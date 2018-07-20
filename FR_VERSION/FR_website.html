@@ -1,0 +1,81 @@
+<!-- https://oscarbrunelle.github.io/website/FR_VERSION/FR_website -->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <script src="index.js"></script>
+  <meta charset="UTF-8">
+  <meta name="description" content="Test Site Web">
+  <meta name="keywords" content="Test, Gratuit, Jeu">
+  <meta name="author" content="Oscar Brunelle">
+  <title>Mon site</title>
+</head>
+
+<body>
+  <div id="banner">
+    <h1>Bienvenue sur mon site web!</h1>
+  </div>
+
+  <div class="navigation_bar">
+    <button id="defaultOpen" class="tablink" onclick="openPage('Home',this,'red')">Menu</button>
+    <button class="tablink" onclick="openPage('Resume',this,'green')">Resume</button>
+    <button class="tablink" onclick="openPage('Games',this,'brown')">Games</button>
+    <button class="tablink" onclick="openPage('About',this,'orange')">About</button>
+    <button class="tablink" onclick="openPage('Contact',this,'blue')">Contact</button>
+  </div>
+
+  <div id="Home" class="tabcontent">
+    <h3>Home</h3>
+    <p>Welcome to the main page!
+      <br>I'm actually doing some test lol.
+      <br>bla bla
+    </p>
+  </div>
+
+  <div id="Resume" class="tabcontent">
+    <h3 id="res">Resume</h3>
+    <p>resume</p>
+  </div>
+
+  <div id="Games" class="tabcontent">
+    <h3>Games</h3>
+    <p>games</p>
+    <button id="play_button" onclick="alert()">Play Monopoly!</button>
+
+    <ul>
+      <li><a href="monopoly.html">Monopoly</a></li>
+      <li><a href="cookieClicker.html">Cookie clicker</a></li>
+      <li><a href="index.html">Coming Soon...</a></li>
+      <li><a href="index.html">Coming Soon...</a></li>
+      <li><a href="index.html">Coming Soon...</a></li>
+      <li><a href="index.html">Coming Soon...</a></li>
+      <li><a href="index.html">Coming Soon...</a></li>
+    </ul>
+  </div>
+
+  <div id="About" class="tabcontent">
+    <h3>About</h3>
+    <p>about</p>
+  </div>
+
+  <div id="Contact" class="tabcontent">
+    <h3>Contact</h3>
+    <p>contact</p>
+  </div>
+
+  <div id="footer" style="background-color: black">
+    <h4>List of links:</h4>
+    <ul>
+      <li><a href="https://oscarbrunelle.github.io/website/">Link to this website</a></li>
+      <li><a href="https://www.w3schools.com">Visit W3Schools.com!</a></li>
+    </ul>
+  </div>
+
+  <script>
+    window.onload = document.getElementById("defaultOpen").click();
+  </script>
+</body>
+
+</html>
