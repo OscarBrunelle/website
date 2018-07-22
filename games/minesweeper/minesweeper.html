@@ -4,7 +4,6 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="minesweeper.css">
-  <script src="minesweeper.js"></script>
   <meta charset="UTF-8">
   <meta name="description" content="A Minesweeper-like game">
   <meta name="keywords" content="Test, Free, Game">
@@ -13,8 +12,10 @@
 </head>
 
 <body>
-  <button onclick="start">Start</button>
-  <button onclick="createField">Create field</button>
+  <img id="source_image" src="icons/minesweeper_0.png">
+  <button onclick="start()">Start</button>
+  <button onclick="createField()">Create field</button>
+  <button onclick="after()"></button>
 
   <div id="info">
     <span id="covered">Cases covered: ?</span>
@@ -24,6 +25,8 @@
   </div>
   <div id="field">
   </div>
+
+  <script src="minesweeper.js"></script>
 </body>
 
 </html>
