@@ -19,67 +19,66 @@
   <a href="#">Clients</a>
   <a href="#">Contact</a>-->
 
-<!-- Use any element to open the sidenav -->
-<span onclick="openNav()">open</span>
-  
+  <!-- Use any element to open the sidenav -->
+  <button onclick="openNav()">Open the shop</button>
+
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div>
-      <button id="cursor_img" class="shop_button" onclick="cursor_function(cursor)"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/a/a0/Cursor_64px.png/revision/latest?cb=20130828033853" alt="Cursor"></button>
-      <p id="cursor_p">
-        <span id="cursor_price">Price: 10$</span>
-        <span><br>Number owned: 0</span>
-        <span><br>Number needed for next amelioration: 1</span>
-      </p>
+      <button id="cursor_img" class="shop_button" onclick="cursor_function(cursor)" title="Cursor [owned: 0]&#013;Number needed for next amelioration: 1&#013;Each cursor produces 0.1 cookies per second&#013;Autoclicks once every 10 seconds"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/a/a0/Cursor_64px.png/revision/latest?cb=20130828033853" alt="Cursor"></button>
+      <span id="cursor_price">Price: 10$<br></span>
     </div>
 
     <div>
-      <button id="grandma" class="shop_button"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/3/31/Grandma_new.png/revision/latest?cb=20130828030742" alt="Grandma"></button>
+      <button id="grandma" class="shop_button" onclick="cursor_function(cursor)" title="Cursor [owned: 0]&#013;Number needed for next amelioration: 1&#013;Each cursor produces 0.1 cookies per second&#013;Autoclicks once every 10 seconds"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/a/a0/Cursor_64px.png/revision/latest?cb=20130828033853" alt="Cursor"></button>
+      <span id="cursor_price">Price: 10$<br></span>
     </div>
 
     <div>
-      <button id="farm" class="shop_button"><img src="" alt="Farm"></button>
+      <button id="farm" class="shop_button" onclick="cursor_function(cursor)" title="Cursor [owned: 0]&#013;Number needed for next amelioration: 1&#013;Each cursor produces 0.1 cookies per second&#013;Autoclicks once every 10 seconds"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/a/a0/Cursor_64px.png/revision/latest?cb=20130828033853" alt="Cursor"></button>
+      <span id="cursor_price">Price: 10$<br></span>
     </div>
 
     <div>
-      <button id="mine" class="shop_button"><img src="" alt="Mine"></button>
+      <button id="mine" class="shop_button" onclick="cursor_function(cursor)" title="Cursor [owned: 0]&#013;Number needed for next amelioration: 1&#013;Each cursor produces 0.1 cookies per second&#013;Autoclicks once every 10 seconds"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/a/a0/Cursor_64px.png/revision/latest?cb=20130828033853" alt="Cursor"></button>
+      <span id="cursor_price">Price: 10$<br></span>
     </div>
 
     <div>
-      <button id="factory" class="shop_button"><img src="" alt="Factory"></button>
+      <button id="factory" class="shop_button" onclick="cursor_function(cursor)" title="Cursor [owned: 0]&#013;Number needed for next amelioration: 1&#013;Each cursor produces 0.1 cookies per second&#013;Autoclicks once every 10 seconds"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/a/a0/Cursor_64px.png/revision/latest?cb=20130828033853" alt="Cursor"></button>
+      <span id="cursor_price">Price: 10$<br></span>
     </div>
 
     <div>
-      <button id="bank" class="shop_button"><img src="" alt="Bank"></button>
+      <button id="bank" class="shop_button" onclick="cursor_function(cursor)" title="Cursor [owned: 0]&#013;Number needed for next amelioration: 1&#013;Each cursor produces 0.1 cookies per second&#013;Autoclicks once every 10 seconds"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/a/a0/Cursor_64px.png/revision/latest?cb=20130828033853" alt="Cursor"></button>
+      <span id="cursor_price">Price: 10$<br></span>
     </div>
 
     <div>
-      <button id="temple" class="shop_button"><img src="" alt="Temple"></button>
+      <button id="temple" class="shop_button" onclick="cursor_function(cursor)" title="Cursor [owned: 0]&#013;Number needed for next amelioration: 1&#013;Each cursor produces 0.1 cookies per second&#013;Autoclicks once every 10 seconds"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/a/a0/Cursor_64px.png/revision/latest?cb=20130828033853" alt="Cursor"></button>
+      <span id="cursor_price">Price: 10$<br></span>
     </div>
 
     <div>
-      <button id="..." class="shop_button"><img src="" alt="..."></button>
+      <button id="" class="shop_button" onclick="cursor_function(cursor)" title="Cursor [owned: 0]&#013;Number needed for next amelioration: 1&#013;Each cursor produces 0.1 cookies per second&#013;Autoclicks once every 10 seconds"><img src="https://vignette.wikia.nocookie.net/cookieclicker/images/a/a0/Cursor_64px.png/revision/latest?cb=20130828033853" alt="Cursor"></button>
+      <span id="cursor_price">Price: 10$<br></span>
     </div>
   </div>
 
-  
-  
-  <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-<div id="main">
-  <div>
-    <h1 class="title">Clicker!</h1>
+  <!----------------------------------------------------------------------------->
+
+  <div id="main">
+    <div>
+      <h1 class="title">Clicker!</h1>
+    </div>
+
+    <div class="centered">
+      <button type="submit" id="image_button" class="click_button" onclick="button_click()"><img src="http://orteil.dashnet.org/cookieclicker/img/favicon.ico" alt="Submit"></button>
+      <p id="money">Money: 0 $</p>
+    </div>
   </div>
 
-  <div>
-    <button class="centered" type="submit" id="image_button" onclick="button_click()"><img src="http://orteil.dashnet.org/cookieclicker/img/favicon.ico" alt="Submit"></button>
-  </div>
 
-  <div>
-    <p class="centered" id="money">Money: 0 $</p>
-  </div>
-</div>
-  
-  
 
   <script src="cookieClicker.js"></script>
 </body>
