@@ -9,10 +9,7 @@ var nbrUncovered = 0;
 var nbrMinesCovered = 36;
 var time = 0;
 
-var buttons_array = [
-  ["bla","bla","bla","bla"]
-["bla","bla","bla","bla"]
-];
+var buttons_array = [[]];
 
 function update() {
   covered = document.getElementById("covered");
@@ -63,9 +60,14 @@ function createField(width = 20, height = 12) {
       im.setAttribute("alt", "Mine?");
       b.setAttribute("onclick", "buttonClicked(event)");
       b.setAttribute("class", "case");
+      b.setAttribute("pos_x",j);
+      b.setAttribute("pos_y",i);
+      b.setAttribute("covered",true);
+      b.setAttribute("mined",false);
+      b.setAttribute("neighbooringMines",0);
       b.appendChild(im);
       d.appendChild(b);
-      buttons_array[i][j] = b;
+      //buttons_array[i][j] = b;
     }
     field.appendChild(d);
   }
@@ -83,7 +85,9 @@ function createMines(mines = 36) {
 }
 
 function buttonClicked(event) {
-  var x = event.target;
+  var clicked = event.target;
+  var x = clicked.getAttribute("pos_x");
+  var y = clicked.getAttribute("pos_y");
   alert(x);
   /*if (x.) {
 
