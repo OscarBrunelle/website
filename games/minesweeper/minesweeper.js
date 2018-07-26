@@ -6,19 +6,14 @@ var width = 20;
 var height = 12;
 var nbrCovered = 20 * 12;
 var nbrUncovered = 0;
-var nbrMinesCovered = 36;
 var time = 0;
-
-var buttons_array = [[]];
 
 function update() {
   covered = document.getElementById("covered");
   uncovered = document.getElementById("uncovered");
-  mines = document.getElementById("mines");
   timer = document.getElementById("timer");
   covered.innerHtml = "Cases covered: " + nbrCovered;
   uncovered.innerHtml = "Cases uncovered: " + nbrUncovered;
-  mines.innerHtml = "Mines to find: " + nbrMinesCovered;
   timer.innerHtml = "Time: " + time;
 }
 
@@ -42,9 +37,10 @@ function start() {
     mines = 36;
   }
   nbrCovered = width * height;
-  nbrMinesCovered = mines;
+  document.getElementById("mines").innerHtml = "Mines to find: " + mines;
   createField(width, height);
   createMines(mines);
+  update();
 }
 
 function createField(width = 20, height = 12) {
@@ -60,11 +56,11 @@ function createField(width = 20, height = 12) {
       im.setAttribute("alt", "Mine?");
       b.setAttribute("onclick", "buttonClicked(event)");
       b.setAttribute("class", "case");
-      b.setAttribute("pos_x",j);
-      b.setAttribute("pos_y",i);
-      b.setAttribute("covered",true);
-      b.setAttribute("mined",false);
-      b.setAttribute("neighbooringMines",0);
+      b.setAttribute("pos_x", j);
+      b.setAttribute("pos_y", i);
+      b.setAttribute("covered", true);
+      b.setAttribute("mined", false);
+      b.setAttribute("neighbooringMines", 0);
       b.appendChild(im);
       d.appendChild(b);
       //buttons_array[i][j] = b;
@@ -74,13 +70,23 @@ function createField(width = 20, height = 12) {
 }
 
 function createMines(mines = 36) {
+  var model = [height][width];
+  document.getElementById("text").innerHtml = "yo";
+  var txt = 0;
+  for (var i = 0; i < height; i++) {
+    for (var j = 0; j < width; j++) {
+      txt++;
+      document.getElementById("text").innerHtml = txt;
+      model[i][j] = new Button();
+    }
+  }
   while (mines > 0) {
     var i = Math.floor(Math.random() * width);
     var j = Math.floor(Math.random() * height);
-    /*if (!model[i][j].isMined()) {
-      model[i][j].setMined();
+    if (!model[i][j].isMined()) {
+      model[i][j].isMined = true;
       mines--;
-    }*/
+    }
   }
 }
 
@@ -92,6 +98,8 @@ function buttonClicked(event) {
   /*if (x.) {
 
   }*/
+  nbrUncovered++;
+  nbrCovered--;
 }
 
 function getIconFileName() {
@@ -128,4 +136,10 @@ function getIconFileName() {
   }
 }
 
+function Button(isMined = false, neighbooringMines = 0){
+  this.isMined = isMined;
+  this.neighbooringMines = neighbooringMines;
+}
+
 document.body.onload = createField();
+document.body.onload = createMines();
