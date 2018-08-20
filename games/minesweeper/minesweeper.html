@@ -12,21 +12,38 @@
 </head>
 
 <body>
-  <img id="source_image" src="icons/minesweeper_0.png">
-  <button onclick="start()">Start</button>
-  <button onclick="createField()">Create field</button>
-  <button onclick="after()"></button>
+  <div class="bigBox">
 
-  <div id="info">
-    <span id="covered">Cases covered: ?</span>
-    <span id="uncovered">Cases uncovered: ?</span>
-    <span id="mines">Mines to find: 36</span>
-    <span id="timer">Time: 0</span>
-  </div>
-  <div id="field">
-  </div>
+    <h1>Minesweeper</h1>
+    <p>
+      <span>Your goal is to find all the mines/br</span>
+      <span>Left click a case to uncover it/br</span>
+      <span>Press space or click the button to toggle flag mode/br</span>
+      <span>Good luck!</span>
+    </p>
 
-  <span id="text">nothing</span>
+    <div class="usefulButtons">
+      <button onclick="start()">Reset</button>
+      <button onclick="createField()">Custom game</button>
+      <button id="flagModeButton" onclick="toggleFlagMode()">Flag mode: OFF</button>
+    </div>
+
+    <div id="info">
+      <span id="covered">Cases covered: ?</span>
+      <span> || </span>
+      <span id="uncovered">Cases uncovered: ?</span>
+      <span> || </span>
+      <span id="mines">Mines to find: 36</span>
+      <span> || </span>
+      <span id="timer">Time: 0</span>
+    </div>
+    <div id="field">
+    </div>
+
+    <span id="text">nothing</span>
+    <span id="text2">nothing</span>
+
+  </div>
 
   <script src="minesweeper.js"></script>
 </body>
