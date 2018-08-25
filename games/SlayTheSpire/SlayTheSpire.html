@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="SlayTheSpire.css">
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="Oscar Brunelle">
+  <title></title>
+</head>
+
+<body>
+
+	<div id="game">
+		<img class="entity" src="player.png" alt="Player">
+		<img class="entity" src="monster.png" alt="Monster">
+		<span id="playerHealth">Player Health: 50</span>
+		<span id="monsterHealth">Monster Health: 25</span>
+		<div id="cards">
+			<img onclick="draw()" src="draw.png" alt="Draw">
+			<div id="deck">
+			</div>
+			<img onclick="showDiscardPile()" src="discard.png" alt="Discard">
+		</div>
+	</div>
+
+	<script src="SlayTheSpire.js"></script>
+</body>
+
+</html>

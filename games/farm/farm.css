@@ -1,0 +1,14 @@
+#webPage{
+	background: -moz-linear-gradient(bottom, DeepSkyBlue, white);
+}
+
+#game{
+	
+}
+
+button {
+	/*float: left;*/
+	background-color: Transparent;
+	border: 1px brown;
+	padding: 0px;
+}

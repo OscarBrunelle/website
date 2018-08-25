@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <link rel="stylesheet" type="text/css" href=".css">
+  <link rel="stylesheet" type="text/css" href="farm.css">
   <meta charset="UTF-8">
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -12,8 +12,25 @@
 </head>
 
 <body>
+  <div id="webPage">
+  <button onclick="toggleLand()">toggle</button>
 
-<script src=".js"></script>
+  <div id="game" onclick="putSomething()">
+    <div id="lands">
+      <button class="land" onclick="harvest(event)"><img src="icons\land.png"></button>
+    </div>
+
+    <div id="trees">
+      <button class="tree"><img src="icons\tree.png"></button>
+    </div>
+
+    <div id="animals">
+      <button class="animal"><img src="icons\animal.png"></button>
+    </div>
+  </div>
+</div>
+
+  <script src="farm.js"></script>
 </body>
 
 </html>
