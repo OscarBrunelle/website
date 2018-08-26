@@ -15,13 +15,14 @@
 
 	<div id="game">
 		<img class="entity" src="player.png" alt="Player">
-		<img class="entity" src="monster.png" alt="Monster">
+		<img class="entity" src="monster.png" alt="Monster" onclick="play()">
 		<span id="playerHealth">Player Health: 50</span>
 		<span id="monsterHealth">Monster Health: 25</span>
 		<div id="cards">
 			<img onclick="draw()" src="draw.png" alt="Draw">
 			<div id="deck">
 			</div>
+			<img onclick="endTurn()" src="endTurn.png" alt="End Turn">
 			<img onclick="showDiscardPile()" src="discard.png" alt="Discard">
 		</div>
 	</div>
