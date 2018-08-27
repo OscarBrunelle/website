@@ -9,6 +9,15 @@ var discardPile = [];
 var deckElement = document.getElementById("deck");
 var selectedCard = null;
 
+function settings(){
+	settingsOverlay = document.getElementById("settingsOverlay");
+	if (settingsOverlay.style.display == "none") {
+		settingsOverlay.style.display = "flex";
+	} else {
+		settingsOverlay.style.display = "none";
+	}
+}
+
 function creature(HP = 10, strength = 0, attack = 5, block = 0, poison = 0){
 	this.HP = HP;
 	this.strength = strength;
