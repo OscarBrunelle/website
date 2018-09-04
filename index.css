@@ -2,9 +2,6 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: Arial;
-}
-
-h3 {
   text-align:center;
   font-weight: bold;
 }
@@ -33,7 +30,7 @@ h3 {
 }
 
 #Home {
-  background-color: red;
+  background-color: grey;
 }
 
 #Resume {
@@ -82,3 +79,6 @@ h3 {
       background-color: #4CAF50;
       color: white;
     }*/
+
+audio{
+  display: none;

@@ -8,6 +8,7 @@ var deck = [];
 var discardPile = [];
 var deckElement = document.getElementById("deck");
 var selectedCard = null;
+var energy = 3;
 
 function settings(){
 	settingsOverlay = document.getElementById("settingsOverlay");
@@ -231,6 +232,7 @@ while (newCard.firstChild) {
 
 function update(){
 	updateCards();
+	document.getElementById("energyText").innerHTML = "Energy: " + energy;
 	document.getElementById("playerHealth").innerHTML = "Player Health: " + player.HP;
 	document.getElementById("monsterHealth").innerHTML = "Monster Health: " + monster.HP;
 }
