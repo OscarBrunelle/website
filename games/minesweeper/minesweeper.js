@@ -61,7 +61,6 @@ function createField(width = 20, height = 12) {
   var mini_width = width * 30;
   //field.setAttribute("min-width",mini_width + "px");
   for (var i = 0; i < height; i++) {
-    p = document.createElement("p");
     d = document.createElement("div");
     d.setAttribute("class", "line");
     for (var j = 0; j < width; j++) {

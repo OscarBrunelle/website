@@ -1,0 +1,17 @@
+body{
+	text-align: center;
+}
+
+.case {
+	cursor: inherit;
+	border: 1px solid black;
+	padding: 0px;
+	margin: 1px;
+	width: 34px;
+	height: 34px;
+}
+
+.line{
+	margin: 0px;
+	height: 36px;
+}
