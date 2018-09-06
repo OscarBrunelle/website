@@ -14,6 +14,22 @@ var head;
 var tail = [];
 var fruit;
 
+function move(direction){
+  if (direction=="right") {
+    speedx=1;
+    speedy=0;
+  } else if (direction=="up") {
+    speedx=0;
+    speedy=-1;
+  } else if (direction=="down") {
+    speedx=0;
+    speedy=1;
+  } else if (direction=="left") {
+    speedx=-1;
+    speedy=0;
+  }
+}
+
 function drawPlayground() {
 
   canvas.setAttribute("tabindex", "1");
