@@ -1,68 +1,75 @@
 body {
-	-webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
 
-#topBar{
-	background: blue;
+#topBar {
+  background: blue;
 }
 
-#settingsOverlay{
-	display: none;
-	position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-    background-color: green;
-    border: 2px solid #4CAF50;
+#settingsOverlay {
+  display: none;
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
+  background-color: green;
+  border: 2px solid #4CAF50;
 }
 
-#game{
-	background: grey;
+#game {
+  background: grey;
 }
 
-#deck div{
-	float: left;
-	background: brown;
-	text-align: center;
-	width: 160px;
-	height: 280px;
-	padding: 10px;
-	margin: 10px;
+#deck div {
+  float: left;
+  background: brown;
+  text-align: center;
+  width: 160px;
+  height: 280px;
+  padding: 10px;
+  margin: 10px;
 }
 
-#deck div h1{
-	pointer-events: none;
-	margin: 0px;
+#deck div h1 {
+  pointer-events: none;
+  margin: 0px;
 }
 
-#deck div img{
-	margin: 0px;
-	margin-top: 10px;
+#deck div img {
+  margin: 0px;
+  margin-top: 10px;
 }
 
 .container {
-    position: relative;
-    text-align: center;
-    color: white;
+  position: relative;
+  text-align: center;
+  color: white;
 }
 
 /* Centered text */
+
 .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#deck div p{
-	background: white;
-	pointer-events: none;
-	margin: 0px;
-	margin-top: 10px;
+#deck div p {
+  background: white;
+  pointer-events: none;
+  margin: 0px;
+  margin-top: 10px;
 }
-

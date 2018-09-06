@@ -64,3 +64,60 @@ function update() {
 }
 
 document.onload = createSlots();
+
+
+/////////////////////////////////////////////////////////////
+
+
+
+
+
+function playGame() {
+  welcomeScreen.style.display = "none";
+  gameScreen.style.display = "block";
+  createImages();
+  canvas = document.createElement("canvas");
+  canvas.setAttribute("width", "768px");
+  canvas.setAttribute("height", "640px");
+  gameScreen.appendChild(canvas);
+  context = canvas.getContext("2d");
+  drawTiles();
+}
+
+function drawTiles() {
+  var newTile;
+  var x = 0;
+  var y = 0;
+  for (var i = 0; i < 12; i++) {
+    for (var j = 0; j < 10; j++) {
+      x = i * 64;
+      y = j * 64;
+      if (i == 5 && (j == 0 || j == 1 || j == 2 || j == 9)) {
+        context.beginPath();
+        context.lineWidth = "1";
+        context.fillStyle = "blue";
+        context.rect(x, y, 64, 64);
+        context.fill();
+      } else if (i == 6 && (j == 0 || j == 2 || j == 7 || j == 8 || j == 9)) {
+        context.beginPath();
+        context.lineWidth = "1";
+        context.fillStyle = "blue";
+        context.rect(x, y, 64, 64);
+        context.fill();
+      } else if (i == 7 && (j == 2 || j == 3 || j == 4 || j == 5 || j == 6 || j == 7)) {
+        context.beginPath();
+        context.lineWidth = "1";
+        context.fillStyle = "blue";
+        context.rect(x, y, 64, 64);
+        context.fill();
+      } else {
+        context.beginPath();
+        context.lineWidth = "1";
+        context.strokeStyle = "blue";
+        context.rect(x, y, 64, 64);
+        context.stroke();/*
+        context.drawImage(monster1Image,x,y,64,64);*/
+      }
+    }
+  }
+}

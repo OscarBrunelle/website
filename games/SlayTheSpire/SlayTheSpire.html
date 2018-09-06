@@ -12,48 +12,48 @@
 </head>
 
 <body>
-	<div id="topBar">
-		<span id="playerName">Oscar</span>
-		<span id="character">The Ironclad</span>
-		<span id="life">50/50</span>
-		<span id="money">99</span>
-		<span id="Ascension level">1</span>
-		<span id="potions">Empty Empty Empty</span>
-		<span id="floor">1st floor</span>
-		<span id="map">Map</span>
-		<span id="Base_DECK">Deck</span>
-		<span id="settings" onclick="settings()">Settings</span>
-		<div id="settingsOverlay">
-			<p>Hellooooo there</p>
-		</div>
-	</div>
+  <div id="topBar">
+    <span id="playerName">Oscar</span>
+    <span id="character">The Ironclad</span>
+    <span id="life">50/50</span>
+    <span id="money">99</span>
+    <span id="Ascension level">1</span>
+    <span id="potions">Empty Empty Empty</span>
+    <span id="floor">1st floor</span>
+    <span id="map">Map</span>
+    <span id="Base_DECK">Deck</span>
+    <span id="settings" onclick="settings()">Settings</span>
+    <div id="settingsOverlay">
+      <p>Hellooooo there</p>
+    </div>
+  </div>
 
-	<div id="game">
-		<div id="playerDiv">
-			<img class="entity" src="player.png" alt="Player">
-			<span id="playerHealth">Player Health: 50</span>
-		</div>
-		<div id="monstersDiv">
-			<img class="entity" src="monster.png" alt="Monster" onclick="play()">
-			<span id="monsterHealth">Monster Health: 25</span>
-		</div>
-		<div id="cards">
-			<img onclick="draw()" src="draw.png" alt="Draw">
+  <div id="game">
+    <div id="playerDiv">
+      <img class="entity" src="player.png" alt="Player">
+      <span id="playerHealth">Player Health: 50</span>
+    </div>
+    <div id="monstersDiv">
+      <img class="entity" src="monster.png" alt="Monster" onclick="play()">
+      <span id="monsterHealth">Monster Health: 25</span>
+    </div>
+    <div id="cards">
+      <img onclick="draw()" src="draw.png" alt="Draw">
 
-			 <div class="container">
-				<img src="energy.png" alt="Energy">
-				<div id="energyText" class="centered">Energy: 3/3</div>
-			</div>
+      <div class="container">
+        <img src="energy.png" alt="Energy">
+        <div id="energyText" class="centered">Energy: 3/3</div>
+      </div>
 
-			<div id="deck"></div>
+      <div id="deck"></div>
 
-			<img onclick="endTurn()" src="endTurn.png" alt="End Turn">
+      <img onclick="endTurn()" src="endTurn.png" alt="End Turn">
 
-			<img onclick="showDiscardPile()" src="discard.png" alt="Discard">
-		</div>
-	</div>
+      <img onclick="showDiscardPile()" src="discard.png" alt="Discard">
+    </div>
+  </div>
 
-	<script src="SlayTheSpire.js"></script>
+  <script src="SlayTheSpire.js"></script>
 </body>
 
 </html>

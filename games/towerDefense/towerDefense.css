@@ -1,0 +1,8 @@
+html, body{
+  text-align: center;
+    background: center no-repeat url("images/towerDefense.png");
+}
+
+canvas{
+  border: 1px solid black;
+}
