@@ -1,3 +1,7 @@
+html, body{
+	text-align: center;
+}
+
 .landButton {
   width: auto;
   height: auto;

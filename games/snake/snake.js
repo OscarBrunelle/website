@@ -14,19 +14,29 @@ var head;
 var tail = [];
 var fruit;
 
-function move(direction){
-  if (direction=="right") {
-    speedx=1;
-    speedy=0;
-  } else if (direction=="up") {
-    speedx=0;
-    speedy=-1;
-  } else if (direction=="down") {
-    speedx=0;
-    speedy=1;
-  } else if (direction=="left") {
-    speedx=-1;
-    speedy=0;
+var updateTime = 200;
+
+function move(direction) {
+  if (direction == "up") {
+    if (speedy != 1) {
+      speedx = 0;
+      speedy = -1;
+    }
+  } else if (direction == "left") {
+    if (speedx != 1) {
+      speedx = -1;
+      speedy = 0;
+    }
+  } else if (direction == "down") {
+    if (speedy != -1) {
+      speedx = 0;
+      speedy = 1;
+    }
+  } else if (direction == "right") {
+    if (speedx != -1) {
+      speedx = 1;
+      speedy = 0;
+    }
   }
 }
 
@@ -43,9 +53,9 @@ function drawPlayground() {
         speedx = 0;
         speedy = -1;
       }
-    } else if (key == "ArrowRight") {
-      if (speedx != -1) {
-        speedx = +1;
+    } else if (key == "ArrowLeft") {
+      if (speedx != 1) {
+        speedx = -1;
         speedy = 0;
       }
     } else if (key == "ArrowDown") {
@@ -53,9 +63,9 @@ function drawPlayground() {
         speedx = 0;
         speedy = +1;
       }
-    } else if (key == "ArrowLeft") {
-      if (speedx != 1) {
-        speedx = -1;
+    } else if (key == "ArrowRight") {
+      if (speedx != -1) {
+        speedx = +1;
         speedy = 0;
       }
     }
@@ -73,7 +83,7 @@ function Snake(xpos = 0, ypos = 0, isHead = false) {
   };
   this.draw = function() {
     ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-    ctx.fillRect(this.xpos, this.ypos, 20, 20);
+    ctx.fillRect(this.xpos+1, this.ypos+1, 18, 18);
   };
   this.eat = function(fruitX, fruitY) {
     if ((this.xpos <= fruitX && (this.xpos + 20) >= (fruitX + 10)) && (this.ypos <= fruitY && (this.ypos + 20) >= (fruitY + 10))) {
@@ -124,7 +134,9 @@ function Fruit() {
 
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   for (var i = tail.length - 1; i >= 0; i--) {
+
     if (tail[i].isHead) {
       tail[i].setNewPos(speedx, speedy);
       tail[i].draw();
@@ -138,6 +150,7 @@ function update() {
         addSnake(tail[tail.length - 1].xpos, tail[tail.length - 1].ypos);
         fruit.newFruit();
       }
+
     } else {
       tail[i].xpos = tail[i - 1].xpos;
       tail[i].ypos = tail[i - 1].ypos;
@@ -154,8 +167,20 @@ function restartGame() {
   initializeFruit();
 }
 
+function changeGameSpeed(gameSpeed = 200){
+  if (gameSpeed = "x1") {
+    updateTime = 200;
+  } else if (gameSpeed = "x0.5") {
+    updateTime = 400;
+  }/* else if (gameSpeed = "x2") {
+    updateTime = 100;
+  } else if (gameSpeed = "x4") {
+    updateTime = 50;
+  }*/
+}
+
 document.body.onload = drawPlayground();
-window.setInterval(update, 200);
+window.setInterval(update, updateTime);
 
 /*TO DO:
 snake dies if touches itself

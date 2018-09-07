@@ -1,9 +1,13 @@
+html, body{
+	text-align: center;
+}
+
 #webPage{
 	background: -moz-linear-gradient(bottom, DeepSkyBlue, white);
 }
 
 #game{
-	
+
 }
 
 button {

@@ -12,13 +12,23 @@
 </head>
 
 <body>
-  <button onclick="move('down')">Move down</button>
-  <button onclick="move('up')">Move up</button>
-  <button onclick="move('left')">Move left</button>
-  <button onclick="move('right')">Move right</button>
   <canvas id="myCanvas" width="640" height="480">
 		This is a canvas. If you see this text, you should update your browser.
 	</canvas>
+  <div id="arrowControls">
+    <div>
+      <img src="up.png" onclick="move('up')">
+    </div>
+    <img src="left.png" onclick="move('left')">
+    <img src="down.png" onclick="move('down')">
+    <img src="right.png" onclick="move('right')">
+  </div>
+  <span>Game Speed:</span>
+  <div id="gameSpeedControls">
+  <button onclick="changeGameSpeed('x0.5')">x 0.5</button>
+  <button onclick="changeGameSpeed('x1')">x 1</button><!--
+  <button onclick="changeGameSpeed('x2')">x 2</button>
+  <button onclick="changeGameSpeed('x4')">x 4</button>-->
 
   <script src="snake.js"></script>
 </body>
