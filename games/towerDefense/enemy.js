@@ -1,13 +1,14 @@
-var enemies = [];/*
+var enemies = [];
+/*
 var startingX = pathCoord[0][0]*64;
 var startingY = pathCoord[0][1]*64;*/
 
 function enemy(type = 0, x = 0, y = 0) {
   this.type = type;
-  this.x = pathCoord[0][0]*64;
-  this.y = pathCoord[0][1]*64;
+  this.x = pathCoord[0][0] * 64 + 16;
+  this.y = pathCoord[0][1] * 64 + 16;
   this.image = monster2Image;
-  this.currentGoal = 0;
+  this.currentGoal = 1;
 
   if (this.type == 0) {
     this.speed = 1;
@@ -31,7 +32,7 @@ function enemy(type = 0, x = 0, y = 0) {
     this.startingHealth = this.health;
   }
   this.draw = function() {
-    context.drawImage(this.image, this.x + 16, this.y + 16);
+    context.drawImage(this.image, this.x, this.y);
     context.beginPath();
     context.fillStyle = "red";
     context.strokeStyle = "black";
@@ -41,7 +42,7 @@ function enemy(type = 0, x = 0, y = 0) {
     context.fill();
   };
   this.move = function() {
-    this.x += 0;//this.speed;
+    this.x += 0; //this.speed;
     this.y += this.speed;
     if (this.y >= canvas.height) {
       return true;

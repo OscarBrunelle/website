@@ -45,7 +45,7 @@ function tower(type = "classic", x = 0, y = 0, range = 10, damage = 10) {
     for (var i = 0; i < enemies.length; i++) {
       enemyX = enemies[i].x;
       enemyY = enemies[i].y;
-      if (((this.x - this.range * 64) <= enemyX && enemyX <= (this.x + this.range * 64)) && ((this.y - this.range * 64) <= enemyY && enemyY <= (this.y + this.range * 64))) {
+      if (((this.x - this.range * 64) <= (enemyX + 32) && enemyX <= (this.x + this.range * 64 + 64)) && ((this.y - this.range * 64) <= (enemyY + 32) && enemyY <= (this.y + this.range * 64 + 64))) {
         return i;
       }
     }
