@@ -1,8 +1,16 @@
-html, body{
+html, body {
   text-align: center;
-    background: center no-repeat url("images/towerDefense.png");
 }
 
-canvas{
+img {
+  width: 64px;
+  height: 64px;
+}
+
+canvas {
   border: 1px solid black;
+}
+
+#welcomeScreen {
+  background: center no-repeat url("images/towerDefense.png");
 }
