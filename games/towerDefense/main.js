@@ -29,6 +29,9 @@ var nbrEnemiesKilled = 0;
 var nbrLives = 10;
 var money = 250;
 
+var spawnIndex = 20;
+var nbrEnemiesSpawned = 0;
+
 function initializeCanvas() {
   welcomeScreen.style.display = "none";
   gameScreen.style.display = "block";
@@ -41,7 +44,6 @@ function initializeCanvas() {
   drawPlayground();
   getPath();
   window.setInterval(update, 50);
-    addEnemy();
 }
 
 function drawPlayground() {
@@ -118,7 +120,18 @@ function getPath() {
   }
 }
 
+function spawn() {
+  if (spawnIndex == 20 && nbrEnemiesSpawned < 10) {
+    spawnIndex = 0;
+    addEnemy();
+    nbrEnemiesSpawned++;
+  } else {
+    spawnIndex++;
+  }
+}
+
 function update() {
+  spawn();
   var enemyFoundIndex = -1;
   var towerDamage = 0;
 
@@ -160,7 +173,7 @@ function drawEnemies() {
   }
 }
 
-function drawBullets(){
+function drawBullets() {
   /*if (true) {
     continue;
   }*/
