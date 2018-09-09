@@ -13,12 +13,17 @@ var classicImage = document.getElementById("classic");
 var sniperImage = document.getElementById("sniper");
 var fireImage = document.getElementById("fire");
 var freezerImage = document.getElementById("freezer");
+var moneyText = document.getElementById("money");
+var waveText = document.getElementById("wave");
+var timeText = document.getElementById("time");
+var livesText = document.getElementById("lives");
 var canvas;
 var context;
 
 
 var numberOfLevels = 3;
-var timeBetweenWaves = 100;
+var timeBetweenWaves = 250;
+var wave = 1;
 
 var levelSelected = 1;
 var pathCoord = [];
@@ -29,7 +34,7 @@ var nbrEnemiesKilled = 0;
 var nbrLives = 10;
 var money = 250;
 
-var spawnIndex = 20;
+var spawnIndex =0;// -250;
 var nbrEnemiesSpawned = 0;
 
 function initializeCanvas() {
@@ -121,27 +126,53 @@ function getPath() {
 }
 
 function spawn() {
-  if (spawnIndex == 20 && nbrEnemiesSpawned < 10) {
+  if (spawnIndex == (25 - wave) && nbrEnemiesSpawned < (10 + wave * 5)) {
     spawnIndex = 0;
     addEnemy();
     nbrEnemiesSpawned++;
+  } else if (nbrEnemiesSpawned == (10 + wave * 5)) {
+    if (wave == 10) {
+      alert("You win!");
+    } else {
+      nbrEnemiesSpawned = 0;
+      spawnIndex = (-1) * timeBetweenWaves;
+      wave++;
+    }
   } else {
     spawnIndex++;
   }
 }
 
 function update() {
+  moneyText.textContent = "Money: " + money + "$";
+  timeText.textContent = "Time: " + spawnIndex + "";
+  waveText.textContent = "Wave: " + wave + "/10";
+  livesText.textContent = "Lives: " + nbrLives + " <3";
   spawn();
   var enemyFoundIndex = -1;
   var towerDamage = 0;
+  var towerDebuff = 0;
+
+  for (var i = 0; i < enemies.length; i++) {
+    enemies[i].debuffEffects();
+    if (enemies[i].move()) {
+      enemies.splice(i, 1);
+      nbrLives--;
+      i--;
+    }
+  }
 
   for (var i = 0; i < towers.length; i++) {
     enemyFoundIndex = towers[i].findEnemy();
     towerDamage = towers[i].damage;
+    towerDebuff = towers[i].debuff;
     if (enemyFoundIndex == -1) {
       continue;
     } else {
+      enemies[enemyFoundIndex].applyDebuff(towerDebuff);
       if (enemies[enemyFoundIndex].die(towerDamage)) {
+        money += enemies[enemyFoundIndex].value;
+        moneyText.textContent = "Money: " + money + "$";
         enemies.splice(enemyFoundIndex, 1);
         nbrEnemiesKilled++;
       }
@@ -163,13 +194,7 @@ function drawTowers() {
 
 function drawEnemies() {
   for (var i = 0; i < enemies.length; i++) {
-    if (enemies[i].move()) {
-      enemies.splice(i, 1);
-      nbrLives--;
-      i--;
-    } else {
-      enemies[i].draw();
-    }
+    enemies[i].draw();
   }
 }
 

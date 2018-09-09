@@ -1,18 +1,20 @@
-html, body{
-	text-align: center;
+html, body {
+  text-align: center;
 }
 
-#webPage{
-	background: -moz-linear-gradient(bottom, DeepSkyBlue, white);
+div {
+  -webkit-transition: all 0.5s ease-in-out;
 }
 
-#game{
-
+#webPage {
+  background: -moz-linear-gradient(bottom, DeepSkyBlue, white);
 }
+
+#game {}
 
 button {
-	/*float: left;*/
-	background-color: Transparent;
-	border: 1px brown;
-	padding: 0px;
+  /*float: left;*/
+  background-color: Transparent;
+  border: 1px brown;
+  padding: 0px;
 }

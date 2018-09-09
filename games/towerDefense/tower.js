@@ -12,29 +12,33 @@ function tower(type = "classic", x = 0, y = 0, range = 10, damage = 10) {
   if (this.type == "classic") {
     this.image = classicImage;
     this.range = 1;
-    this.damage = 10;
+    this.damage = 1;
     this.fireRate = 2;
+    this.debuff = 0;
     this.cost = 50;
     this.color = "green";
   } else if (this.type == "sniper") {
     this.image = sniperImage;
     this.range = 2;
-    this.damage = 10;
+    this.damage = 1;
     this.fireRate = 1;
+    this.debuff = 0;
     this.cost = 50;
     this.color = "yellow";
   } else if (this.type == "fire") {
     this.image = fireImage;
     this.range = 1;
-    this.damage = 20;
+    this.damage = 0;
     this.fireRate = 1;
+    this.debuff = "fire";
     this.cost = 50;
     this.color = "red";
   } else if (this.type == "freezer") {
     this.image = freezerImage;
     this.range = 1;
-    this.damage = 20;
+    this.damage = 2;
     this.fireRate = 1;
+    this.debuff = "freeze";
     this.cost = 50;
     this.color = "blue";
   }
@@ -67,11 +71,14 @@ function selectTower(selection = "classic") {
 function addTower(event) {
   mouseX = Math.floor(event.offsetX / 64) * 64;
   mouseY = Math.floor(event.offsetY / 64) * 64;
-  money -= 50;
   if (isPossibleToPlace(mouseX, mouseY)) {
-    var newTower = new tower(selectedType, mouseX, mouseY);
-    newTower.draw();
-    towers.push(newTower);
+    if (money >= 50) {
+      money -= 50;
+      moneyText.textContent = "Money: " + money + "$";
+      var newTower = new tower(selectedType, mouseX, mouseY);
+      newTower.draw();
+      towers.push(newTower);
+    }
   }
 }
 
