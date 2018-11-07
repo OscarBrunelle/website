@@ -1,0 +1,14 @@
+html, body, div {
+  display: block;
+  text-align: center;
+}
+
+button, a {
+  /*display: inherit;
+  text-align: center;*/
+  width: 128px;
+  height: 30px;
+  background: grey;
+  border: 1px solid black;
+  padding: 16px;
+}
