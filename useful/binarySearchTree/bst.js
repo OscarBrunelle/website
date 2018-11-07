@@ -26,14 +26,7 @@ function drawTree() {
     node.draw();
   }
 }
-/*
-function Node(value, x, y, size) {
-  this.draw = function () {
-    context.arc(x, y, 10 * size, 0, 0, 0);
-    context.fillText(value, x, y);
-  };
-}
-*/
+
 class Node {
   constructor(value, x, y, size, context) {
     this.value = value;
@@ -62,6 +55,20 @@ class Node {
 function switchCircles() {
   drawCircles = !drawCircles;
   context.clearRect(0,0,canvas.width, canvas.height);
+  drawTree();
+}
+
+function reset(){
+  tree = [];
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  drawTree();
+}
+
+function add(){
+  var value = prompt("Enter the value", "value");
+  value = parseInt(value);
+  tree.push(value);
+  context.clearRect(0, 0, canvas.width, canvas.height);
   drawTree();
 }
 
