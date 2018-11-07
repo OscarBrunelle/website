@@ -59,7 +59,7 @@ class Node {
   };
 }
 
-function allowCircles(){
+function switchCircles() {
   drawCircles = !drawCircles;
   context.clearRect(0,0,canvas.width, canvas.height);
   drawTree();
