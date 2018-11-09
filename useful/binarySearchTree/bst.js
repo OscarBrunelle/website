@@ -28,12 +28,13 @@ function drawTree() {
 }
 
 class Node {
-  constructor(value, x, y, size, context) {
+  constructor(value, parent, context) {
     this.value = value;
-    this.x = x;
-    this.y = y;
+    this.x = parent.x;
+    this.y = parent.y;
     this.size = size;
     this.ctx = context;
+    this.height = parent.height + 1;
   }
   draw() {
     var numberDecimal = 1;
@@ -134,7 +135,7 @@ function createBST(){
 }
 
 function bst(array){
-  
+
 }
 
 function update() {

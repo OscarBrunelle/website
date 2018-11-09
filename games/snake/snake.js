@@ -14,7 +14,7 @@ var head;
 var tail = [];
 var fruit;
 
-var updateTime = 200;
+var updateTime = 100;
 
 function move(direction) {
   if (direction == "up") {
@@ -46,8 +46,8 @@ function drawPlayground() {
   canvas.focus();
   canvas.style.background = "grey";
 
-  canvas.addEventListener('keydown', function(event) {
-    key = event.key;
+  canvas.addEventListener('keydown', function (event) {
+    var key = event.key;
     if (key == "ArrowUp") {
       if (speedy != 1) {
         speedx = 0;
@@ -69,6 +69,16 @@ function drawPlayground() {
         speedy = 0;
       }
     }
+    key = event.which;
+    if (key == 49) {
+      changeGameSpeed(0.5);
+    } else if (key == 50) {
+      changeGameSpeed(1);
+    } else if (key == 51) {
+      changeGameSpeed(2);
+    } else if (key == 52) {
+      changeGameSpeed(4);
+    }
   });
   restartGame();
 }
@@ -77,22 +87,22 @@ function Snake(xpos = 0, ypos = 0, isHead = false) {
   this.xpos = xpos;
   this.ypos = ypos;
   this.isHead = isHead;
-  this.setNewPos = function(xspeed, yspeed) {
+  this.setNewPos = function (xspeed, yspeed) {
     this.xpos += xspeed * 20;
     this.ypos += yspeed * 20;
   };
-  this.draw = function() {
+  this.draw = function () {
     ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-    ctx.fillRect(this.xpos+1, this.ypos+1, 18, 18);
+    ctx.fillRect(this.xpos + 1, this.ypos + 1, 18, 18);
   };
-  this.eat = function(fruitX, fruitY) {
+  this.eat = function (fruitX, fruitY) {
     if ((this.xpos <= fruitX && (this.xpos + 20) >= (fruitX + 10)) && (this.ypos <= fruitY && (this.ypos + 20) >= (fruitY + 10))) {
       return true;
     } else {
       return false;
     }
   };
-  this.die = function() {
+  this.die = function () {
     if (this.xpos < 0 || this.xpos > canvas.width || this.ypos < 0 || this.ypos > canvas.height) {
       return true;
     } else {
@@ -120,15 +130,15 @@ function initializeFruit() {
 }
 
 function Fruit() {
-  this.x = Math.floor((Math.random() * 631) / 20) * 20 + 5;
-  this.y = Math.floor((Math.random() * 471) / 20) * 20 + 5;
-  this.draw = function() {
+  this.x = Math.floor((Math.random() * canvas.width + 1) / 20) * 20 + 5;
+  this.y = Math.floor((Math.random() * canvas.height + 1) / 20) * 20 + 5;
+  this.draw = function () {
     ctx.fillStyle = 'rgba(255, 255, 255, 1)';
     ctx.fillRect(this.x, this.y, 10, 10);
   };
-  this.newFruit = function() {
-    this.x = Math.floor((Math.random() * 631) / 20) * 20 + 5;
-    this.y = Math.floor((Math.random() * 471) / 20) * 20 + 5;
+  this.newFruit = function () {
+    this.x = Math.floor((Math.random() * canvas.width + 1) / 20) * 20 + 5;
+    this.y = Math.floor((Math.random() * canvas.height + 1) / 20) * 20 + 5;
   }
 }
 
@@ -167,20 +177,22 @@ function restartGame() {
   initializeFruit();
 }
 
-function changeGameSpeed(gameSpeed = 200){
-  if (gameSpeed = "x1") {
-    updateTime = 200;
-  } else if (gameSpeed = "x0.5") {
-    updateTime = 400;
-  }/* else if (gameSpeed = "x2") {
-    updateTime = 100;
-  } else if (gameSpeed = "x4") {
+function changeGameSpeed(gameSpeed = 1) {
+  if (gameSpeed == 4) {
     updateTime = 50;
-  }*/
+  } else if (gameSpeed == 2) {
+    updateTime = 100;
+  } else if (gameSpeed == 0.5) {
+    updateTime = 400;
+  } else {
+    updateTime = 200;
+  }
+  clearInterval(interval);
+  interval = setInterval(update, updateTime);
 }
 
 document.body.onload = drawPlayground();
-window.setInterval(update, updateTime);
+var interval = setInterval(update, updateTime);
 
 /*TO DO:
 snake dies if touches itself
