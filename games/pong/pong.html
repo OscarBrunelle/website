@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Pong</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="pong.css" />
+</head>
+
+<body>
+  <div id="canvasDiv">
+    <canvas id="canvas" width="400px" height="400px"></canvas>
+  </div>
+  <div id="scores">
+    <span id="player1Score">Player 1: 0</span>
+    <span>|</span>
+    <span id="player2Score">Player 2: 0</span>
+  </div>
+  <div id="colors">
+    <button onclick="changeColor('rgba(255,255,255,1)')">White</button>
+    <button onclick="changeColor('rgba(255,0,0,1)')">Red</button>
+    <button onclick="changeColor('rgba(0,255,0,1)')">Green</button>
+    <button onclick="changeColor('rgba(0,0,255,1)')">Blue</button>
+  </div>
+
+
+  <script src="Player.js"></script>
+  <script src="Ball.js"></script>
+  <script src="Paddle.js"></script>
+  <script src="pong.js"></script>
+</body>
+
+</html>

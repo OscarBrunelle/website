@@ -1,0 +1,11 @@
+body{
+  text-align: center;
+}
+
+div{
+  width: 100%;
+}
+
+canvas{
+  background-color: black;
+}

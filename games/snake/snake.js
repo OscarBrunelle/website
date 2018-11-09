@@ -42,11 +42,11 @@ function move(direction) {
 
 function drawPlayground() {
 
-  canvas.setAttribute("tabindex", "1");
-  canvas.focus();
+  /*canvas.setAttribute("tabindex", "1");
+  canvas.focus();*/
   canvas.style.background = "grey";
 
-  canvas.addEventListener('keydown', function (event) {
+  document.body.addEventListener('keydown', function (event) {
     var key = event.key;
     if (key == "ArrowUp") {
       if (speedy != 1) {
@@ -80,6 +80,7 @@ function drawPlayground() {
       changeGameSpeed(4);
     }
   });
+  interval = setInterval(update, updateTime);
   restartGame();
 }
 
@@ -191,8 +192,8 @@ function changeGameSpeed(gameSpeed = 1) {
   interval = setInterval(update, updateTime);
 }
 
+var interval;
 document.body.onload = drawPlayground();
-var interval = setInterval(update, updateTime);
 
 /*TO DO:
 snake dies if touches itself
