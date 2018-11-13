@@ -46,19 +46,21 @@ class Node {
     this.x = canvas.width / 2;
     this.y = 30;
     this.size = 20;
-    root = this;
+    if (root == null || root != this) {
+      root = this;
+    }
   }
   setParent(parent) {
     this.parent = parent;
     this.depth = this.parent.depth + 1;
     if (this.parent.left == this) {
       this.x = this.parent.x - canvas.width / Math.pow(2, this.depth + 1);
-    } else if (this.parent.right == this){
+    } else if (this.parent.right == this) {
       this.x = this.parent.x + canvas.width / Math.pow(2, this.depth + 1);
     } else {
       console.log("Problem finding the node");
     }
-    this.y = this.parent.y + 20;
+    this.y = this.parent.y + 30;
     this.size = 20 * (Math.pow(0.9, this.depth));
   }
   findNumberDecimals() {
@@ -70,6 +72,13 @@ class Node {
     }
     return numberDecimal;
   }
+  calculatePositon() {
+    if (this.parent == null) {
+      this.setAsRoot();
+    } else {
+      this.setParent(this.parent);
+    }
+  }
   draw() {
     this.ctx.beginPath();
     if (drawCircles) {
@@ -77,7 +86,7 @@ class Node {
       this.ctx.stroke();
     }
     this.ctx.font = /*(10-numberDecimal)+*/ "10px Arial"
-    this.ctx.fillText(this.value, this.x - 4 * this.valueLength, this.y + 2);
+    this.ctx.fillText(this.value, this.x - 3 * this.valueLength, this.y + 2);
   }
 }
 
@@ -157,6 +166,7 @@ function addValue(value) {
 }
 
 function setDemoTree() {
+  resizeWindow();
   reset();
   addValue(7);
   addValue(2);
@@ -167,6 +177,22 @@ function setDemoTree() {
   update();
 }
 
+function resizeWindow() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight - 60;
+  calculatePositon(root);
+  update();
+}
+
+function calculatePositon(node) {
+  if (node != null) {
+    node.calculatePositon();
+    calculatePositon(node.left);
+    calculatePositon(node.right);
+  }
+}
+
+window.addEventListener("resize", resizeWindow);
 document.onload = setDemoTree();
 
 function createBST() {
