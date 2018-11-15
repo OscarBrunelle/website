@@ -8,7 +8,7 @@ var root = null;
 function drawTree(node) {
   if (node != null) {
     node.draw();
-    var coef = 2 / 3;
+    var coef = Math.cos(Math.PI / 4);
     if (node.left != null) {
       if (drawLines) {
         context.beginPath();
