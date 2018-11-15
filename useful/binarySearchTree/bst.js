@@ -1,7 +1,6 @@
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
 
-var tree = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 var drawCircles = true;
 var drawLines = true;
 var root = null;
@@ -101,6 +100,8 @@ function switchLines() {
 
 function reset() {
   root = null;
+  drawCircles = true;
+  drawLines = true;
   update();
 }
 

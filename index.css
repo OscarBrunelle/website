@@ -1,9 +1,16 @@
-body, html {
-  height: 100%;
-  margin: 0;
+body,
+html {
   font-family: Arial;
-  text-align:center;
+  text-align: center;
   font-weight: bold;
+}
+
+#allDiv {
+  margin: 20px;
+}
+
+p {
+  font-weight: normal;
 }
 
 .tablink {
@@ -19,7 +26,7 @@ body, html {
 }
 
 .tablink:hover {
-  background-color: #777;
+  background-color: grey;
 }
 
 .tabcontent {
@@ -30,33 +37,27 @@ body, html {
 }
 
 #Home {
-  background-color: grey;
+  background-color: rgb(100, 140, 180);
 }
 
 #Resume {
-  background-color: green;
+  background-color: rgb(100, 140, 180);
 }
 
 #Useful {
-  background-color: purple;
+  background-color: rgb(100, 140, 180);
 }
 
 #Games {
-  background-color: brown;
+  background-color: rgb(100, 140, 180);
 }
 
 #Contact {
-  background-color: blue;
+  background-color: rgb(100, 140, 180);
 }
 
 #About {
-  background-color: orange;
-}
-
-#play_button {
-  color: blue;
-  background-color: black;
-  border: 1px solid #ddd;
+  background-color: rgb(100, 140, 180);
 }
 
 /*
@@ -84,5 +85,6 @@ body, html {
       color: white;
     }*/
 
-audio{
-  display: none;
+#footer {
+  padding-bottom: 5px;
+}
