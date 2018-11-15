@@ -155,11 +155,10 @@ function setDemoTree() {
   addValue(10);
   addValue(5);
   addValue(16);
-  update();
+  equilibrateTree();
   context.font = /*(10-numberDecimal)+*/ "24px Arial";
   context.fillText("This is a demo tree.", canvas.width / 2 - 100, canvas.height / 2 - 80);
   context.fillText("Please press the reset button", canvas.width / 2 - 140, canvas.height / 2 - 50);
-  equilibrateTree();
 }
 
 function resizeWindow() {
@@ -198,23 +197,31 @@ function findHeightOfNode(node) {
   node.height = Math.max(leftHeight, rightHeight) + 1;
   node.balancement = leftHeight - rightHeight;
   if (node.balancement > 1) {
-    if (node.left != null && node.left.balancement > 0) {
-      console.log("Value : " + node.value + ", left height: " + leftHeight + ", right height: " + rightHeight);
-      balanceNode(node, 1); //CASE 1
-    } else {
-      balanceNode(node, 2); //CASE 2
+    if (node.left != null) {
+      if (node.left.balancement > 0) {
+        balanceNode(node, 1); //CASE 1
+      } else if (node.left.balancement < 0) {
+        balanceNode(node, 2); //CASE 2
+      } else {
+        balanceNode(node, 2); //CASE 2
+      }
     }
-  } else if (node.balancement < 1) {
-    if (node.right != null && node.right.balancement > 0) {
-      balanceNode(node, 3); //CASE 3
-    } else {
-      balanceNode(node, 4); //CASE 4
+  } else if (node.balancement < -1) {
+    if (node.right != null) {
+      if (node.right.balancement > 0) {
+        balanceNode(node, 3); //CASE 3
+      } else if (node.right.balancement < 0) {
+        balanceNode(node, 4); //CASE 4
+      } else {
+        balanceNode(node, 4); //CASE 4
+      }
     }
   }
   return node.height;
 }
 
 function balanceNode(node, caseNumber) {
+  console.log("Node " + node.value + " case " + caseNumber);
   switch (caseNumber) {
     case 1:
       if (node == root) {
@@ -222,79 +229,70 @@ function balanceNode(node, caseNumber) {
         node.left = node.left.right;
         root.right = node;
         node.setParent(root);
+        if (node.left != null) {
+          node.left.setParent(node);
+        }
+        node.parent.right = node;
       } else {
+        if (node.left.right != null) {
+          node.left.right.setParent(node);
+        }
+        node.left.setParent(node.parent);
         if (node.parent.left == node) {
           node.parent.left = node.left;
-          node.left.setParent(node.parent);
-          node.setParent(node.parent.left);
         } else {
           node.parent.right = node.left;
-          node.left.setParent(node.parent);
-          node.setParent(node.parent.right);
         }
+        node.setParent(node.left);
         node.left = node.left.right;
+        node.parent.right = node;
       }
-      node.left.setParent(node);
-      node.parent.right = node;
       break;
     case 2:
-      if (node == root) {
-        node.left = node.left.right;
-        node.left.parent.right = node.left.left;
-        node.left.right.left = node.left;
-        node.left.setParent(node);
-        node.left.left.setParent(node.left);
-      } else {
-        if (node.parent.left == node) {
-          node.parent.left = node.left;
-          node.left.setParent(node.parent);
-          node.setParent(node.parent.left);
-        } else {
-          node.parent.right = node.left;
-          node.left.setParent(node.parent);
-          node.setParent(node.parent.right);
-        }
-        node.left = node.left.right;
+      node.left.setParent(node.left.right);
+      if (node.left.right.left != null) {
+        node.left.right.left.setParent(node.left);
       }
+      node.left.right = node.left.right.left;
+      node.left.parent.left = node.left;
+      node.left = node.left.parent;
+      node.left.setParent(node);
       balanceNode(node, 1);
       break;
     case 3:
-      if (node == root) {
-        node.left.setAsRoot();
-        node.left = node.left.right;
-        root.right = node;
-        node.setParent(root);
-      } else {
-        if (node.parent.left == node) {
-          node.parent.left = node.left;
-          node.left.setParent(node.parent);
-          node.setParent(node.parent.left);
-        } else {
-          node.parent.right = node.left;
-          node.left.setParent(node.parent);
-          node.setParent(node.parent.right);
-        }
-        node.left = node.left.right;
+      node.right.setParent(node.right.left);
+      if (node.right.left.right != null) {
+        node.right.left.right.setParent(node.right);
       }
+      node.right.left = node.right.left.right;
+      node.right.parent.right = node.right;
+      node.right = node.right.parent;
+      node.right.setParent(node);
       balanceNode(node, 4);
       break;
     default:
       if (node == root) {
-        node.left.setAsRoot();
-        node.left = node.left.right;
-        root.right = node;
+        node.right.setAsRoot();
+        node.right = node.right.left;
+        root.left = node;
         node.setParent(root);
-      } else {
-        if (node.parent.left == node) {
-          node.parent.left = node.left;
-          node.left.setParent(node.parent);
-          node.setParent(node.parent.left);
-        } else {
-          node.parent.right = node.left;
-          node.left.setParent(node.parent);
-          node.setParent(node.parent.right);
+        if (node.right != null) {
+          node.right.setParent(node);
         }
-        node.left = node.left.right;
+        node.parent.left = node;
+      } else {
+        if (node.right.left != null) {
+          node.right.left.setParent(node);
+        }
+        node.right.setParent(node.parent);
+        if (node.parent.right == node) {
+          node.parent.right = node.right;
+        } else {
+          node.parent.left = node.right;
+        }
+        node.setParent(node.right);
+        node.right = node.right.left;
+        node.parent.left = node;
       }
       break;
   }
