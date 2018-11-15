@@ -3,33 +3,31 @@ var context = canvas.getContext("2d");
 
 var tree = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 var drawCircles = true;
+var drawLines = true;
 var root = null;
 
 function drawTree(node) {
-  /*var change = 1;
-  var xAugmentation = canvas.width;
-  var x = -(xAugmentation / 2);
-  var yAugmentation = 30;
-  var y = yAugmentation;
-  var size = 1;
-  var value, node;
-  for (var index = 0; index < tree.length; index++) {
-    if (index == change) {
-      change += index + 1;
-      xAugmentation = xAugmentation / 2;
-      size *= 0.9;
-      x = -xAugmentation / 2;
-      y += yAugmentation;
-    }
-    value = tree[index];
-    x += xAugmentation;
-    node = new Node(value, x, y, size, context);
-    node.draw();
-  }*/
   if (node != null) {
     node.draw();
-    drawTree(node.left);
-    drawTree(node.right);
+    var coef = 2 / 3;
+    if (node.left != null) {
+      if (drawLines) {
+        context.beginPath();
+        context.moveTo(node.x - coef * node.size, node.y + coef * node.size);
+        context.lineTo(node.left.x + coef * node.left.size, node.left.y - coef * node.left.size);
+        context.stroke();
+      }
+      drawTree(node.left);
+    }
+    if (node.right != null) {
+      if (drawLines) {
+        context.beginPath();
+        context.moveTo(node.x + coef * node.size, node.y + coef * node.size);
+        context.lineTo(node.right.x - coef * node.right.size, node.right.y - coef * node.right.size);
+        context.stroke();
+      }
+      drawTree(node.right);
+    }
   }
 }
 
@@ -61,7 +59,7 @@ class Node {
     } else {
       console.log("Problem finding the node " + this.value);
     }
-    this.y = this.parent.y + 30;
+    this.y = this.parent.y + 40;
     this.size = 20 * (Math.pow(0.9, this.depth));
   }
   findNumberDecimals() {
@@ -93,6 +91,11 @@ class Node {
 
 function switchCircles() {
   drawCircles = !drawCircles;
+  update();
+}
+
+function switchLines() {
+  drawLines = !drawLines;
   update();
 }
 
@@ -162,8 +165,8 @@ function setDemoTree() {
 }
 
 function resizeWindow() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight - 60;
+  canvas.width = window.innerWidth - 10;
+  canvas.height = window.innerHeight - 80;
   calculatePositon(root);
   update();
 }
