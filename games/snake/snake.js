@@ -48,10 +48,10 @@ function drawPlayground() {
   console.log(window.innerHeight);
   if (window.innerWidth > 500) {
     canvas.width = window.innerWidth - 30;
-    canvas.height = window.innerHeight - 140;
+    canvas.height = window.innerHeight - 120;
   } else {
     canvas.width = window.innerWidth - 5;
-    canvas.height = window.innerHeight - 40;
+    canvas.height = window.innerHeight - 80;
   }
 
   document.body.addEventListener('keydown', function (event) {
