@@ -45,6 +45,8 @@ function drawPlayground() {
   /*canvas.setAttribute("tabindex", "1");
   canvas.focus();*/
   canvas.style.background = "grey";
+  canvas.width = window.innerWidth - 30;
+  canvas.height = window.innerHeight - 140;
 
   document.body.addEventListener('keydown', function (event) {
     var key = event.key;

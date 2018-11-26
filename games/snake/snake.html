@@ -12,9 +12,9 @@
 </head>
 
 <body>
-  <canvas id="myCanvas" width="640" height="480">
-		This is a canvas. If you see this text, you should update your browser.
-	</canvas>
+  <canvas id="myCanvas">
+    This is a canvas. If you see this text, you should update your browser.
+  </canvas>
   <div id="arrowControls">
     <div>
       <img src="up.png" onclick="move('up')">
@@ -25,12 +25,13 @@
   </div>
   <span>Game Speed:</span>
   <div id="gameSpeedControls">
-  <button onclick="changeGameSpeed(0.5)">x 0.5</button>
-  <button onclick="changeGameSpeed(1)">x 1</button>
-  <button onclick="changeGameSpeed(2)">x 2</button>
-  <button onclick="changeGameSpeed(4)">x 4</button>
+    <button onclick="changeGameSpeed(0.5)">x 0.5</button>
+    <button onclick="changeGameSpeed(1)">x 1</button>
+    <button onclick="changeGameSpeed(2)">x 2</button>
+    <button onclick="changeGameSpeed(4)">x 4</button>
 
-  <script src="snake.js"></script>
+    <script src="snake.js"></script>
+    <!--<script src="smallScreen.js"></script>-->
 </body>
 
 </html>
