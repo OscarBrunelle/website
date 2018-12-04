@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bubble Trouble</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="bubbleTrouble.css" />
+</head>
+
+<body>
+  <div id="mainMenu" class="fixedDiv">
+    <button id="play1" class="menuButton" onclick="loadGame(1)">1 Player</button>
+    <button id="play2" class="menuButton" onclick="loadGame(2)">2 Players</button>
+    <button id="instructions" class="menuButton" onclick="toggleInstuctions()">Instructions</button>
+    <button id="options" class="menuButton" onclick="toggleOptionsMenu()">Options</button>
+    <button id="credits" class="menuButton">Credits</button>
+    <button id="back" class="menuButton">Back to home page</button>
+  </div>
+
+  <div id="optionsMenu">
+    <div class="fixedDiv">
+      <button id="sound" class="menuButton">Sound</button>
+      <button id="music" class="menuButton">Music</button>
+      <button id="language" class="menuButton">Language</button>
+      <button id="backMainMenu" class="menuButton" onclick="loadMainMenu('button')">Main Menu</button>
+    </div>
+  </div>
+
+  <div id="game">
+    <canvas id="canvas"></canvas>
+    <button onclick="nextLevel()">Next Level</button>
+  </div>
+
+  <image src="images/player1.png" id="imagePlayer1" style="display: none;"></image>
+  <image src="images/player2.png" id="imagePlayer2" style="display: none;"></image>
+
+  <script src="Laser.js"></script>
+  <script src="Bubble.js"></script>
+  <script src="Player.js"></script>
+  <script src="bubbleTrouble.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+#mainMenu {}
+
+#game {
+  display: none;
+}
+
+.preloadImage {
+  display: none;
+}
+
+.full {
+  width: 30px;
+  height: 60px;
+}
+
+.half {
+  width: 30px;
+  height: 30px;
+}
+
+#fireball {
+  width: 5px;
+  height: 5px;
+}

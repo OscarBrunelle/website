@@ -1,11 +1,12 @@
 <!-- https://oscarbrunelle.github.io/website/ -->
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 
 <head>
   <link rel="stylesheet" type="text/css" href="index.css">
   <script src="index.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <meta name="description" content="Test Website">
   <meta name="keywords" content="Test, Free, Game">
@@ -19,7 +20,7 @@
     </div>
 
     <div class="navigation_bar">
-      <button id="defaultOpen" class="tablink" onclick="openPage('Home',this,'grey')">Home</button>
+      <button id="defaultOpen" class="tablink" onclick="openPage('News',this,'grey')">News</button>
       <!--
     <button class="tablink" onclick="openPage('Resume',this,'green')">Resume</button>-->
       <button class="tablink" onclick="openPage('Useful',this,'grey')">Useful</button>
@@ -29,25 +30,31 @@
     <button class="tablink" onclick="openPage('Contact',this,'blue')">Contact</button>-->
     </div>
 
-    <div id="Home" class="tabcontent">
-      <h3>Home</h3>
-      <p>Welcome to my website!<br>
-        <br>Here you'll be able to find useful creations of my own, remakes of well-known games,
-        <br>as well as information about me.
-        <br>Have a good time!
-      </p>
+    <div id="News" class="tabcontent">
+      <div id="description">
+        <h3>Description</h3>
+        <p>Welcome to my website!<br>
+          <br>Here you'll be able to find useful creations of my own, remakes of well-known games,
+          <br>as well as information about me.
+          <br>Enough talk, have a good time!
+        </p>
+      </div>
+      <div id="newsFeed">
+        <h3>News</h3>
+        <p class="newsTitle">26/11/18 - Added the news feed</p>
+        <p class="newsContent">Here will be the place where I'll post some news about the updates
+          <br>and the future projects for the website.
+        </p>
+      </div>
     </div>
-    <!--
-  <div id="Resume" class="tabcontent">
-    <h3 id="res">Resume</h3>
-    <p>resume</p>
-  </div>
--->
+
     <div id="Games" class="tabcontent">
       <h3>Games</h3>
       <div>
         <p>Already available games</p>
+        <li><a href="games/bubbleTrouble.bubbleTrouble.html">Bubble Trouble</a></li>
         <li><a href="games/pong/pong.html">Pong</a></li>
+        <li><a href="games/snake/snake.html">Snake</a></li>
         <p>----------</p>
       </div>
 
@@ -56,6 +63,7 @@
         <li><a href="games/buttonKiller/buttonKiller.html">Button Killer</a></li>
         <li><a href="games/cookieClicker/cookieClicker.html">Cookie clicker</a></li>
         <li><a href="games/dungeon/dungeon.html">Dungeon</a></li>
+        <li><a href="games/doodleJump/doodleJump.html">Doodle Jump</a></li>
         <li><a href="games/farm/farm.html">Farm</a></li>
         <li><a href="games/flappyBird/flappyBird.html">Flappy Bird</a></li>
         <li><a href="games/formula1/formula1.html">Formula 1</a></li>
@@ -69,7 +77,6 @@
         <li><a href="games/myGame/myGame.html">My Game</a></li>
         <li><a href="games/plantsVsZombies/plantsVsZombies.html">Plants vs Zombies</a></li>
         <li><a href="games/slayTheSpire/slayTheSpire.html">Slay The Spire</a></li>
-        <li><a href="games/snake/snake.html">Snake</a></li>
         <li><a href="games/sudoku/sudoku.html">Sudoku</a></li>
         <li><a href="games/travian/travian.html">Travian</a></li>
       </div>
