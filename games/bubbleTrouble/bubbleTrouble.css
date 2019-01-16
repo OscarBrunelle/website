@@ -2,6 +2,11 @@ body {
   text-align: center;
 }
 
+.pub{
+  width: 20%;
+  height: 100%;
+}
+
 .fixedDiv {
   position: fixed;
   /*background-image: url(images/mainMenu.png);*/

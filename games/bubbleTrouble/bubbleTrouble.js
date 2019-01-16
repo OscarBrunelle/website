@@ -23,8 +23,8 @@ function loadGame(nbrPlayersChosen) {
   document.getElementById('mainMenu').style.display = "none";
   document.getElementById('game').style.display = "block";
   canvas.style.background = "grey";
-  canvas.width = window.innerWidth - 30;
-  canvas.height = window.innerHeight - 30;
+  canvas.width = window.innerWidth * 0.5;
+  canvas.height = window.innerHeight - 100;
   bottom = canvas.height / 1.25;
   levelTop = 0;
   context.fillStyle = "rgb(0,0,0)";
@@ -74,6 +74,14 @@ function loadGame(nbrPlayersChosen) {
 function update() {
   if (!gameIsRunning) return;
   context.clearRect(0, 0, canvas.width, canvas.height);
+  context.createLinearGradient(0, 0, 170, 0);
+  /*var grd = context.createLinearGradient(0, 0, 170, 0);
+  grd.addColorStop(0, "red");
+  grd.addColorStop(1, "yellow");*/
+
+  context.fillStyle = "grey";
+  context.fillRect(0 + 20, 0 + 20, canvas.width - 40, canvas.height - 40);
+
   context.beginPath();
   context.moveTo(0, bottom);
   context.lineTo(canvas.width, bottom);
