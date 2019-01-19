@@ -30,22 +30,39 @@ function searchLinesAndColumns() {
 }
 
 function searchSquares() {
-  for (let i = 0; i < 9; i += 3) {
-    for (let j = 0; j < 9; j += 3) {
-      for (let x = 0; x < 3; x++) {
-        const yAxis = grid[i + x];
-        for (let y = 0; y < 3; y++) {
-          const number = yAxis[j + y].number;
-          if (number != null) {
-            for (let a = 0; a < 3; a++) {
-              const column = grid[i + a];
-              for (let b = 0; b < 3; b++) {
-                const currentCase = column[j + b];
-                currentCase.possibleNumbers.removeElement(number);
+  for (let num = 1; num < 10; num++) {
+    var possibleCases = [];
+    //loop through each 3*3 square
+    for (let i = 0; i < 9; i += 3) {
+      for (let j = 0; j < 9; j += 3) {
+        //loop inside the square
+        for (let x = 0; x < 3; x++) {
+          const yAxis = grid[i + x];
+          for (let y = 0; y < 3; y++) {
+            const number = yAxis[j + y].number;
+            if (number != null) {
+              //remove number possibility in the line
+              for (let a = 0; a < 3; a++) {
+                const column = grid[i + a];
+                //remove number possibility in the column
+                for (let b = 0; b < 3; b++) {
+                  const currentCase = column[j + b];
+                  currentCase.possibleNumbers.removeElement(number);
+                }
               }
             }
+            const currentCase = grid[i + x][j + y];
+            currentCase.possibleNumbers.forEach(element => {
+              if (element == num) {
+                possibleCases.push(currentCase);
+              }
+            });
           }
         }
+        if (possibleCases.length == 1) {
+          possibleCases[0].number = num;
+        }
+        possibleCases = [];
       }
     }
   }

@@ -6,7 +6,8 @@ var selectedNumber = null;
 var primaryMode = false,
   guessMode = false,
   eraseMode = false,
-  searchMode = false;
+  searchMode = false,
+  showPossibleNumbers = false;
 
 function switchMode(n) {
   switch (n) {
@@ -21,6 +22,10 @@ function switchMode(n) {
       break;
     case 3:
       searchMode = !searchMode;
+      break;
+    case 4:
+      showPossibleNumbers = !showPossibleNumbers;
+      update();
       break;
     default:
       console.log("Error while chosing the mode");
@@ -51,13 +56,13 @@ class Case {
 }
 
 function onload() {
-  createGrid();
+  generateSudoku();
   drawGrid();
   update();
   canvas.addEventListener("click", clickEvent);
 }
 
-function createGrid() {
+function generateSudoku() {
   const exampleGrid = [
     [null, 3, null, null, 5, 1, 2, 6, null],
     [1, 2, null, null, null, null, null, 5, 8],
@@ -69,14 +74,40 @@ function createGrid() {
     [3, 9, null, null, null, null, null, 1, 5],
     [null, 4, 1, 9, 8, null, null, 3, null]
   ];
+  const exampleGrid2 = [
+    [null, null, 9, null, null, 4, 2, null, null],
+    [null, null, null, null, 8, null, null, 4, null],
+    [6, null, null, 5, 7, null, null, null, 9],
+    [9, null, 3, null, null, null, null, null, null],
+    [null, 1, null, null, null, null, null, 9, null],
+    [null, null, null, null, null, null, 8, null, 5],
+    [7, null, null, null, 1, 9, null, null, 4],
+    [null, 6, null, null, 5, null, null, null, null],
+    [null, null, 1, 7, null, null, 6, null, null]
+  ];
+  grid = [];
   for (let i = 0; i < 9; i++) {
     var column = [];
     for (let j = 0; j < 9; j++) {
-      const value = exampleGrid[i][j];
+      const value = exampleGrid2[i][j];
       column.push(new Case(i * 50, j * 50, value, value != null));
     }
     grid.push(column);
   }
+  update();
+}
+
+function resetGrid() {
+  grid = [];
+  for (let i = 0; i < 9; i++) {
+    var column = [];
+    for (let j = 0; j < 9; j++) {
+      const value = null;
+      column.push(new Case(i * 50, j * 50, value, value != null));
+    }
+    grid.push(column);
+  }
+  update();
 }
 
 function clickEvent(event) {
@@ -149,9 +180,16 @@ function update() {
       } else {
         isFinished = false;
         context.font = "italic 10px Arial";
-        for (let guessIndex = 0; guessIndex < currentCase.guesses.length; guessIndex++) {
-          var guess = currentCase.guesses[guessIndex];
-          context.fillText(guess, currentCase.x + 5 + ((guess - 1) % 3) * 15, currentCase.y + 15 + Math.floor((guess - 1) / 3) * 15);
+        /*for (let guessIndex = 0; guessIndex < currentCase.guesses.length; guessIndex++) {
+          var guess = currentCase.guesses[guessIndex];*/
+        if (showPossibleNumbers) {
+          currentCase.possibleNumbers.forEach(guess => {
+            context.fillText(guess, currentCase.x + 5 + ((guess - 1) % 3) * 15, currentCase.y + 15 + Math.floor((guess - 1) / 3) * 15);
+          });
+        } else {
+          currentCase.guesses.forEach(guess => {
+            context.fillText(guess, currentCase.x + 5 + ((guess - 1) % 3) * 15, currentCase.y + 15 + Math.floor((guess - 1) / 3) * 15);
+          });
         }
       }
     }
@@ -165,8 +203,6 @@ function selectNumber(num) {
   selectedNumber = num;
 }
 
-// check if an element exists in array using a comparer function
-// comparer : function(currentElement)
 Array.prototype.inArray = function (element) {
   for (var i = 0; i < this.length; i++) {
     if (this[i] == element) return i;
@@ -174,8 +210,6 @@ Array.prototype.inArray = function (element) {
   return -1;
 };
 
-// adds an element to the array if it does not already exist using a comparer 
-// function
 Array.prototype.pushIfNotExist = function (element) {
   if (this.inArray(element) == -1) {
     this.push(element);
