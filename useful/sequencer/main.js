@@ -2,12 +2,23 @@ var canvas, canvasContext;
 var normalKeys = [],
   specialKeys = [];
 var keyWidth = 30;
+var sequence = [];
+var clicking = false,
+  playing = false,
+  registering = false;
+var previousKey = null;
+var playingInterval, metronomeInterval;
+var tempo;
 
 //var simpleNotesOrder = ['C0', 'D0', 'E0', 'F0', 'G0', 'A0', 'B0'];
 
 //var specialNotesOrder = ['C#0', 'Db0', 'D#0', 'Eb0', 'F#0', 'Gb0', 'G#0', 'Ab0', 'A#0', 'Bb0'];
 
 var notesOrder = ['C0', 'C#0', 'Db0', 'D0', 'D#0', 'Eb0', 'E0', 'F0', 'F#0', 'Gb0', 'G0', 'G#0', 'Ab0', 'A0', 'A#0', 'Bb0', 'B0'];
+
+function setTempo(bpm = 90) {
+  tempo = 60000 / bpm;
+}
 
 var noteValues = {
   'C0': 16.35,
@@ -27,6 +38,16 @@ var noteValues = {
   'A#0': 29.14,
   'Bb0': 29.14,
   'B0': 30.87
+}
+
+function toggleMetronome() {
+  if (metronomeInterval != null) {
+    clearInterval(metronomeInterval);
+  } else {
+    metronomeInterval = setInterval(function () {
+      playSound(220);
+    }, tempo);
+  }
 }
 
 function playSound(frequency) {
@@ -50,16 +71,48 @@ function playSound(frequency) {
   }
 }
 
+function playSequence() {
+  console.log("Playing sequence");
+  playing = true;
+  let index = 0;
+  interval = setInterval(function () {
+    if (index < sequence.length) {
+      playSound(sequence[index]);
+    } else {
+      console.log("Stopped playing");
+      clearInterval(interval);
+    }
+    index++;
+  }, tempo);
+}
+
+function stopPlaying() {
+  console.log("Stopped playing");
+  clearInterval(interval);
+  playing = false;
+}
+
+function registerSequence() {
+  registering = !registering;
+  if (registering) {
+    console.log("Registering. Press again to stop.");
+  } else {
+    console.log("Stopped registering");
+  }
+}
+
 function generateKeyboard() {
   canvas = document.createElement('canvas');
   canvas.width = 1475;
   canvas.style.backgroundColor = 'grey';
   canvasContext = canvas.getContext('2d');
-  canvas.addEventListener('mousedown', findKey);
+  canvas.addEventListener('mousedown', mouseDownEvent);
+  document.body.addEventListener('mouseup', mouseUpEvent);
+  canvas.addEventListener('mousemove', mouseMoveEvent);
   document.body.appendChild(canvas);
 
   var x = 0;
-  for (let pow = 0; pow < 7; pow++) {
+  for (let pow = 3; pow < 7; pow++) {
     for (i = 0; i < notesOrder.length; i++) {
       const noteName = notesOrder[i];
       if (noteName.length > 2) {
@@ -73,6 +126,7 @@ function generateKeyboard() {
     }
   }
   drawKeyboard();
+  setTempo();
 }
 
 function drawKeyboard() {
@@ -84,25 +138,49 @@ function drawKeyboard() {
   });
 }
 
+function mouseUpEvent(e) {
+  clicking = false;
+  previousKey = null;
+}
+
+function mouseDownEvent(e) {
+  clicking = true;
+  let key = findKey(e);
+  if (key != null) {
+    playKey(key);
+  }
+}
+
+function mouseMoveEvent(e) {
+  if (clicking == true) {
+    let key = findKey(e);
+    if (key != null && key != previousKey) {
+      playKey(key);
+    }
+  }
+}
+
+function playKey(key) {
+  playSound(key.frequency);
+  if (registering) {
+    sequence.push(key.frequency);
+  }
+  previousKey = key;
+}
+
 function findKey(e) {
   var rect = e.target.getBoundingClientRect();
   var x = e.clientX - rect.left;
   var y = e.clientY - rect.top;
   var index = (x - (x % keyWidth)) / keyWidth;
   if (y > canvas.height / 3 && index < normalKeys.length) {
-    let touch = normalKeys[index];
-    playSound(touch.frequency);
-    return;
+    return normalKeys[index];
   } else if (index < specialKeys.length) {
-    let touch = specialKeys[index];
-    playSound(touch.frequency);
-    return;
+    return specialKeys[index];
   } else if (index < normalKeys.length) {
-    let touch = normalKeys[index];
-    playSound(touch.frequency);
-    return;
+    return normalKeys[index];
   } else {
-    console.log("Couldn't play this note");
+    return null;
   }
 }
 

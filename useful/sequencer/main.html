@@ -10,8 +10,13 @@
 </head>
 
 <body>
-
-  <button onclick="playSound(440)"></button>
+  <canvas id="canvas"></canvas>
+  <div>
+    <button id="play" onclick="playSequence()">Play</button>
+    <button id="stop" onclick="stopPlaying()">Stop</button>
+    <button id="register" onclick="registerSequence()">Register</button>
+    <button id="metronome" onclick="toggleMetronome()">Metronome</button>
+  </div>
 
   <script src="main.js"></script>
 </body>
