@@ -88,3 +88,8 @@ p {
 #footer {
   padding-bottom: 5px;
 }
+
+#description {
+  padding-left: 20%;
+  padding-right: 20%;
+}
