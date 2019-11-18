@@ -1,0 +1,24 @@
+#displays {
+	display: -webkit-box;
+}
+
+canvas {
+}
+
+table {
+	border-collapse : collapse;
+	border : 1px solid black;
+	width : 50%;
+}
+
+th, td {
+	text-align : center;
+	vertical-align : center;
+	border : 1px solid black;
+}
+
+th {
+	height : 25px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}

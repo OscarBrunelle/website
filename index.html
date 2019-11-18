@@ -3,90 +3,32 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" type="text/css" href="index.css">
-  <script src="index.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
-  <meta name="description" content="Test Website">
-  <meta name="keywords" content="Test, Free, Game">
-  <meta name="author" content="Oscar Brunelle">
-  <title>Oscar's website</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Oscar Brunelle - Personal website">
+	<meta name="keywords" content="Oscar, Brunelle">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Oscar Brunelle</title>
 </head>
 
 <body>
-  <div id="allDiv">
-    <div id="banner">
-    </div>
+	<div id="wrapper" class="day">
+		<div id="banner">
+			<p>Oscar Brunelle</p>
+		</div>
 
-    <div class="navigation_bar">
-      <button id="defaultOpen" class="tablink" onclick="openPage('News',this,'grey')">News</button>
-      <!--
-    <button class="tablink" onclick="openPage('Resume',this,'green')">Resume</button>-->
-      <button class="tablink" onclick="openPage('Useful',this,'grey')">Useful</button>
-      <button class="tablink" onclick="openPage('Games',this,'grey')">Games</button>
-      <button class="tablink" onclick="openPage('About',this,'grey')">About</button>
-      <!--
-    <button class="tablink" onclick="openPage('Contact',this,'blue')">Contact</button>-->
-    </div>
+		<div id="projectsList">
+			<div id="researchesList">
+				<p class="listTitle">Tools and researches</p>
+			</div>
 
-    <div id="News" class="tabcontent">
-      <div id="description">
-        <h3>Description</h3>
-        <p>Welcome to my website!<br>
-          <br>Hi! My name is Oscar. I'm a student in computer engineering, and I'm using this website to learn and improve my skills.
-          <br>You'll be able to find some tools under the "useful" section, or you may be interester in the games I've done or tried to reproduce.
-          <br>Have a good time!
-        </p>
-      </div>
-    </div>
+			<div id="gamesList">
+				<p class="listTitle">Games</p>
+			</div>
+		</div>
+	</div>
 
-    <div id="Games" class="tabcontent">
-      <h3>Games</h3>
-      <div>
-        <p>List of games</p>
-        <li><a href="games/bubbleTrouble/bubbleTrouble.html">Bubble Trouble</a></li>
-        <li><a href="games/doodleJump/doodleJump.html">Doodle Jump</a></li>
-        <li><a href="games/pong/pong.html">Pong</a></li>
-        <li><a href="games/snake/snake.html">Snake</a></li>
-      </div>
-    </div>
-
-    <div id="Useful" class="tabcontent">
-      <h3>Useful</h3>
-      <p>Things that you may find useful</p>
-
-      <li><a href="useful/binarySearchTree/bst.html">Binary Search Tree</a></li>
-      <li><a href="useful/sudoku/sudoku.html">Sudoku Solver</a></li>
-    </div>
-
-    <div id="About" class="tabcontent">
-      <h3>About me</h3>
-      <p>Hi! I'm Oscar, and I'm the creator of this website!
-        <br>If you want more information about me, have a look at my resume!</p>
-      <a href="other/Resume_Oscar_Brunelle.pdf">Link to my pdf resume</a>
-    </div>
-
-    <!--
-    <div id="footer" style="background-color: grey">
-      <h4 style="padding-top: 5px; color:white">List of links:</h4>a>
-    </div>
-  -->
-  </div>
-
-  <script>
-    window.onload = document.getElementById("defaultOpen").click();
-  </script>
+	<script type="text/javascript" src="main.js"></script>
 </body>
-
 </html>
-
-<!-- Add icon library
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<div class="icon-bar">
- <a class="active" href="#"><i class="fa fa-home"></i></a>
- <a href="#"><i class="fa fa-search"></i></a>
- <a href="#"><i class="fa fa-envelope"></i></a>
- <a href="#"><i class="fa fa-globe"></i></a>
- <a href="#"><i class="fa fa-trash"></i></a>
-</div> -->
