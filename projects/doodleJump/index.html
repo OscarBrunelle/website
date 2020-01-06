@@ -1,22 +1,84 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Doodle Jump</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="dj.css" />
+	<link rel="stylesheet" type="text/css" href="menu.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Doodle Jump">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Doodle Jump</title>
 </head>
-
 <body>
+	<div id="mainMenuDiv" class="mainDiv">
+		<p class="menuTitle">Doodle Jump</p>
 
-  <img class="preloadImage" id="player" src="other/player.png">
-<img class="preloadImage" id="pad" src="other/pad.png">
-<img class="preloadImage" id="spring" src="other/spring.png">
+		<div id="menuButtons">
+			<div class="menuButtonDiv">
+				<button id="playButton" class="menuButton" onclick="launchGame();">Play</button>
+			</div>
+			<div class="menuButtonDiv">
+				<button id="instructionsButton" class="menuButton" onclick="showDiv('instructionsDiv');">Instructions</button>
+			</div>
+			<div class="menuButtonDiv">
+				<button id="optionsButton" class="menuButton" onclick="showDiv('optionsDiv');">Options</button>
+				<a href="../../index.html"><button id="quitButton" class="menuButton">Quit Game</button></a>
+			</div>
+		</div>
+	</div>
 
-  <script src="Player.js"></script>
-  <script src="dj.js"></script>
+	<div id="gameDiv" class="mainDiv">
+		<div style="width: 200px; height: 400px; margin: auto;">
+			<div style="position: relative; left: 10px;">
+				<p style="position: absolute;">Score: <span id="currentScore">0</span></p>
+			</div>
+			<canvas id="gameCanvas" width="200px" height="400px" style="border: 1px dashed black;"></canvas>
+			
+		</div>
+	</div>
+
+	<div id="instructionsDiv" class="mainDiv" style="margin: 5%;">
+		<p>
+			Instructions.
+		</p>
+		<button id="instructionsBackButton" class="menuButton" onclick="showDiv('menuDiv');">Back to main menu</button>
+	</div>
+
+	<div id="optionsDiv" class="mainDiv" style="margin: 5%;">
+		<div style="margin-bottom: 10%;">
+			<div style="width: 50%;">
+				<button id="optionsMusicButton" class="menuButton">Music ♫</button>
+			</div>
+			<div style="width: 50%;">
+				<button id="optionsSoundButton" class="menuButton">Sound ♪</button>
+			</div>
+		</div>
+		<button id="optionsBackButton" class="menuButton" onclick="showDiv('menuDiv');">Back to main menu</button>
+	</div>
+
+	<div id="restartScreen" class="mainDiv">
+		<div>
+			<p class="menuTitle">You died!</p>
+			<p class="menuText">Score: <span id="finalScore">0</span>.</p>
+		</div>
+		<div id="menuButtons">
+			<div class="menuButtonDiv">
+				<button class="menuButton" onclick="launchGame();">Play again</button>
+			</div>
+			<div class="menuButtonDiv">
+				<button class="menuButton" onclick="showDiv('mainMenuDiv');">Back to main menu</button>
+			</div>
+		</div>
+	</div>
+
+	<img id="player" class="preloadImage" src="other/player.png" style="display: none;">
+	<img id="pad" class="preloadImage" src="other/pad.png" style="display: none;">
+	<img id="spring" class="preloadImage" src="other/spring.png" style="display: none;">
+	
+	<script type="text/javascript" src="menu.js"></script>
+	<script type="text/javascript" src="game.js"></script>
+	<script type="text/javascript" src="classes.js"></script>
+	<script type="text/javascript" src="game.js"></script>
 </body>
-
 </html>
