@@ -1,0 +1,52 @@
+body {
+	background-color: #aaa;
+}
+
+.menuTitle {
+	text-align: center;
+	color: #a59c99;
+	font-family: Source Sans Pro, sans-serif;
+	font-size: 100px;
+	font-style: normal;
+	font-weight: 700;
+	letter-spacing: -4px;
+	text-shadow: 0 0 4px black;
+	text-shadow: 2px 0 0 black, -2px 0 0 black, 0 2px 0 black, 0 -2px 0 black, 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+	margin: 8%;
+}
+
+.menuText {
+	text-align: center;
+	color: black;
+	background-color: #bbb;
+	font-family: Source Sans Pro, sans-serif;
+	font-size: 30px;
+	margin: 0 30% 0 30%;
+	border: 1px solid black;
+}
+
+#menuButtons {
+	text-align: center;
+	margin: 0 25% 0 25%;
+	user-select: none;
+}
+
+.menuButton {
+	border: 3px solid black;
+	background-color: #797979;
+	text-align: center;
+	color: white;
+	font-family: Source Sans Pro, sans-serif;
+	font-size: 30px;
+	font-style: normal;
+	text-shadow: 2px 2px #3f3f3f;
+	padding: 10px;
+	margin: 10px 0 10px 0;
+	width: 100%;
+	user-select: none;
+}
+
+.menuButton:hover, .menuButton:focus {
+	border-color: white;
+	cursor: pointer;
+}
