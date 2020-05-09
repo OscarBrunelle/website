@@ -1,5 +1,6 @@
 /*
 change drawCase function to use only case object as argument
+when all mines are flagged, win
 */
 
 var flagMode = false;
@@ -85,6 +86,8 @@ function reset(){
 
 	nbrUncovered = 0;
 	remainingMines = mines;
+
+	context.clearRect(0, 0, canvas.width, canvas.height);
 
 	createField();
 	drawField();
