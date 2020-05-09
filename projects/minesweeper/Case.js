@@ -13,6 +13,7 @@ class Case {
 	toggleFlag(){
 		this.isFlagged = !this.isFlagged;
 		this.icon = this.isFlagged ? icons[9] : icons[12];
+		return this.isFlagged;
 	}
 
 	uncover(clicked = false){
