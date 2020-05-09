@@ -66,6 +66,10 @@ function loadGame() {
 
 	timer = new Timer(DOM_timer);
 
+	$("#canvas").on("contextmenu", function(e) {
+		return false;
+	});
+
 	document.body.addEventListener("keypress", function(e){
 		switch(e.which){
 			case 102:
@@ -155,10 +159,14 @@ function click(event){
 	const xIndex = Math.floor(x / CASE_WIDTH);
 	const yIndex = Math.floor(y / CASE_HEIGHT);
 
-	clickCase(xIndex, yIndex);
+	if (event.button === 0) { //left click
+		clickCase(xIndex, yIndex, flagMode);
+	} else if (event.button === 2) { //right click
+		clickCase(xIndex, yIndex, true);
+	}
 }
 
-function clickCase(xIndex, yIndex) {
+function clickCase(xIndex, yIndex, flag) {
 	if (xIndex < 0 || xIndex >= width || yIndex < 0 || yIndex >= height) {
 		return;
 	}
@@ -166,7 +174,7 @@ function clickCase(xIndex, yIndex) {
 	let caseObj = field[xIndex][yIndex];
 	if (caseObj === undefined || caseObj.isUncovered) return;
 
-	if (flagMode) {
+	if (flag) {
 		let flagged = caseObj.toggleFlag();
 		if (flagged) {
 			remainingMines--;
