@@ -1,49 +1,69 @@
-body, html {
-	font-family: Arial;
+#projects {
+	display: grid;
+	gap: 20px;
 }
 
-.listTitle {
+.projects_list {
+	display: grid;
+	gap: 10px;
+}
+
+@media (max-width: 599px) {
+	.projects_list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 600px) {
+	.projects_list {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.projects_list-title {
+	margin: 0px;
+	padding: 10px;
+	grid-column: 1 / -1;
 	text-align: center;
 	color: #2f3235;
 	font-family: Source Sans Pro, sans-serif;
-	font-size: 26px;
 	font-style: normal;
 	font-weight: 700;
 	border-top: 1px dashed black;
 }
 
 .project {
-	display: inline-grid; /* or inline-flex */
-	min-width: 80px;
-	width: calc(25% - 26px);
-	margin: 5px;
+	display: grid;
+	gap: 10px;
 	padding: 5px;
+	text-decoration: none;
 	border: 1px solid black;
+	cursor: pointer;
 }
 
-.projectLink {
+.project-title {
+	margin: 0px;
 	background-color: transparent;
 	text-decoration: none !important;
 	outline: none !important;
-	text-align: center;
+	justify-self: center;
 	color: #2f3235;
 	font-family: Source Sans Pro, sans-serif;
-	font-size: 20px;
 	font-style: normal;
 	font-weight: 700;
 	line-height: 1.2;
 	transition: color .2s ease,background-color .2s ease;
-	margin-bottom: 10px;
 }
 
-.projectLink:hover, .projectLink:focus {
+.project-title:hover, .project-title:focus {
 	color: #4c4f53;
     text-decoration: underline !important;
 }
 
-.description {
+.project-description {
+	margin: 0px;
 	font-family: Lora ,sans-serif;
-	font-size: 15px;
+	font-size: 1em;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 1.7;
@@ -51,10 +71,6 @@ body, html {
 	text-align: justify;
 }
 
-.centered {
-	text-align: center;
-}
-
-#footer {
+footer {
 	padding-bottom: 5px;
 }
