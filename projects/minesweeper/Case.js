@@ -16,8 +16,9 @@ class Case {
 		return this.isFlagged;
 	}
 
+	//returns true if the user clicked a mine
 	uncover(clicked = false){
-		if ((this.isFlagged && !clicked) || (!this.flagged && !this.isUncovered)) {
+		if ((this.isFlagged && !clicked) || (!this.isFlagged && !this.isUncovered)) {
 			this.isUncovered = true;
 			if (this.isMined) {
 				if (clicked) {
