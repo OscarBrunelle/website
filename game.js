@@ -152,17 +152,17 @@ class Modal {
 		this.element = $("<div class='modal'></div>").appendTo(parent_selector);
 		this.element.append("<div id='" + element_id + "'></div>");
 		const x_close = $("<button class='x-close'>x</button>").appendTo("#" + element_id);
-		x_close.on("click", function() {
+		x_close.on("click", function () {
 			ref.element.hide();
 		});
 		this.text_element = $("<p class='modal_text'>" + text + "</p>").appendTo("#" + element_id);
 		const buttons_container = $("<div class='modal_buttons_container'></div>").appendTo("#" + element_id);
-		const yes_button = $("<button>Play again</button>").on("click", function() {
+		const yes_button = $("<button>Play again</button>").on("click", function () {
 			ref.element.hide();
 			yes_function();
 		}).appendTo("#" + element_id + " .modal_buttons_container");
 		const no_button = $("<button>Close</button>").appendTo("#" + element_id + " .modal_buttons_container");
-		no_button.on("click", function() {
+		no_button.on("click", function () {
 			ref.element.hide();
 			no_function();
 		});
@@ -207,7 +207,7 @@ class GameCanvas {
 
 	onclick(action) {
 		const canvas = this.canvas;
-		canvas.addEventListener("mousedown", function(event) {
+		canvas.addEventListener("mousedown", function (event) {
 			const rect = canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
@@ -229,7 +229,7 @@ class GameCanvas {
 
 	add_return_button(action) {
 		const exit_button = $("<button class='bottom_exit-button menu-button'>Return to main menu</button>").appendTo("#gameplay_div");
-		exit_button.on("click", function() {
+		exit_button.on("click", function () {
 			action();
 			show_mainMenu("#gameplay_div");
 		});

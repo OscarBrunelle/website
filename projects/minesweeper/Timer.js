@@ -1,7 +1,7 @@
 class Timer {
-	constructor(DOMObject, startingTime = 0, format = 0) {
+	constructor(selector, startingTime = 0, format = 0) {
 		this.time = startingTime;
-		this.DOM = DOMObject;
+		this.selector = selector;
 	}
 
 	addTime(milliseconds) {
@@ -9,8 +9,12 @@ class Timer {
 		this.updateDisplay();
 	}
 
+	getTime() {
+		return this.time / 1000 + "s";
+	}
+
 	updateDisplay() {
-		this.DOM.innerHTML = "Time: " + (this.time / 1000);
+		$(this.selector).text("Time: " + (this.time / 1000));
 	}
 
 	reset() {
@@ -23,5 +27,6 @@ class Timer {
 
 	stop(){
 		clearInterval(this.interval);
+		return this.time;
 	}
 }

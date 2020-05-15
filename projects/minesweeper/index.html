@@ -1,52 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="../../game.css">
 	<meta charset="UTF-8">
 	<meta name="description" content="A Minesweeper-like game">
 	<meta name="keywords" content="Minesweeper">
 	<meta name="author" content="Oscar Brunelle">
 	<title>Minesweeper</title>
 </head>
+
 <body>
-	<div id="mainMenu">
-		<button onclick="reset();">Play</button>
-		<button>Instructions</button>
-		<button>Commands</button>
-		<a href="../../index.html"><button>Home</button></a>
-	</div>
-
-	<div class="game">
-
-		<h1>Minesweeper</h1>
-
-		<div class="usefulButtons">
-			<button onclick="reset();">Reset</button>
-			<button onclick="changeSettings();">Custom game</button>
-			<button id="flagModeButton" onclick="toggleFlagMode();">Flag mode: OFF</button>
-		</div>
-
-		<div id="info">
-			<span id="covered"></span>
-			<span> || </span>
-			<span id="uncovered"></span>
-			<span> || </span>
-			<span id="mines"></span>
-			<span> || </span>
-			<span id="timer"></span>
-		</div>
-
-		<canvas id="canvas" width="600px" height="400px"></canvas>
-	</div>
-
-	<span id="text">nothing</span>
-	<span id="text2">nothing</span>
-	</div>
+	<div id='main_div'></div>
 
 	<script type="text/javascript" src="../../jquery.js"></script>
 	<script type="text/javascript" src="../../shared.js"></script>
+	<script type="text/javascript" src="../../game.js"></script>
 	<script type="text/javascript" src="Case.js"></script>
 	<script type="text/javascript" src="Timer.js"></script>
 	<script src="main.js"></script>
 </body>
+
 </html>

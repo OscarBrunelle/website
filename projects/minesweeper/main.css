@@ -1,39 +1,54 @@
 body {
-  text-align: center;
+	text-align: center;
 }
 
 /*h1 {
-  text-align: center;
+	text-align: center;
 }
 
 p {
-  text-align: center;
+	text-align: center;
 }
 
 div {
-  text-align: center;
+	text-align: center;
 }*/
 
 .usefulButtons {
-  margin: auto;
-  width: 50%;
+	margin: auto;
+	width: 50%;
 }
 
 .field {
-  /*margin: auto;
-  width: 50%;*/
+	/*margin: auto;
+	width: 50%;*/
 }
 
 .line {
-  margin: auto;
-  width: 50%;
-  height: 30px;
+	margin: auto;
+	width: 50%;
+	height: 30px;
 }
 
 .case {
-  cursor: progress;
-  border: 1px solid black;
-  padding: 0px;
-  width: 30px;
-  height: 30px;
+	cursor: progress;
+	border: 1px solid black;
+	padding: 0px;
+	width: 30px;
+	height: 30px;
 }
+
+#flagModeButton {
+	cursor: pointer;
+	background-color: black;
+	color: white;
+	opacity: 0.5;
+}
+
+#flagModeButton.active {
+	background-color: green;
+	color: white;
+	opacity: 1;
+}
+
+#end_popup {}
