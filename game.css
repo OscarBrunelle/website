@@ -1,0 +1,158 @@
+/* GAME CONTAINER */
+
+#game {
+	min-width: fit-content;
+	height: fit-content;
+	max-height: calc(100vh - 42px);
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid black;
+	background-color: lightblue;
+}
+
+#game>* {
+	display: none;
+}
+
+/* END GAME CONTAINER */
+
+.bottom_exit-button {
+	display: block;
+	width: 100%;
+	grid-column: 1 / span 2;
+}
+
+/* MAIN MENU */
+
+#main_menu {
+	width: 100%;
+	margin: auto;
+}
+
+.main_title {
+	text-align: center;
+	margin: 20px;
+	color: #a59c99;
+	font-family: Source Sans Pro, sans-serif;
+	font-size: min(max(10vw, 16px), 80px);
+	font-style: normal;
+	font-weight: 700;
+	letter-spacing: -2px;
+	text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+}
+
+.menu-button {
+	padding: 3px;
+	font-size: min(max(3vw, 12px), 20px);
+	border-radius: 20px;
+}
+
+.main_menu-button {
+	display: block;
+	width: 100%;
+	margin: 5px auto;
+}
+
+/* END MAIN MENU */
+
+/* INSTRUCTIONS */
+
+#instructions {
+	width: 80%;
+	margin: auto;
+}
+
+/* END INSTRUCTIONS */
+
+/* OPTIONS */
+
+#menu_options {
+	width: 80%;
+	margin: auto;
+}
+
+#options-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 5px;
+}
+
+.option-button {}
+
+/* END OPTIONS */
+
+/* GAMEPLAY DIV */
+
+#gameplay_div {
+	height: 100%;
+	position: relative;
+	overflow-x: auto;
+}
+
+/* END GAMEPLAY DIV */
+
+/* MODAL */
+.modal {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	display: grid;
+	grid-template-columns: auto;
+	align-items: center;
+	justify-items: center;
+	z-index: 100;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.x-close {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 0%;
+	right: 0%;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	color: red;
+	background-color: lightgrey;
+}
+
+.modal>div {
+	min-width: 50%;
+	max-width: 100%;
+	width: fit-content;
+	min-height: 50%;
+	max-height: 100%;
+	height: fit-content;
+	box-sizing: border-box;
+	position: relative;
+	padding: 10px;
+	display: grid;
+	grid-template-rows: auto;
+	align-items: center;
+	justify-items: center;
+	gap: 10px;
+	color: black;
+	border: 1px solid black;
+	background-color: white;
+}
+
+.modal .modal_text {
+	width: 100%;
+	text-align: center;
+}
+
+.modal .modal_buttons_container {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.modal button {}
+
+/* END MODAL */
