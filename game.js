@@ -1,4 +1,6 @@
 "use strict";
+//TODO fusionner Game et GameCanvas
+const ICONS_PATH = "../../icons/";
 
 class MenuButton {
 	constructor(_title, _action) {
@@ -62,9 +64,10 @@ class InstructionsButton extends MenuButton {
 }
 
 class MenuOption {
-	constructor(_name, _icon) {
+	constructor(_name, _icon, default_state = true) {
 		this.name = _name;
 		this.icon = _icon;
+		this.state = default_state;
 	}
 
 	set name(value) {
@@ -92,7 +95,13 @@ class OptionsButton extends MenuButton {
 				menu_options.append("<h3>Options</h3>");
 				menu_options.append("<div id='options-container'></div>");
 				for (const menu_option of options_list) {
-					const option_element = $("<button class='option-button menu-button'>" + menu_option.name + "</button>").appendTo("#options-container");
+					const option_element = $("<button class='option-button menu-button'></button>").appendTo("#options-container");
+					option_element.append("<img src='" + ICONS_PATH + menu_option.icon + "-" + (menu_option.state ? "on" : "off") + ".png'></img>");
+					option_element.append("<span>" + menu_option.name + "</span>");
+					option_element.on("click", function () {
+						menu_option.state = !menu_option.state;
+						option_element.find("img").prop("src", ICONS_PATH + menu_option.icon + "-" + (menu_option.state ? "on" : "off") + ".png");
+					});
 				}
 				const exit_button = $("<button class='bottom_exit-button menu-button'>Exit</button>").appendTo("#options-container");
 				exit_button.on("click", function () {
@@ -159,12 +168,16 @@ class Modal {
 		const buttons_container = $("<div class='modal_buttons_container'></div>").appendTo("#" + element_id);
 		const yes_button = $("<button>Play again</button>").on("click", function () {
 			ref.element.hide();
-			yes_function();
+			if (yes_function != null) {
+				yes_function();
+			}
 		}).appendTo("#" + element_id + " .modal_buttons_container");
 		const no_button = $("<button>Close</button>").appendTo("#" + element_id + " .modal_buttons_container");
 		no_button.on("click", function () {
 			ref.element.hide();
-			no_function();
+			if (no_function != null) {
+				no_function();
+			}
 		});
 		this.hide();
 	}
@@ -195,6 +208,10 @@ class GameCanvas {
 		document.getElementById("gameplay_div").appendChild(canvas);
 		this.canvas = canvas;
 		this.context = this.canvas.getContext("2d");
+
+		$("#canvas").on("contextmenu", function () {
+			return false;
+		});
 	}
 
 	set width(value) {
@@ -207,7 +224,7 @@ class GameCanvas {
 
 	onclick(action) {
 		const canvas = this.canvas;
-		canvas.addEventListener("mousedown", function (event) {
+		$("#canvas").on("mousedown", function (event) {
 			const rect = canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
@@ -243,5 +260,17 @@ class Game {
 
 	getParameter(name) {
 		return this.parameters[name];
+	}
+
+	add_event(event_name, key_actions = {}) {
+		$("#game").on(event_name, function (e) {
+			for (const key in key_actions) {
+				const key_code = key.charCodeAt(0);
+				if (e.which === key_code) {
+					return key_actions[key]();
+				}
+			}
+			return false;
+		});
 	}
 }
