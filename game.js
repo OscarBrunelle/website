@@ -1,5 +1,7 @@
 "use strict";
 //TODO fusionner Game et GameCanvas
+//TODO use event.code
+//TODO put options and instructions into 'content' containers to use grid
 const ICONS_PATH = "../../icons/";
 
 class MenuButton {
@@ -34,30 +36,40 @@ class MenuButton {
 class PlayButton extends MenuButton {
 	constructor(parent_selector, play_action) {
 		super("Play", function () {
-			show_gameCanvas(parent_selector);
+			switch_view("#gameplay_div");
 			play_action();
 		});
 	}
 }
 
-function show_gameCanvas(parent_selector) {
-	$(parent_selector).children().hide();
-	$("#gameplay_div").show();
+function switch_view(view_selector) {
+	$("#game").children().each(function() {
+		const element = $(this);
+		hide(element);
+	});
+	show($(view_selector));
+	$(view_selector).focus();
 }
 
 class InstructionsButton extends MenuButton {
 	constructor(parent_selector, text) {
 		const instr_action = () => {
 			if ($("#instructions").length < 1) {
-				const instructions = $("<div id='instructions'></div>").appendTo(parent_selector);
+				const instructions = $("<div id='instructions' class='hidden' tabindex='0'></div>").appendTo(parent_selector);
+				instructions.on("keydown", function(e) {
+					if (e.code === "Escape") {
+						switch_view("#main_menu");
+					}
+				});
+
 				instructions.append("<h3>Instructions</h3>");
 				$("<p>" + text + "</p>").appendTo("#instructions");
 				const exit_button = $("<button class='bottom_exit-button menu-button'>Exit</button>").appendTo("#instructions");
 				exit_button.on("click", function () {
-					show_mainMenu("#instructions");
+					switch_view("#main_menu");
 				});
 			}
-			$("#instructions").show();
+			switch_view("#instructions");
 		}
 		super("Instructions", instr_action);
 	}
@@ -91,7 +103,13 @@ class OptionsButton extends MenuButton {
 	constructor(parent_selector, options_list) {
 		const opt_action = () => {
 			if ($("#menu_options").length < 1) {
-				const menu_options = $("<div id='menu_options'></div>").appendTo(parent_selector);
+				const menu_options = $("<div id='menu_options' class='hidden' tabindex='0'></div>").appendTo(parent_selector);
+				menu_options.on("keydown", function(e) {
+					if (e.code === "Escape") {
+						switch_view("#main_menu");
+					}
+				});
+
 				menu_options.append("<h3>Options</h3>");
 				menu_options.append("<div id='options-container'></div>");
 				for (const menu_option of options_list) {
@@ -105,10 +123,10 @@ class OptionsButton extends MenuButton {
 				}
 				const exit_button = $("<button class='bottom_exit-button menu-button'>Exit</button>").appendTo("#options-container");
 				exit_button.on("click", function () {
-					show_mainMenu("#menu_options");
+					switch_view("#main_menu");
 				});
 			}
-			$("#menu_options").show();
+			switch_view("#menu_options");
 		}
 		super("Options", opt_action);
 	}
@@ -127,23 +145,17 @@ class ExitButton extends MenuButton {
 
 class GameMenu {
 	constructor(parent_selector, title, menu_buttons) {
-		const main_menu = $("<div id='main_menu'></div>").appendTo(parent_selector);
+		const main_menu = $("<div id='main_menu' class='hidden' tabindex='0'></div>").appendTo(parent_selector);
 		main_menu.append("<h1 class='main_title'>" + title + "</h1>");
 		main_menu.append("<div id='menu_options-container'></div>");
 		for (const menu_button of menu_buttons) {
 			const button_element = $("<button class='main_menu-button menu-button'>" + menu_button.title + "</button>").appendTo("#menu_options-container");
 			button_element.on("click", function () {
-				$(parent_selector).children().hide();
 				menu_button.action();
 			});
 		}
-		show_mainMenu();
+		switch_view("#main_menu");
 	}
-}
-
-function show_mainMenu(parent_selector) {
-	$(parent_selector).hide();
-	$("#main_menu").show();
 }
 
 /**
@@ -158,23 +170,29 @@ class Modal {
 	 */
 	constructor(parent_selector, element_id, text, yes_function, no_function) {
 		const ref = this;
-		this.element = $("<div class='modal'></div>").appendTo(parent_selector);
+		this.element = $("<div class='modal' tabindex='0'></div>").appendTo(parent_selector);
+		this.element.on("keydown", function(e) {
+			if (e.code === "Escape") {
+				ref.hide();
+			}
+		});
+
 		this.element.append("<div id='" + element_id + "'></div>");
 		const x_close = $("<button class='x-close'>x</button>").appendTo("#" + element_id);
 		x_close.on("click", function () {
-			ref.element.hide();
+			
 		});
 		this.text_element = $("<p class='modal_text'>" + text + "</p>").appendTo("#" + element_id);
 		const buttons_container = $("<div class='modal_buttons_container'></div>").appendTo("#" + element_id);
 		const yes_button = $("<button>Play again</button>").on("click", function () {
-			ref.element.hide();
+			ref.hide();
 			if (yes_function != null) {
 				yes_function();
 			}
 		}).appendTo("#" + element_id + " .modal_buttons_container");
 		const no_button = $("<button>Close</button>").appendTo("#" + element_id + " .modal_buttons_container");
 		no_button.on("click", function () {
-			ref.element.hide();
+			ref.hide();
 			if (no_function != null) {
 				no_function();
 			}
@@ -183,11 +201,11 @@ class Modal {
 	}
 
 	show() {
-		this.element.show();
+		show(this.element);
 	}
 
 	hide() {
-		this.element.hide();
+		hide(this.element);
 	}
 
 	set text(value) {
@@ -196,22 +214,30 @@ class Modal {
 }
 
 class GameCanvas {
-	constructor(parent_selector, _width, _height) {
+	constructor(parent_selector, _width, _height, bool_add_return_button = true) {
 		this.width = _width;
 		this.height = _height;
-		this.element = $("<div id='gameplay_div'></div>").appendTo(parent_selector);
+		this.element = $("<div id='gameplay_div' class='hidden' tabindex='0'></div>").appendTo(parent_selector);
+		this.element.on("keydown", function(e) {
+			if (e.code === "Escape") {
+				stop_game();
+				switch_view("#main_menu");
+			}
+		});
 
-		const canvas = document.createElement("canvas");
-		canvas.id = "canvas";
-		canvas.width = _width;
-		canvas.height = _height;
-		document.getElementById("gameplay_div").appendChild(canvas);
-		this.canvas = canvas;
+		const content = $("<div class='content'></div>").appendTo("#gameplay_div");
+
+		content.append("<canvas id='game_canvas' width='" + _width + "' height='" + _height + "'></canvas>");
+		this.canvas = $("#game_canvas")[0];
 		this.context = this.canvas.getContext("2d");
 
-		$("#canvas").on("contextmenu", function () {
+		$("#game_canvas").on("contextmenu", function () {
 			return false;
 		});
+
+		if (bool_add_return_button) {
+			this.add_return_button(stop_game); //TODO: game.stop();
+		}
 	}
 
 	set width(value) {
@@ -224,7 +250,7 @@ class GameCanvas {
 
 	onclick(action) {
 		const canvas = this.canvas;
-		$("#canvas").on("mousedown", function (event) {
+		$("#game_canvas").on("mousedown", function (event) {
 			const rect = canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
@@ -248,7 +274,7 @@ class GameCanvas {
 		const exit_button = $("<button class='bottom_exit-button menu-button'>Return to main menu</button>").appendTo("#gameplay_div");
 		exit_button.on("click", function () {
 			action();
-			show_mainMenu("#gameplay_div");
+			switch_view("#main_menu");
 		});
 	}
 }
