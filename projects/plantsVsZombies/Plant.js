@@ -86,6 +86,9 @@ class Zombie extends Drawable {
         } else {
             this.x -= this.speed;
             this.draw();
+            const initialHP = entitiesCharacteristics[this.id].hp;
+            gameContext.fillStyle = "red";
+            gameContext.fillRect(this.x, this.y, 50 * (this.hp / initialHP), 10);
         }
     }
 }
