@@ -12,6 +12,7 @@ var selectedEntity = null;
 
 var money;
 
+var sound_enabled = true;
 const UPDATE_DELAY = 1000 / 60;
 var timer = 0;
 var level_delays = {
@@ -37,7 +38,8 @@ function reset() {
     zombies = [];
     selectionBar = [];
     selectedEntity = null;
-    money = 100;
+    money = 500;
+    timer = 0;
     let selectionBarNode = document.getElementById("entitySelectionBar");
     while (selectionBarNode.firstChild) {
         selectionBarNode.removeChild(selectionBarNode.firstChild);
@@ -92,8 +94,14 @@ function update() {
         if (peas[index].x > gameCanvas.width) {
             peas.splice(index--, 1);
         } else if (zIndex !== -1) {
+            playPopSound();
             zombies[zIndex].hp -= peas[index].damage;
-            if (zombies[zIndex].hp <= 0) zombies.splice(zIndex, 1);
+            if (zombies[zIndex].hp <= 0) {
+                zombies.splice(zIndex, 1);
+                money += 25;
+                updateMoney();
+                playZombie_deathSound();
+            }
             peas.splice(index--, 1);
         } else {
             peas[index].update();
@@ -115,4 +123,29 @@ function finishGame(won) {
     } else {
         showDiv("retryScreen");
     }
+}
+
+function playPlopSound() {
+    if (!sound_enabled) {
+        return false;
+    }
+    const rand = Math.floor(Math.random() * 3);
+    let audio = new Audio("sounds/plop" + rand + ".mp3");
+    audio.play();
+}
+
+function playPopSound() {
+    if (!sound_enabled) {
+        return false;
+    }
+    let audio = new Audio("sounds/pop.mp3");
+    audio.play();
+}
+
+function playZombie_deathSound() {
+    if (!sound_enabled) {
+        return false;
+    }
+    let audio = new Audio("sounds/zombie_death.mp3");
+    audio.play();
 }

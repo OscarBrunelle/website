@@ -5,6 +5,7 @@ let ZOMBIE_WIDTH = 64, ZOMBIE_HEIGHT = 64;
 
 class Drawable {
     constructor(id, type, x = 0, y = 0) {
+        this.id = id;
         let width, height;
         switch (type) {
             case 0:
@@ -54,6 +55,7 @@ class Plant extends Drawable {
         if (this.cooldown <= 0) {
             this.cooldown = this.shotSpeed;
             peas.push(new Pea(201, this.x + 64, this.y + 10));
+            playPlopSound();
         }
         this.draw();
     }
