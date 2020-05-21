@@ -12,6 +12,20 @@ var selectedEntity = null;
 
 var money;
 
+const UPDATE_DELAY = 1000 / 60;
+var timer = 0;
+var level_delays = {
+    3000: 301,
+    4000: 301,
+    5000: 301,
+    5500: 301,
+    6000: 301,
+    6250: 301,
+    6500: 301,
+    6750: 301,
+    7000: 301
+};
+
 gameCanvas.addEventListener("click", clickCanvas);
 
 function preloadGame() {}
@@ -40,7 +54,7 @@ function startLevel(levelNumber = currentLevel) {
     updateMoney();
 
     currentLevel = levelNumber;
-    interval = setInterval(update, 1000 / 60);
+    interval = setInterval(update, UPDATE_DELAY);
 
     let selectionBarNode = document.getElementById("entitySelectionBar");
     for (let index = 0; index < levelSelectedPlants.length; index++) {
@@ -63,6 +77,12 @@ function startLevel(levelNumber = currentLevel) {
 
 function update() {
     gameContext.clearRect(0, 0, gameCanvas.clientWidth, gameCanvas.height);
+
+    timer += UPDATE_DELAY;
+    if (level_delays[Math.floor(timer)] != null) {
+        const randY = Math.floor(Math.random() * 5);
+        zombies.push(new Zombie(level_delays[Math.floor(timer)], gameCanvas.width, randY * 64));
+    }
 
     for (let index = 0; index < plants.length; index++) {
         plants[index].update();
