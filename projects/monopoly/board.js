@@ -60,10 +60,10 @@ function create_board () {
 		create_side(board_positions[index], board_cases.slice(index * 10 + 1, (index + 1) * 10));
 	}
 
-	create_corner("top", "left", "parc");
-	create_corner("bottom", "left", "prison");
-	create_corner("bottom", "right", "start");
-	create_corner("top", "right", "police");
+	create_corner("bottom", "start");
+	create_corner("left", "prison");
+	create_corner("top", "parc");
+	create_corner("right", "police");
 
 	let roll_dices_button = $("<button id='roll_dices_button'>Roll Dices</button>").appendTo("#board_center");
 	roll_dices_button.on("click", roll_dices);
@@ -96,8 +96,8 @@ function create_special_case(parent_id, case_class) {
     return board_case;
 }
 
-function create_corner(ref1, ref2, img_src) {
-    let board_corner = $("<div class='board_corner' style='" + ref1 + ": 0px; " + ref2 + ": 0px;'></div>").appendTo("#board");
+function create_corner(side, img_src) {
+    let board_corner = $("<div id='" + img_src + "' class='board_corner'></div>").appendTo("#board_" + side);
     board_corner.append("<img src='" + IMAGES_PATH + img_src + ".png'></img>");
     return board_corner;
 }
