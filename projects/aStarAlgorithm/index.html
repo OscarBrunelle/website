@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="A* Algorithm">
+	<meta name="author" content="Oscar Brunelle">
 	<title>A* Algorithm</title>
 </head>
 <body>
-	<canvas id="canvas" width="480px" height="360px"></canvas>
-
 	<div>
-		<button onclick="createRandomArray()">Create new array</button>
-		<button onclick="findBestPath()">Find best path</button>
+		<canvas id="canvas" width="480px" height="360px"></canvas>
+		<div>
+			<button onclick="createRandomArray()">Create new array</button>
+			<button onclick="findBestPath()">Find best path</button>
+		</div>
 	</div>
-
-	<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script-->
+	
+	<script type="text/javascript" src="canvas.js"></script>
+	<script type="text/javascript" src="Square.js"></script>
+	<script type="text/javascript" src="array.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </body>
 </html>
