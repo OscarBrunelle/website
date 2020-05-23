@@ -13,12 +13,27 @@ function switchMode(n) {
 	switch (n) {
 		case 0:
 			primaryMode = !primaryMode;
+			if (primaryMode) {
+				canvas.style.cursor = "url('cursors/primary-" + selectedNumber + ".png'), auto";
+			} else {
+				canvas.style.cursor = "url('cursors/number-" + selectedNumber + ".png'), auto";
+			}
 			break;
 		case 1:
 			guessMode = !guessMode;
+			if (guessMode) {
+				canvas.style.cursor = "url('cursors/guess-" + selectedNumber + ".png'), auto";
+			} else {
+				canvas.style.cursor = "url('cursors/number-" + selectedNumber + ".png'), auto";
+			}
 			break;
 		case 2:
 			eraseMode = !eraseMode;
+			if (eraseMode) {
+				canvas.style.cursor = "url('cursors/erase.png'), auto";
+			} else {
+				canvas.style.cursor = "url('cursors/number-" + selectedNumber + ".png'), auto";
+			}
 			break;
 		case 3:
 			searchMode = !searchMode;
@@ -82,6 +97,7 @@ function emptyGrid() {
 }
 
 function resetGrid() {
+	showPossibleNumbers = false;
 	grid = [];
 	for (let i = 0; i < 9; i++) {
 		var column = [];
@@ -166,7 +182,16 @@ function update() {
 }
 
 function selectNumber(num) {
+	eraseMode = false;
 	selectedNumber = num;
+
+	if (primaryMode) {
+		canvas.style.cursor = "url('cursors/primary-" + selectedNumber + ".png'), auto";
+	} else if (guessMode) {
+		canvas.style.cursor = "url('cursors/guess-" + selectedNumber + ".png'), auto";
+	} else {
+		canvas.style.cursor = "url('cursors/number-" + selectedNumber + ".png'), auto";
+	}
 }
 
 document.onload = loadGame();
