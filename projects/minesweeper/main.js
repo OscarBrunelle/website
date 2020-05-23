@@ -17,21 +17,26 @@ var CASE_HEIGHT = screen_width > 600 ? NORMAL_SIZE : SMALL_SIZE;;
 const game = new Game("body", GAME_DIV_ID);
 const instructions_text = "Don't click the mines.";
 const menu_options = [
-	new MenuOption("Sound") //TODO: add active / not active icons options
+	new MenuOption("Sound", "sound")
 ];
 let menu_buttons = [
-	new PlayButton(GAME_DIV_SEL, reset),
+	new PlayButton(GAME_DIV_SEL, loadGame),
 	new InstructionsButton(GAME_DIV_SEL, instructions_text),
 	new OptionsButton(GAME_DIV_SEL, menu_options),
 	new ExitButton()
 ];
 const game_menu = new GameMenu(GAME_DIV_SEL, "Minesweeper", menu_buttons);
-const game_canvas = new GameCanvas(GAME_DIV_SEL, 600, 400);
+const game_canvas = new GameCanvas(GAME_DIV_SEL, 600, 400, true);
 game_canvas.onclick(click);
 
 const end_popup = new Modal("#gameplay_div", "end_popup", "", reset);
 
+var game_running = false;
+
 window.onresize = function () {
+	if (!this.game_running) {
+		return false;
+	}
 	const old_screen_width = screen_width;
 	screen_width = document.body.clientWidth;
 	if (old_screen_width >= 600 && screen_width < 600) {
@@ -100,32 +105,26 @@ function changeSettings() {
 	reset();
 }
 
-function stop_game() {}
+function stop_game() {
+	timer.stop();
+	game_running = false;
+	//TODO $("#gameplay_div").empty();
+}
 
 function loadGame() {
+	game_running = true;
+
 	width = DEFAULT_WIDTH;
 	height = DEFAULT_HEIGHT;
 	mines = DEFAULT_MINES;
 
 	timer = new Timer("#timer");
 
-	$("#gameplay_div").append('<div class="usefulButtons"><button onclick="reset();">Reset</button><button onclick="changeSettings();">Custom game</button><button id="flagModeButton" onclick="toggleFlagMode();">Flag mode: OFF</button></div><div id="info"><span id="covered"></span><span> || </span><span id="uncovered"></span><span> || </span><span id="mines"></span><span> || </span><span id="timer"></span></div>');
-	game_canvas.add_return_button(stop_game);
+	$("#gameplay_div .content").append('<div class="usefulButtons"><button onclick="reset();">Reset</button><button onclick="changeSettings();">Custom game</button><button id="flagModeButton" onclick="toggleFlagMode();">Flag mode: OFF</button></div><div id="info"><span id="covered"></span><span> || </span><span id="uncovered"></span><span> || </span><span id="mines"></span><span> || </span><span id="timer"></span></div>');
 
-	$("#canvas").on("contextmenu", function (e) {
-		return false;
-	});
-
-	document.body.addEventListener("keypress", function (e) {
-		switch (e.which) {
-			case 102:
-				toggleFlagMode();
-				break;
-			case 114:
-				reset();
-				break;
-			default:
-		}
+	game.add_event("keypress", {
+		"f": toggleFlagMode,
+		"r": reset
 	});
 
 	loadIcons();
@@ -280,8 +279,6 @@ function drawCase(x, y, icon) {
 }
 
 function uncoverAll() {
-	canvas.removeEventListener("mousedown", click);
-
 	for (var i = 0; i < field.length; i++) {
 		for (var j = 0; j < field[i].length; j++) {
 			let caseObj = field[i][j];
@@ -340,7 +337,10 @@ function getIconFileName(iconNumber) {
 
 function toggleFlagMode() {
 	flagMode = !flagMode;
+	if (flagMode) {
+		game_canvas.cursor("flag.png");
+	} else {
+		game_canvas.cursor();
+	}
 	updateTexts();
 }
-
-window.onload = loadGame();
