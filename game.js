@@ -294,6 +294,11 @@ class GameCanvas {
 			switch_view("#main_menu");
 		});
 	}
+
+	cursor(cursor_name) {
+		let cursor = (cursor_name != null) ? "url('cursors/" + cursor_name + "'), " : "";
+		this.canvas.style.cursor = cursor + "auto";
+	}
 }
 
 class Game {
