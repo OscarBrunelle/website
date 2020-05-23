@@ -1,0 +1,107 @@
+#board {
+	width: 640px;
+	height: 640px;
+	position: relative;
+	border: 1px solid black;
+	background-color: rgb(204, 255, 204);
+}
+
+.case_container {
+	width: 75%;
+	height: 12.5%;
+	position: absolute;
+	left: 12.5%;
+	bottom: 0px;
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+}
+
+#board_left {
+	transform: translate(calc(-58% - 2px), -350%) rotate(90deg);
+}
+#board_top {
+	transform: translate(0%, -700%) rotate(180deg);
+}
+#board_right {
+	transform: translate(calc(58% + 2px), -350%) rotate(270deg);
+}
+
+.board_case {
+	height: 100%;
+	position: relative;
+	box-sizing: border-box;
+	border-left: 1px solid black;
+}
+.case_container .board_case:last-child {
+	border-right: 1px solid black;
+}
+.case_color_div {
+	width: 100%;
+	height: 20%;
+	position: absolute;
+	top: 0px;
+	border-bottom: 1px solid black;
+}
+
+.board_case {
+	border-top: 1px solid black;
+	text-align: center;
+}
+.board_case > img {
+	width: 100%;
+	height: 100%;
+}
+
+.case_name {
+	width: 90%;
+	position: absolute;
+	top: 25%;
+	left: 5%;
+	font-size: 0.6em;
+    line-height: 1em;
+}
+
+.case_price {
+	width: 80%;
+	position: absolute;
+	bottom: 5%;
+	left: 10%;
+	font-size: 0.6em;
+}
+
+#board_center {
+	width: 75%;
+	height: 75%;
+	margin: 12.5%;
+}
+
+.case_color_div.brown {
+	background-color: brown;
+}
+.case_color_div.lightblue {
+	background-color: lightblue;
+}
+.case_color_div.pink {
+	background-color: pink;
+}
+.case_color_div.orange {
+	background-color: orange;
+}
+.case_color_div.red {
+	background-color: red;
+}
+.case_color_div.yellow {
+	background-color: yellow;
+}
+.case_color_div.green {
+	background-color: green;
+}
+.case_color_div.darkblue {
+	background-color: darkblue;
+}
+
+.board_corner {
+	width: 12.5%;
+	height: 12.5%;
+	position: absolute;
+}
