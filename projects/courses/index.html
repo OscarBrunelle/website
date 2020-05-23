@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Courses</title>
+</head>
+<body>
+	<div id="top"></div>
+	<div id="main">
+		<div><div id="week_grid"></div></div>
+		<div id="checkboxes">
+			<div id="course_checkboxes"></div>
+			<div id="option_checkboxes">
+				<input id='option-type' type='checkbox' value='type' onchange='update_grid()'></input>
+				<label for='option-type'>Type</label><br />
+				<input id='option-short_name' type='checkbox' value='short_name' onchange='update_grid()'></input>
+				<label for='option-short_name'>Short Name</label><br />
+				<input id='option-long_name' type='checkbox' value='long_name' onchange='update_grid()'></input>
+				<label for='option-long_name'>Long Name</label><br />
+			</div>
+		</div>
+	</div>
+	<div id="footer"></div>
+
+	<script type="text/javascript" src="../../jquery.js"></script>
+	<script type="text/javascript" src="courses.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
