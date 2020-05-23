@@ -1,3 +1,5 @@
+const IMAGES_PATH = "images/";
+
 let board_cases = [
 	[false, "start"],
     [true, "brown", "Boulevard de Belleville", 60],
@@ -90,12 +92,12 @@ function create_case(parent_id, case_class, case_name, case_price) {
 
 function create_special_case(parent_id, case_class) {
     let board_case = $("<div class='board_case " + case_class + "'></div>").appendTo("#" + parent_id);
-    board_case.append("<img src='" + case_class + ".png'></img>");
+    board_case.append("<img src='" + IMAGES_PATH + case_class + ".png'></img>");
     return board_case;
 }
 
 function create_corner(ref1, ref2, img_src) {
     let board_corner = $("<div class='board_corner' style='" + ref1 + ": 0px; " + ref2 + ": 0px;'></div>").appendTo("#board");
-    board_corner.append("<img src='" + img_src + "'></img>");
+    board_corner.append("<img src='" + IMAGES_PATH + img_src + ".png'></img>");
     return board_corner;
 }
