@@ -214,7 +214,7 @@ class Modal {
 }
 
 class GameCanvas {
-	constructor(parent_selector, _width, _height, bool_add_return_button = true) {
+	constructor(parent_selector, _width, _height, bool_add_return_button) {
 		this.width = _width;
 		this.height = _height;
 		this.element = $("<div id='gameplay_div' class='hidden' tabindex='0'></div>").appendTo(parent_selector);
@@ -224,6 +224,11 @@ class GameCanvas {
 				switch_view("#main_menu");
 			}
 		});
+		
+		const top_bar = $("<div class='top_bar'></div>").appendTo("#gameplay_div");
+		top_bar.append("<button id='open_escape_menu_button-top'><img src='" + ICONS_PATH + "parameter.png'></button>");
+		top_bar.append("<div id='top_bar-center'></div>");
+		top_bar.append("<button id='exit-top'><img src='" + ICONS_PATH + "exit.png'></button>");
 
 		const content = $("<div class='content'></div>").appendTo("#gameplay_div");
 

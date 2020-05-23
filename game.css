@@ -168,6 +168,28 @@ body {
 	text-align: center;
 }
 
+#gameplay_div .top_bar {
+	grid-row: 1;
+}
+
+#gameplay_div .top_bar>button {
+	width: 32px;
+	height: 32px;
+	display: inline-block;
+	padding: 0px;
+	border: none;
+	background-color: transparent;
+}
+#gameplay_div .top_bar>button>img {
+	width: 100%;
+	height: 100%;
+}
+
+#gameplay_div .top_bar #top_bar-center {
+	width: calc(100% - (2 * 32px));
+	display: inline-block;
+}
+
 /* END GAMEPLAY DIV */
 
 /* MODAL */
