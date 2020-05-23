@@ -271,8 +271,20 @@ class GameCanvas {
 		this.clear();
 	}
 
-	clear() {
-		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	clear(x, y, width, height) {
+		if (x == null) {
+			x = 0;
+		}
+		if (y == null) {
+			y = 0;
+		}
+		if (width == null) {
+			width = this.canvas.width;
+		}
+		if (height == null) {
+			height = this.canvas.height;
+		}
+		this.context.clearRect(x, y, width, height);
 	}
 
 	add_return_button(action) {
