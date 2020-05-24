@@ -34,6 +34,11 @@ const PROJECTS = [{
 		description: "Uncover all cases without touching a mine!",
 		type: "game"
 	}, {
+		link: "monopoly",
+		title: "Monopoly",
+		description: "Play the classic monopoly game!",
+		type: "game"
+	}, {
 		link: "pong",
 		title: "Pong",
 		description: "Try to beat your friend at pong!",
