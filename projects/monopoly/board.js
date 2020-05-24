@@ -1,6 +1,15 @@
 const IMAGES_PATH = "images/";
 const GROUP_COLORS = ["brown", "lightblue", "pink", "orange", "red", "yellow", "green", "darkblue"];
 
+/*
+TODO:
+- finir d'écrire les noms des cases
+- traduction?
+- tourner à 45deg les images des coins
+- refaire les png propres
+- ajouter les actions des cartes speciales
+*/
+
 class BoardCase {
 	constructor(_type) {
 		this.type = _type;
@@ -148,7 +157,7 @@ function create_board() {
 		board_case.appendTo(parent_id);
 	}
 
-	let roll_dices_button = $("<button id='roll_dices_button'>Roll Dices</button>").appendTo("#board-center");
+	let roll_dices_button = $("<button id='roll_dices_button'>Roll Dices</button>").appendTo("#side-center");
 	roll_dices_button.on("click", roll_dices);
 }
 

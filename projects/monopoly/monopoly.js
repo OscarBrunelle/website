@@ -2,6 +2,13 @@ let players = [];
 let current_player_index = 0;
 let number_players = 1;
 
+/*
+TODO:
+- créer et gérer les joueurs
+- utiliser le moteur de jeu game
+	 - ajouter instructions
+*/
+
 $(document).ready(function() {
     create_board();
 

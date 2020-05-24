@@ -81,8 +81,17 @@
 	font-size: 0.6em;
 }
 
-#board_center {
+/* CENTER ELEMENTS */
+#side-center {
 	width: 75%;
 	height: 75%;
+	display: grid;
 	margin: 12.5%;
+}
+
+#roll_dices_button {
+	width: 60px;
+	height: 60px;
+	justify-self: center;
+	align-self: center;
 }
