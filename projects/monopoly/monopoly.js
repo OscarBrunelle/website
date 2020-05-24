@@ -1,7 +1,3 @@
-let players = [];
-let current_player_index = 0;
-let number_players = 1;
-
 /*
 TODO:
 - créer et gérer les joueurs
@@ -9,34 +5,29 @@ TODO:
 	 - ajouter instructions
 */
 
+const SIDE_SIZE = 10;
+const BOARD_SIZE = 4 * SIDE_SIZE;
+const PLAYER_COLORS = ["blue", "red", "green", "purple"];
+
+const dices = new Dices(2);
+
+let players = [];
+let current_player;
+let number_players = 1;
+
 $(document).ready(function() {
     create_board();
 
 	for (let i = 0; i < number_players; i++) {
-		players.push(new Player(i))
+		players.push(new Player(i, PLAYER_COLORS[i]));
+		players[i].draw();
 	}
+
+	//select player who start at random
+	current_player = Math.floor(Math.random() * players.length);
 });
 
-//move in Player class
-function roll_dices () {
-	let dices_value = get_dices_value();
-	const player = players[current_player_index]
-	player.pos += dices_value;
-	if (player.pos > board_cases.length) {
-		player.pos %= board_cases.length;
-	}
-	const player_element = $("#player").detach();
-	player.move();
-}
-
-function get_dices_value () {
-	let result1 = Math.floor(Math.random() * 6 + 1);
-	let result2 = Math.floor(Math.random() * 6 + 1);
-	return result1 + result2;
-}
-
-class Player {
-	constructor(_num) {
-		
-	}
+function throw_dices() {
+	players[current_player].start_turn();
+	current_player = (current_player + 1) % players.length;
 }

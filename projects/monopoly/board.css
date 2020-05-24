@@ -95,3 +95,12 @@
 	justify-self: center;
 	align-self: center;
 }
+
+.player {
+	width: 20px;
+	height: 40px;
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+	border-radius: 10px;
+}

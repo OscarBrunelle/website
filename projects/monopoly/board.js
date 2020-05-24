@@ -1,6 +1,8 @@
 const IMAGES_PATH = "images/";
 const GROUP_COLORS = ["brown", "lightblue", "pink", "orange", "red", "yellow", "green", "darkblue"];
 
+let id = 10;
+
 /*
 TODO:
 - finir d'écrire les noms des cases
@@ -13,11 +15,17 @@ TODO:
 class BoardCase {
 	constructor(_type) {
 		this.type = _type;
+		this.reset();
+
+		this.uniqueId = "case-" + (id++);
+		this.element = $("<div id='" + this.uniqueId + "' class='board_case'></div>");
 	}
 
 	appendTo(parent_id) {
 		this.element.prependTo("#" + parent_id);
 	}
+
+	action(player) {}
 
 	reset() {}
 }
@@ -27,6 +35,18 @@ class BuyableCase extends BoardCase {
 		super(type);
 		this.group = _group;
 		this.price = _price;
+	}
+
+	action(player) {
+		if (this.proprietary == null) {
+			//ask to buy
+		} else if (this.proprietary === player.number) {
+			if (this.type === 0 && this.houses < MAX_HOUSES) {
+				//ask for more houses
+			}
+		} else if (!this.isMortgaged) {
+			//pay to proprietary
+		}
 	}
 
 	reset() {
@@ -41,7 +61,6 @@ class ColoredCase extends BuyableCase {
 		super(0, _group, _price);
 		this.title = _title;
 
-		this.element = $("<div class='board_case'></div>");
 		this.element.append("<div class='case_color_div' style='background-color: " + GROUP_COLORS[this.group] + ";'></div>");
 		this.element.append("<span class='case_name'>" + this.title + "</span>");
 		this.element.append("<span class='case_price'>M " + this.price + "</span>");
@@ -57,7 +76,6 @@ class GroupCase extends BuyableCase {
 	constructor(_group, _price, _image) {
 		super(1, _group, _price);
 
-		this.element = $("<div class='board_case'></div>");
 		this.element.append("<img src='" + IMAGES_PATH + _image + ".png'></img>");
 		this.element.append("<span class='case_price'>M " + this.price + "</span>");
 	}
@@ -66,9 +84,11 @@ class GroupCase extends BuyableCase {
 class SpecialCase extends BoardCase {
 	constructor(_image, _action, _price = null) {
 		super(2);
+		if (_action != null) {
+			this.action = _action;
+		}
 		this.price = _price;
 
-		this.element = $("<div class='board_case'></div>");
 		this.element.append("<img src='" + IMAGES_PATH + _image + ".png'></img>");
 		if (this.price != null) {
 			this.element.append("<span class='case_price'>M " + this.price + "</span>");
@@ -157,13 +177,22 @@ function create_board() {
 		board_case.appendTo(parent_id);
 	}
 
+	//TODO: throw or row dices?
 	let roll_dices_button = $("<button id='roll_dices_button'>Roll Dices</button>").appendTo("#side-center");
-	roll_dices_button.on("click", roll_dices);
+	roll_dices_button.on("click", throw_dices);
 }
 
-function community() {}
-function income_tax() {}
-function chance() {}
-function parking() {}
-function police() {}
-function luxury_tax() {}
+function community(player) {}
+
+function income_tax(player) {}
+
+function chance(player) {}
+
+function parking(player) {}
+
+function police(player) {
+	player.moveTo(10);
+	player.isJailed = true;
+}
+
+function luxury_tax(player) {}
