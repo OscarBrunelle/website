@@ -1,103 +1,160 @@
 const IMAGES_PATH = "images/";
+const GROUP_COLORS = ["brown", "lightblue", "pink", "orange", "red", "yellow", "green", "darkblue"];
 
-let board_cases = [
-	[false, "start"],
-    [true, "brown", "Boulevard de Belleville", 60],
-	[false, "community_bottom"],
-	[true, "brown", "Rue Lecourbe", 60],
-	[false, "income_tax"],
-	[false, "train_bottom"],
-	[true, "lightblue", "", 100],
-	[false, "chance_bottom"],
-	[true, "lightblue", "", 100],
-	[true, "lightblue", "", 120],
-	
-	[false, "prison"],
-    [true, "pink", "", 140],
-	[true, "pink", "", 140],
-	[false, "electricity"],
-	[true, "pink", "", 160],
-	[false, "train_left"],
-	[true, "orange", "", 180],
-	[true, "orange", "", 180],
-	[false, "community_left"],
-	[true, "orange", "", 200],
-	
-	[false, "parking"],
-    [true, "red", "", 220],
-	[true, "red", "", 220],
-	[false, "chance_top"],
-	[true, "red", "", 240],
-	[false, "train_top"],
-	[true, "yellow", "", 260],
-	[true, "yellow", "", 260],
-	[false, "water"],
-	[true, "yellow", "", 280],
-	
-	[false, "police"],
-    [true, "green", "", 300],
-	[true, "green", "", 300],
-	[false, "community_right"],
-	[true, "green", "", 320],
-	[false, "train_right"],
-	[false, "chance_right"],
-	[true, "darkblue", "", 350],
-	[false, "luxury_tax"],
-	[true, "darkblue", "Rue de la paix", 400]
-];
-
-let board_positions = ["board_bottom", "board_left", "board_top", "board_right"];
-
-function create_board () {
-    let board = $("<div id='board'></div>").appendTo("#game");
-    board.append("<div id='board_bottom' class='case_container'></div>");
-    board.append("<div id='board_left' class='case_container'></div>");
-    board.append("<div id='board_top' class='case_container'></div>");
-	board.append("<div id='board_right' class='case_container'></div>");
-	board.append("<div id='board_center'></div>");
-
-	for (let index = 0; index < 4; index++) {
-		create_side(board_positions[index], board_cases.slice(index * 10 + 1, (index + 1) * 10));
+class BoardCase {
+	constructor(_type) {
+		this.type = _type;
 	}
 
-	create_corner("bottom", "start");
-	create_corner("left", "prison");
-	create_corner("top", "parc");
-	create_corner("right", "police");
+	appendTo(parent_id) {
+		this.element.prependTo("#" + parent_id);
+	}
 
-	let roll_dices_button = $("<button id='roll_dices_button'>Roll Dices</button>").appendTo("#board_center");
-	roll_dices_button.on("click", roll_dices);
-	
-	let player = $("<div id='player' class='player'></div>").appendTo(".community_bottom");
+	reset() {}
 }
 
-function create_side(parent_id, side_cases) {
-	for (let i = side_cases.length - 1; i >= 0; i--) {
-		const board_case = side_cases[i];
-		if (board_case[0]) {
-			create_case(parent_id, board_case[1], board_case[2], board_case[3]);
-		} else {
-			create_special_case(parent_id, board_case[1]);
+class BuyableCase extends BoardCase {
+	constructor(type, _group, _price) {
+		super(type);
+		this.group = _group;
+		this.price = _price;
+	}
+
+	reset() {
+		super.reset();
+		this.proprietary = null;
+		this.isMortgaged = false;
+	}
+}
+
+class ColoredCase extends BuyableCase {
+	constructor(_group, _price, _title) {
+		super(0, _group, _price);
+		this.title = _title;
+
+		this.element = $("<div class='board_case'></div>");
+		this.element.append("<div class='case_color_div' style='background-color: " + GROUP_COLORS[this.group] + ";'></div>");
+		this.element.append("<span class='case_name'>" + this.title + "</span>");
+		this.element.append("<span class='case_price'>M " + this.price + "</span>");
+	}
+
+	reset() {
+		super.reset();
+		this.houses = 0;
+	}
+}
+
+class GroupCase extends BuyableCase {
+	constructor(_group, _price, _image) {
+		super(1, _group, _price);
+
+		this.element = $("<div class='board_case'></div>");
+		this.element.append("<img src='" + IMAGES_PATH + _image + ".png'></img>");
+		this.element.append("<span class='case_price'>M " + this.price + "</span>");
+	}
+}
+
+class SpecialCase extends BoardCase {
+	constructor(_image, _action, _price = null) {
+		super(2);
+		this.price = _price;
+
+		this.element = $("<div class='board_case'></div>");
+		this.element.append("<img src='" + IMAGES_PATH + _image + ".png'></img>");
+		if (this.price != null) {
+			this.element.append("<span class='case_price'>M " + this.price + "</span>");
 		}
 	}
 }
 
-function create_case(parent_id, case_class, case_name, case_price) {
-	let board_case = $("<div class='board_case'></div>").appendTo("#" + parent_id);
-	board_case.append("<div class='case_color_div " + case_class + "'></div>");
-	board_case.append("<span class='case_name'>" + case_name + "</span>");
-	board_case.append("<span class='case_price'>M " + case_price + "</span>");
-    return board_case;
+const BOARD = [
+	new SpecialCase("start"),
+	new ColoredCase(0, 60, "Boulevard de Belleville"),
+	new SpecialCase("community_bottom", community),
+	new ColoredCase(0, 60, "Rue Lecourbe"),
+	new SpecialCase("income_tax", income_tax, 200),
+	new GroupCase(8, 200, "train_bottom"),
+	new ColoredCase(1, 100, "TODO"),
+	new SpecialCase("chance_bottom", chance),
+	new ColoredCase(1, 100, "TODO"),
+	new ColoredCase(1, 120, "TODO"),
+
+	new SpecialCase("prison"),
+	new ColoredCase(2, 140, "TODO"),
+	new ColoredCase(2, 140, "TODO"),
+	new GroupCase(9, 150, "electricity"),
+	new ColoredCase(2, 160, "TODO"),
+	new GroupCase(8, 200, "train_left"),
+	new ColoredCase(3, 180, "TODO"),
+	new ColoredCase(3, 180, "TODO"),
+	new SpecialCase("community_left", community),
+	new ColoredCase(3, 200, "TODO"),
+
+	new SpecialCase("parking", parking),
+	new ColoredCase(4, 220, "TODO"),
+	new ColoredCase(4, 220, "TODO"),
+	new SpecialCase("chance_top", chance),
+	new ColoredCase(4, 240, "TODO"),
+	new GroupCase(8, 200, "train_top"),
+	new ColoredCase(5, 260, "TODO"),
+	new ColoredCase(5, 260, "TODO"),
+	new GroupCase(9, 150, "water"),
+	new ColoredCase(5, 280, "TODO"),
+
+	new SpecialCase("police", police),
+	new ColoredCase(6, 300, "TODO"),
+	new ColoredCase(6, 300, "TODO"),
+	new SpecialCase("community_right", community),
+	new ColoredCase(6, 320, "TODO"),
+	new GroupCase(8, 200, "train_right"),
+	new SpecialCase("chance_right", chance),
+	new ColoredCase(7, 350, "Avenue des Champs-Élysées"),
+	new SpecialCase("luxury_tax", luxury_tax, 100),
+	new ColoredCase(7, 400, "Rue de la paix"),
+];
+
+function create_board() {
+	let board = $("<div id='board'></div>").appendTo("#game");
+	board.append("<div id='side-bottom' class='case_container'></div>");
+	board.append("<div id='side-left' class='case_container'></div>");
+	board.append("<div id='side-top' class='case_container'></div>");
+	board.append("<div id='side-right' class='case_container'></div>");
+	board.append("<div id='side-center'></div>");
+
+	for (const board_index in BOARD) {
+		const board_case = BOARD[board_index];
+
+		let parent_id = "side-";
+		let side;
+		switch (Math.floor(board_index / 10)) {
+			case 0:
+				side = "bottom";
+				break;
+			case 1:
+				side = "left";
+				break;
+			case 2:
+				side = "top";
+				break;
+			case 3:
+				side = "right";
+				break;
+			default:
+				console.error("Error while creating the board, too many elements.")
+				break;
+		}
+		parent_id += side;
+
+		board_case.appendTo(parent_id);
+	}
+
+	let roll_dices_button = $("<button id='roll_dices_button'>Roll Dices</button>").appendTo("#board-center");
+	roll_dices_button.on("click", roll_dices);
 }
 
-function create_special_case(parent_id, case_class) {
-    let board_case = $("<div class='board_case " + case_class + "'></div>").appendTo("#" + parent_id);
-    board_case.append("<img src='" + IMAGES_PATH + case_class + ".png'></img>");
-    return board_case;
-}
-
-function create_corner(side, img_src) {
-    let board_corner = $("<div id='" + img_src + "' class='board_corner'></div>").appendTo("#board_" + side);
-    board_corner.append("<img src='" + IMAGES_PATH + img_src + ".png'></img>");
-    return board_corner;
-}
+function community() {}
+function income_tax() {}
+function chance() {}
+function parking() {}
+function police() {}
+function luxury_tax() {}

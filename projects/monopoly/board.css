@@ -16,13 +16,13 @@
 	grid-template-columns: repeat(9, 1fr) auto;
 }
 
-#board_left {
+#side-left {
 	transform: translate(calc(-57% - 1px), -300%) rotate(90deg);
 }
-#board_top {
+#side-top {
 	transform: translate(calc(-14% - 2px), -700%) rotate(180deg);
 }
-#board_right {
+#side-right {
 	transform: translate(calc(42% + 4px), -400%) rotate(270deg);
 }
 
@@ -51,16 +51,17 @@
 	width: 100%;
 	height: 100%;
 }
-
-.board_corner {
+/*
+.case_container .board_case:last-child {
+	transform: rotate(-45deg);
+}
+*/
+.case_container .board_case:last-child {
 	width: 80px;
 	height: 80px;
 	box-sizing: border-box;
 	position: relative;
-}
-.board_corner > img {
-	width: 100%;
-	height: 100%;
+	border: none;
 }
 
 .case_name {
@@ -84,29 +85,4 @@
 	width: 75%;
 	height: 75%;
 	margin: 12.5%;
-}
-
-.case_color_div.brown {
-	background-color: brown;
-}
-.case_color_div.lightblue {
-	background-color: lightblue;
-}
-.case_color_div.pink {
-	background-color: pink;
-}
-.case_color_div.orange {
-	background-color: orange;
-}
-.case_color_div.red {
-	background-color: red;
-}
-.case_color_div.yellow {
-	background-color: yellow;
-}
-.case_color_div.green {
-	background-color: green;
-}
-.case_color_div.darkblue {
-	background-color: darkblue;
 }
