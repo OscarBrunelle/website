@@ -100,7 +100,6 @@
 	width: 20px;
 	height: 40px;
 	position: absolute;
-	bottom: 15px;
-	left: 15px;
 	border-radius: 10px;
+	transition: 1s;
 }

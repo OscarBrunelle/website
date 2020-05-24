@@ -3,12 +3,11 @@ class Player {
 		this.number = _num;
 		this.reset();
 
-		this.element = $("<div class='player' style='background-color: " + color + ";'></div>");
+		this.element = $("<div class='player' style='background-color: " + color + ";'></div>").appendTo("#board");
 	}
 
 	start_turn() {
 		const result = dices.throw();
-		console.log(result);
 		if (result.double) {
 			this.free();
 		}
@@ -46,8 +45,32 @@ class Player {
 	}
 
 	draw() {
+		/*
 		this.element.detach();
 		this.element.appendTo("#" + BOARD[this.position].uniqueId);
+		*/
+		const side = Math.floor(this.position / 10);
+		switch (side) {
+			case 0:
+				this.element.css("transform", "");
+				this.element.css("right", (52.3 * (this.position % 10 + 1)) + "px");
+				break;
+			case 1:
+				this.element.css("right", "0px");
+				this.element.css("transform", "translate(-600px, " + (20 - 52.3 * (this.position % 10 + 1)) + "px) rotate(90deg)");
+				break;
+			case 2:
+				this.element.css("right", "0px");
+				this.element.css("transform", "translate(" + (-630 + (52.3 * (this.position % 10 + 1))) + "px, -580px) rotate(180deg)");
+				break;
+			case 3:
+				this.element.css("right", "0px");
+				this.element.css("transform", "translate(-20px, " + (20 - 52.3 * (10 - this.position % 10 + 1)) + "px) rotate(-90deg)");
+				break;
+			default:
+				break;
+		}
+		this.element.css("bottom", "10px");
 	}
 
 	reset () {
