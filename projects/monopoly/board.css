@@ -1,6 +1,7 @@
 #board {
 	width: 640px;
 	height: 640px;
+	display: inline-block;
 	position: relative;
 	border: 1px solid black;
 	background-color: rgb(204, 255, 204);
@@ -19,9 +20,11 @@
 #side-left {
 	transform: translate(calc(-57% - 1px), -300%) rotate(90deg);
 }
+
 #side-top {
 	transform: translate(calc(-14% - 2px), -700%) rotate(180deg);
 }
+
 #side-right {
 	transform: translate(calc(42% + 4px), -400%) rotate(270deg);
 }
@@ -32,9 +35,11 @@
 	box-sizing: border-box;
 	border-right: 1px solid black;
 }
+
 .case_container .board_case:first-child {
 	border-left: 1px solid black;
 }
+
 .case_color_div {
 	width: 100%;
 	height: 20%;
@@ -45,12 +50,14 @@
 
 .board_case {
 	border-top: 1px solid black;
-	text-align: center;
+	font-size: 0.6em;
 }
-.board_case > img {
+
+.board_case>img {
 	width: 100%;
 	height: 100%;
 }
+
 /*
 .case_container .board_case:last-child {
 	transform: rotate(-45deg);
@@ -67,10 +74,14 @@
 .case_name {
 	width: 90%;
 	position: absolute;
-	top: 25%;
+	top: 5%;
 	left: 5%;
-	font-size: 0.6em;
-    line-height: 1em;
+	text-align: center;
+	line-height: 1em;
+}
+
+.type-0 .case_name {
+	top: 23%;
 }
 
 .case_price {
@@ -78,7 +89,7 @@
 	position: absolute;
 	bottom: 5%;
 	left: 10%;
-	font-size: 0.6em;
+	text-align: center;
 }
 
 /* CENTER ELEMENTS */
@@ -86,20 +97,131 @@
 	width: 75%;
 	height: 75%;
 	display: grid;
+	grid-template-rows: 1fr 11% 1fr;
+	gap: 1px;
 	margin: 12.5%;
 }
 
-#roll_dices_button {
-	width: 60px;
-	height: 60px;
+/* DICES */
+#dices_div {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	justify-self: center;
 	align-self: center;
+	justify-items: center;
+	align-items: center;
 }
 
+#roll_dices_button {
+	width: 33%;
+	height: 100%;
+	padding: 2px;
+}
+
+.dice_result {
+	width: 33%;
+	height: 100%;
+}
+
+/* END DICES */
+/* END CENTER ELEMENTS */
+
 .player {
-	width: 20px;
-	height: 40px;
+	width: 15px;
+	height: 15px;
 	position: absolute;
-	border-radius: 10px;
-	transition: 1s;
+	border-radius: 100%;
+}
+
+.player-0 {
+	bottom: 15px;
+	left: 5px;
+}
+
+.player-1 {
+	bottom: 15px;
+	right: 5px;
+}
+
+.player-2 {
+	bottom: 35px;
+	left: 5px;
+}
+
+.player-3 {
+	bottom: 35px;
+	right: 5px;
+}
+
+#center-top {
+	width: 100%;
+	display: grid;
+}
+
+#card {
+	width: 30%;
+	height: 100%;
+	box-sizing: border-box;
+	display: inline-block;
+	position: relative;
+	margin-left: 10px;
+	justify-self: center;
+	font-size: 16px;
+	border: 1px solid black;
+}
+#card:empty {
+	display: none;
+}
+
+#card>img {
+	width: 100%;
+}
+
+#card .content {
+	width: 90%;
+	position: absolute;
+	top: 40%;
+	left: 5%;
+}
+
+.rent {
+	display: grid;
+	grid-template-columns: auto 25px;
+}
+
+.rent>p {
+	margin: 0px;
+	font-size: 12px;
+}
+
+.rent>p:first-child {
+	text-align: left;
+}
+
+.rent>p:last-child {
+	text-align: right;
+}
+
+.mortgage_value {
+	width: 90%;
+	position: absolute;
+	bottom: 0%;
+	left: 5%;
+	text-align: center;
+	font-size: 12px;
+}
+
+.mortgage_value>p {
+	margin: 0px;
+	font-weight: bold;
+}
+
+#players_stats {
+	display: block;
+}
+
+#players_stats>span {
+	display: block;
 }

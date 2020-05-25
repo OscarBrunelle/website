@@ -1,37 +1,77 @@
+const STARTING_MONEY = 1500;
+const START_GAIN = 200;
+
 class Player {
-	constructor(_num, color) {
+	constructor(_num, _color) {
 		this.number = _num;
+		this.color = _color;
 		this.reset();
 
-		this.element = $("<div class='player' style='background-color: " + color + ";'></div>").appendTo("#board");
+		this.element = $("<div class='player player-" + this.number + "' style='background-color: " + this.color + ";'></div>").appendTo("#board");
 	}
 
 	start_turn() {
+
+	}
+
+	throw_dices() {
 		const result = dices.throw();
+		for (let i = 0; i < result.indiv_results.length; i++) {
+			const src = "images/dice-" + result.indiv_results[i] + ".png";
+			$("#dice-" + i).attr("src", src);
+		}
+		dices_result = result;
+
 		if (result.double) {
 			this.free();
 		}
 		if (!this.isJailed) {
-			this.move(result.amount);
+			this.move(result.amount, result.double);
 		} else {
 			this.attempt++;
 			if (this.attempt > 3) {
 				this.pay(50);
 				this.free();
-				this.move(result.amount);
+				this.move(result.amount, result.double);
+			} else {
+				end_player_turn();
 			}
 		}
 	}
 
-	move(number){
-		this.position = (this.position + number) % BOARD_SIZE;
-		this.draw();
-		BOARD[this.position].action(this);
+	move(number, double) {
+		const player = this;
+		let i = 0;
+		let interval = setInterval(function(){
+			if (i >= number) {
+				clearInterval(interval);
+				BOARD[player.position].action(player);
+				if (!double) {
+					end_player_turn();
+				} else {
+					player.start_turn();
+				}
+			} else {
+				BOARD[player.position].remove(player);
+				player.position = (player.position + 1) % BOARD_SIZE;
+				BOARD[player.position].move(player);
+				if (player.position === 0) {
+					player.get(START_GAIN);
+				}
+				i++;
+			}
+		}, 100);
 	}
 
-	moveTo(position){
-		this.position = position;
-		this.draw();
+	moveTo(pos, end_turn = true) {
+		BOARD[this.position].remove(this);
+		this.position = pos;
+		BOARD[this.position].move(this);
+		if (end_turn) {
+			end_player_turn();
+		} else {
+			BOARD[this.position].action(this);
+		}
 	}
 
 	free() {
@@ -39,43 +79,44 @@ class Player {
 		this.attempt = 1;
 	}
 
-	pay(amount) {
-		this.money -= amount;
-		console.log(this.money);
+	get(amount) {
+		this.money += amount;
+		this.updateMoney();
 	}
 
-	draw() {
-		/*
-		this.element.detach();
-		this.element.appendTo("#" + BOARD[this.position].uniqueId);
-		*/
-		const side = Math.floor(this.position / 10);
-		switch (side) {
-			case 0:
-				this.element.css("transform", "");
-				this.element.css("right", (52.3 * (this.position % 10 + 1)) + "px");
-				break;
-			case 1:
-				this.element.css("right", "0px");
-				this.element.css("transform", "translate(-600px, " + (20 - 52.3 * (this.position % 10 + 1)) + "px) rotate(90deg)");
-				break;
-			case 2:
-				this.element.css("right", "0px");
-				this.element.css("transform", "translate(" + (-630 + (52.3 * (this.position % 10 + 1))) + "px, -580px) rotate(180deg)");
-				break;
-			case 3:
-				this.element.css("right", "0px");
-				this.element.css("transform", "translate(-20px, " + (20 - 52.3 * (10 - this.position % 10 + 1)) + "px) rotate(-90deg)");
-				break;
-			default:
-				break;
+	pay(amount, recipient) {
+		if (this.money < amount) {
+			this.pay(this.money, recipient);
+			this.lose();
+			return;
 		}
-		this.element.css("bottom", "10px");
+		this.money -= amount;
+		this.updateMoney();
+		if (recipient != null) {
+			recipient.get(amount);
+		}
 	}
 
-	reset () {
+	hasMonopole(group) {
+		for (const b_case of BOARD) {
+			if (b_case.group === group && b_case.proprietary !== this) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	updateMoney() {
+		$("#player_money-" + this.number).text("Player " + this.number + ": " + this.money);
+	}
+
+	lose(){
+		BOARD[this.position].remove(this);
+	}
+
+	reset() {
 		this.position = 0;
-		this.money = 1500;
+		this.money = STARTING_MONEY;
 		this.isJailed = false;
 		this.attempt = 1;
 	}
