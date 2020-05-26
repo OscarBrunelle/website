@@ -187,13 +187,13 @@ class GroupCase extends BuyableCase {
 				case 1:
 					rent = 25;
 					break;
-				case 1:
+				case 2:
 					rent = 50;
 					break;
-				case 1:
+				case 3:
 					rent = 100;
 					break;
-				case 1:
+				case 4:
 					rent = 200;
 					break;
 				default:
