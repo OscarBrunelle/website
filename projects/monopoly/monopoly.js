@@ -29,6 +29,7 @@ $(document).ready(function() {
 	//select player who start at random
 	current_player = Math.floor(Math.random() * players.length);
 	has_played = false;
+	toggle_dices(true);
 });
 
 function throw_dices() {
@@ -37,9 +38,21 @@ function throw_dices() {
 	}
 	players[current_player].throw_dices();
 	has_played = true;
+	update_action_buttons();
 }
 
-function end_player_turn() {
+function toggle_dices(enable_dices) {
+	const player = players[current_player];
+	const text = enable_dices ? "Roll dices" : ("End " +  player.name + " turn");
+	const action = enable_dices ? throw_dices : end_turn;
+	$("#roll_dices_button").text(text).off("click").on("click", action);
+}
+
+function end_turn() {
 	current_player = (current_player + 1) % players.length;
 	has_played = false;
+	toggle_dices(true);
+	$("#card").empty().removeClass("type-0 mortgaged");
+	update_action_buttons(true);
+	dices_result = null;
 }

@@ -22,6 +22,10 @@ class BoardCase {
 		this.uniqueId = "case-" + (id++);
 		this.element = $("<div id='" + this.uniqueId + "' class='board_case type-" + _type + "'></div>");
 		this.element.append("<span class='case_name'>" + this.name + "</span>");
+		const board_case = this;
+		this.element.on("mouseover", function () {
+			board_case.show();
+		});
 	}
 
 	appendTo(parent_id) {
@@ -41,7 +45,7 @@ class BoardCase {
 	}
 
 	show() {
-		$("#card").empty().removeClass("type-0");
+		$("#card").empty().removeClass("type-0 mortgaged");
 		$("#card").append("<span class='case_name'>" + this.name + "</span>");
 	}
 
@@ -54,48 +58,41 @@ class BuyableCase extends BoardCase {
 		this.group = _group;
 		this.price = _price;
 		this.mortgage = this.price / 2;
-		
+
 		this.element.append("<span class='case_price'>M " + this.price + "</span>");
 	}
 
 	action(player) {
 		super.action(player);
-		if (this.proprietary == null) {
-			player.pay(this.price);
-			this.proprietary = player;
-			this.element.css("outline", "2px solid " + player.color);
-			this.element.css("outline-offset", "-3px");
-			//ask to buy
-		} else if (this.proprietary === player) {
-			if (this.type === 0 && player.hasMonopole(this.group) && this.houses < MAX_HOUSES) {
-				//ask for more houses
-			}
-		} else if (!this.isMortgaged) {
-			//pay to proprietary
-			player.pay(this.rent, this.proprietary);
+		if (this.owner == null) {} else if (this.owner === player) {} else if (!this.isMortgaged) {
+			player.pay(this.rent, this.owner);
 		}
 	}
 
 	toggleMortgage() {
 		if (this.isMortgaged) {
-			if (this.proprietary.money < this.mortgage) {
+			if (this.owner.money < this.mortgage) {
 				return;
 			}
-			this.proprietary.pay(this.mortgage);
+			this.owner.pay(this.mortgage);
 		} else {
-			this.proprietary.get(this.mortgage);
+			this.owner.get(this.mortgage);
 		}
 		this.isMortgaged = !this.isMortgaged;
+		this.show();
 	}
 
 	show() {
 		super.show();
+		if (this.isMortgaged) {
+			$("#card").addClass("mortgaged");
+		}
 		$("#card").append("<div class='mortgage_value'>Valeur hypothéquaire:<p>€ " + this.mortgage + "</p></div>");
 	}
 
 	reset() {
 		super.reset();
-		this.proprietary = null;
+		this.owner = null;
 		this.isMortgaged = false;
 	}
 }
@@ -116,13 +113,20 @@ class ColoredCase extends BuyableCase {
 			rent = 0;
 		} else if (this.houses === 0) {
 			rent = this.rents[this.houses];
-			if (this.proprietary.hasMonopole(this.group)) {
+			if (this.owner.hasMonopole(this.group)) {
 				rent *= 2;
 			}
 		} else {
 			rent = this.rents[this.houses];
 		}
 		return rent;
+	}
+
+	addHouse() {
+		if (this.houses < MAX_HOUSES && this.owner.money > this.house_price) {
+			this.owner.pay(this.house_price);
+			this.houses++;
+		}
 	}
 
 	show() {
@@ -175,7 +179,7 @@ class GroupCase extends BuyableCase {
 		if (this.group === 8) {
 			let owned = 0;
 			for (const b_case of BOARD) {
-				if (b_case.group === this.group && b_case.proprietary === this.proprietary) {
+				if (b_case.group === this.group && b_case.owner === this.owner) {
 					owned++;
 				}
 			}
@@ -197,7 +201,7 @@ class GroupCase extends BuyableCase {
 			}
 		} else if (this.group === 9) {
 			let multiplier = 4;
-			if (this.proprietary.hasMonopole(this.group)) {
+			if (this.owner.hasMonopole(this.group)) {
 				multiplier = 10;
 			}
 			rent = multiplier * dices_result.amount;
@@ -294,6 +298,19 @@ function create_board() {
 	$("<div id='center-middle'></div>").appendTo("#side-center");
 	$("<div id='center-bottom'></div>").appendTo("#side-center");
 
+	const action_buttons = $("<div id='action_buttons'></div>").appendTo("#center-top");
+	const buy_button = $("<button id='buy_button' disabled></button>").appendTo("#action_buttons");
+	buy_button.append("<span class='action_text'>Acheter</span>");
+	buy_button.append("<span class='price'>Hypothéquer</span>");
+	buy_button.on("click", buy);
+	const house_button = $("<button id='house_button' disabled></button>").appendTo("#action_buttons");
+	house_button.append("<span class='action_text'>Acheter une maison</span>");
+	house_button.append("<span class='price'>Hypothéquer</span>");
+	house_button.on("click", house);
+	const mortgage_button = $("<button id='mortgage_button' disabled></button>").appendTo("#action_buttons");
+	mortgage_button.append("<span class='action_text'>Hypothéquer</span>");
+	mortgage_button.append("<span class='price'></span>");
+	mortgage_button.on("click", mortgage);
 	const card = $("<div id='card'></div>").appendTo("#center-top");
 
 	//TODO: throw or row dices?
@@ -326,4 +343,95 @@ function police(player) {
 
 function luxury_tax(player) {
 	player.pay(100);
+}
+
+function buy() {
+	const player = players[current_player];
+	const board_case = BOARD[player.position];
+
+	const disabled = (board_case.type === 2) || (board_case.owner != null || board_case.price > player.money);
+	if (!disabled) {
+		player.pay(board_case.price);
+		board_case.owner = player;
+		update_action_buttons();
+	} else {
+		console.log("Can't buy.");
+	}
+}
+
+function house() {
+	const player = players[current_player];
+	const board_case = BOARD[player.position];
+
+	const disabled = (board_case.type !== 0) || (!player.hasMonopole(board_case.group) || board_case.houses >= MAX_HOUSES || player.money < board_case.house_price || !board_case.isMortgaged);
+	if (!disabled) {
+		board_case.addHouse();
+		update_action_buttons();
+	} else {
+		console.log("Can't add more houses.");
+	}
+}
+
+function mortgage() {
+	const player = players[current_player];
+	const board_case = BOARD[player.position];
+
+	const disabled = (board_case.type === 2) || (board_case.owner !== player);
+	if (!disabled) {
+		board_case.toggleMortgage();
+		update_action_buttons();
+	} else {
+		console.log("Can't mortgage.");
+	}
+}
+
+function update_action_buttons(disable) {
+	update_buy_button(disable);
+	update_house_button();
+	update_mortgage_button();
+}
+
+function update_buy_button(disable) {
+	const player = players[current_player];
+	const board_case = BOARD[player.position];
+
+	const disabled = disable || (board_case.type === 2) || (board_case.owner != null || board_case.price > player.money);
+	if (board_case.type === 0 || board_case.type === 1) {
+		$("#buy_button").find(".price").text("Price: €" + board_case.price);
+	} else {
+		$("#buy_button").find(".price").text("Price: /");
+	}
+	$("#buy_button").prop("disabled", disabled);
+}
+
+function update_house_button(disable) {
+	const player = players[current_player];
+	const board_case = BOARD[player.position];
+
+	const disabled = disable || (board_case.type !== 0) || (!player.hasMonopole(board_case.group) || board_case.houses >= MAX_HOUSES || player.money < board_case.house_price || !board_case.isMortgaged);
+	if (board_case.owner === player) {
+		$("#house_button").find(".price").text("Cost: €" + board_case.house_price);
+	} else {
+		$("#house_button").find(".price").text("");
+	}
+	$("#house_button").prop("disabled", disabled);
+}
+
+function update_mortgage_button(disable) {
+	const player = players[current_player];
+	const board_case = BOARD[player.position];
+
+	const disabled = disable || (board_case.type === 2) || (board_case.owner !== player);
+	const text = (disabled || !board_case.isMortgaged) ? "Hypothéquer" : "Deshypothéquer";
+	$("#mortgage_button").find(".action_text").text(text);
+	if (board_case.owner === player) {
+		if (board_case.isMortgaged) {
+			$("#mortgage_button").find(".price").text("Cost: €" + board_case.mortgage);
+		} else {
+			$("#mortgage_button").find(".price").text("Get: €" + board_case.mortgage);
+		}
+	} else {
+		$("#mortgage_button").find(".price").text("");
+	}
+	$("#mortgage_button").prop("disabled", disabled);
 }

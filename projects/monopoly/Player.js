@@ -2,9 +2,10 @@ const STARTING_MONEY = 1500;
 const START_GAIN = 200;
 
 class Player {
-	constructor(_num, _color) {
+	constructor(_num, _color, _name = ("Player " + _num)) {
 		this.number = _num;
 		this.color = _color;
+		this.name = _name;
 		this.reset();
 
 		this.element = $("<div class='player player-" + this.number + "' style='background-color: " + this.color + ";'></div>").appendTo("#board");
@@ -34,7 +35,7 @@ class Player {
 				this.free();
 				this.move(result.amount, result.double);
 			} else {
-				end_player_turn();
+				toggle_dices(false);
 			}
 		}
 	}
@@ -46,10 +47,9 @@ class Player {
 			if (i >= number) {
 				clearInterval(interval);
 				BOARD[player.position].action(player);
+				update_action_buttons();
 				if (!double) {
-					end_player_turn();
-				} else {
-					player.start_turn();
+					toggle_dices(false);
 				}
 			} else {
 				BOARD[player.position].remove(player);
@@ -68,7 +68,7 @@ class Player {
 		this.position = pos;
 		BOARD[this.position].move(this);
 		if (end_turn) {
-			end_player_turn();
+			toggle_dices(false);
 		} else {
 			BOARD[this.position].action(this);
 		}
@@ -99,7 +99,7 @@ class Player {
 
 	hasMonopole(group) {
 		for (const b_case of BOARD) {
-			if (b_case.group === group && b_case.proprietary !== this) {
+			if (b_case.group === group && b_case.owner !== this) {
 				return false;
 			}
 		}
