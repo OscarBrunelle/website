@@ -4,13 +4,19 @@ class LanguageSelector {
 	constructor(parent_selector, _languages, def_lang_index, _click_func) {
 		const ref = this;
 		this.languages = _languages;
-		this.lang_index = def_lang_index;
-		this.language = this.languages[this.lang_index];
+		const cookie = get_cookie("language");
+		if (cookie != null && cookie != "") {
+			this.language = cookie;
+			this.lang_index = this.languages.indexOf(this.language);
+		} else {
+			this.lang_index = def_lang_index;
+			this.language = this.languages[this.lang_index];
+		}
 		this.click_func = _click_func;
 
 		this.element = $("<button id='language_selector'>" + this.language + "</button>").appendTo(parent_selector);
 		this.element.on("click", function () {
-			ref.switch_language()
+			ref.switch_language();
 		});
 	}
 
@@ -18,6 +24,7 @@ class LanguageSelector {
 		this.lang_index = (this.lang_index + 1) % this.languages.length;
 		this.language = this.languages[this.lang_index];
 		this.element.text(this.language);
+		set_cookie("language", this.language);
 		if (this.click_func != null) {
 			this.click_func();
 		}
