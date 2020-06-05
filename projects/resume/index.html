@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<link rel="shortcut icon" href="../../icons/svgs/regular/file.svg" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="resume.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Resume tool">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Resume</title>
+</head>
+
+<body>
+	<nav role="navigation" id="top_nav">
+		<button id="print_resume" onclick="printResume();">Print</button>
+		<input type="file" accept=".json" id="file-selector">
+	</nav>
+
+	<main role="main">
+		<div id="resume"></div>
+	</main>
+
+	<script type="text/javascript" src="../../jquery.js"></script>
+	<script type="text/javascript" src="../../shared.js"></script>
+	<script type="text/javascript" src="default_infos.js"></script>
+	<script type="text/javascript" src="resume.js"></script>
+</body>
+
+</html>
