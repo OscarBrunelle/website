@@ -1,5 +1,4 @@
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
+var canvas, context;
 var grid = [];
 var selectedCase = null;
 var selectedNumber = null;
@@ -8,32 +7,62 @@ var primaryMode = false,
 	eraseMode = false,
 	searchMode = false,
 	showPossibleNumbers = false;
+var WIDTH;
+
+$(document).ready(function () {
+	const small = window.matchMedia("(max-width: 600px)").matches;
+	const canvas_jq = $("<canvas id='canvas' width='" + (small ? 450 : 450) + "px' height='" + (small ? 450 : 450) + "px'></canvas>").prependTo("#main");
+	canvas = canvas_jq[0];
+	WIDTH = canvas.width / 10;
+	context = canvas.getContext("2d");
+	create_buttons();
+
+	loadGame();
+});
 
 function switchMode(n) {
 	switch (n) {
 		case 0:
 			primaryMode = !primaryMode;
+			guessMode = false;
+			eraseMode = false;
 			if (primaryMode) {
 				canvas.style.cursor = "url('cursors/primary-" + selectedNumber + ".png'), auto";
+				$("#mode-0").addClass("selected");
 			} else {
 				canvas.style.cursor = "url('cursors/number-" + selectedNumber + ".png'), auto";
+				$("#mode-0").removeClass("selected");
 			}
+			$("#mode-1").removeClass("selected");
+			$("#mode-2").removeClass("selected");
 			break;
 		case 1:
+			primaryMode = false;
+			eraseMode = false;
 			guessMode = !guessMode;
 			if (guessMode) {
 				canvas.style.cursor = "url('cursors/guess-" + selectedNumber + ".png'), auto";
+				$("#mode-1").addClass("selected");
 			} else {
 				canvas.style.cursor = "url('cursors/number-" + selectedNumber + ".png'), auto";
+				$("#mode-1").removeClass("selected");
 			}
+			$("#mode-0").removeClass("selected");
+			$("#mode-2").removeClass("selected");
 			break;
 		case 2:
+			primaryMode = false;
+			guessMode = false;
 			eraseMode = !eraseMode;
 			if (eraseMode) {
 				canvas.style.cursor = "url('cursors/erase.png'), auto";
+				$("#mode-2").addClass("selected");
 			} else {
 				canvas.style.cursor = "url('cursors/number-" + selectedNumber + ".png'), auto";
+				$("#mode-2").removeClass("selected");
 			}
+			$("#mode-0").removeClass("selected");
+			$("#mode-1").removeClass("selected");
 			break;
 		case 3:
 			searchMode = !searchMode;
@@ -46,6 +75,31 @@ function switchMode(n) {
 			console.log("Error while chosing the mode");
 			break;
 	}
+}
+
+function create_number_buttons() {
+	for (let num = 1; num <= 9; num++) {
+		const button = $("<button id='number-" + num + "' class='number-button menu-button' onclick='selectNumber(" + num + ");'>" + num + "</button>").appendTo("#number_buttons");
+		if (num === 1) {
+			button.click();
+		}
+	}
+}
+
+function create_modes_buttons() {
+	const modes = ["Primary", "Guess", "Erase", "Search", "Show Possible Numbers"];
+	for (let i = 0; i < modes.length; i++) {
+		const mode = modes[i];
+		const button = $("<button id='mode-" + i + "' class='mode-button menu-button' onclick='switchMode(" + i + ");'>" + mode + "</button>").appendTo("#mode_buttons");
+		if (mode === "Search") {
+			button.prop("disabled", true);
+		}
+	}
+}
+
+function create_buttons() {
+	create_number_buttons();
+	create_modes_buttons();
 }
 
 function loadGame() {
@@ -85,29 +139,39 @@ function exportGrid() {
 }
 
 function emptyGrid() {
-	let emptyLine = [], emptyGrid = [];
-	for (let i = 0; i < 9; i++) {
-		emptyLine.push(null);
+	const confirmation = confirm("Are you sure that you want to empty the grid?");
+	if (confirmation) {
+		let emptyLine = [],
+			emptyGrid = [];
+		for (let i = 0; i < 9; i++) {
+			emptyLine.push(null);
+		}
+		for (let i = 0; i < 9; i++) {
+			emptyGrid.push(emptyLine);
+		}
+		generateSudoku(emptyGrid);
+		update();
 	}
-	for (let i = 0; i < 9; i++) {
-		emptyGrid.push(emptyLine);
-	}
-	generateSudoku(emptyGrid);
-	update();
 }
 
 function resetGrid() {
-	showPossibleNumbers = false;
-	grid = [];
-	for (let i = 0; i < 9; i++) {
-		var column = [];
-		for (let j = 0; j < 9; j++) {
-			const value = null;
-			column.push(new Case(i * 50, j * 50, value, value != null));
+	const confirmation = confirm("Are you sure that you want to reset the grid?");
+	if (confirmation) {
+		loadGame();
+		/*
+		showPossibleNumbers = false;
+		grid = [];
+		for (let i = 0; i < 9; i++) {
+			var column = [];
+			for (let j = 0; j < 9; j++) {
+				const value = null;
+				column.push(new Case(i * 50, j * 50, value, value != null));
+			}
+			grid.push(column);
 		}
-		grid.push(column);
+		update();
+		*/
 	}
-	update();
 }
 
 function clickEvent(event) {
@@ -184,6 +248,8 @@ function update() {
 function selectNumber(num) {
 	eraseMode = false;
 	selectedNumber = num;
+	$(".number-button").removeClass("selected");
+	$("#number-" + num).addClass("selected");
 
 	if (primaryMode) {
 		canvas.style.cursor = "url('cursors/primary-" + selectedNumber + ".png'), auto";
@@ -193,5 +259,3 @@ function selectNumber(num) {
 		canvas.style.cursor = "url('cursors/number-" + selectedNumber + ".png'), auto";
 	}
 }
-
-document.onload = loadGame();

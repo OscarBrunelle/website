@@ -1,47 +1,36 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="shortcut icon" href="favicon.png" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="sudoku.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Sudoku solver">
+	<meta name="author" content="Oscar Brunelle">
 	<title>Sudoku</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 
 <body>
-	<canvas id="canvas" width="450px" height="450px"></canvas>
-	<div id="numbers">
-		<button onclick="selectNumber(1)">1</button>
-		<button onclick="selectNumber(2)">2</button>
-		<button onclick="selectNumber(3)">3</button>
-		<button onclick="selectNumber(4)">4</button>
-		<button onclick="selectNumber(5)">5</button>
-		<button onclick="selectNumber(6)">6</button>
-		<button onclick="selectNumber(7)">7</button>
-		<button onclick="selectNumber(8)">8</button>
-		<button onclick="selectNumber(9)">9</button>
-		<button onclick="switchMode(0)">Primary</button>
-		<button onclick="switchMode(1)">Guess</button>
-		<button onclick="switchMode(2)">Erase</button>
-	</div>
-	<div>
-		<button onclick="searchSolution()">Search Solution</button>
-		<button onclick="switchMode(3)">Search Mode</button>
-		<button onclick="generateSudoku()" disabled>Generate</button>
-		<button onclick="/*resetGrid()*/loadGame()">Reset Grid</button>
-		<button onclick="emptyGrid()">Empty Grid</button>
-		<button onclick="exportGrid()" disabled>Export Grid</button>
-	</div>
-	<div>
-		<button onclick="switchMode(4)">Show Possible Numbers</button>
-	</div>
+	<main role="main" id="main">
+		<div id="number_buttons"></div>
+		<div id='mode_buttons'></div>
+		<div id='other_buttons'>
+			<button class='menu-button' onclick="searchSolution()">Search Solution</button>
+			<button class='menu-button' onclick="generateSudoku()" disabled>Generate</button>
+			<button class='menu-button' onclick="resetGrid();">Reset Grid</button>
+			<button class='menu-button' onclick="emptyGrid()">Empty Grid</button>
+			<button class='menu-button' onclick="exportGrid()" disabled>Export Grid</button>
+		</div>
+	</main>
 
+	<script src="../../jquery.js"></script>
 	<script src="AI.js"></script>
 	<script src="graphics.js"></script>
 	<script src="classes.js"></script>
 	<script src="grids.js"></script>
-	<script src="main.js"></script>
+	<script src="sudoku.js"></script>
 </body>
 
 </html>

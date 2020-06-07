@@ -1,0 +1,42 @@
+canvas{
+	background-color: rgb(230, 230, 230);
+	border: 1px black;
+}
+
+body{
+	text-align: center;
+	background-color: lightblue;
+}
+
+.menu-button {
+	min-width: 25px;
+	height: 25px;
+	padding: 3px;
+	margin: 2px;
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255, 1);
+	color: black;
+	border: 1px solid transparent;
+	cursor: pointer;
+}
+.menu-button:hover {
+	border-color: currentColor;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+.menu-button:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(100, 100, 100, 0.5), 0 0 0 1.5px rgba(255, 105, 180, 0.5);
+}
+.menu-button:active {
+    transform: translateY(1px);
+}
+.menu-button:disabled {
+	color: rgba(16, 16, 16, 0.3);
+    background-color: rgba(239, 239, 239, 0.3);
+    border-color: rgba(118, 118, 118, 0.3);
+	cursor: not-allowed;
+}
+.menu-button.selected {
+	color: white;
+	background-color: black;
+}

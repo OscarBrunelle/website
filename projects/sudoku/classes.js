@@ -9,8 +9,8 @@ class Case {
   constructor(x, y, value = null, isPrimary = false) {
     this.x = x;
     this.y = y;
-    this.width = 45;
-    this.height = 45;
+    this.width = WIDTH;
+    this.height = WIDTH;
     this.number = value;
     this.isPrimary = isPrimary;
     this.guesses = [];
