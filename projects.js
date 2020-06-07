@@ -1,12 +1,14 @@
-const PROJECTS = [{
-		link: "bst",
-		title: "Binary Search Tree",
-		description: "Create, reduce and visualise binary search trees.",
-		type: "research"
-	}, {
+const PROJECTS = [
+	/* RESEARCH */
+	{
 		link: "aStarAlgorithm",
 		title: "A* Algorithm",
 		description: "Visualise the A* algorithm.",
+		type: "research"
+	}, {
+		link: "bst",
+		title: "Binary Search Tree",
+		description: "Create, reduce and visualise binary search trees.",
 		type: "research"
 	}, {
 		link: "stateSolver",
@@ -18,10 +20,18 @@ const PROJECTS = [{
 		title: "Sudoku",
 		description: "Create or solve random sudokus.",
 		type: "research"
-	}, {
+	},
+	/* END RESEARCH */
+	/* GAMING */
+	{
 		link: "animation",
 		title: "Animations",
 		description: "View basic frame by frame animations.",
+		type: "game"
+	}, {
+		link: "bubbleShooter",
+		title: "Bubble Shooter (Multiplayer)",
+		description: "Shoot and avoid the falling bubbles!",
 		type: "game"
 	}, {
 		link: "doodleJump",
@@ -39,6 +49,11 @@ const PROJECTS = [{
 		description: "Play the classic monopoly game!",
 		type: "game"
 	}, {
+		link: "plantsVsZombies",
+		title: "Plants Vs Zombies",
+		description: "Defend your garden against the zombies!",
+		type: "game"
+	}, {
 		link: "pong",
 		title: "Pong",
 		description: "Try to beat your friend at pong!",
@@ -49,4 +64,5 @@ const PROJECTS = [{
 		description: "Get the longest snake possible!",
 		type: "game"
 	}
+	/* END GAMING */
 ];
