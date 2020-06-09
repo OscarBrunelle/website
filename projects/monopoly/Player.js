@@ -43,7 +43,7 @@ class Player {
 	move(number, double) {
 		const player = this;
 		let i = 0;
-		let interval = setInterval(function(){
+		let interval = setInterval(function () {
 			if (i >= number) {
 				clearInterval(interval);
 				BOARD[player.position].action(player);
@@ -95,6 +95,31 @@ class Player {
 		if (recipient != null) {
 			recipient.get(amount);
 		}
+
+		console.log(this.name + " paid " + amount + " to " + (recipient != null ? recipient.name : "BANK"));
+	}
+
+	add_to_properties(board_case) {
+		board_case.owner = this;
+		this.properties.push(board_case);
+
+		this.update_properties();
+	}
+
+	update_properties() {
+		this.properties.sort(function (a, b) {
+			if (a.board_index < b.board_index) {
+				return -1;
+			} else if (a.board_index > b.board_index) {
+				return 1;
+			} else {
+				return 0;
+			}
+		});
+		const prop_container = $("#player_properties-" + this.number).empty();
+		for (const prop of this.properties) {
+			prop_container.append(prop.card);
+		}
 	}
 
 	hasMonopole(group) {
@@ -110,7 +135,7 @@ class Player {
 		$("#player_money-" + this.number).text("Player " + this.number + ": " + this.money);
 	}
 
-	lose(){
+	lose() {
 		BOARD[this.position].remove(this);
 	}
 
@@ -119,5 +144,6 @@ class Player {
 		this.money = STARTING_MONEY;
 		this.isJailed = false;
 		this.attempt = 1;
+		this.properties = [];
 	}
 }

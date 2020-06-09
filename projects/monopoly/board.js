@@ -44,9 +44,27 @@ class BoardCase {
 		this.show();
 	}
 
+	get card() {
+		const c = $("<div class='property_card' board_index='" + this.board_index + "'></div>");
+		c.append("<span class='case_name'>" + this.name + "</span>");
+
+		return c;
+	}
+
 	show() {
 		$("#card").empty().removeClass("type-0 mortgaged");
-		$("#card").append("<span class='case_name'>" + this.name + "</span>");
+		$("#card").html(this.card.html());
+		if (this.card.hasClass("type-0")) {
+			$("#card").addClass("type-0");
+		}
+		if (this.card.hasClass("mortgaged")) {
+			$("#card").addClass("mortgaged");
+		}
+
+		const owner = this.owner != null ? this.owner.name : "/";
+		$("#infos-owner .value_text").text(owner);
+		const rent = this.rent != null ? ("€ " + this.rent) : "/";
+		$("#infos-rent .value_text").text(rent);
 	}
 
 	reset() {}
@@ -82,12 +100,14 @@ class BuyableCase extends BoardCase {
 		this.show();
 	}
 
-	show() {
-		super.show();
+	get card() {
+		const c = super.card;
 		if (this.isMortgaged) {
-			$("#card").addClass("mortgaged");
+			c.addClass("mortgaged");
 		}
-		$("#card").append("<div class='mortgage_value'>Valeur hypothéquaire:<p>€ " + this.mortgage + "</p></div>");
+		c.append("<div class='mortgage_value'>Valeur hypothéquaire:<p>€ " + this.mortgage + "</p></div>");
+
+		return c;
 	}
 
 	reset() {
@@ -109,7 +129,7 @@ class ColoredCase extends BuyableCase {
 
 	get rent() {
 		let rent;
-		if (this.isMortgaged) {
+		if (this.owner == null || this.isMortgaged) {
 			rent = 0;
 		} else if (this.houses === 0) {
 			rent = this.rents[this.houses];
@@ -129,11 +149,11 @@ class ColoredCase extends BuyableCase {
 		}
 	}
 
-	show() {
-		super.show();
-		$("#card").addClass("type-0");
-		$("#card").append("<div class='case_color_div' style='background-color: " + GROUP_COLORS[this.group] + ";'></div>");
-		const rents_container = $("<div class='content'></div>").appendTo("#card");
+	get card() {
+		const c = super.card;
+		c.addClass("type-0");
+		c.append("<div class='case_color_div' style='background-color: " + GROUP_COLORS[this.group] + ";'></div>");
+		const rents_container = $("<div class='content'></div>").appendTo(c);
 		for (const house_num in this.rents) {
 			let house_text;
 			switch (parseInt(house_num)) {
@@ -153,6 +173,8 @@ class ColoredCase extends BuyableCase {
 			const rent_text = this.rents[house_num];
 			rents_container.append("<div class='rent'><p>" + house_text + "</p><p>" + rent_text + "</p></div>");
 		}
+
+		return c;
 	}
 
 	reset() {
@@ -171,7 +193,7 @@ class GroupCase extends BuyableCase {
 	}
 
 	get rent() {
-		if (this.isMortgaged) {
+		if (this.owner == null || this.isMortgaged) {
 			return 0;
 		}
 
@@ -209,9 +231,11 @@ class GroupCase extends BuyableCase {
 		return rent;
 	}
 
-	show() {
-		super.show();
-		$("#card").append("<img src='" + IMAGES_PATH + this.image + ".png'></img>");
+	get card() {
+		const c = super.card;
+		c.append("<img src='" + IMAGES_PATH + this.image + ".png'></img>");
+
+		return c;
 	}
 }
 
@@ -235,29 +259,37 @@ class SpecialCase extends BoardCase {
 		}
 	}
 
-	show() {
+	get card() {
 		if (this.name == null) {
-			return;
+			return $("");
 		}
 
-		super.show();
-		$("#card").append("<img src='" + IMAGES_PATH + this.image + ".png'></img>");
+		const c = super.card;
+		c.append("<img src='" + IMAGES_PATH + this.image + ".png'></img>");
 		if (this.price != null) {
-			$("#card").append("<span class='case_price'>M " + this.price + "</span>");
+			c.append("<span class='case_price'>M " + this.price + "</span>");
 		}
+
+		return c;
 	}
 }
 
 let BOARD = [];
 
 function create_board() {
+	$("<div id='player_properties-0' class='player_properties'></div>").appendTo("#game");
+	$("<div id='player_properties-1' class='player_properties'></div>").appendTo("#game");
 	const board = $("<div id='board'></div>").appendTo("#game");
+	$("<div id='player_properties-2' class='player_properties'></div>").appendTo("#game");
+	$("<div id='player_properties-3' class='player_properties'></div>").appendTo("#game");
+
 	board.append("<div id='side-bottom' class='case_container'></div>");
 	board.append("<div id='side-left' class='case_container'></div>");
 	board.append("<div id='side-top' class='case_container'></div>");
 	board.append("<div id='side-right' class='case_container'></div>");
 
-	for (const board_index in BOARD_CASES) {
+	for (let board_index in BOARD_CASES) {
+		board_index = parseInt(board_index);
 		const infos = BOARD_CASES[board_index];
 		let board_case;
 		if (infos.type === 0) {
@@ -290,6 +322,7 @@ function create_board() {
 		parent_id += side;
 
 		board_case.appendTo(parent_id);
+		board_case.board_index = board_index;
 		BOARD.push(board_case);
 	}
 
@@ -311,7 +344,12 @@ function create_board() {
 	mortgage_button.append("<span class='action_text'>Hypothéquer</span>");
 	mortgage_button.append("<span class='price'></span>");
 	mortgage_button.on("click", mortgage);
-	const card = $("<div id='card'></div>").appendTo("#center-top");
+
+	const card = $("<div id='card' class='property_card'></div>").appendTo("#center-top");
+
+	const infos = $("<div id='infos'></div>").appendTo("#center-top");
+	infos.append("<div id='infos-owner'>Owner: <span class='value_text'></span></div>");
+	infos.append("<div id='infos-rent'>Rent: <span class='value_text'></span></div>");
 
 	//TODO: throw or row dices?
 	const dices_div = $("<div id='dices_div'></div>").appendTo("#center-middle");
@@ -352,7 +390,7 @@ function buy() {
 	const disabled = (board_case.type === 2) || (board_case.owner != null || board_case.price > player.money);
 	if (!disabled) {
 		player.pay(board_case.price);
-		board_case.owner = player;
+		player.add_to_properties(board_case);
 		update_action_buttons();
 	} else {
 		console.log("Can't buy.");
