@@ -58,7 +58,7 @@ function get_data(d) {
 function update_resume() {
 	$("#resume").empty();
 	$("#resume").append("<div id='resume-content'></div>");
-	$("#resume").append("<div id='resume-side'></div>");
+	$("#resume").append("<div id='resume-side'><img id='resume-profile_pic' src='profile_pic.png'></div>");
 
 	language = LANG_SELECTOR.language;
 	iterate_data(resume_data, language, $("#resume-content"));
