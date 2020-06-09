@@ -38,7 +38,7 @@ main {
 	text-align: justify;
 }
 #resume-content, #resume-side {
-	padding: 40px;
+	padding: 35px;
 }
 #resume-content {
 	height: 100%;
@@ -49,16 +49,24 @@ main {
 	height: 100%;
 	box-sizing: border-box;
 	vertical-align: top;
-	background-color: white;
+	background-color: cadetblue/*#7bb7b1*/;
+}
+#resume-side p {
+	color: white;
 }
 
 
+
+#resume-profile_pic {
+	width: 100%;
+	border-radius: 50%;
+}
 
 .resume-container_title {
 	text-transform: uppercase;
 }
 #resume-content .resume-container_title {
-	color: #595959;
+	color: black/*#595959*/;
 }
 
 .resume-level-0 {
@@ -73,7 +81,7 @@ main {
 
 .resume-job_description {
 	white-space: break-spaces;
-	color: #59596e;
+	color: black/*#595959*/;
 }
 
 .resume-language, .resume-language_level {
@@ -130,15 +138,9 @@ main {
 	font-size: 15px;
 }
 
-#resume-side {
-	background-color: #7bb7b1;
-}
-#resume-side p {
-	color: white;
-}
-
 #resume .icon_container > img {
 	height: 14px;
+	vertical-align: middle;
 }
 
 /* for dark mode
@@ -189,6 +191,6 @@ main {
 	#resume-side {
 		width: 35%;
 		display: inline-block;
-		background-color: lightblue !important;
+		background-color: cadetblue !important;
 	}
 }
