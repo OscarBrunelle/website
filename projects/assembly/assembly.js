@@ -25,7 +25,7 @@ function load() {
 	const grid_cookie = get_cookie("grid");
 	if (grid_cookie != "") {
 		const obj_grid = JSON.parse(grid_cookie);
-		grid = new Grid("main", obj_grid.width, obj_grid.height, obj_grid.nbr_frames_x, obj_grid.nbr_frames_y, obj_grid.id);
+		grid = new Grid("main", obj_grid.w, obj_grid.h, obj_grid.nbr_frames_x, obj_grid.nbr_frames_y, obj_grid.id);
 		grid.scale = obj_grid.scale;
 		grid.translate_x = obj_grid.translate_x;
 		grid.translate_y = obj_grid.translate_y;
