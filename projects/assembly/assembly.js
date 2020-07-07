@@ -26,7 +26,15 @@ function load() {
 	}
 	const machines_cookie = get_cookie("machines");
 	if (machines_cookie != "") {
-		machines = JSON.parse(machines_cookie);
+		obj_machines = JSON.parse(machines_cookie);
+		for (const obj_machine of obj_machines) {
+			let className = obj_machine.className;
+			let machine = eval("new " + className + "(" + obj_machine.x + ", " + obj_machine.y + ")");
+			machine.className = className;
+			machine.production_time = obj_machine.production_time;
+			machine.production_item = obj_machine.production_item;
+			machines.push(machine);
+		}
 	}
 	update_money();
 	grid = new Grid("main", GRID_WIDTH, GRID_HEIGHT, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
@@ -139,6 +147,7 @@ function action(x, y) {
 		}
 		let className = MACHINES[selected].className;
 		let machine = eval("new " + className + "(" + pos_index.x + ", " + pos_index.y + ")");
+		machine.className = className;
 		if (money >= machine.cost) {
 			money -= machine.cost;
 			update_money();
@@ -150,9 +159,9 @@ function action(x, y) {
 }
 
 function get_element_at_index(x_index, y_index) {
-	for (const element of machines) {
-		if (element.x_index === x_index && element.y_index === y_index) {
-			return element;
+	for (const machine of machines) {
+		if (machine.x_index === x_index && machine.y_index === y_index) {
+			return machine;
 		}
 	}
 	return null;
@@ -196,17 +205,17 @@ function update(currentTime) {
 
 	grid.clear();
 
-	for (const element of machines) {
-		element.update(elapsedSinceLastLoop);
+	for (const machine of machines) {
+		machine.update(elapsedSinceLastLoop);
 	}
 	for (let i = 0; i < items.length; i++) {
 		let item = items[i];
 		if (item.is_centered()) {
-			const element = get_element_at_pos(item.x, item.y);
-			if (element != null && element != item.last_interaction) {
-				items[i] = element.transformItem(item);
+			const machine = get_element_at_pos(item.x, item.y);
+			if (machine != null && machine != item.last_machine) {
+				items[i] = machine.transformItem(item);
 				if (items[i] != null) {
-					items[i].last_interaction = element;
+					items[i].last_machine = machine;
 					items[i].center();
 				}
 			}
