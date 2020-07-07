@@ -45,7 +45,7 @@ function load() {
 		for (const obj_machine of obj_machines) {
 			let className = obj_machine.className;
 			if (className != null) {
-				let machine = eval("new " + className + "(" + obj_machine.x + ", " + obj_machine.y + ")");
+				let machine = eval("new " + className + "(" + obj_machine.x_index + ", " + obj_machine.y_index + ")");
 				machine.className = className;
 				machine.production_time = obj_machine.production_time;
 				machine.production_item = obj_machine.production_item;
