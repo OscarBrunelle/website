@@ -1,6 +1,6 @@
 const specials = ["pointer", "rotate", "delete"];
 
-const things = {
+const MACHINES = {
 	"starter": {
 		"name": "Starter",
 		"className": "Starter",

@@ -24,20 +24,24 @@ function load() {
 	if (money_cookie != "") {
 		money = parseInt(money_cookie);
 	}
+	const machines_cookie = get_cookie("elements");
+	if (machines_cookie != "") {
+		elements = JSON.parse(machines_cookie);
+	}
 	update_money();
 	grid = new Grid("main", GRID_WIDTH, GRID_HEIGHT, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
 	grid.onclick(action);
 
 	for (const special of specials) {
-		const thing_img = new Image();
-		thing_img.src = "images/" + special + ".png";
-		const thing_btn = document.createElement("button");
-		thing_btn.appendChild(thing_img);
-		thing_btn.addEventListener("click", function () {
+		const img = new Image();
+		img.src = "images/" + special + ".png";
+		const btn = document.createElement("button");
+		btn.appendChild(img);
+		btn.addEventListener("click", function () {
 			selected = special;
 			grid.cursor("images/" + (selected === "pointer" ? "???" : selected) + ".png");
 		});
-		document.getElementById("thing-selectors").appendChild(thing_btn);
+		document.getElementById("selectors").appendChild(btn);
 	}
 
 	for (const ressource_name of raw_ressources) {
@@ -56,57 +60,57 @@ function load() {
 			fill: "blue"
 		});
 		*/
-		const item_img = new Image();
-		item_img.src = "images/" + ressource_name + ".png";
-		item_img.style.display = "none";
-		document.getElementById("thing-selectors").appendChild(item_img);
+		const img = new Image();
+		img.src = "images/" + ressource_name + ".png";
+		img.style.display = "none";
+		document.getElementById("selectors").appendChild(img);
 
 		items_stats[ressource_name] = {
 			"cost": raw_ressource.cost,
 			"value": raw_ressource.value,
-			"image": item_img
+			"image": img
 		};
 	}
 	for (const ts_name of transformed_ressources) {
 		for (const ressource_name of raw_ressources) {
 			const item_name = ts_name + "_" + ressource_name;
-			const item_img = new Image();
-			item_img.src = "images/" + item_name + ".png";
-			item_img.style.display = "none";
-			document.getElementById("thing-selectors").appendChild(item_img);
+			const img = new Image();
+			img.src = "images/" + item_name + ".png";
+			img.style.display = "none";
+			document.getElementById("selectors").appendChild(img);
 
 			items_stats[item_name] = {
 				"value": transformed_ressource_value,
-				"image": item_img
+				"image": img
 			};
 		}
 	}
 	for (const item_name in crafts) {
 		const item = crafts[item_name];
 
-		const item_img = new Image();
-		item_img.src = "images/" + item_name + ".png";
-		item_img.style.display = "none";
-		document.getElementById("thing-selectors").appendChild(item_img);
+		const img = new Image();
+		img.src = "images/" + item_name + ".png";
+		img.style.display = "none";
+		document.getElementById("selectors").appendChild(img);
 
 		items_stats[item_name] = {
 			"value": item.value,
-			"image": item_img
+			"image": img
 		};
 	}
 
-	for (const thing in things) {
-		const thing_img = new Image();
-		thing_img.src = "images/" + thing + ".png";
-		const thing_btn = document.createElement("button");
-		thing_btn.appendChild(thing_img);
-		thing_btn.addEventListener("click", function () {
-			selected = thing;
+	for (const machine_name in MACHINES) {
+		const img = new Image();
+		img.src = "images/" + machine_name + ".png";
+		const btn = document.createElement("button");
+		btn.appendChild(img);
+		btn.addEventListener("click", function () {
+			selected = machine_name;
 			grid.cursor("images/" + selected + ".png");
 		});
-		document.getElementById("thing-selectors").appendChild(thing_btn);
+		document.getElementById("selectors").appendChild(btn);
 
-		things[thing].image = thing_img;
+		MACHINES[machine_name].image = img;
 	}
 
 	update();
@@ -130,16 +134,17 @@ function action(x, y) {
 			elements.splice(elements.indexOf(pointed_element), 1);
 		}
 	} else if (pointed_element == null) {
-		if (Object.keys(things).indexOf(selected) < 0) {
+		if (Object.keys(MACHINES).indexOf(selected) < 0) {
 			return;
 		}
-		let className = things[selected].className;
-		let thing = eval("new " + className + "(" + pos_index.x + ", " + pos_index.y + ")");
-		if (money >= thing.cost) {
-			money -= thing.cost;
+		let className = MACHINES[selected].className;
+		let machine = eval("new " + className + "(" + pos_index.x + ", " + pos_index.y + ")");
+		if (money >= machine.cost) {
+			money -= machine.cost;
 			update_money();
-			elements.push(thing);
-			thing.draw();
+			elements.push(machine);
+			set_cookie("elements", JSON.stringify(elements));
+			machine.draw();
 		}
 	}
 }
@@ -285,7 +290,7 @@ class Producer extends Assembler {
 
 class Starter extends Producer {
 	constructor(_x_index, _y_index) {
-		super(_x_index, _y_index, things["starter"].image, things["starter"].cost);
+		super(_x_index, _y_index, MACHINES["starter"].image, MACHINES["starter"].cost);
 		this.production_item = raw_ressources[0];
 	}
 
@@ -312,7 +317,7 @@ class Starter extends Producer {
 
 class Seller extends Assembler {
 	constructor(_x_index, _y_index) {
-		super(_x_index, _y_index, things["seller"].image, things["seller"].cost);
+		super(_x_index, _y_index, MACHINES["seller"].image, MACHINES["seller"].cost);
 	}
 
 	transformItem(item) {
@@ -323,7 +328,7 @@ class Seller extends Assembler {
 
 class Roller extends Assembler {
 	constructor(_x_index, _y_index) {
-		super(_x_index, _y_index, things["roller"].image, things["roller"].cost);
+		super(_x_index, _y_index, MACHINES["roller"].image, MACHINES["roller"].cost);
 	}
 
 	transformItem(item){
@@ -361,19 +366,19 @@ class Transformer extends Producer {
 
 class Cutter extends Transformer {
 	constructor(_x_index, _y_index) {
-		super(_x_index, _y_index, things["cutter"].image, things["cutter"].cost, "gear");
+		super(_x_index, _y_index, MACHINES["cutter"].image, MACHINES["cutter"].cost, "gear");
 	}
 }
 
 class WireDrawer extends Transformer {
 	constructor(_x_index, _y_index) {
-		super(_x_index, _y_index, things["wire_drawer"].image, things["wire_drawer"].cost, "wire");
+		super(_x_index, _y_index, MACHINES["wire_drawer"].image, MACHINES["wire_drawer"].cost, "wire");
 	}
 }
 
 class Crafter extends Producer {
 	constructor(_x_index, _y_index) {
-		super(_x_index, _y_index, things["crafter"].image, things["crafter"].cost);
+		super(_x_index, _y_index, MACHINES["crafter"].image, MACHINES["crafter"].cost);
 		this.production_item = Object.keys(crafts)[0];
 		this.stored_ingredients = {};
 	}
