@@ -128,8 +128,8 @@ function load() {
 			if (className != null) {
 				let machine = eval("new " + className + "(" + obj_machine.x_index + ", " + obj_machine.y_index + ")");
 				machine.className = className;
-				machine.production_time = obj_machine.production_time;
-				machine.production_item = obj_machine.production_item;
+				machine.production_time = obj_machine.prod_time;
+				machine.production_item = obj_machine.prod_item;
 				machines.push(machine);
 			}
 		}
