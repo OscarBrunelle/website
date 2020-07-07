@@ -29,8 +29,13 @@ const PROJECTS = [
 		description: "View basic frame by frame animations.",
 		type: "game"
 	}, {
-		link: "bubbleShooter",
-		title: "Bubble Shooter (Multiplayer)",
+		link: "assembly",
+		title: "Assembly line",
+		description: "Create and optimize your assembly line.",
+		type: "game"
+	}, {
+		link: "bubbleTrouble",
+		title: "Bubble Trouble (Multiplayer)",
 		description: "Shoot and avoid the falling bubbles!",
 		type: "game"
 	}, {
