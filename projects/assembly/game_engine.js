@@ -37,24 +37,27 @@ class GameCanvas {
 	}
 
 	set id(value) {
+		this.canvas_id = value;
 		this.canvas.id = value;
 	}
 	get id() {
-		return this.canvas.id;
+		return this.canvas_id;
 	}
 
 	set width(value) {
+		this.w = value;
 		this.canvas.width = value;
 	}
 	get width() {
-		return this.canvas.width;
+		return this.w;
 	}
 
 	set height(value) {
+		this.h = value;
 		this.canvas.height = value;
 	}
 	get height() {
-		return this.canvas.height;
+		return this.h;
 	}
 
 	strokeRect(x, y, width, height, color) {
