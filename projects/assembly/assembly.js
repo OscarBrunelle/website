@@ -2,8 +2,10 @@
 
 //if item goes out of canvas, delete
 
-const GRID_WIDTH = 500, GRID_HEIGHT = 500;
-const GRID_FRAMES_X = 16, GRID_FRAMES_Y = 16;
+const GRID_WIDTH = 500,
+	GRID_HEIGHT = 500;
+const GRID_FRAMES_X = 16,
+	GRID_FRAMES_Y = 16;
 
 const STARTING_MONEY = 50000;
 const STORED_LIMIT = 1000;
@@ -24,20 +26,31 @@ function load() {
 	if (money_cookie != "") {
 		money = parseInt(money_cookie);
 	}
+	update_money();
 	const machines_cookie = get_cookie("machines");
 	if (machines_cookie != "") {
 		const obj_machines = JSON.parse(machines_cookie);
 		for (const obj_machine of obj_machines) {
 			let className = obj_machine.className;
-			let machine = eval("new " + className + "(" + obj_machine.x + ", " + obj_machine.y + ")");
-			machine.className = className;
-			machine.production_time = obj_machine.production_time;
-			machine.production_item = obj_machine.production_item;
-			machines.push(machine);
+			if (className != null) {
+				let machine = eval("new " + className + "(" + obj_machine.x + ", " + obj_machine.y + ")");
+				machine.className = className;
+				machine.production_time = obj_machine.production_time;
+				machine.production_item = obj_machine.production_item;
+				machines.push(machine);
+			}
 		}
 	}
-	update_money();
-	grid = new Grid("main", GRID_WIDTH, GRID_HEIGHT, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
+	const grid_cookie = get_cookie("grid");
+	if (grid_cookie != "") {
+		const obj_grid = JSON.parse(grid_cookie);
+		grid = new Grid("main", obj_grid.width, obj_grid.height, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
+		grid.scale = obj_grid.scale;
+		grid.translate_x = obj_grid.translate_x;
+		grid.translate_y = obj_grid.translate_y;
+	} else {
+		grid = new Grid("main", GRID_WIDTH, GRID_HEIGHT, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
+	}
 	grid.onclick(action);
 
 	for (const special of specials) {
@@ -178,7 +191,7 @@ function toggle_updating() {
 	if (!stopped) {
 		update();
 	}
-	
+
 	document.getElementById("toggle_updating-btn").innerHTML = (stopped ? "START" : "STOP");
 }
 
@@ -189,6 +202,7 @@ function update_money() {
 }
 
 let lastTime;
+
 function update(currentTime) {
 	if (stopped) {
 		lastTime = null;
@@ -197,12 +211,15 @@ function update(currentTime) {
 		return requestAnimationFrame(update);
 	}
 
-	if(!lastTime){lastTime=currentTime;}
-	let elapsedSinceLastLoop=(currentTime-lastTime);
-	lastTime=currentTime;
+	if (!lastTime) {
+		lastTime = currentTime;
+	}
+	const elapsedSinceLastLoop = (currentTime - lastTime);
+	lastTime = currentTime;
 
 	update_money();
 
+	set_cookie("grid", JSON.stringify(grid));
 	grid.clear();
 
 	for (const machine of machines) {
@@ -340,7 +357,7 @@ class Roller extends Assembler {
 		super(_x_index, _y_index, MACHINES["roller"].image, MACHINES["roller"].cost);
 	}
 
-	transformItem(item){
+	transformItem(item) {
 		item.direction = Math.floor(this.angle_rad / (90 * (Math.PI / 180)));
 		return item;
 	}
