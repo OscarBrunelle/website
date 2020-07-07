@@ -130,6 +130,7 @@ function load() {
 				machine.className = className;
 				machine.production_time = obj_machine.prod_time;
 				machine.production_item = obj_machine.prod_item;
+				machine.angle_rad = obj_machine.angle_rad;
 				machines.push(machine);
 			}
 		}
@@ -167,9 +168,9 @@ function action(x, y) {
 			update_money();
 			machines.push(machine);
 			machine.draw();
-			set_cookie("machines", JSON.stringify(machines));
 		}
 	}
+	set_cookie("machines", JSON.stringify(machines));
 }
 
 function get_element_at_index(x_index, y_index) {
