@@ -12,7 +12,7 @@ var stopped = false;
 
 var grid;
 var selected;
-var elements = [];
+var machines = [];
 var items = [];
 
 var money = STARTING_MONEY;
@@ -24,9 +24,9 @@ function load() {
 	if (money_cookie != "") {
 		money = parseInt(money_cookie);
 	}
-	const machines_cookie = get_cookie("elements");
+	const machines_cookie = get_cookie("machines");
 	if (machines_cookie != "") {
-		elements = JSON.parse(machines_cookie);
+		machines = JSON.parse(machines_cookie);
 	}
 	update_money();
 	grid = new Grid("main", GRID_WIDTH, GRID_HEIGHT, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
@@ -131,7 +131,7 @@ function action(x, y) {
 	} else if (selected === "delete") {
 		if (pointed_element != null) {
 			pointed_element.sell();
-			elements.splice(elements.indexOf(pointed_element), 1);
+			machines.splice(machines.indexOf(pointed_element), 1);
 		}
 	} else if (pointed_element == null) {
 		if (Object.keys(MACHINES).indexOf(selected) < 0) {
@@ -142,15 +142,15 @@ function action(x, y) {
 		if (money >= machine.cost) {
 			money -= machine.cost;
 			update_money();
-			elements.push(machine);
-			set_cookie("elements", JSON.stringify(elements));
+			machines.push(machine);
+			set_cookie("machines", JSON.stringify(machines));
 			machine.draw();
 		}
 	}
 }
 
 function get_element_at_index(x_index, y_index) {
-	for (const element of elements) {
+	for (const element of machines) {
 		if (element.x_index === x_index && element.y_index === y_index) {
 			return element;
 		}
@@ -196,7 +196,7 @@ function update(currentTime) {
 
 	grid.clear();
 
-	for (const element of elements) {
+	for (const element of machines) {
 		element.update(elapsedSinceLastLoop);
 	}
 	for (let i = 0; i < items.length; i++) {
