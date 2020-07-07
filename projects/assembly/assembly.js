@@ -22,38 +22,6 @@ var money = STARTING_MONEY;
 var items_stats = {};
 
 function load() {
-	const grid_cookie = get_cookie("grid");
-	if (grid_cookie != "") {
-		const obj_grid = JSON.parse(grid_cookie);
-		grid = new Grid("main", obj_grid.w, obj_grid.h, obj_grid.nbr_frames_x, obj_grid.nbr_frames_y, obj_grid.id);
-		grid.scale = obj_grid.scale;
-		grid.translate_x = obj_grid.translate_x;
-		grid.translate_y = obj_grid.translate_y;
-		grid.grid_color = obj_grid.grid_color;
-	} else {
-		grid = new Grid("main", GRID_WIDTH, GRID_HEIGHT, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
-	}
-	grid.onclick(action);
-	const money_cookie = get_cookie("money");
-	if (money_cookie != "") {
-		money = parseInt(money_cookie);
-	}
-	update_money();
-	const machines_cookie = get_cookie("machines");
-	if (machines_cookie != "") {
-		const obj_machines = JSON.parse(machines_cookie);
-		for (const obj_machine of obj_machines) {
-			let className = obj_machine.className;
-			if (className != null) {
-				let machine = eval("new " + className + "(" + obj_machine.x_index + ", " + obj_machine.y_index + ")");
-				machine.className = className;
-				machine.production_time = obj_machine.production_time;
-				machine.production_item = obj_machine.production_item;
-				machines.push(machine);
-			}
-		}
-	}
-
 	for (const special of specials) {
 		const img = new Image();
 		img.src = "images/" + special + ".png";
@@ -135,6 +103,38 @@ function load() {
 		MACHINES[machine_name].image = img;
 	}
 
+	const grid_cookie = get_cookie("grid");
+	if (grid_cookie != "") {
+		const obj_grid = JSON.parse(grid_cookie);
+		grid = new Grid("main", obj_grid.w, obj_grid.h, obj_grid.nbr_frames_x, obj_grid.nbr_frames_y, obj_grid.id);
+		grid.scale = obj_grid.scale;
+		grid.translate_x = obj_grid.translate_x;
+		grid.translate_y = obj_grid.translate_y;
+		grid.grid_color = obj_grid.grid_color;
+	} else {
+		grid = new Grid("main", GRID_WIDTH, GRID_HEIGHT, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
+	}
+	grid.onclick(action);
+	const money_cookie = get_cookie("money");
+	if (money_cookie != "") {
+		money = parseInt(money_cookie);
+	}
+	update_money();
+	const machines_cookie = get_cookie("machines");
+	if (machines_cookie != "") {
+		const obj_machines = JSON.parse(machines_cookie);
+		for (const obj_machine of obj_machines) {
+			let className = obj_machine.className;
+			if (className != null) {
+				let machine = eval("new " + className + "(" + obj_machine.x_index + ", " + obj_machine.y_index + ")");
+				machine.className = className;
+				machine.production_time = obj_machine.production_time;
+				machine.production_item = obj_machine.production_item;
+				machines.push(machine);
+			}
+		}
+	}
+
 	update();
 }
 
@@ -166,8 +166,8 @@ function action(x, y) {
 			money -= machine.cost;
 			update_money();
 			machines.push(machine);
-			set_cookie("machines", JSON.stringify(machines));
 			machine.draw();
+			set_cookie("machines", JSON.stringify(machines));
 		}
 	}
 }
