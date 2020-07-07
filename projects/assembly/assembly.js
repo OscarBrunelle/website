@@ -26,7 +26,7 @@ function load() {
 	}
 	const machines_cookie = get_cookie("machines");
 	if (machines_cookie != "") {
-		obj_machines = JSON.parse(machines_cookie);
+		const obj_machines = JSON.parse(machines_cookie);
 		for (const obj_machine of obj_machines) {
 			let className = obj_machine.className;
 			let machine = eval("new " + className + "(" + obj_machine.x + ", " + obj_machine.y + ")");
