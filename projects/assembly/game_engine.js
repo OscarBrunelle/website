@@ -4,7 +4,7 @@ class GameCanvas {
 	constructor(parent_selector, _width, _height, _id = "game_canvas") {
 		//create the canvas
 		this.canvas = document.createElement("canvas");
-		this.canvas.id = _id;
+		this.id = _id;
 		this.width = _width;
 		this.height = _height;
 
@@ -23,15 +23,24 @@ class GameCanvas {
 			const multiplicator = delta < 0 ? 2 : 0.5;
 			this.context.scale(multiplicator, multiplicator);
 			this.scale *= multiplicator;
+
 			const rect = this.canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
 			this.translate_x = x;
 			this.translate_y = y;
+
 			this.clear();
 		});
 
 		this.clear();
+	}
+
+	set id(value) {
+		this.canvas.id = value;
+	}
+	get id() {
+		return this.canvas.id;
 	}
 
 	set width(value) {
@@ -86,12 +95,12 @@ class GameCanvas {
 			this.context.translate(x + width / 2, y + height / 2);
 			this.context.rotate(angle_rad);
 			try {
-				this.context.drawImage(image, - width / 2, - height / 2, width, height);
+				this.context.drawImage(image, -width / 2, -height / 2, width, height);
 			} catch (e) {
 				console.log(e);
 			}
 			this.context.rotate(-angle_rad);
-			this.context.translate(- (x + width / 2), -(y + height / 2));
+			this.context.translate(-(x + width / 2), -(y + height / 2));
 		} else {
 			try {
 				this.context.drawImage(image, x, y, width, height);
@@ -266,7 +275,8 @@ class GridDrawable {
 	}
 
 	redraw() {
-		const fw = this.game_canvas.frame_width, fh = this.game_canvas.frame_height;
+		const fw = this.game_canvas.frame_width,
+			fh = this.game_canvas.frame_height;
 		this.game_canvas.context.clearRect(this.x_index * fw + 1, this.y_index * fh + 1, fw - 2, fh - 2);
 		this.draw();
 	}
