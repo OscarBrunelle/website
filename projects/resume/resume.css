@@ -1,5 +1,5 @@
 #top_nav {
-	display: grid;
+	display: none;
 	grid-template-columns: repeat(3, 1fr);
 }
 
@@ -16,181 +16,223 @@
 body {
 	margin: 0px;
 }
-main {
-	height: calc(100vh - 21px);
+
+#resume-fr {
+	display: block;
+	display: none;
+}
+#resume-en {
+	display: none;
+	display: block;
 }
 
 /* RESUME */
-
-#resume {
-	width: 915px;
-	height: 1300px;
-	box-sizing: border-box;
-	display: grid;
-	grid-template-columns: 2fr 1fr;
-	gap: 1px;
+.resume {
+	/*width: 800px;*/
+	height: 100%;
+	position: relative;
+	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
-	border: 1px solid black;
-	background-color: black;
+	border: none;
+	background-color: transparent;
 }
-#resume p, #resume h3 {
+
+.resume * {
+	box-sizing: border-box;
+}
+
+#container-left {
+	width: 32%;
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	padding: 25px 12.5px 25px 25px;
+}
+#resume-fr #container-left {
+	padding: 20px 12.5px 20px 25px;
+}
+#container-right {
+	width: 68%;
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 25px 25px 25px 12.5px;
+}
+#resume-fr #container-right {
+	padding: 20px 25px 20px 12.5px;
+}
+
+.resume p, .resume h1, .resume h2, .resume h3, .resume h4, .resume span {
 	margin: 0px;
 	text-align: justify;
 }
-#resume-content, #resume-side {
-	padding: 35px;
-}
-#resume-content {
-	height: 100%;
-	box-sizing: border-box;
-	background-color: white;
-}
-#resume-side {
-	height: 100%;
-	box-sizing: border-box;
-	vertical-align: top;
-	background-color: cadetblue/*#7bb7b1*/;
-}
-#resume-side p {
-	color: white;
-}
 
-
-
-#resume-profile_pic {
-	width: 100%;
-	border-radius: 50%;
-}
-
-.resume-container_title {
+.resume h1 {
+	margin-bottom: 15px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: initial;
 	text-transform: uppercase;
 }
-#resume-content .resume-container_title {
-	color: black/*#595959*/;
+#main_title {
+	font-size: 22px;
+	color: orangered;
+	font-weight: bold;
+}
+.resume h2 {
+	margin-bottom: 15px;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: darkblue;
+	text-transform: uppercase;
+}
+.resume h3 {
+	font-size: 14px;
+	font-weight: bold;
+}
+.resume h4 {
+	font-weight: bold;
+}
+.resume a {
+	color: black;
+	text-decoration: none;
 }
 
-.resume-level-0 {
-	margin-bottom: 20px;
+.bordered_container {
+	padding: 15px;
+	border: 2px solid darkblue;
+	border-radius: 10px;
+	margin-bottom: 25px;
 }
-.resume-level-0 .resume-container_title {
+/* PERSONAL */
+#personal {
+	padding: 0px;
+	font-size: 12px;
+	border-color: transparent;
+}
+.icon_container {}
+#profile_pic {
+	width: 50%;
+	margin-left: 25%;
+	padding: 2%;
+	border-radius: 50%;
+	border: 2px solid darkblue;
+}
+#infos {
+	margin-top: 10px;
+	margin-left: 15px;
+}
+/* END PERSONAL */
+/* DESCRIPTION */
+#description {
+	text-align: center;
+	border: 1px dashed black;
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+#description > p {
+	text-align: center;
+	margin-left: -1px;
+	margin-right: -1px;
+}
+#title {
 	font-size: 20px;
 }
-.resume-level-1 {
-	margin-top: 10px;
+/* END DESCRIPTION */
+/* WORK EXPERIENCES */
+#work_experiences {
 }
 
-.resume-job_description {
-	white-space: break-spaces;
-	color: black/*#595959*/;
+.work-experience {
+	margin-top: 15px;
 }
-
-.resume-language, .resume-language_level {
-	display: inline-block;
+.work-title {
+	font-weight: bold;
 }
-.resume-language {
-	width: 70px;
+.work-title-date::after {
+	content: "\00a0:\00a0"
 }
-.resume-language_level::before {
+.work-title-position {
+	color: darkblue;
+}
+.work-title-employer::before {
+	content: "\00a0-\00a0"
+}
+.work-title-city::before {
+	content: "\00a0("
+}
+.work-title-city::after {
+	content: ")"
+}
+/* END WORK EXPERIENCES */
+/* TECHNOLOGIES */
+#technologies {
+}
+ul {
+	margin-top: 15px;
+	padding-left: 15px;
+}
+lh {
+	margin-left: -15px;
+	font-size: 14px;
+	font-weight: bold;
+}
+ul>li>p {
+	display: inline;
+}
+ul>li>p:first-child {
+	font-style: italic;
+	/*
+	text-decoration: underline;
+	/**/
+}
+ul>li>p:nth-child(2)::before {
 	content: ":\00a0";
 }
-
-.resume-title {
-	font-weight: bold;
+/* END TECHNOLOGIES */
+/* EDUCATION */
+#education {
 }
-
-.resume-diploma {
-	font-weight: bold;
+.diploma {
+	margin-top: 15px;
 }
-
-.resume-employer, .resume-school, .resume-city, .resume-country {
-	display: inline-block;
+.diploma-date::after {
+	content: "\00a0:\00a0";
+}
+.diploma-name {
+	font-weight: bold;
+	color: darkblue;
+}
+.diploma-school {
 	font-style: italic;
 }
-.resume-employer::after, .resume-school::after {
-	content: "\00a0|\00a0";
+/* END EDUCATION */
+/* LANGUAGES */
+#languages {
 }
-.resume-city::after {
-	content: "\00a0-\00a0";
+#resume-fr .language {
+	margin-top: 6px;
 }
+#resume-en .language {
+	margin-top: 5px;
+}
+/* END LANGUAGES */
+/* PROJECTS */
+#projects {}
+.project {
+	margin-top: 15px;
+}
+/* END PROJECTS */
 
-.resume-first_name, .resume-last_name {
-	font-size: 35px;
-	font-weight: bold;
-}
-#resume-side .resume-last_name {
-	color: black;
-	text-transform: uppercase;
-}
-
-.resume-job_title {
-	font-size: 24px;
-	font-weight: bold;
-}
-
-.resume-phone, .resume-email {
-	display: inline-block;
-}
-.resume-phone::before, .resume-email::before {
-	content: "\00a0\00a0";
-}
-
-.resume-date {
-	font-size: 15px;
-}
-
-#resume .icon_container > img {
-	height: 14px;
+.icon_container>img {
+	height: 12px;
 	vertical-align: middle;
 }
-
-/* for dark mode
-@media (prefers-color-scheme: dark) {
-	body {
-		background-color: #111;
-	}
-	#resume {
-		color: white;
-		border-color: white;
-		background-color: white;
-	}
-	#resume-content {
-		background-color: #111;
-	}
-	#resume-side {
-		background-color: #111;
-	}
+.icon_container>* {
+	display: inline-block;
 }
-*/
-/* END RESUME */
-
-@media print {
-	body * {
-		visibility: hidden;
-	}
-	#resume, #resume * {
-		visibility: visible;
-	}
-
-	nav {
-		display: none !important;
-	}
-	main {
-		height: 100vh;
-	}
-
-	#resume {
-		display: block;
-		border: none;
-		background-color: transparent;
-	}
-	#resume-content {
-		width: 65%;
-		display: inline-block;
-		border-right: 1px solid black;
-	}
-	#resume-side {
-		width: 35%;
-		display: inline-block;
-		background-color: cadetblue !important;
-	}
+.icon_container>p::before {
+	content: "\00a0\00a0";
 }

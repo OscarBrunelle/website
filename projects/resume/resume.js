@@ -13,12 +13,16 @@ const CONTAINER_TITLE = {
 		"en": "Profile"
 	},
 	"work_experience": {
-		"fr": "Expérience professionelle",
-		"en": "Work experience"
+		"fr": "Expériences professionelles",
+		"en": "Work experiences"
 	},
 	"projects": {
 		"fr": "Projets",
 		"en": "Projects"
+	},
+	"technologies": {
+		"fr": "Technologies",
+		"en": "Technologies"
 	},
 	"contact": {
 		"fr": "Contact",
@@ -33,16 +37,27 @@ const CONTAINER_TITLE = {
 		"en": "Languages"
 	}
 };
-const SIDE_CONTAINER = ["personal", "contact", "education", "languages"];
+const SIDE_CONTAINER = ["personal", "contact", "education", "projects", "languages"];
+const text_with_icons = {
+	"email": "solid/envelope",
+	"phone": "solid/phone",
+	"website": "solid/globe",
+	"linkedin": "brands/linkedin"
+};
 
 let resume_data;
 //C:\Users\oscar\Desktop\#Oscar\Programmation\website\projects\resume
 $(document).ready(function () {
+	/*
 	const cookie = get_cookie("default_infos");
 	if (cookie != null && cookie != "") {
 		resume_data = JSON.parse(cookie);
+	} else {
+		resume_data = template_infos;
 	}
+	resume_data = template_infos;
 	update_resume();
+	/**/
 });
 
 function printResume() {
@@ -58,7 +73,7 @@ function get_data(d) {
 function update_resume() {
 	$("#resume").empty();
 	$("#resume").append("<div id='resume-content'></div>");
-	$("#resume").append("<div id='resume-side'><img id='resume-profile_pic' src='profile_pic.png'></div>");
+	$("#resume").append("<div id='resume-side'><img id='resume-profile_pic' src='profile_pic_squared.png'></div>");
 
 	language = LANG_SELECTOR.language;
 	iterate_data(resume_data, language, $("#resume-content"));
@@ -71,23 +86,32 @@ function iterate_data(data, lang, parent, deep_level = -1) {
 			return -1;
 		} else if (data.hasOwnProperty(key)) {
 			let content = data[key];
-			if (content[lang] != null && DISPLAY_NONE.indexOf(key) < 0) {
-				if (key === "phone") {
+			if (DISPLAY_NONE.indexOf(key) >= 0) {} else if (content[lang] != null || content[LANG_SELECTOR.default_language] != null) {
+				const text = content[lang] != null ? content[lang] : content[LANG_SELECTOR.default_language];
+				if (text_with_icons.hasOwnProperty(key)) {
 					const container = $("<div class='icon_container'></div>").appendTo(parent);
-					container.append("<img src='" + FA_ICONS + "solid/phone.svg' />");
-					container.append("<p class='resume-" + key + "'>" + content[lang] + "</p>");
-				} else if (key === "email") {
-					const container = $("<div class='icon_container'></div>").appendTo(parent);
-					container.append("<img src='" + FA_ICONS + "solid/envelope.svg' />");
-					container.append("<p class='resume-" + key + "'>" + content[lang] + "</p>");
+					container.append("<img src='" + FA_ICONS + text_with_icons[key] + ".svg' />");
+					container.append("<p class='resume-" + key + "'>" + text + "</p>");
 				} else {
-					$("<p class='resume-" + key + "'>" + content[lang] + "</p>").appendTo(parent);
+					$("<p class='resume-" + key + "'>" + text + "</p>").appendTo(parent);
+				}
+			} else if (key === "list") {
+				const ul_element = $("<ul></ul>").appendTo(parent);
+				for (const li of content) {
+					const li_element = $("<li></li>").appendTo(ul_element);
+					for (const k in li) {
+						const li_content = li[k];
+						if (li_content[lang] != null || li_content[LANG_SELECTOR.default_language] != null) {
+							const text = li_content[lang] != null ? li_content[lang] : li_content[LANG_SELECTOR.default_language];
+							$("<p>" + text + "</p>").appendTo(li_element);
+						}
+					}
 				}
 			} else {
 				const container_parent = (SIDE_CONTAINER.indexOf(key) < 0) ? parent : $("#resume-side");
 				const container = $("<div class='resume-level-" + deep_level + " resume-container-" + key + "'></div>").appendTo(container_parent);
 				if (CONTAINER_TITLE.hasOwnProperty(key)) {
-					container.append("<h3 class='resume-container_title'>" + CONTAINER_TITLE[key][language] + "</h3>");
+					container.append("<h3 class='resume-container_title'>" + CONTAINER_TITLE[key][lang] + "</h3>");
 				}
 				iterate_data(content, lang, container, deep_level);
 			}
