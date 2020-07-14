@@ -56,12 +56,16 @@ $(document).ready(function () {
 		resume_data = template_infos;
 	}
 	resume_data = template_infos;
-	update_resume();
 	/**/
+	update_resume();
 });
 
 function printResume() {
-	print_element("resume", "resume.css");
+	if (getComputedStyle(document.getElementById("resume-fr"), null).style === "block") {
+		print_element("resume-fr", "resume.css");
+	} else {
+		print_element("resume-en", "resume.css");
+	}
 }
 
 function get_data(d) {
@@ -71,12 +75,23 @@ function get_data(d) {
 }
 
 function update_resume() {
+	/*
 	$("#resume").empty();
 	$("#resume").append("<div id='resume-content'></div>");
 	$("#resume").append("<div id='resume-side'><img id='resume-profile_pic' src='profile_pic_squared.png'></div>");
+	*/
 
 	language = LANG_SELECTOR.language;
-	iterate_data(resume_data, language, $("#resume-content"));
+	if (language === "fr") {
+		document.getElementById("resume-fr").style.display = "block";
+		document.getElementById("resume-en").style.display = "none";
+		document.getElementById("print_resume").innerHTML = "Imprimer";
+	} else {
+		document.getElementById("resume-fr").style.display = "none";
+		document.getElementById("resume-en").style.display = "block";
+		document.getElementById("print_resume").innerHTML = "Print";
+	}
+	//iterate_data(resume_data, language, $("#resume-content"));
 }
 
 function iterate_data(data, lang, parent, deep_level = -1) {

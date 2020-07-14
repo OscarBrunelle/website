@@ -1,6 +1,10 @@
 #top_nav {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+#top_nav > input {
 	display: none;
-	grid-template-columns: repeat(3, 1fr);
 }
 
 #print_resume {
