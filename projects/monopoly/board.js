@@ -334,11 +334,11 @@ function create_board() {
 	const action_buttons = $("<div id='action_buttons'></div>").appendTo("#center-top");
 	const buy_button = $("<button id='buy_button' disabled></button>").appendTo("#action_buttons");
 	buy_button.append("<span class='action_text'>Acheter</span>");
-	buy_button.append("<span class='price'>Hypothéquer</span>");
+	buy_button.append("<span class='price'></span>");
 	buy_button.on("click", buy);
 	const house_button = $("<button id='house_button' disabled></button>").appendTo("#action_buttons");
 	house_button.append("<span class='action_text'>Acheter une maison</span>");
-	house_button.append("<span class='price'>Hypothéquer</span>");
+	house_button.append("<span class='price'></span>");
 	house_button.on("click", house);
 	const mortgage_button = $("<button id='mortgage_button' disabled></button>").appendTo("#action_buttons");
 	mortgage_button.append("<span class='action_text'>Hypothéquer</span>");
