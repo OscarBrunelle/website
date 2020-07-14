@@ -1,0 +1,20 @@
+body {
+	background-color: grey;
+}
+
+#board {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+#dealer_spot {
+	grid-column: 1 / 5fr;
+}
+.spot {
+	display: inline-block;
+	border: 1px solid black;
+}
+
+#card {
+	background-color: white;
+}

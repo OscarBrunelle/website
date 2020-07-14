@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="casino.css">
+	<link rel="stylesheet" type="text/css" href="blackjack.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Casino">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Casino</title>
+</head>
+
+<body>
+	<main role="main">
+		<p id="cards_picked"></p>
+		<span>Total: <p id="total">0</p></span>
+		<span>AI total: <p id="ai_total">0</p></span>
+		<div>
+			<button id="pick" onclick="pick_card()">Pick</button>
+			<button onclick="stop()">Stop</button>
+			<button onclick="reset()">Reset</button>
+		</div>
+
+		<div id="board">
+			
+		</div>
+	</main>
+
+	<script type="text/javascript" src="casino.js"></script>
+	<script type="text/javascript" src="blackjack.js"></script>
+</body>
+
+</html>
