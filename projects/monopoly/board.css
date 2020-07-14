@@ -64,6 +64,7 @@
 	position: relative;
 	box-sizing: border-box;
 	border-right: 1px solid black;
+	background-color: rgb(204, 255, 204);
 }
 
 .case_container .board_case:first-child {
