@@ -4,13 +4,14 @@ class LanguageSelector {
 	constructor(parent_selector, _languages, def_lang_index, _click_func) {
 		const ref = this;
 		this.languages = _languages;
+		this.default_language = this.languages[def_lang_index];
 		const cookie = get_cookie("language");
 		if (cookie != null && cookie != "") {
 			this.language = cookie;
 			this.lang_index = this.languages.indexOf(this.language);
 		} else {
 			this.lang_index = def_lang_index;
-			this.language = this.languages[this.lang_index];
+			this.language = this.default_language;
 		}
 		this.click_func = _click_func;
 
@@ -68,19 +69,17 @@ function hide(element) {
 }
 
 function print_element(element_id, css_file_path = null) {
-	let html_to_print = "";
-	if (css_file_path != null) {
-		html_to_print += "<link rel='stylesheet' type='text/css' href='resume.css'>";
-	}
-	const DocumentContainer = document.getElementById(element_id);
-	html_to_print += DocumentContainer.outerHTML;
-
 	const WindowObject = window.open("");
-	WindowObject.document.writeln(html_to_print);
+	if (css_file_path != null) {
+		WindowObject.document.writeln("<link rel='stylesheet' type='text/css' href='" + css_file_path + "'>");
+	}
+	WindowObject.document.writeln(document.getElementById(element_id).outerHTML);
 	WindowObject.document.close();
 	WindowObject.focus();
-	WindowObject.print();
-	WindowObject.close();
+	setTimeout(function () { //adding a delay to wait for the css to apply
+		WindowObject.print();
+		WindowObject.close();
+	}, 1000);
 }
 
 function read_file(element_selector, finished_function, log_progress = false) {
