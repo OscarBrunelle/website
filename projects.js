@@ -16,6 +16,11 @@ const PROJECTS = [
 		description: "Get the state table of a given expression.",
 		type: "research"
 	}, {
+		link: "resume",
+		title: "Resume",
+		description: "View my resume.",
+		type: "research"
+	}, {
 		link: "sudoku",
 		title: "Sudoku",
 		description: "Create or solve random sudokus.",
@@ -37,6 +42,11 @@ const PROJECTS = [
 		link: "bubbleTrouble",
 		title: "Bubble Trouble (Multiplayer)",
 		description: "Shoot and avoid the falling bubbles!",
+		type: "game"
+	}, {
+		link: "casino",
+		title: "Casino",
+		description: "Try your luck at the casino!",
 		type: "game"
 	}, {
 		link: "doodleJump",
