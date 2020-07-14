@@ -44,6 +44,19 @@ function display_classes(selected_courses) {
 				let parent = $("<div class='" + course.short_name + "'></div>").appendTo("#D" + session.day + "H" + session.hour);
 				parent.addClass("course_color-" + c_index);
 				parent.append("<span class='course_name'>" + course.short_name + " - " + session.type + "</span>");
+				if ($("#option-time").is(":checked")) {
+					let text = "";
+					let time = (STARTING_TIME + JET_LAG + SHIFT_LENGTH * session.hour) % 24;
+					const hours_1 = ("0" + parseInt(time)).substr(-2);
+					const minutes_1 = ("0" + time % 1 * 60).substr(-2);
+					time = (time + 1.5) % 24;
+					const hours_2 = ("0" + parseInt(time)).substr(-2);
+					const minutes_2 = ("0" + time % 1 * 60).substr(-2);
+					text += hours_1 + "h" + minutes_1;
+					text += " - ";
+					text += hours_2 + "h" + minutes_2;
+					parent.append("<span class='course_time'>" + text + "</span>");
+				}
 				if ($("#option-long_name").is(":checked")) {
 					parent.append("<span class='course_name'>" + course.long_name + "</span>");
 				}
