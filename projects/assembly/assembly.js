@@ -102,23 +102,22 @@ function load() {
 	}
 
 	const grid_cookie = get_cookie("grid");
+	//const width = document.getElementById("game").clientWidth;
+	//const height = document.getElementById("game").clientHeight;
+	let width = document.body.clientWidth - 20;
+	let height = document.body.clientHeight - 100;
+	let size = Math.min(width, height);
 	if (grid_cookie != "") {
-		let width = document.body.clientWidth - 20;
-		let height = document.body.clientHeight - 100;
-		let size = Math.min(width, height);
 		const obj_grid = JSON.parse(grid_cookie);
-		grid = new Grid("main", size, size, obj_grid.nbr_frames_x, obj_grid.nbr_frames_y, obj_grid.id);
+		grid = new Grid("#game", size, size, obj_grid.nbr_frames_x, obj_grid.nbr_frames_y, obj_grid.id);
 		grid.scale = obj_grid.scale;
 		grid.translate_x = obj_grid.translate_x;
 		grid.translate_y = obj_grid.translate_y;
 		grid.grid_color = obj_grid.grid_color;
 	} else {
-		let width = document.body.clientWidth - 20;
-		let height = document.body.clientHeight - 100;
-		let size = Math.min(width, height);
-		grid = new Grid("main", size, size, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
+		grid = new Grid("#game", size, size, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
 	}
-	grid.onclick(action);
+	grid.onclick(click);
 	//window.addEventListener("resize", resize);
 	const money_cookie = get_cookie("money");
 	if (money_cookie != "") {
@@ -152,7 +151,7 @@ function resize() {
 	grid.height = size;
 }
 
-function action(x, y) {
+function click(x, y) {
 	const pos_index = grid.get_index_of_pos(x, y);
 	let pointed_element = get_element_at_index(pos_index.x, pos_index.y);
 	if (selected === "pointer") {
@@ -211,7 +210,15 @@ function toggle_updating() {
 }
 
 function update_money() {
-	const text = money + " $";
+	const money_rules = ["", "K", "M", "B"];
+
+	let formatted_money = money;
+	let index = 0;
+	while (formatted_money >= Math.pow(10, 3)) {
+		formatted_money = formatted_money / 1000;
+		index++;
+	}
+	const text = "Money: $ " + formatted_money.toFixed(4 - Math.ceil(Math.log10(formatted_money + 1))) + " " + money_rules[index];
 	document.querySelector("#money").innerHTML = text;
 	set_cookie("money", money);
 }
@@ -468,10 +475,25 @@ class Crafter extends Producer {
 	}
 
 	click() {
-		let crafts_keys = Object.keys(crafts);
-		let index = crafts_keys.indexOf(this.production_item);
-		index = (++index) % crafts_keys.length;
-		this.production_item = crafts_keys[index];
+		const ref = this;
+
+		const modal = document.querySelector("#game .modal");
+		modal.innerHTML = "";
+		modal.style.display = "block";
+		modal.style.left = this.x + "px";
+		modal.style.top = this.y + "px";
+		for (const craft_name in crafts) {
+			const craft_div = document.createElement("div");
+			craft_div.className = "item_selector";
+			const craft_img = items_stats[craft_name].image;
+			craft_div.appendChild(craft_img);
+			modal.appendChild(craft_div);
+
+			craft_div.addEventListener("click", function(){
+				modal.style.display = "none";
+				ref.production_item = craft_name;
+			});
+		}
 	}
 
 	draw() {

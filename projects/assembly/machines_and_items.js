@@ -152,4 +152,4 @@ const crafts = {
 		"unlock_cost": 10,
 		"value": 2500000
 	}
-}
+};

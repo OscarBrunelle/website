@@ -8,9 +8,30 @@ main {
 	background-color: lightgrey;
 }
 
-canvas {
+#game {
+	position: relative;
+}
+#game > canvas {
 	background-color: white;
 	image-rendering: pixelated;
+}
+
+#game > .modal {
+	min-width: 10px;
+	width: 20%;
+	min-height: 10px;
+	display: none;
+	position: absolute;
+	background-color: black;
+	opacity: 0.5;
+}
+.modal > .item_selector {
+	width: 50%;
+	display: inline-block;
+}
+.modal > .item_selector > img {
+	width: 100%;
+	display: block !important;
 }
 
 #top_container {
