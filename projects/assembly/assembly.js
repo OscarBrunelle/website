@@ -2,10 +2,8 @@
 
 //if item goes out of canvas, delete
 
-const GRID_WIDTH = 500,
-	GRID_HEIGHT = 500;
-const GRID_FRAMES_X = 16,
-	GRID_FRAMES_Y = 16;
+const GRID_FRAMES_X = 16;
+const GRID_FRAMES_Y = 16;
 
 const STARTING_MONEY = 50000;
 const STORED_LIMIT = 1000;
@@ -105,16 +103,23 @@ function load() {
 
 	const grid_cookie = get_cookie("grid");
 	if (grid_cookie != "") {
+		let width = document.body.clientWidth - 20;
+		let height = document.body.clientHeight - 100;
+		let size = Math.min(width, height);
 		const obj_grid = JSON.parse(grid_cookie);
-		grid = new Grid("main", obj_grid.w, obj_grid.h, obj_grid.nbr_frames_x, obj_grid.nbr_frames_y, obj_grid.id);
+		grid = new Grid("main", size, size, obj_grid.nbr_frames_x, obj_grid.nbr_frames_y, obj_grid.id);
 		grid.scale = obj_grid.scale;
 		grid.translate_x = obj_grid.translate_x;
 		grid.translate_y = obj_grid.translate_y;
 		grid.grid_color = obj_grid.grid_color;
 	} else {
-		grid = new Grid("main", GRID_WIDTH, GRID_HEIGHT, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
+		let width = document.body.clientWidth - 20;
+		let height = document.body.clientHeight - 100;
+		let size = Math.min(width, height);
+		grid = new Grid("main", size, size, GRID_FRAMES_X, GRID_FRAMES_Y, "grid");
 	}
 	grid.onclick(action);
+	//window.addEventListener("resize", resize);
 	const money_cookie = get_cookie("money");
 	if (money_cookie != "") {
 		money = parseInt(money_cookie);
@@ -130,13 +135,21 @@ function load() {
 				machine.className = className;
 				machine.production_time = obj_machine.prod_time;
 				machine.production_item = obj_machine.prod_item;
-				machine.angle_rad = obj_machine.angle_rad;
+				machine.rotation_rad = obj_machine.rotation_rad;
 				machines.push(machine);
 			}
 		}
 	}
 
 	update();
+}
+
+function resize() {
+	let width = document.body.clientWidth - 20;
+	let height = document.body.clientHeight - 100;
+	let size = Math.min(width, height);
+	grid.width = size;
+	grid.height = size;
 }
 
 function action(x, y) {
@@ -148,7 +161,7 @@ function action(x, y) {
 		}
 	} else if (selected === "rotate") {
 		if (pointed_element != null) {
-			pointed_element.angle_rad = (pointed_element.angle_rad + 90 * (Math.PI / 180)) % (360 * (Math.PI / 180));
+			pointed_element.rotation_rad = (pointed_element.rotation_rad + 90 * (Math.PI / 180)) % (360 * (Math.PI / 180));
 			pointed_element.redraw();
 		}
 	} else if (selected === "delete") {
@@ -248,9 +261,14 @@ function update(currentTime) {
 	requestAnimationFrame(update);
 }
 
-class Assembler extends GridDrawable {
-	constructor(_x_index, _y_index, _image, _cost) {
-		super(grid, _image, _x_index, _y_index);
+class Assembler extends Drawable {
+	constructor(grid_x, grid_y, image, _cost) {
+		const obj_desc = {
+			grid_x: grid_x,
+			grid_y: grid_y,
+			image: image
+		};
+		super(grid, obj_desc);
 		this.cost = _cost;
 	}
 
@@ -276,8 +294,9 @@ class Producer extends Assembler {
 	}
 
 	produce_item(item_name) {
-		const direction = Math.floor(this.angle_rad / (90 * (Math.PI / 180)));
+		const direction = Math.floor(this.rotation_rad / (90 * (Math.PI / 180)));
 		let item = new Item(this.x_index, this.y_index, direction, item_name);
+		item.last_machine = this;
 		item.draw();
 		items.push(item);
 		return item;
@@ -360,7 +379,7 @@ class Roller extends Assembler {
 	}
 
 	transformItem(item) {
-		item.direction = Math.floor(this.angle_rad / (90 * (Math.PI / 180)));
+		item.direction = Math.floor(this.rotation_rad / (90 * (Math.PI / 180)));
 		return item;
 	}
 }
@@ -467,6 +486,9 @@ class Crafter extends Producer {
 
 class Item extends Drawable {
 	constructor(_x_index, _y_index, direction, name) {
+		const pos = grid.get_border_pos_of_index(_x_index, _y_index, direction);
+		const image = items_stats[name].image;
+		/*
 		switch (direction) {
 			case 0:
 				_y_index++;
@@ -475,8 +497,6 @@ class Item extends Drawable {
 				_x_index++;
 				break;
 		}
-		const pos = grid.get_pos_of_index(_x_index, _y_index);
-		const image = items_stats[name].image;
 		switch (direction) {
 			case 0:
 				pos.x += (grid.frame_width - image.width) / 2;
@@ -493,7 +513,13 @@ class Item extends Drawable {
 				pos.y += (grid.frame_height - image.height) / 2;
 				break;
 		}
-		super(grid, image, pos.x, pos.y);
+		*/
+		const obj_desc = {
+			x: pos.x,
+			y: pos.y,
+			image: image
+		};
+		super(grid, obj_desc);
 		this.width = grid.frame_width / 2;
 		this.height = grid.frame_height / 2;
 		this.direction = direction;
@@ -532,28 +558,28 @@ class Item extends Drawable {
 		if (this.prev_x == null || this.prev_y == null) {
 			return false;
 		}
-		let prev_x = this.prev_x % grid.frame_width;
-		let prev_y = this.prev_y % grid.frame_height;
-		let x = this.x % grid.frame_width;
-		let y = this.y % grid.frame_height;
-		let center_x = (grid.frame_width - this.image.width) / 2;
-		let center_y = (grid.frame_height - this.image.height) / 2;
+		let prev_x = this.prev_x % this.game_canvas.frame_width;
+		let prev_y = this.prev_y % this.game_canvas.frame_height;
+		let x = this.x % this.game_canvas.frame_width;
+		let y = this.y % this.game_canvas.frame_height;
+		let center_x = this.game_canvas.frame_width / 2;
+		let center_y = this.game_canvas.frame_height / 2;
 		const x_centered = ((prev_x <= center_x && x >= center_x && this.prev_x <= this.x) || (prev_x >= center_x && x <= center_x && this.prev_x >= this.x));
 		const y_centered = ((prev_y <= center_y && y >= center_y && this.prev_y <= this.y) || (prev_y >= center_y && y <= center_y && this.prev_y >= this.y));
 		return (x_centered && y_centered);
 	}
 
 	center() {
-		const pos = grid.get_nearest_frame(this.x, this.y);
-		this.x = pos.x + (grid.frame_width - this.image.width) / 2;
-		this.y = pos.y + (grid.frame_height - this.image.height) / 2;
+		const pos = this.game_canvas.get_nearest_frame(this.x, this.y);
+		this.x = pos.x + this.game_canvas.frame_width / 2;
+		this.y = pos.y + this.game_canvas.frame_height / 2;
 	}
 
 	update() {
 		this.prev_x = this.x;
 		this.prev_y = this.y;
-		this.x += this.direction_x * (grid.frame_width / 30);
-		this.y += this.direction_y * (grid.frame_height / 30);
+		this.x += this.direction_x * (this.game_canvas.frame_width / 30);
+		this.y += this.direction_y * (this.game_canvas.frame_height / 30);
 		this.draw();
 	}
 }

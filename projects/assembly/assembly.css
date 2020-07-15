@@ -1,3 +1,9 @@
+body {
+	width: 100vw;
+	height: 100vh;
+	margin: 0px;
+}
+
 main {
 	background-color: lightgrey;
 }
@@ -5,6 +11,14 @@ main {
 canvas {
 	background-color: white;
 	image-rendering: pixelated;
+}
+
+#top_container {
+
+}
+
+#grid_container {
+
 }
 
 #money {
