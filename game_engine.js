@@ -29,28 +29,44 @@ class GameCanvas {
 			this.context.scale(multiplicator, multiplicator);
 			this.scale *= multiplicator;
 
-			const rect = this.canvas.getBoundingClientRect();
+			this.context.setTransform(this.scale, 0, 0, this.scale, 0, 0);
+			this.translate_x = 0;
+			this.translate_y = 0;
+
+			/*const rect = this.canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
-			const y = event.clientY - rect.top;
+			const y = event.clientY - rect.top;*/
 		});
 		this.translate_x = 0;
 		this.translate_y = 0;
 		let mouse_x, mouse_y;
 		this.canvas.addEventListener("mousedown", event => {
-			if (event.button === 1) {
+			if (event.button === 1 || event.button === 2) {
 				const rect = this.canvas.getBoundingClientRect();
 				mouse_x = (event.clientX - rect.left) / this.scale;
 				mouse_y = (event.clientY - rect.top) / this.scale;
 			}
 		});
 		this.canvas.addEventListener("mouseup", event => {
-			if (event.button === 1) {
+			if (event.button === 1 || event.button === 2) {
 				const rect = this.canvas.getBoundingClientRect();
 				const x = (event.clientX - rect.left) / this.scale;
 				const y = (event.clientY - rect.top) / this.scale;
-				//this.translate_x += x - mouse_x;
-				//this.translate_y += y - mouse_y;
-				this.context.translate(x - mouse_x, y - mouse_y);
+				let t_x = x - mouse_x;
+				if (t_x > -this.translate_x) {
+					t_x = -this.translate_x;
+				} else if ((this.translate_x + t_x) * this.scale < this.width - this.width * this.scale) {
+					t_x = (-this.translate_x * this.scale + (this.width - this.width * this.scale)) / this.scale;
+				}
+				let t_y = y - mouse_y;
+				if (t_y > -this.translate_y) {
+					t_y = -this.translate_y;
+				} else if ((this.translate_y + t_y) * this.scale < this.height - this.height * this.scale) {
+					t_y = (-this.translate_y * this.scale + (this.height - this.height * this.scale)) / this.scale;
+				}
+				this.translate_x += t_x;
+				this.translate_y += t_y;
+				this.context.translate(t_x, t_y);
 			}
 		});
 		this.key_map = {};
@@ -154,8 +170,8 @@ class GameCanvas {
 		this.canvas.addEventListener("mousedown", event => {
 			if (event.button === 0) {
 				const rect = this.canvas.getBoundingClientRect();
-				const x = (event.clientX - rect.left) / this.scale;
-				const y = (event.clientY - rect.top) / this.scale;
+				const x = (event.clientX - rect.left) / this.scale - this.translate_x;
+				const y = (event.clientY - rect.top) / this.scale - this.translate_y;
 				action(x, y);
 			}
 		});
@@ -209,6 +225,8 @@ class GameCanvas {
 	reset() {
 		this.scale = 1;
 		this.context.setTransform(1, 0, 0, 1, 0, 0);
+		this.translate_x = 0;
+		this.translate_y = 0;
 	}
 }
 
@@ -534,7 +552,12 @@ function collision_detection(element, target, side) {
 		bottom: target.y + target.height / 2,
 		right: target.x + target.width / 2
 	};
-	const corners = [[-1, 1], [-1, -1], [1, -1], [1, 1]];
+	const corners = [
+		[-1, 1],
+		[-1, -1],
+		[1, -1],
+		[1, 1]
+	];
 	let inside = true;
 	for (const corner_pos of corners) {
 		const corner = {
