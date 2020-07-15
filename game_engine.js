@@ -32,13 +32,28 @@ class GameCanvas {
 			const rect = this.canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
-			this.translate_x = x;
-			this.translate_y = y;
-
-			this.clear();
+		});
+		this.translate_x = 0;
+		this.translate_y = 0;
+		let mouse_x, mouse_y;
+		this.canvas.addEventListener("mousedown", event => {
+			if (event.button === 1) {
+				const rect = this.canvas.getBoundingClientRect();
+				mouse_x = (event.clientX - rect.left) / this.scale;
+				mouse_y = (event.clientY - rect.top) / this.scale;
+			}
+		});
+		this.canvas.addEventListener("mouseup", event => {
+			if (event.button === 1) {
+				const rect = this.canvas.getBoundingClientRect();
+				const x = (event.clientX - rect.left) / this.scale;
+				const y = (event.clientY - rect.top) / this.scale;
+				//this.translate_x += x - mouse_x;
+				//this.translate_y += y - mouse_y;
+				this.context.translate(x - mouse_x, y - mouse_y);
+			}
 		});
 		this.key_map = {};
-		//const ref = this;
 		document.getElementById(this.id).addEventListener("keydown", event => {
 			this.key_map[event.key] = true;
 		});
@@ -136,12 +151,11 @@ class GameCanvas {
 	}
 
 	onclick(action) {
-		const ref = this;
-		this.canvas.addEventListener("mousedown", function (event) {
+		this.canvas.addEventListener("mousedown", event => {
 			if (event.button === 0) {
-				const rect = ref.canvas.getBoundingClientRect();
-				const x = (event.clientX - rect.left) / ref.scale;
-				const y = (event.clientY - rect.top) / ref.scale;
+				const rect = this.canvas.getBoundingClientRect();
+				const x = (event.clientX - rect.left) / this.scale;
+				const y = (event.clientY - rect.top) / this.scale;
 				action(x, y);
 			}
 		});
@@ -164,25 +178,37 @@ class GameCanvas {
 		this.clear();
 	}
 
-	clear(x, y, width, height) {
-		if (x == null) {
-			x = 0;
-		}
-		if (y == null) {
-			y = 0;
-		}
-		if (width == null) {
-			width = this.canvas.width / this.scale;
-		}
-		if (height == null) {
-			height = this.canvas.height / this.scale;
-		}
-		this.context.clearRect(x, y, width, height);
-	}
-
 	cursor(cursor_url) {
 		let cursor = (cursor_url != null) ? "url('" + cursor_url + "'), " : "";
 		this.canvas.style.cursor = cursor + "auto";
+	}
+
+	clear(x, y, width, height) {
+		if (x == null && y == null && width == null && height == null) {
+			this.context.save();
+			this.context.setTransform(1, 0, 0, 1, 0, 0);
+			this.context.clearRect(0, 0, this.width, this.height);
+			this.context.restore();
+		} else {
+			if (x == null) {
+				x = 0;
+			}
+			if (y == null) {
+				y = 0;
+			}
+			if (width == null) {
+				width = this.canvas.width / this.scale;
+			}
+			if (height == null) {
+				height = this.canvas.height / this.scale;
+			}
+			this.context.clearRect(x, y, width, height);
+		}
+	}
+
+	reset() {
+		this.scale = 1;
+		this.context.setTransform(1, 0, 0, 1, 0, 0);
 	}
 }
 
