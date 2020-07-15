@@ -61,6 +61,9 @@ function load() {
 	}
 	for (const ts_name of transformed_ressources) {
 		for (const ressource_name of raw_ressources) {
+			if (ressource_name === "none") {
+				continue;
+			}
 			const item_name = ts_name + "_" + ressource_name;
 			const img = new Image();
 			img.src = "images/" + item_name + ".png";
@@ -340,31 +343,48 @@ class Producer extends Assembler {
 			}
 		}
 	}
+
+	draw() {
+		super.draw();
+		if (this.production_item != null && this.production_item !== "none" && transformed_ressources.indexOf(this.production_item) < 0) {
+			const image = items_stats[this.production_item].image;
+			const fw = this.game_canvas.frame_width;
+			const fh = this.game_canvas.frame_height;
+			const x = this.x_index * fw + fw / 6;
+			const y = this.y_index * fh + fh / 6;
+			grid.drawImage(image, x, y, fw / 3, fh / 3);
+		}
+	}
 }
 
 class Starter extends Producer {
 	constructor(_x_index, _y_index) {
 		super(_x_index, _y_index, MACHINES["starter"].image, MACHINES["starter"].cost);
-		this.production_item = raw_ressources[0];
+		this.production_item = "none";
 	}
 
 	produce() {
-		let item = this.produce_item(this.production_item);
-		money -= item.cost;
+		if (this.production_item != null && this.production_item !== "none") {
+			let item = this.produce_item(this.production_item);
+			money -= item.cost;
+		}
 	}
 
 	click() {
-		let index = raw_ressources.indexOf(this.production_item);
-		index = (++index) % raw_ressources.length;
-		this.production_item = raw_ressources[index];
-	}
+		const modal = show_modal(this.x, this.y);
+		/*const ressource_items = raw_ressources;
+		ressource_items.unshift("none");*/
+		for (const ressource_name of raw_ressources) {
+			const ressource_div = document.createElement("div");
+			ressource_div.className = "item_selector";
+			const ressource_img = items_stats[ressource_name].image;
+			ressource_div.appendChild(ressource_img);
+			modal.appendChild(ressource_div);
 
-	draw() {
-		super.draw();
-		if (this.production_item != null) {
-			const x = this.x_index * grid.frame_width + 2;
-			const y = this.y_index * grid.frame_height + 2;
-			grid.drawImage(items_stats[this.production_item].image, x, y, 10, 10);
+			ressource_div.addEventListener("click", event => {
+				modal.style.display = "none";
+				this.production_item = ressource_name;
+			});
 		}
 	}
 }
@@ -416,6 +436,10 @@ class Transformer extends Producer {
 			this.produce_item(item_name);
 		}
 	}
+
+	click() {
+		return;
+	}
 }
 
 class Cutter extends Transformer {
@@ -433,13 +457,17 @@ class WireDrawer extends Transformer {
 class Crafter extends Producer {
 	constructor(_x_index, _y_index) {
 		super(_x_index, _y_index, MACHINES["crafter"].image, MACHINES["crafter"].cost);
-		this.production_item = Object.keys(crafts)[0];
+		this.production_item = "none";
 		this.stored_ingredients = {};
 	}
 
 	set production_item(value) {
 		super.production_item = value;
-		this.ingredients = crafts[this.production_item].recipe;
+		if (value != null && value !== "none") {
+			this.ingredients = crafts[this.production_item].recipe;
+		} else {
+			this.ingredients = {};
+		}
 	}
 	get production_item() {
 		return super.production_item;
@@ -461,7 +489,7 @@ class Crafter extends Producer {
 	}
 
 	can_produce() {
-		if (this.ingredients != null) {
+		if (this.production_item != null && this.production_item !== "none" && this.ingredients != null) {
 			for (const ingredient in this.ingredients) {
 				const needed = this.ingredients[ingredient];
 				const in_stock = this.stored_ingredients[ingredient];
@@ -475,33 +503,20 @@ class Crafter extends Producer {
 	}
 
 	click() {
-		const ref = this;
-
-		const modal = document.querySelector("#game .modal");
-		modal.innerHTML = "";
-		modal.style.display = "block";
-		modal.style.left = this.x + "px";
-		modal.style.top = this.y + "px";
-		for (const craft_name in crafts) {
+		const modal = show_modal(this.x, this.y);
+		const craft_items = crafts;
+		craft_items["none"] = {};
+		for (const craft_name in craft_items) {
 			const craft_div = document.createElement("div");
 			craft_div.className = "item_selector";
 			const craft_img = items_stats[craft_name].image;
 			craft_div.appendChild(craft_img);
 			modal.appendChild(craft_div);
 
-			craft_div.addEventListener("click", function(){
+			craft_div.addEventListener("click", event => {
 				modal.style.display = "none";
-				ref.production_item = craft_name;
+				this.production_item = craft_name;
 			});
-		}
-	}
-
-	draw() {
-		super.draw();
-		if (this.production_item != null) {
-			const x = this.x_index * grid.frame_width + 2;
-			const y = this.y_index * grid.frame_height + 2;
-			grid.drawImage(items_stats[this.production_item].image, x, y, grid.frame_width / 3, grid.frame_height / 3);
 		}
 	}
 }
@@ -604,6 +619,15 @@ class Item extends Drawable {
 		this.y += this.direction_y * (this.game_canvas.frame_height / 30);
 		this.draw();
 	}
+}
+
+function show_modal(x, y) {
+	const modal = document.querySelector("#game .modal");
+	modal.innerHTML = "";
+	modal.style.display = "block";
+	modal.style.left = x + "px";
+	modal.style.top = y + "px";
+	return modal;
 }
 
 document.onload = load();

@@ -6,6 +6,10 @@ body {
 
 main {
 	background-color: lightgrey;
+	user-select: none;
+}
+
+#selectors {
 }
 
 #game {

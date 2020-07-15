@@ -33,7 +33,7 @@ const MACHINES = {
 	}
 };
 
-const raw_ressources = ["aluminium", "copper", "diamond", "gold", "iron"];
+const raw_ressources = ["none", "aluminium", "copper", "gold", "iron", "diamond"];
 const raw_ressource = {
 	"cost": 5,
 	"value": 80
