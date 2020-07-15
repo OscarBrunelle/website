@@ -26,6 +26,9 @@ class GameCanvas {
 		this.canvas.addEventListener("wheel", event => {
 			const delta = Math.sign(event.deltaY);
 			const multiplicator = delta < 0 ? 2 : 0.5;
+			if (this.scale <= 1 && multiplicator <= 1) {
+				return;
+			}
 			this.context.scale(multiplicator, multiplicator);
 			this.scale *= multiplicator;
 
