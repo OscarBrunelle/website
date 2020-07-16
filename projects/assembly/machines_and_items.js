@@ -16,21 +16,31 @@ const MACHINES = {
 		"className": "Roller",
 		"cost": 300
 	},
+	/*"furnace": {
+		"name": "Furnace",
+		"className": "Furnace",
+		"cost": 10000
+	},*/
 	"cutter": {
 		"name": "Cutter",
 		"className": "Cutter",
-		"cost": 10
+		"cost": 10000
 	},
 	"wire_drawer": {
 		"name": "Wire Drawer",
 		"className": "WireDrawer",
-		"cost": 10
+		"cost": 10000
 	},
 	"crafter": {
 		"name": "Crafter",
 		"className": "Crafter",
-		"cost": 2000
-	}
+		"cost": 20000
+	}/*,
+	"selector_left": {
+		"name": "Left Selector",
+		"className": "SelectorLeft",
+		"cost": 50000
+	}*/
 };
 
 const raw_ressources = ["none", "aluminium", "copper", "gold", "iron", "diamond"];

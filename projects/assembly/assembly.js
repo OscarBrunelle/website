@@ -5,7 +5,7 @@
 const GRID_FRAMES_X = 16;
 const GRID_FRAMES_Y = 16;
 
-const STARTING_MONEY = 50000;
+const STARTING_MONEY = 50000000;
 const STORED_LIMIT = 1000;
 
 var stopped = false;
