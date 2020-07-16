@@ -1,0 +1,17 @@
+#conversion {
+	position: relative;
+}
+
+#logs-div {
+	width: 30%;
+	max-height: 50vh;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 5px;
+	overflow-y: auto;
+	border: 1px solid black;
+}
+#logs-div > h3 {
+	text-align: center;
+}
