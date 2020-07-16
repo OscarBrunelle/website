@@ -73,7 +73,7 @@ class GameCanvas {
 			}
 		});
 		this.canvas.addEventListener("mousemove", event => {
-			if (mouse_buttons_pressed["0"] || mouse_buttons_pressed["1"]) {
+			if (mouse_buttons_pressed["1"] || mouse_buttons_pressed["2"]) {
 				const rect = this.canvas.getBoundingClientRect();
 				const x = (event.clientX - rect.left);
 				const y = (event.clientY - rect.top);
@@ -231,8 +231,11 @@ class GameCanvas {
 		this.clear();
 	}
 
-	cursor(cursor_url) {
+	cursor(cursor_url = null, cursor_url2 = null) {
 		let cursor = (cursor_url != null) ? "url('" + cursor_url + "'), " : "";
+		if (cursor_url2 != null) {
+			cursor += "url('" + cursor_url2 + "'), ";
+		}
 		this.canvas.style.cursor = cursor + "auto";
 	}
 
