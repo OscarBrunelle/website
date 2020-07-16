@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   sodipodi:docname="wire_copper.svg"
+   viewBox="0 0 16 16"
+   height="16"
+   width="16"
+   id="svg7978"
+   version="1.1">
+  <metadata
+     id="metadata7984">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs7982">
+    <linearGradient
+       osb:paint="solid"
+       id="linearGradient11003">
+      <stop
+         id="stop11001"
+         offset="0"
+         style="stop-color:#cfdfb5;stop-opacity:1;" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     inkscape:current-layer="g7986"
+     inkscape:window-maximized="1"
+     inkscape:window-y="439"
+     inkscape:window-x="-8"
+     inkscape:cy="6.9713448"
+     inkscape:cx="10.426425"
+     inkscape:zoom="29.334557"
+     showgrid="false"
+     id="namedview7980"
+     inkscape:window-height="745"
+     inkscape:window-width="1366"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <g
+     id="g7986"
+     inkscape:label="Image"
+     inkscape:groupmode="layer">
+    <path
+       transform="matrix(1.3331988,0,0,1.4538023,-3.6040127e-5,3.9242254e-5)"
+       d="M 5.4848242,6.0005498 C 5.7446215,6.1731783 5.3802992,6.4359201 5.1979043,6.4323499 4.7036252,6.4226749 4.5054152,5.8320185 4.6212239,5.42671 4.8283784,4.7017081 5.6944955,4.4470736 6.3455839,4.7051493 7.3010823,5.0838859 7.6192257,6.2571799 7.2120248,7.1482294 6.66929,8.3358583 5.1792482,8.7186995 4.0502247,8.1595505 2.6294638,7.4559187 2.1814863,5.6450998 2.8940233,4.2790304 3.7570011,2.6245373 5.890667,2.1111935 7.4932635,2.9779488 9.381868,3.9993899 9.9607195,6.4571083 8.9392254,8.295909 7.75987,10.418877 4.9773343,11.063331 2.9025451,9.8867511 0.54503762,8.5498458 -0.16508696,5.4419771 1.1668227,3.1313508 2.661024,0.5391772 6.0945904,-0.23666744 8.6409431,1.2507482 11.467877,2.9020614 12.30948,6.6615929 10.666426,9.4435886"
+       sodipodi:t0="0"
+       sodipodi:argument="-18.263073"
+       sodipodi:radius="6.2212148"
+       sodipodi:revolution="3"
+       sodipodi:expansion="1"
+       sodipodi:cy="6.0005498"
+       sodipodi:cx="5.4848242"
+       id="path11071"
+       style="fill:none;fill-rule:evenodd;stroke:#ff6400;fill-opacity:1;stroke-opacity:1"
+       sodipodi:type="spiral" />
+  </g>
+</svg>
