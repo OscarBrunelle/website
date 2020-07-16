@@ -11,6 +11,11 @@ const PROJECTS = [
 		description: "Create, reduce and visualise binary search trees.",
 		type: "research"
 	}, {
+		link: "helper",
+		title: "Helper",
+		description: "Things that comes handy for my courses.",
+		type: "research"
+	}, {
 		link: "stateSolver",
 		title: "State solver",
 		description: "Get the state table of a given expression.",
