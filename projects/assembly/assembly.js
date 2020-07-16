@@ -19,41 +19,56 @@ var money = STARTING_MONEY;
 
 var items_stats = {};
 
-function load() {
-	for (const special of specials) {
-		const img = new Image();
-		img.src = "images/" + special + ".png";
+function get_image(image_name, show = false, click = false) {
+	const img = new Image();
+	let no_svg = false;
+	img.onerror = function () {
+		img.onerror = null;
+		no_svg = true;
+		img.src = "images/" + image_name + ".png";
+	};
+	img.src = "images/" + image_name + ".svg";
+
+	if (show) {
 		const btn = document.createElement("button");
 		btn.appendChild(img);
-		btn.addEventListener("click", function () {
-			selected = special;
-			grid.cursor("images/" + (selected === "pointer" ? "???" : selected) + ".png");
-		});
+		if (click) {
+			btn.addEventListener("click", function () {
+				selected = image_name;
+				if (selected === "pointer") {
+					grid.cursor();
+				} else {
+					if (no_svg) {
+						grid.cursor("images/" + selected + ".png");
+					} else {
+						grid.cursor("images/" + selected + ".svg", "images/" + selected + ".png");
+					}
+				}
+			});
+		}
 		document.getElementById("selectors").appendChild(btn);
-	}
-
-	for (const ressource_name of raw_ressources) {
-		/*
-		let svg_xml_colored = svg_xml.replace(/#3080d0/g, "#e05030");
-		item_img.src = "data:image/svg+xml;charset=utf-8," + svg_xml_colored;
-		*/
-		/*
-		var parser = new DOMParser();
-		var doc = parser.parseFromString("images/" + ressource_name + ".png", "image/svg+xml");
-		const item_img = document.createElement("object");
-		item_img.className = ressource_name;
-		item_img.type = "image/svg+xml";
-		item_img.data = "images/" + ressource_name + ".png";
-		$("main #" + ressource_name).contents().find("g").css({
-			fill: "blue"
-		});
-		*/
-		const img = new Image();
-		img.src = "images/" + ressource_name + ".png";
+	} else {
 		img.style.display = "none";
 		document.getElementById("selectors").appendChild(img);
+	}
 
-		items_stats[ressource_name] = {
+	return img;
+}
+
+function load() {
+	for (const name of specials) {
+		const img = get_image(name, true, true);
+	}
+
+	for (const name in MACHINES) {
+		const img = get_image(name, true, true);
+		MACHINES[name].image = img;
+	}
+
+	for (const name of raw_ressources) {
+		const img = get_image(name);
+
+		items_stats[name] = {
 			"cost": raw_ressource.cost,
 			"value": raw_ressource.value,
 			"image": img
@@ -64,44 +79,22 @@ function load() {
 			if (ressource_name === "none") {
 				continue;
 			}
-			const item_name = ts_name + "_" + ressource_name;
-			const img = new Image();
-			img.src = "images/" + item_name + ".png";
-			img.style.display = "none";
-			document.getElementById("selectors").appendChild(img);
+			const name = ts_name + "_" + ressource_name;
+			const img = get_image(name);
 
-			items_stats[item_name] = {
+			items_stats[name] = {
 				"value": transformed_ressource_value,
 				"image": img
 			};
 		}
 	}
-	for (const item_name in crafts) {
-		const item = crafts[item_name];
-
-		const img = new Image();
-		img.src = "images/" + item_name + ".png";
-		img.style.display = "none";
-		document.getElementById("selectors").appendChild(img);
-
-		items_stats[item_name] = {
+	for (const name in crafts) {
+		const item = crafts[name];
+		const img = get_image(name);
+		items_stats[name] = {
 			"value": item.value,
 			"image": img
 		};
-	}
-
-	for (const machine_name in MACHINES) {
-		const img = new Image();
-		img.src = "images/" + machine_name + ".png";
-		const btn = document.createElement("button");
-		btn.appendChild(img);
-		btn.addEventListener("click", function () {
-			selected = machine_name;
-			grid.cursor("images/" + selected + ".png");
-		});
-		document.getElementById("selectors").appendChild(btn);
-
-		MACHINES[machine_name].image = img;
 	}
 
 	const grid_cookie = get_cookie("grid");
@@ -439,6 +432,12 @@ class Transformer extends Producer {
 
 	click() {
 		return;
+	}
+}
+
+class Furnace extends Transformer {
+	constructor(_x_index, _y_index) {
+		super(_x_index, _y_index, MACHINES["furnace"].image, MACHINES["furnace"].cost, "liquid");
 	}
 }
 

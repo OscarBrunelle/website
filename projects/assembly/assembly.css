@@ -10,6 +10,20 @@ main {
 }
 
 #selectors {
+	width: 100%;
+}
+#selectors > button {
+	min-width: 32px;
+	max-width: 52px;
+	width: 5%;
+	padding: 1px;
+	margin: 0px;
+	border: none;
+	background-color: transparent;
+}
+#selectors > button > img {
+	width: 100%;
+	height: 100%;
 }
 
 #game {
@@ -48,22 +62,6 @@ main {
 
 #money {
 	display: inline-block;
-}
-
-#thing-selectors {
-	width: 497px;
-}
-#thing-selectors > button {
-	width: 6.25%;
-	height: calc(497px / 16);
-	padding: 5px;
-	margin: 0px;
-	border: none;
-	background-color: transparent;
-}
-#thing-selectors > button > img {
-	width: 100%;
-	height: 100%;
 }
 
 #toggle_updating {

@@ -16,11 +16,11 @@ const MACHINES = {
 		"className": "Roller",
 		"cost": 300
 	},
-	/*"furnace": {
+	"furnace": {
 		"name": "Furnace",
 		"className": "Furnace",
 		"cost": 10000
-	},*/
+	},
 	"cutter": {
 		"name": "Cutter",
 		"className": "Cutter",
@@ -49,7 +49,7 @@ const raw_ressource = {
 	"value": 80
 };
 
-const transformed_ressources = ["gear", "wire"];
+const transformed_ressources = ["liquid", "gear", "wire"];
 const transformed_ressource_value = 100;
 
 const crafts = {
