@@ -85,6 +85,9 @@ body {
 	overflow-y: auto;
     border-spacing: 0px;
 }
+#mtu-table > tr:nth-child(even) {
+	background-color: lightgrey;
+}
 #mtu-table > tr {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
