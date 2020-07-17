@@ -1,17 +1,97 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
 #conversion {
 	position: relative;
+	display: grid;
+	gap: 5px;
+	padding: 5px;
+}
+@media (max-width: 600px) {
+	#conversion {
+		grid-template-columns: 100%;
+	}
+}
+@media (min-width: 601px) {
+	#conversion {
+		grid-template-columns: minmax(400px, 1fr) minmax(190px, 1fr);
+	}
+}
+
+#converters {
+	display: inline-block;
+}
+#converters > div {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid black;
+}
+#converters > div > label {
+	display: block;
+}
+@media (max-width: 300px) {
+	#converters > div >* {
+		display: block;
+		width: 100%;
+	}
+}
+@media (min-width: 301px) {
+	#converters > div > input {
+		width: 50%;
+		display: inline-block;
+	}
+	#converters > div > .result {
+		width: 50%;
+		display: inline-block;
+		text-align: right;
+	}
 }
 
 #logs-div {
-	width: 30%;
 	max-height: 50vh;
-	position: absolute;
-	top: 0px;
-	right: 0px;
+	display: inline-block;
 	padding: 5px;
 	overflow-y: auto;
 	border: 1px solid black;
 }
 #logs-div > h3 {
 	text-align: center;
+}
+
+#mtu-div {
+	margin: 5px;
+	padding: 5px;
+	border: 1px solid black;
+}
+#mtu-inputs {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 5px;
+	padding: 5px;
+}
+#mtu-inputs > div > * {
+	width: 50%;
+	display: inline-block;
+}
+#mtu-table {
+	width: 100%;
+	max-height: 50vh;
+	display: block;
+	overflow-y: auto;
+    border-spacing: 0px;
+}
+#mtu-table > tr {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+#mtu-table th, #mtu-table td {
+	border: 1px solid black;
+}
+#mtu-table td {
+	text-align: right;
 }

@@ -14,9 +14,23 @@
 <body>
 	<main id="main" role="main">
 		<div id="conversion">
+			<div id="converters"></div>
 			<div id="logs-div">
 				<h3>LOGS</h3>
 				<span id="logs"></span>
+			</div>
+		</div>
+		<div id="others">
+			<div id="mtu-div">
+				<div id="mtu-inputs">
+					<div>
+						<label for="data">Data</label><input name="data">
+					</div>
+					<div>
+						<label for="mtu">MTU</label><input name="mtu">
+					</div>
+				</div>
+				<table id="mtu-table"></table>
 			</div>
 		</div>
 	</main>
@@ -25,7 +39,9 @@
 	<script type="text/javascript" src="../../shared.js"></script>
 	<script type="text/javascript" src="helper.js"></script>
 	<script type="text/javascript" src="conversion.js"></script>
-	<script>document.onload = load();</script>
+	<script>
+		document.onload = load();
+	</script>
 </body>
 
 </html>
