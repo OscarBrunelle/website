@@ -12,7 +12,8 @@ function load_conversion() {
 }
 
 function decimal_to_binary() {
-	function calcultate_result(val) {
+	function calcultate_result(values) {
+		let val = values["dec_to_bin"];
 		let result = 0;
 		let multiplicator = 1;
 		while (val !== 0) {
@@ -22,11 +23,12 @@ function decimal_to_binary() {
 		}
 		return result;
 	}
-	create_input(calcultate_result, true, "Decimal to binary", "dec_to_bin");
+	add_calculator(calcultate_result, true, ["Decimal to binary"], ["dec_to_bin"]);
 }
 
 function binary_to_decimal() {
-	function calcultate_result(val) {
+	function calcultate_result(values) {
+		let val = values["bin_to_dec"];
 		if (val === 0 || val === 1) {
 			return val;
 		}
@@ -44,155 +46,65 @@ function binary_to_decimal() {
 		}
 		return result;
 	}
-	create_input(calcultate_result, true, "Binary to decimal", "bin_to_dec");
+	add_calculator(calcultate_result, true, ["Binary to decimal"], ["bin_to_dec"]);
 }
 
 function decimal_to_binary_power() {
-	function calcultate_result(val) {
-		return Math.log2(val);
+	function calcultate_result(values) {
+		return Math.log2(values["log2"]);
 	}
-	create_input(calcultate_result, true, "log2(n)", "log2");
+	add_calculator(calcultate_result, true, ["log2(n)"], ["log2"]);
 }
 
-function create_input(calcultate_result, number_input, label, name = label) {
+function add_calculator(calcultate_result, number_input, labels, names = labels) {
 	let previous_log;
 
 	function update_function(event) {
-		let val = event.target.value;
-		let result;
-		if (val == null || val === "") {
-			result = "Invalid";
-		} else {
-			if (number_input && !Number.isNaN(parseFloat(val))) {
-				val = parseFloat(val);
+		let values = {};
+		let parent = event.target.parentElement;
+		parent.querySelectorAll("input").forEach(child => {
+			let val = child.value;
+			if (val != null && val !== "") {
+				if (number_input && !Number.isNaN(parseFloat(val))) {
+					values[child.name] = parseFloat(val);
+				} else {
+					values[child.name] = val;
+				}
 			}
-			result = calcultate_result(val);
+		});
+		let result;
+		if (Object.keys(values).length > 0) {
+			result = calcultate_result(values);
+		} else {
+			result = "Invalid";
 		}
-		document.querySelector("#" + event.target.name + " .result").innerHTML = result;
+		parent.querySelector(".result").innerHTML = result;
 		if (result !== "Invalid") {
-			let log = ("<br>" + label + " '" + val + "' is : " + result);
+			let log = ("<br>Result is : " + result);
 			if (previous_log !== log) {
 				previous_log = log;
-				document.querySelector("#logs").innerHTML += log;
+				let logs_span = parent.parentElement.parentElement.querySelector(".logs > span");
+				let logs = logs_span.parentElement;
+				const is_scrolled_to_bottom = logs.scrollHeight - logs.clientHeight <= logs.scrollTop + 1;
+				logs_span.innerHTML += log;
+				if (is_scrolled_to_bottom) {
+					logs.scrollTop = logs.scrollHeight - logs.clientHeight;
+				}
 			}
 		}
 	}
-	const field_label = document.createElement("label");
-	const field_input = document.createElement("input");
-	const result_span = document.createElement("div");
+
 	const container = document.createElement("div");
 
-	field_label.innerHTML = label;
-	field_label.for = name;
-	field_input.name = name;
+	for (const i in labels) {
+		let label = labels[i];
+		let name = names[i];
+		create_input(label, name, container, update_function);
+	}
+
+	const result_span = document.createElement("div");
 	result_span.className = "result";
-	container.id = name;
-	field_input.addEventListener("change", update_function);
-	field_input.addEventListener("keypress", update_function);
-	field_input.addEventListener("paste", update_function);
-	field_input.addEventListener("input", update_function);
-
-	container.appendChild(field_label);
-	container.appendChild(field_input);
 	container.appendChild(result_span);
+
 	document.querySelector("#converters").appendChild(container);
-}
-
-function mtu() {
-	const mtu_container = document.getElementById("mtu-div");
-	const table = document.querySelector("#mtu-div table");
-	const columns = ["flag", "offset", "data", "total"];
-
-	function add_columns() {
-		const th_row = document.createElement("tr");
-		for (const col of columns) {
-			let th = document.createElement("th");
-			th.innerHTML = col;
-			th_row.appendChild(th);
-		}
-		table.appendChild(th_row);
-	}
-
-	let data_val, mtu_val;
-	document.querySelectorAll("#mtu-inputs input").forEach(field_input => {
-		function update_function(event) {
-			let val = event.target.value;
-			let result;
-			if (val == null || val === "" || Number.isNaN(parseFloat(val))) {
-				val = null;
-			} else {
-				val = parseFloat(val);
-			}
-			switch (event.target.name) {
-				case "data":
-					data_val = val;
-					break;
-				case "mtu":
-					mtu_val = val;
-					break;
-				default:
-					return false;
-					break;
-			}
-			if (data_val != null && mtu_val != null) {
-				fill_table();
-			}
-		}
-		field_input.addEventListener("change", update_function);
-		field_input.addEventListener("keypress", update_function);
-		field_input.addEventListener("paste", update_function);
-		field_input.addEventListener("input", update_function);
-	});
-
-	function fill_table() {
-		if (mtu_val < 8) {
-			return;
-		}
-
-		table.innerHTML = "";
-		add_columns();
-
-		let data = data_val;
-		let mtu = mtu_val;
-		let options = 20;
-		let td_offset = 0;
-		while (data > 0) {
-			let td_flag, td_data, td_total;
-			if (mtu > data + options) {
-				td_flag = 0;
-				td_data = data;
-				td_total = td_data + options;
-				data -= data;
-			} else {
-				td_flag = 1;
-				td_data = (mtu - options) - (mtu - options) % 8;
-				td_total = td_data + options;
-				data -= td_data;
-			}
-			let tr = document.createElement("tr");
-			for (const i in columns) {
-				let col = columns[i];
-				let td = document.createElement("td");
-				switch (col) {
-					case "flag":
-						td.innerHTML = td_flag;
-						break;
-					case "offset":
-						td.innerHTML = td_offset;
-						break;
-					case "data":
-						td.innerHTML = td_data;
-						break;
-					case "total":
-						td.innerHTML = td_total;
-						break;
-					default:
-						break;
-				}
-				tr.appendChild(td);
-			}
-			table.appendChild(tr);
-			td_offset += td_data / 8;
-		}
-	}
 }

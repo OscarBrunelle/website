@@ -13,12 +13,34 @@
 
 <body>
 	<main id="main" role="main">
-		<div id="conversion">
-			<div id="converters"></div>
-			<div id="logs-div">
-				<h3>LOGS</h3>
-				<span id="logs"></span>
+		<div id="conversion" class="calc_with_log-div">
+			<div class="close-container">
+				<button class="close-button" onclick="toggle_parent(event);" style="float: right;">-</button><span>Converters</span>
 			</div>
+			<div id="converters"></div>
+			<div class="logs">
+				<div class="close-container" style="width: calc(100% - 34px);">
+					<button class="close-button" onclick="toggle_parent(event);">-</button><span>Logs</span>
+				</div>
+				<h3>LOGS</h3>
+				<span></span>
+			</div>
+		</div>
+		</div>
+		<div id="calculation" class="calc_with_log-div">
+			<div class="close-container">
+				<button class="close-button" onclick="toggle_parent(event);" style="float: right;">-</button><span>Calculators</span>
+			</div>
+			<div id="calculators"></div>
+			<div class="logs">
+				<div class="close-container" style="width: calc(100% - 34px);">
+					<button class="close-button" onclick="toggle_parent(event);">-</button><span>Logs</span>
+				</div>
+				<h3>LOGS</h3>
+				<span></span>
+			</div>
+		</div>
+		</div>
 		</div>
 		<div id="others">
 			<div id="mtu-div">
@@ -39,6 +61,8 @@
 	<script type="text/javascript" src="../../shared.js"></script>
 	<script type="text/javascript" src="helper.js"></script>
 	<script type="text/javascript" src="conversion.js"></script>
+	<script type="text/javascript" src="calculation.js"></script>
+	<script type="text/javascript" src="mtu.js"></script>
 	<script>
 		document.onload = load();
 	</script>
