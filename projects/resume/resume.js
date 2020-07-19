@@ -61,7 +61,7 @@ $(document).ready(function () {
 });
 
 function printResume() {
-	if (getComputedStyle(document.getElementById("resume-fr"), null).style === "block") {
+	if (getComputedStyle(document.getElementById("resume-fr"), null).display === "block") {
 		print_element("resume-fr", "resume.css");
 	} else {
 		print_element("resume-en", "resume.css");
