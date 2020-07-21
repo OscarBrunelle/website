@@ -1,88 +1,184 @@
 const PROJECTS = [
 	/* RESEARCH */
 	{
-		link: "aStarAlgorithm",
-		title: "A* Algorithm",
-		description: "Visualise the A* algorithm.",
+		link: "astar",
+		title: {
+			en: "A* Algorithm",
+			fr: ""
+		},
+		description: {
+			en: "Visualise the A* algorithm.",
+			fr: ""
+		},
 		type: "research"
 	}, {
 		link: "bst",
-		title: "Binary Search Tree",
-		description: "Create, reduce and visualise binary search trees.",
+		title: {
+			en: "Binary Search Tree",
+			fr: ""
+		},
+		description: {
+			en: "Create, reduce and visualise binary search trees.",
+			fr: ""
+		},
 		type: "research"
 	}, {
 		link: "helper",
-		title: "Helper",
-		description: "Things that comes handy for my courses.",
+		title: {
+			en: "Helper",
+			fr: ""
+		},
+		description: {
+			en: "Things that comes handy for my courses.",
+			fr: ""
+		},
 		type: "research"
 	}, {
 		link: "stateSolver",
-		title: "State solver",
-		description: "Get the state table of a given expression.",
+		title: {
+			en: "State solver",
+			fr: ""
+		},
+		description: {
+			en: "Get the state table of a given expression.",
+			fr: ""
+		},
 		type: "research"
 	}, {
 		link: "resume",
-		title: "Resume",
-		description: "View my resume.",
+		title: {
+			en: "Resume",
+			fr: ""
+		},
+		description: {
+			en: "View my resume.",
+			fr: ""
+		},
 		type: "research"
 	}, {
 		link: "sudoku",
-		title: "Sudoku",
-		description: "Create or solve random sudokus.",
+		title: {
+			en: "Sudoku",
+			fr: ""
+		},
+		description: {
+			en: "Create or solve random sudokus.",
+			fr: ""
+		},
 		type: "research"
 	},
 	/* END RESEARCH */
-	/* GAMING */
+	/* GAMES */
 	{
 		link: "animation",
-		title: "Animations",
-		description: "View basic frame by frame animations.",
+		title: {
+			en: "Animations",
+			fr: ""
+		},
+		description: {
+			en: "View basic frame by frame animations.",
+			fr: ""
+		},
 		type: "game"
 	}, {
 		link: "assembly",
-		title: "Assembly line",
-		description: "Create and optimize your assembly line.",
+		title: {
+			en: "Assembly line",
+			fr: ""
+		},
+		description: {
+			en: "Create and optimize your assembly line.",
+			fr: ""
+		},
 		type: "game"
 	}, {
 		link: "bubbleTrouble",
-		title: "Bubble Trouble (Multiplayer)",
-		description: "Shoot and avoid the falling bubbles!",
+		title: {
+			en: "Bubble Trouble (Multiplayer)",
+			fr: ""
+		},
+		description: {
+			en: "Shoot and avoid the falling bubbles!",
+			fr: ""
+		},
 		type: "game"
 	}, {
 		link: "casino",
-		title: "Casino",
-		description: "Try your luck at the casino!",
+		title: {
+			en: "Casino",
+			fr: ""
+		},
+		description: {
+			en: "Try your luck at the casino!",
+			fr: ""
+		},
 		type: "game"
 	}, {
 		link: "doodleJump",
-		title: "Doodle Jump",
-		description: "Jump as high as you can!",
+		title: {
+			en: "Doodle Jump",
+			fr: ""
+		},
+		description: {
+			en: "Jump as high as you can!",
+			fr: ""
+		},
 		type: "game"
 	}, {
 		link: "minesweeper",
-		title: "Minesweeper",
-		description: "Uncover all cases without touching a mine!",
+		title: {
+			en: "Minesweeper",
+			fr: ""
+		},
+		description: {
+			en: "Uncover all cases without touching a mine!",
+			fr: ""
+		},
 		type: "game"
 	}, {
 		link: "monopoly",
-		title: "Monopoly",
-		description: "Play the classic monopoly game!",
+		title: {
+			en: "Monopoly",
+			fr: ""
+		},
+		description: {
+			en: "Play the classic monopoly game!",
+			fr: ""
+		},
 		type: "game"
 	}, {
 		link: "plantsVsZombies",
-		title: "Plants Vs Zombies",
-		description: "Defend your garden against the zombies!",
+		title: {
+			en: "Plants Vs Zombies",
+			fr: ""
+		},
+		description: {
+			en: "Defend your garden against the zombies!",
+			fr: ""
+		},
 		type: "game"
 	}, {
 		link: "pong",
-		title: "Pong",
-		description: "Try to beat your friend at pong!",
+		title: {
+			en: "Pong",
+			fr: ""
+		},
+		description: {
+			en: "Try to beat your friend at pong!",
+			fr: ""
+		},
 		type: "game"
 	}, {
 		link: "snake",
-		title: "Snake",
-		description: "Get the longest snake possible!",
+		title: {
+			en: "Snake",
+			fr: ""
+		},
+		description: {
+			en: "Get the longest snake possible!",
+			fr: ""
+		},
 		type: "game"
 	}
-	/* END GAMING */
+	/* END GAMES */
 ];

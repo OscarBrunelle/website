@@ -7,6 +7,8 @@ const list_title = {
 	"games": "Games"
 };
 
+let language = "en";
+
 $(document).ready(function() {
 	for (const project of PROJECTS) {
 		const parent_id = type_parent[project.type];
@@ -15,7 +17,7 @@ $(document).ready(function() {
 			projects_list.append("<h1 class='projects_list-title'>" + list_title[parent_id])
 		}
 		const container = $("<a class='project' href='projects/" + project.link + "/index.html'></a>").appendTo("#" + parent_id);
-		container.append("<h2 class='project-title'>" + project.title + "</h2>");
-		container.append("<p class='project-description'>" + project.description + "</p>");
+		container.append("<h2 class='project-title'>" + project["title"][language] + "</h2>");
+		container.append("<p class='project-description'>" + project["description"][language] + "</p>");
 	}
 });
