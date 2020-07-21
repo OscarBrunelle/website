@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Tool to visualize the A* Algorithm.">
+	<meta name="author" content="Oscar Brunelle">
+	<title>A* Algorithm</title>
+</head>
+
+<body>
+	<main role="main">
+		<div id="grid-div"></div>
+		<div id="parameters">
+			<button onclick="create_grid()">Shuffle grid</button>
+			<label for="number_obstacles">Number of obstacles</label>
+			<input id="number_obstacles-input" name="number_obstacles" type="range" min="0" max="148" value="50">
+			<label for="number_frames_x">Number of frames x</label>
+			<input id="number_frames_x-input" name="number_frames_x" type="range" min="1" max="30" value="15">
+			<label for="number_frames_y">Number of frames y</label>
+			<input id="number_frames_y-input" name="number_frames_y" type="range" min="1" max="30" value="10">
+			<label for="start-x">Start x</label>
+			<input id="start-x-input" name="start-x" type="range" min="1" max="15" value="0">
+			<label for="start-y">Start y</label>
+			<input id="start-y-input" name="start-y" type="range" min="1" max="10" value="0">
+			<label for="end-x">End x</label>
+			<input id="end-x-input" name="end-x" type="range" min="1" max="14" value="14">
+			<label for="end-y">End y</label>
+			<input id="end-y-input" name="end-y" type="range" min="1" max="9" value="9">
+		</div>
+	</main>
+	<div>
+		<canvas id="canvas" width="480px" height="360px"></canvas>
+		<div>
+			<button onclick="createRandomArray()">Create new array</button>
+			<button onclick="findBestPath()">Find best path</button>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../game_engine.js"></script>
+	<script type="text/javascript" src="astar.js"></script>
+</body>
+
+</html>
