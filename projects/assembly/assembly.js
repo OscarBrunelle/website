@@ -39,9 +39,9 @@ function get_image(image_name, show = false, click = false) {
 					grid.cursor();
 				} else {
 					if (no_svg) {
-						grid.cursor("images/" + selected + ".png");
+						grid.cursor("url('images/" + selected + ".png')");
 					} else {
-						grid.cursor("images/" + selected + ".svg", "images/" + selected + ".png");
+						grid.cursor(["url('images/" + selected + ".svg')", "url('images/" + selected + ".png')"]);
 					}
 				}
 			});
