@@ -105,7 +105,7 @@ function load() {
 	let size = Math.min(width, height);
 	if (grid_cookie != "") {
 		const obj_grid = JSON.parse(grid_cookie);
-		grid = new Grid("#game", size, size, obj_grid.nbr_frames_x, obj_grid.nbr_frames_y, obj_grid.id);
+		grid = new Grid("#game", size, size, obj_grid.number_frames_x, obj_grid.number_frames_y, obj_grid.id);
 		grid.scale = obj_grid.scale;
 		grid.translate_x = obj_grid.translate_x;
 		grid.translate_y = obj_grid.translate_y;
