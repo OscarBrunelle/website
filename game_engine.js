@@ -32,22 +32,22 @@ class GameCanvas {
 			this.context.scale(multiplicator, multiplicator);
 			this.scale *= multiplicator;
 			this.translate(0, 0);
-/*
-			const rect = this.canvas.getBoundingClientRect();
-			const x = (event.clientX - rect.left) * this.scale;
-			const y = (event.clientY - rect.top) * this.scale;
-			let t_x;
-			if (x - this.translate_x < this.width / this.scale / 2) {
-				t_x = 0;
-			} else if (x - this.translate_x > this.width / this.scale * 3 / 2) {
-				t_x = this.width / this.scale * 2;
-			} else {
-				t_x = x - this.translate_x + this.width * this.scale / 2;
-			}
-			const t_y = y - this.translate_y + this.height * this.scale / 2;
-			console.log(x,y,t_x,t_y);
-			this.translate(t_x, t_y);
-			/**/
+			/*
+						const rect = this.canvas.getBoundingClientRect();
+						const x = (event.clientX - rect.left) * this.scale;
+						const y = (event.clientY - rect.top) * this.scale;
+						let t_x;
+						if (x - this.translate_x < this.width / this.scale / 2) {
+							t_x = 0;
+						} else if (x - this.translate_x > this.width / this.scale * 3 / 2) {
+							t_x = this.width / this.scale * 2;
+						} else {
+							t_x = x - this.translate_x + this.width * this.scale / 2;
+						}
+						const t_y = y - this.translate_y + this.height * this.scale / 2;
+						console.log(x,y,t_x,t_y);
+						this.translate(t_x, t_y);
+						/**/
 		});
 		this.translate_x = 0;
 		this.translate_y = 0;
@@ -130,8 +130,10 @@ class GameCanvas {
 	}
 
 	strokeRect(x, y, width, height, color) {
-		x = Math.round(x) + 0.5;
-		y = Math.round(y) + 0.5;
+		x = x - width / 2;
+		y = y - height / 2;
+		x = (Math.floor(x / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(x / 0.5) * 0.5) : (Math.floor((x + 0.5) / 0.5) * 0.5);
+		y = (Math.floor(y / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(y / 0.5) * 0.5) : (Math.floor((y + 0.5) / 0.5) * 0.5);
 		this.context.save();
 		this.context.lineWidth = 1;
 		this.context.strokeStyle = color;
@@ -140,8 +142,10 @@ class GameCanvas {
 	}
 
 	fillRect(x, y, width, height, color) {
-		x = Math.round(x) + 0.5;
-		y = Math.round(y) + 0.5;
+		x = x - width / 2;
+		y = y - height / 2;
+		x = (Math.floor(x / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(x / 0.5) * 0.5) : (Math.floor((x + 0.5) / 0.5) * 0.5);
+		y = (Math.floor(y / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(y / 0.5) * 0.5) : (Math.floor((y + 0.5) / 0.5) * 0.5);
 		this.context.save();
 		this.context.lineWidth = 1;
 		this.context.fillStyle = color;
@@ -271,10 +275,10 @@ class GameCanvas {
 }
 
 class Grid extends GameCanvas {
-	constructor(parent_selector, _width, _height, _nbr_frames_x, _nbr_frames_y, _id = "game_canvas", _grid_color = "black") {
+	constructor(parent_selector, _width, _height, _number_frames_x, _number_frames_y, _id = "game_canvas", _grid_color = "black") {
 		super(parent_selector, _width, _height, _id);
-		this.nbr_frames_x = _nbr_frames_x;
-		this.nbr_frames_y = _nbr_frames_y;
+		this.number_frames_x = _number_frames_x;
+		this.number_frames_y = _number_frames_y;
 		this.grid_color = _grid_color;
 
 		this.context.imageSmoothingEnabled = false;
@@ -344,23 +348,23 @@ class Grid extends GameCanvas {
 	}
 
 	calculate_frame_size() {
-		if (this.nbr_frames_x != null && this.nbr_frames_y != null) {
-			this.frame_width = Math.floor((this.width - 1) / this.nbr_frames_x);
-			this.frame_height = Math.floor((this.height - 1) / this.nbr_frames_y);
+		if (this.number_frames_x != null && this.number_frames_y != null) {
+			this.frame_width = Math.floor((this.width - 1) / this.number_frames_x);
+			this.frame_height = Math.floor((this.height - 1) / this.number_frames_y);
 		}
 	}
 
 	resize() {
 		this.calculate_frame_size();
-		this.width = this.nbr_frames_x * this.frame_width + 1;
-		this.height = this.nbr_frames_y * this.frame_height + 1;
+		this.width = this.number_frames_x * this.frame_width + 1;
+		this.height = this.number_frames_y * this.frame_height + 1;
 	}
 
 	draw_grid() {
-		if (this.nbr_frames_x != null && this.nbr_frames_y != null) {
-			for (let x_counter = 0; x_counter < this.nbr_frames_x; x_counter++) {
-				for (let y_counter = 0; y_counter < this.nbr_frames_y; y_counter++) {
-					this.strokeRect(x_counter * this.frame_width, y_counter * this.frame_height, this.frame_width, this.frame_height, this.grid_color);
+		if (this.number_frames_x != null && this.number_frames_y != null) {
+			for (let x_counter = 0; x_counter < this.number_frames_x; x_counter++) {
+				for (let y_counter = 0; y_counter < this.number_frames_y; y_counter++) {
+					this.strokeRect(x_counter * this.frame_width + this.frame_width / 2, y_counter * this.frame_height + this.frame_height / 2, this.frame_width, this.frame_height, this.grid_color);
 				}
 			}
 		}
@@ -394,6 +398,7 @@ class Drawable {
 	 * @param {GameCanvas} game_canvas 
 	 * @param {Array} obj_desc Options:
 	 * 		image: Image
+	 * 		color: String
 	 * 		x: Number
 	 * 		y: Number
 	 * 		grid_x: Number
@@ -404,7 +409,8 @@ class Drawable {
 	 */
 	constructor(game_canvas, obj_desc = {}) {
 		this.game_canvas = game_canvas;
-		this.image = obj_desc["image"] != null ? obj_desc["image"] : UNDEFINED_IMAGE;
+		this.image = obj_desc["image"] != null ? obj_desc["image"] : null;
+		this.color = obj_desc["color"] != null ? obj_desc["color"] : null;
 		if (obj_desc["grid_x"] != null && obj_desc["grid_y"] != null) {
 			this.grid_x = obj_desc["grid_x"] != null ? obj_desc["grid_x"] : 0;
 			this.grid_y = obj_desc["grid_y"] != null ? obj_desc["grid_y"] : 0;
@@ -443,7 +449,11 @@ class Drawable {
 
 	//functions
 	draw() {
-		this.game_canvas.drawImage(this.image, this.x, this.y, this.width, this.height, this.rotation_rad);
+		if (this.image != null) {
+			this.game_canvas.drawImage(this.image, this.x, this.y, this.width, this.height, this.rotation_rad);
+		} else if (this.color != null) {
+			this.game_canvas.fillRect(this.x, this.y, this.width, this.height, this.color);
+		}
 	}
 
 	redraw() {
