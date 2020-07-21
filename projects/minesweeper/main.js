@@ -338,7 +338,7 @@ function getIconFileName(iconNumber) {
 function toggleFlagMode() {
 	flagMode = !flagMode;
 	if (flagMode) {
-		game_canvas.cursor("flag.png");
+		game_canvas.cursor("url('flag.png')");
 	} else {
 		game_canvas.cursor();
 	}

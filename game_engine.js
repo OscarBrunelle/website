@@ -24,6 +24,7 @@ class GameCanvas {
 		});
 		this.scale = 1;
 		this.canvas.addEventListener("wheel", event => {
+			event.preventDefault();
 			const delta = Math.sign(event.deltaY);
 			const multiplicator = delta < 0 ? 2 : 0.5;
 			if (this.scale <= 1 && multiplicator <= 1) {
@@ -53,12 +54,16 @@ class GameCanvas {
 		this.translate_y = 0;
 		let mouse_x, mouse_y;
 		let mouse_buttons_pressed = {};
+		this.previous_cursor;
 		this.canvas.addEventListener("mousedown", event => {
 			if (event.button === 1 || event.button === 2) {
+				event.preventDefault();
 				mouse_buttons_pressed[event.button] = true;
 				const rect = this.canvas.getBoundingClientRect();
 				mouse_x = (event.clientX - rect.left);
 				mouse_y = (event.clientY - rect.top);
+				this.previous_cursor = this.canvas.style.cursor;
+				this.cursor("move", false);
 			}
 		});
 		this.canvas.addEventListener("mouseup", event => {
@@ -70,6 +75,7 @@ class GameCanvas {
 				let t_x = x - mouse_x;
 				let t_y = y - mouse_y;
 				this.translate(t_x, t_y);
+				this.cursor(this.previous_cursor, false);
 			}
 		});
 		this.canvas.addEventListener("mousemove", event => {
@@ -134,6 +140,8 @@ class GameCanvas {
 		y = y - height / 2;
 		x = (Math.floor(x / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(x / 0.5) * 0.5) : (Math.floor((x + 0.5) / 0.5) * 0.5);
 		y = (Math.floor(y / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(y / 0.5) * 0.5) : (Math.floor((y + 0.5) / 0.5) * 0.5);
+		width = Math.floor(width);
+		height = Math.floor(height);
 		this.context.save();
 		this.context.lineWidth = 1;
 		this.context.strokeStyle = color;
@@ -146,6 +154,8 @@ class GameCanvas {
 		y = y - height / 2;
 		x = (Math.floor(x / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(x / 0.5) * 0.5) : (Math.floor((x + 0.5) / 0.5) * 0.5);
 		y = (Math.floor(y / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(y / 0.5) * 0.5) : (Math.floor((y + 0.5) / 0.5) * 0.5);
+		width = Math.floor(width);
+		height = Math.floor(height);
 		this.context.save();
 		this.context.lineWidth = 1;
 		this.context.fillStyle = color;
@@ -235,12 +245,26 @@ class GameCanvas {
 		this.clear();
 	}
 
-	cursor(cursor_url = null, cursor_url2 = null) {
-		let cursor = (cursor_url != null) ? "url('" + cursor_url + "'), " : "";
-		if (cursor_url2 != null) {
-			cursor += "url('" + cursor_url2 + "'), ";
+	cursor(cursors, auto_cursor = true) {
+		let cursor = "";
+		if (cursors instanceof Array) {
+			for (let i = 0; i < cursors.length; i++) {
+				const cursor_string = cursors[i];
+				cursor += cursor_string;
+				if (i !== cursors.length - 1 || auto_cursor) {
+					cursor += ", ";
+				}
+			}
+		} else if (cursors != null) {
+			cursor = cursors;
+			if (auto_cursor) {
+				cursor += ", ";
+			}
 		}
-		this.canvas.style.cursor = cursor + "auto";
+		if (auto_cursor) {
+			cursor += "auto";
+		}
+		this.canvas.style.cursor = cursor;
 	}
 
 	clear(x, y, width, height) {
@@ -263,6 +287,10 @@ class GameCanvas {
 				height = this.canvas.height / this.scale;
 			}
 			this.context.clearRect(x, y, width, height);
+		}
+
+		if (this.onredraw != null) {
+			this.onredraw();
 		}
 	}
 
