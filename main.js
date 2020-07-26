@@ -6,7 +6,7 @@ const list_title = {
 	"researches": "Research",
 	"games": "Games"
 };
-
+/*
 let language = "en";
 
 $(document).ready(function() {
@@ -21,3 +21,36 @@ $(document).ready(function() {
 		container.append("<p class='project-description'>" + project["description"][language] + "</p>");
 	}
 });
+*/
+
+function load_home() {
+	document.getElementById("lang-button").addEventListener("click", update_language);
+	update_language();
+}
+
+function update_language() {
+	let lang_cookie = get_cookie("lang");
+	let language_button = document.getElementById("lang-button");
+
+	function set_language(lang){
+		language_button.active = lang === "en";
+		language_button.innerHTML = lang === "en" ? "fr" : "en";
+		set_cookie("lang", lang);
+		$("main *[lang='" + lang + "']").show();
+		$("main *[lang='" + (lang === "en" ? "fr" : "en") + "']").hide();
+	}
+
+	if (lang_cookie == null) {
+		if (language_button.innerHTML === "fr") {
+			set_language("fr");
+		} else {
+			set_language("en");
+		}
+	} else if (lang_cookie === "fr") {
+		set_language("fr");
+	} else {
+		set_language("en");
+	}
+}
+
+document.onload = load_home();

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-	<link rel="shortcut icon" href="icons/svgs/solid/tools.svg" type="image/x-icon"/>
+	<link rel="shortcut icon" href="icons/svgs/solid/tools.svg" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="shared.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,14 +15,86 @@
 </head>
 
 <body>
+	<nav role="navigation">
+		<button id="lang-button"></button>
+	</nav>
+
 	<div id="banner">
-		<p>Oscar Brunelle</p>
+		<p>My name is Oscar Brunelle. Listed below are some of the projects that I worked on.</p>
+		<p>If you want to contact me, here is a <a href="projects/resume/index.html">link to my resume</a>.</p>
 	</div>
 
-	<div id="projects"></div>
+	<main id="projects" role="main">
+		<div id="researches" class="projects_list">
+			<h1 class="projects_list-title">
+				<span lang="en">Research</span>
+				<span lang="fr">Recherche</span>
+			</h1>
+			<a class="project" href="projects/astar/index.html">
+				<h2 class="project-title">A* Algorithm</h2>
+				<p class="project-description">Visualise the A* algorithm.</p>
+			</a>
+			<a class="project" href="projects/bst/index.html">
+				<h2 class="project-title">Binary Search Tree</h2>
+				<p class="project-description">Create, reduce and visualise binary search trees.</p>
+			</a><a class="project" href="projects/helper/index.html">
+				<h2 class="project-title">Helper</h2>
+				<p class="project-description">Things that comes handy for my courses.</p>
+			</a><a class="project" href="projects/stateSolver/index.html">
+				<h2 class="project-title">State solver</h2>
+				<p class="project-description">Get the state table of a given expression.</p>
+			</a><a class="project" href="projects/resume/index.html">
+				<h2 class="project-title">Resume</h2>
+				<p class="project-description">View my resume.</p>
+			</a><a class="project" href="projects/sudoku/index.html">
+				<h2 class="project-title">Sudoku</h2>
+				<p class="project-description">Create or solve random sudokus.</p>
+			</a>
+		</div>
+		<div id="games" class="projects_list">
+			<h1 class="projects_list-title">
+				<span lang="en">Games</span>
+				<span lang="fr">Jeux</span>
+			</h1>
+			<a class="project" href="projects/animation/index.html">
+				<h2 class="project-title">Animations</h2>
+				<p class="project-description">View basic frame by frame animations.</p>
+			</a>
+			<a class="project" href="projects/assembly/index.html">
+				<h2 class="project-title">Assembly line</h2>
+				<p class="project-description">Create and optimize your assembly line.</p>
+			</a><a class="project" href="projects/bubbleTrouble/index.html">
+				<h2 class="project-title">Bubble Trouble (Multiplayer)</h2>
+				<p class="project-description">Shoot and avoid the falling bubbles!</p>
+			</a><a class="project" href="projects/casino/index.html">
+				<h2 class="project-title">Casino</h2>
+				<p class="project-description">Try your luck at the casino!</p>
+			</a><a class="project" href="projects/doodleJump/index.html">
+				<h2 class="project-title">Doodle Jump</h2>
+				<p class="project-description">Jump as high as you can!</p>
+			</a><a class="project" href="projects/minesweeper/index.html">
+				<h2 class="project-title">Minesweeper</h2>
+				<p class="project-description">Uncover all cases without touching a mine!</p>
+			</a><a class="project" href="projects/monopoly/index.html">
+				<h2 class="project-title">Monopoly</h2>
+				<p class="project-description">Play the classic monopoly game!</p>
+			</a><a class="project" href="projects/plantsVsZombies/index.html">
+				<h2 class="project-title">Plants Vs Zombies</h2>
+				<p class="project-description">Defend your garden against the zombies!</p>
+			</a><a class="project" href="projects/pong/index.html">
+				<h2 class="project-title">Pong</h2>
+				<p class="project-description">Try to beat your friend at pong!</p>
+			</a><a class="project" href="projects/snake/index.html">
+				<h2 class="project-title">Snake</h2>
+				<p class="project-description">Get the longest snake possible!</p>
+			</a>
+		</div>
+	</main>
 
 	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="shared.js"></script>
 	<script type="text/javascript" src="projects.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </body>
+
 </html>

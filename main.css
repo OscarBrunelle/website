@@ -65,17 +65,18 @@
 	font-style: normal;
 	font-weight: 700;
 	line-height: 1.2;
-	transition: color .2s ease,background-color .2s ease;
+	transition: color .2s ease, background-color .2s ease;
 }
 
-.project-title:hover, .project-title:focus {
+.project-title:hover,
+.project-title:focus {
 	color: #4c4f53;
-    text-decoration: underline !important;
+	text-decoration: underline !important;
 }
 
 .project-description {
 	margin: 0px;
-	font-family: Lora ,sans-serif;
+	font-family: Lora, sans-serif;
 	font-size: 1em;
 	font-style: normal;
 	font-weight: 400;
@@ -84,6 +85,8 @@
 	text-align: justify;
 }
 
-footer {
-	padding-bottom: 5px;
+#lang-button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
 }
