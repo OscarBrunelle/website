@@ -3,8 +3,11 @@ function load() {
 }
 
 function create_input(label, name, parent, update_function) {
+	const container = document.createElement("div");
 	const field_label = document.createElement("label");
 	const field_input = document.createElement("input");
+
+	container.className = "input-container";
 	field_label.innerHTML = label;
 	field_label.for = name;
 	field_input.name = name;
@@ -14,8 +17,9 @@ function create_input(label, name, parent, update_function) {
 	field_input.addEventListener("paste", update_function);
 	field_input.addEventListener("input", update_function);
 
-	parent.appendChild(field_label);
-	parent.appendChild(field_input);
+	container.appendChild(field_label);
+	container.appendChild(field_input);
+	parent.appendChild(container);
 }
 
 function toggle_parent(event) {

@@ -117,7 +117,7 @@ body {
 	padding: 5px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
 	#mtu-inputs {
 		grid-template-columns: 1fr;
 	}
@@ -152,4 +152,18 @@ body {
 
 #mtu-table td {
 	text-align: right;
+}
+
+.input-container {
+	width: 50%;
+	display: inline-block;
+}
+
+.input-container>label,
+.input-container>input {
+	width: 100%;
+}
+
+input:disabled {
+	cursor: not-allowed;
 }
