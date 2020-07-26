@@ -13,34 +13,34 @@
 
 <body>
 	<main id="main" role="main">
-		<div id="conversion" class="calc_with_log-div">
-			<div class="close-container">
-				<button class="close-button" onclick="toggle_parent(event);" style="float: right;">-</button><span>Converters</span>
+		<div id="conversion" class="calc_with_log-div window">
+			<div class="window-bar">
+				<div>Converters</div><button class="close-button" onclick="toggle_parent(event);">-</button>
 			</div>
-			<div id="converters"></div>
-			<div class="logs">
-				<div class="close-container" style="width: calc(100% - 34px);">
-					<button class="close-button" onclick="toggle_parent(event);">-</button><span>Logs</span>
+			<div class="window-content">
+				<div id="converters"></div>
+				<div class="logs">
+					<div class="window-bar">
+						<div>Logs</div><button class="close-button" onclick="toggle_parent(event);">-</button>
+					</div>
+					<div class="window-content"></div>
 				</div>
-				<h3>LOGS</h3>
-				<span></span>
 			</div>
 		</div>
 		</div>
-		<div id="calculation" class="calc_with_log-div">
-			<div class="close-container">
-				<button class="close-button" onclick="toggle_parent(event);" style="float: right;">-</button><span>Calculators</span>
+		<div id="calculation" class="calc_with_log-div window">
+			<div class="window-bar">
+				<div>Calculators</div><button class="close-button" onclick="toggle_parent(event);">-</button>
 			</div>
-			<div id="calculators"></div>
-			<div class="logs">
-				<div class="close-container" style="width: calc(100% - 34px);">
-					<button class="close-button" onclick="toggle_parent(event);">-</button><span>Logs</span>
+			<div class="window-content">
+				<div id="calculators"></div>
+				<div class="logs">
+					<div class="window-bar">
+						<div>Logs</div><button class="close-button" onclick="toggle_parent(event);">-</button>
+					</div>
+					<div class="window-content"></div>
 				</div>
-				<h3>LOGS</h3>
-				<span></span>
 			</div>
-		</div>
-		</div>
 		</div>
 		<div id="others">
 			<div id="mtu-div">

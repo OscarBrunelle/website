@@ -20,26 +20,20 @@ function create_input(label, name, parent, update_function) {
 
 function toggle_parent(event) {
 	let button = event.target;
-	let button_parent = button.parentElement;
-	let children = button_parent.parentElement.children;
-
+	let content = button.parentElement.parentElement.querySelector(".window-content");
 	let button_state = button.innerHTML === "+";
-	let after_button = false;
-	for (let i = 0; i < children.length; i++) {
-		const child = children[i];
-		if (child === button_parent) {
-			after_button = true;
-			continue;
-		}
-		if (after_button) {
-			child.style.display = button_state ? "block" : "none";
-		}
-	}
+
 	if (button_state) {
 		button.innerHTML = "-";
-		button_parent.querySelector("span").style.display = "none";
+		button.parentElement.style["margin-bottom"] = "5px";
+		button.parentElement.style["border-bottom"] = "1px solid black";
+		content.style.display = "block";
+		//content.style.height = "fit-content";
 	} else {
 		button.innerHTML = "+";
-		button_parent.querySelector("span").style.display = "inline-block";
+		button.parentElement.style["margin-bottom"] = 0;
+		button.parentElement.style["border-bottom"] = "none";
+		content.style.display = "none";
+		//content.style.height = "0";
 	}
 }

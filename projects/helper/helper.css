@@ -6,67 +6,84 @@ body {
 	margin: 0;
 }
 
-.close-container {
-	width: calc(100% - 10px);
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	z-index: 100;
+.window-content {
+	height: fit-content;
+	position: relative;
 }
-.close-container > button {
+
+.window-bar {
+	width: 100%;
+	z-index: 100;
+	margin-bottom: 5px;
+	border-bottom: 1px solid black;
+}
+
+.window-bar>* {
+	display: inline-block;
+}
+
+.window-bar>button {
 	width: 24px;
 	height: 24px;
 	text-align: center;
 	border: 1px solid black;
 }
-.close-container > span {
+
+.window-bar>div {
 	width: calc(100% - 24px);
-	display: none;
 	text-align: center;
 }
 
 .calc_with_log-div {
-	min-height: 50px;
-	position: relative;
-	display: grid;
-	gap: 5px;
 	margin: 5px;
 	border: 1px solid black;
 }
+
+.calc_with_log-div>.window-content {
+	display: grid;
+}
+
 @media (max-width: 600px) {
-	.calc_with_log-div {
-		grid-template-columns: 100%;
+	.calc_with_log-div>.window-content {
+		grid-template-columns: 1fr;
 	}
 }
+
 @media (min-width: 601px) {
-	.calc_with_log-div {
+	.calc_with_log-div>.window-content {
 		grid-template-columns: minmax(400px, 1fr) minmax(190px, 1fr);
 	}
 }
 
 #converters {
 	display: inline-block;
+	margin: 1px;
 }
-#converters > div {
+
+#converters>div {
 	width: 100%;
 	padding: 5px;
 	border: 1px solid black;
 }
-#converters > div > label {
+
+#converters>div>label {
 	display: block;
 }
+
 @media (max-width: 300px) {
-	#converters > div >* {
+	#converters>div>* {
 		display: block;
 		width: 100%;
 	}
 }
+
 @media (min-width: 301px) {
-	#converters > div > input {
+	#converters>div>input {
 		width: 50%;
 		display: inline-block;
 	}
-	#converters > div > .result {
+
+	#converters>div>.result {
 		width: 50%;
 		display: inline-block;
 		text-align: right;
@@ -79,9 +96,11 @@ body {
 	position: relative;
 	padding: 5px;
 	overflow-y: auto;
+	margin: 1px;
 	border: 1px solid black;
 }
-.logs > h3 {
+
+.logs>.window-content>h3 {
 	text-align: center;
 }
 
@@ -90,38 +109,47 @@ body {
 	padding: 5px;
 	border: 1px solid black;
 }
+
 #mtu-inputs {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: 5px;
 	padding: 5px;
 }
+
 @media (max-width: 400px) {
 	#mtu-inputs {
 		grid-template-columns: 1fr;
 	}
 }
-#mtu-inputs > div > * {
+
+#mtu-inputs>div>* {
 	width: 50%;
 	display: inline-block;
 }
+
 #mtu-table {
 	width: 100%;
 	max-height: 50vh;
 	display: block;
 	overflow-y: auto;
-    border-spacing: 0px;
+	border-spacing: 0px;
 }
-#mtu-table > tr:nth-child(even) {
+
+#mtu-table>tr:nth-child(even) {
 	background-color: lightgrey;
 }
-#mtu-table > tr {
+
+#mtu-table>tr {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-#mtu-table th, #mtu-table td {
+
+#mtu-table th,
+#mtu-table td {
 	border: 1px solid black;
 }
+
 #mtu-table td {
 	text-align: right;
 }

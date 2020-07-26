@@ -83,12 +83,12 @@ function add_calculator(calcultate_result, number_input, labels, names = labels)
 			let log = ("<br>Result is : " + result);
 			if (previous_log !== log) {
 				previous_log = log;
-				let logs_span = parent.parentElement.parentElement.querySelector(".logs > span");
-				let logs = logs_span.parentElement;
-				const is_scrolled_to_bottom = logs.scrollHeight - logs.clientHeight <= logs.scrollTop + 1;
-				logs_span.innerHTML += log;
+				let logs_container = parent.parentElement.parentElement.querySelector(".logs");
+				let logs = logs_container.querySelector(".window-content");
+				const is_scrolled_to_bottom = logs_container.scrollHeight - logs_container.clientHeight <= logs_container.scrollTop + 1;
+				logs.innerHTML += log;
 				if (is_scrolled_to_bottom) {
-					logs.scrollTop = logs.scrollHeight - logs.clientHeight;
+					logs_container.scrollTop = logs_container.scrollHeight - logs_container.clientHeight;
 				}
 			}
 		}
