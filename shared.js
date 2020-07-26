@@ -45,7 +45,7 @@ function get_cookie(cookie_name) {
 			return c.substring(name.length, c.length);
 		}
 	}
-	return "";
+	return null;
 }
 
 function set_cookie(name, value) {
@@ -151,13 +151,14 @@ function download(data, filename, type) {
 const NOTES = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "G#", "A", "Bb", "B"];
 const A0 = 27.5;
 const A4 = 440;
+
 function get_note_frequency(note) {
 	if (note == null) {
 		console.log("Error: note can't be null");
 		return;
 	}
 
-	if (Number.isInteger(note)) {//note equal to number of half steps difference from A4
+	if (Number.isInteger(note)) { //note equal to number of half steps difference from A4
 		return (A4 * (2 ** (note / 12)));
 	} else {
 		const num = parseInt(note.substring(note.length - 1));
@@ -172,7 +173,7 @@ function play_frequency(frequency, duration, callback) {
 	const oscillator = context.createOscillator();
 	const gain = context.createGain();
 
-	oscillator.type = "sine";//options: sine square triangle sawtooth
+	oscillator.type = "sine"; //options: sine square triangle sawtooth
 	oscillator.frequency.value = frequency; // value in hertz
 
 	gain.gain.setValueAtTime(0.01, context.currentTime);
@@ -186,5 +187,4 @@ function play_frequency(frequency, duration, callback) {
 	oscillator.onended = callback;
 	oscillator.start(0);
 	oscillator.stop(context.currentTime + duration);
-
 }

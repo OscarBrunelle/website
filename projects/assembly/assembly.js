@@ -103,7 +103,7 @@ function load() {
 	let width = document.body.clientWidth - 20;
 	let height = document.body.clientHeight - 100;
 	let size = Math.min(width, height);
-	if (grid_cookie != "") {
+	if (grid_cookie != null) {
 		const obj_grid = JSON.parse(grid_cookie);
 		grid = new Grid("#game", size, size, obj_grid.number_frames_x, obj_grid.number_frames_y, obj_grid.id);
 		grid.scale = obj_grid.scale;
@@ -116,12 +116,12 @@ function load() {
 	grid.onclick(click);
 	//window.addEventListener("resize", resize);
 	const money_cookie = get_cookie("money");
-	if (money_cookie != "") {
+	if (money_cookie != null) {
 		money = parseInt(money_cookie);
 	}
 	update_money();
 	const machines_cookie = get_cookie("machines");
-	if (machines_cookie != "") {
+	if (machines_cookie != null) {
 		const obj_machines = JSON.parse(machines_cookie);
 		for (const obj_machine of obj_machines) {
 			let className = obj_machine.className;
