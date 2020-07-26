@@ -3,7 +3,7 @@ const type_parent = {
 	"game": "games"
 };
 const list_title = {
-	"researches": "Tools and research projects",
+	"researches": "Research",
 	"games": "Games"
 };
 
