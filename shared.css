@@ -30,7 +30,7 @@ footer>span {
 	text-align: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 599px) {
 	main {
 		min-height: calc(100vh - 10px - 48px);
 	}
