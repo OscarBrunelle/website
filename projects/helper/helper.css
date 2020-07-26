@@ -92,9 +92,14 @@ body {
 }
 #mtu-inputs {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	gap: 5px;
 	padding: 5px;
+}
+@media (max-width: 400px) {
+	#mtu-inputs {
+		grid-template-columns: 1fr;
+	}
 }
 #mtu-inputs > div > * {
 	width: 50%;

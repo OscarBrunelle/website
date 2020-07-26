@@ -13,7 +13,7 @@ function mtu() {
 		table.appendChild(th_row);
 	}
 
-	let data_val, mtu_val;
+	let data_val, mtu_val, header_options_val;
 	document.querySelectorAll("#mtu-inputs input").forEach(field_input => {
 		function update_function(event) {
 			let val = event.target.value;
@@ -30,9 +30,11 @@ function mtu() {
 				case "mtu":
 					mtu_val = val;
 					break;
+				case "header_options":
+					header_options_val = val;
+					break;
 				default:
 					return false;
-					break;
 			}
 			if (data_val != null && mtu_val != null) {
 				fill_table();
@@ -45,37 +47,39 @@ function mtu() {
 	});
 
 	function fill_table() {
-		if (mtu_val < 8) {
+		let data = data_val;
+		let mtu = mtu_val;
+		let options = (header_options_val != null && header_options_val >= 0) ? header_options_val : 0;
+		let header = 20 + options;
+
+		if (mtu_val < 8 || mtu_val <= header) {
 			return;
 		}
 
 		table.innerHTML = "";
 		add_columns();
 
-		let data = data_val;
-		let mtu = mtu_val;
-		let options = 20;
 		let td_offset = 0;
 		while (data > 0) {
-			let td_flag, td_data, td_total;
-			if (mtu > data + options) {
-				td_flag = 0;
+			let td_more_flag, td_data, td_total;
+
+			if (mtu > data + header) {
+				td_more_flag = 0;
 				td_data = data;
-				td_total = td_data + options;
-				data -= data;
 			} else {
-				td_flag = 1;
-				td_data = (mtu - options) - (mtu - options) % 8;
-				td_total = td_data + options;
-				data -= td_data;
+				td_more_flag = 1;
+				td_data = (mtu - header) - (mtu - header) % 8;
 			}
+			td_total = td_data + header;
+			data -= td_data;
+
 			let tr = document.createElement("tr");
 			for (const i in columns) {
 				let col = columns[i];
 				let td = document.createElement("td");
 				switch (col) {
 					case "flag":
-						td.innerHTML = td_flag;
+						td.innerHTML = td_more_flag;
 						break;
 					case "offset":
 						td.innerHTML = td_offset;
