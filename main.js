@@ -28,28 +28,30 @@ function load_home() {
 	update_language();
 }
 
+let language;
 function update_language() {
 	let lang_cookie = get_cookie("lang");
 	let language_button = document.getElementById("lang-button");
 
 	function set_language(lang){
+		language = lang;
 		language_button.active = lang === "en";
 		language_button.innerHTML = lang === "en" ? "fr" : "en";
 		set_cookie("lang", lang);
-		$("main *[lang='" + lang + "']").show();
-		$("main *[lang='" + (lang === "en" ? "fr" : "en") + "']").hide();
+		$("body *[lang='" + lang + "']").show();
+		$("body *[lang='" + (lang === "en" ? "fr" : "en") + "']").hide();
 	}
 
-	if (lang_cookie == null) {
-		if (language_button.innerHTML === "fr") {
-			set_language("fr");
-		} else {
+	if (language == null) {
+		if (lang_cookie == null) {
 			set_language("en");
+		} else {
+			set_language("fr");
 		}
-	} else if (lang_cookie === "fr") {
-		set_language("fr");
-	} else {
+	} else if (language === "fr" || language_button.innerHTML === "en") {
 		set_language("en");
+	} else {
+		set_language("fr");
 	}
 }
 
