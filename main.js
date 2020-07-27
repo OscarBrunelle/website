@@ -46,7 +46,7 @@ function update_language() {
 		if (lang_cookie == null) {
 			set_language("en");
 		} else {
-			set_language("fr");
+			set_language(lang_cookie);
 		}
 	} else if (language === "fr" || language_button.innerHTML === "en") {
 		set_language("en");
