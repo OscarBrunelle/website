@@ -36,7 +36,7 @@ function update_language() {
 	function set_language(lang){
 		language = lang;
 		language_button.active = lang === "en";
-		language_button.innerHTML = lang === "en" ? "fr" : "en";
+		language_button.innerHTML = lang === "en" ? "FR" : "EN";
 		set_cookie("lang", lang);
 		$("body *[lang='" + lang + "']").show();
 		$("body *[lang='" + (lang === "en" ? "fr" : "en") + "']").hide();
@@ -48,7 +48,7 @@ function update_language() {
 		} else {
 			set_language(lang_cookie);
 		}
-	} else if (language === "fr" || language_button.innerHTML === "en") {
+	} else if (language === "fr" || language_button.innerHTML === "EN") {
 		set_language("en");
 	} else {
 		set_language("fr");
