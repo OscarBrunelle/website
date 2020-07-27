@@ -8,6 +8,7 @@ function load_conversion() {
 	decimal_to_binary();
 	binary_to_decimal();
 	decimal_to_binary_power();
+	cache_address();
 	mtu();
 }
 
@@ -56,12 +57,39 @@ function decimal_to_binary_power() {
 	add_calculator(calcultate_result, true, ["log2(n)"], ["log2"]);
 }
 
+function cache_address() {
+	function calcultate_result(values, last_updated) {
+		if (values["cache_size"] != null && values["number_blocks"] != null) {
+			document.querySelector("input[name='cache_size']").disabled = false;
+			document.querySelector("input[name='number_blocks']").disabled = false;
+			document.querySelector("input[name='block_size']").disabled = true;
+			document.querySelector("input[name='block_size']").value = values["cache_size"] / values["number_blocks"];
+		} else if (values["number_blocks"] != null && values["block_size"] != null) {
+			document.querySelector("input[name='cache_size']").disabled = true;
+			document.querySelector("input[name='cache_size']").value = values["number_blocks"] * values["block_size"];
+			document.querySelector("input[name='number_blocks']").disabled = false;
+			document.querySelector("input[name='block_size']").disabled = false;
+		} else if (values["block_size"] != null && values["cache_size"] != null) {
+			document.querySelector("input[name='cache_size']").disabled = false;
+			document.querySelector("input[name='number_blocks']").disabled = true;
+			document.querySelector("input[name='number_blocks']").value = values["cache_size"] / values["block_size"];
+			document.querySelector("input[name='block_size']").disabled = false;
+		} else {
+			document.querySelector("input[name='cache_size']").disabled = false;
+			document.querySelector("input[name='number_blocks']").disabled = false;
+			document.querySelector("input[name='block_size']").disabled = false;
+		}
+		return null;
+	}
+	add_calculator(calcultate_result, true, ["Cache size", "Number of blocks", "Block size"], ["cache_size", "number_blocks", "block_size"]);
+}
+
 function add_calculator(calcultate_result, number_input, labels, names = labels) {
 	let previous_log;
 
 	function update_function(event) {
 		let values = {};
-		let parent = event.target.parentElement;
+		let parent = event.target.parentElement.parentElement;
 		parent.querySelectorAll("input").forEach(child => {
 			let val = child.value;
 			if (val != null && val !== "") {
@@ -74,12 +102,12 @@ function add_calculator(calcultate_result, number_input, labels, names = labels)
 		});
 		let result;
 		if (Object.keys(values).length > 0) {
-			result = calcultate_result(values);
+			result = calcultate_result(values, event.target.name);
 		} else {
 			result = "Invalid";
 		}
 		parent.querySelector(".result").innerHTML = result;
-		if (result !== "Invalid") {
+		if (result != null && result !== "Invalid") {
 			let log = ("<br>Result is : " + result);
 			if (previous_log !== log) {
 				previous_log = log;
