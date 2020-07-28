@@ -113,9 +113,7 @@ class Node extends Drawable {
 		this.game_canvas.context.beginPath();
 		this.game_canvas.context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
 		this.game_canvas.context.stroke();
-		this.game_canvas.context.textAlign = "center";
-		let text_size = 10;
-		this.game_canvas.context.fillText(this.id, this.x, this.y + text_size / 2);
+		this.game_canvas.fillText(this.id, this.x, this.y);
 		for (const neighbour of this.paths) {
 			let pos1 = {
 				x: this.x,
