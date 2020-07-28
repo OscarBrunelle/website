@@ -26,6 +26,8 @@ class GameCanvas {
 		this.y = this.height / 2;
 
 		this.context = this.canvas.getContext("2d");
+		this.context.textAlign = "center";
+		this.context.textBaseline = "middle";
 
 		this.canvas.addEventListener("contextmenu", function (event) {
 			event.preventDefault();
@@ -169,6 +171,10 @@ class GameCanvas {
 		this.context.fillStyle = color;
 		this.context.fillRect(x, y, width, height);
 		this.context.restore();
+	}
+
+	fillText(text, x, y) {
+		this.context.fillText(text, x, y);
 	}
 
 	drawObj(obj) {
