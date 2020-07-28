@@ -61,15 +61,15 @@ function draw_arrow(pos1, pos2, text) {
 	const theta = Math.atan2(dy, dx);
 	let angle1 = theta - Math.PI / 8;
 	let angle2 = theta + Math.PI / 8;
-	pos1.x -= RADIUS * Math.cos(angle1);
-	pos1.y -= RADIUS * Math.sin(angle1);
-	pos2.x += RADIUS * Math.cos(angle2);
-	pos2.y += RADIUS * Math.sin(angle2);
+	let x1 = pos1.x - RADIUS * Math.cos(angle1);
+	let y1 = pos1.y - RADIUS * Math.sin(angle1);
+	let x2 = pos2.x + RADIUS * Math.cos(angle2);
+	let y2 = pos2.y + RADIUS * Math.sin(angle2);
 	const arrow_end = 15;
 
 	game_canvas.context.save();
 	game_canvas.context.beginPath();
-	game_canvas.context.moveTo(pos1.x, pos1.y);
+	game_canvas.context.moveTo(x1, y1);
 	/*if (pos1.y < pos2.y) {
 		if (pos1.x < pos2.x) {
 			game_canvas.context.bezierCurveTo(pos1.x - 50, pos1.y + 50, pos2.x - 50, pos2.y + 50, pos2.x, pos2.y);
@@ -79,15 +79,14 @@ function draw_arrow(pos1, pos2, text) {
 	} else {
 		game_canvas.context.lineTo(pos2.x, pos2.y);
 	}*/
-	game_canvas.context.lineTo(pos2.x, pos2.y);
+	game_canvas.context.lineTo(x2, y2);
 	let left_angle = theta + Math.PI / 4;
-	game_canvas.context.lineTo(pos2.x + arrow_end * Math.cos(left_angle), pos2.y + arrow_end * Math.sin(left_angle));
-	game_canvas.context.moveTo(pos2.x, pos2.y);
+	game_canvas.context.lineTo(x2 + arrow_end * Math.cos(left_angle), y2 + arrow_end * Math.sin(left_angle));
+	game_canvas.context.moveTo(x2, y2);
 	let right_angle = theta - Math.PI / 4;
-	game_canvas.context.lineTo(pos2.x + arrow_end * Math.cos(right_angle), pos2.y + arrow_end * Math.sin(right_angle));
+	game_canvas.context.lineTo(x2 + arrow_end * Math.cos(right_angle), y2 + arrow_end * Math.sin(right_angle));
 	game_canvas.context.stroke();
-	game_canvas.context.textAlign = "center";
-	game_canvas.context.fillText(text, pos1.x - (dx + 2 * RADIUS) / 2, pos1.y - (dy + 2 * RADIUS) / 2);
+	game_canvas.context.fillText(text, x1 - (x1 - x2 + RADIUS) / 2, y1 - (y1 - y2 + RADIUS) / 2);
 	game_canvas.context.restore();
 }
 
@@ -137,6 +136,19 @@ function draw_nodes() {
 }
 
 function add_path(starting_node, end_node, cost) {
+	for (let i = 0; i < starting_node.paths.length; i++) {
+		const path = starting_node.paths[i];
+		if (path.node === end_node) {
+			if (cost < 0) {
+				starting_node.paths.splice(i, 1);
+			} else {
+				starting_node.paths[i].cost = cost;
+			}
+			draw_nodes();
+			return;
+		}
+	}
+
 	starting_node.add_neighbour(end_node, cost);
 	draw_nodes();
 }
@@ -151,10 +163,15 @@ function click_action(x, y) {
 				update_shortest();
 				return;
 			} else {
-				let cost = prompt("Path cost", 1);
-				add_path(starting_node, node, parseInt(cost));
+				if (node === starting_node) {
+					return;
+				}
+				let cost = prompt("Enter the path cost from node " + starting_node.id + " to node " + node.id + " (negative value to delete)", 1);
+				if (!Number.isNaN(cost)) {
+					add_path(starting_node, node, parseInt(cost));
+					update_shortest();
+				}
 				starting_node = null;
-				update_shortest();
 				return;
 			}
 		}
