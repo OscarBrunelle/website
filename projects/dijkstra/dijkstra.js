@@ -164,6 +164,7 @@ function add_path(starting_node, end_node, cost) {
 let starting_node;
 
 function click_action(x, y) {
+	let too_near = false;
 	for (const node of nodes) {
 		if (Math.abs(x - node.x) < node.radius && Math.abs(y - node.y) < node.radius) {
 			if (starting_node == null) {
@@ -175,21 +176,25 @@ function click_action(x, y) {
 					return;
 				}
 				let cost = prompt("Enter the path cost from node " + starting_node.id + " to node " + node.id + " (negative value to delete)", 1);
-				if (!Number.isNaN(cost)) {
+				if (cost != null && !Number.isNaN(parseInt(cost))) {
 					add_path(starting_node, node, parseInt(cost));
 					update_shortest();
 				}
 				starting_node = null;
 				return;
 			}
+		} else if (Math.abs(x - node.x) < 2 * node.radius && Math.abs(y - node.y) < 2 * node.radius) {
+			too_near = true;
 		}
 	}
 
-	let node = new Node(x, y, next_id++);
-	nodes.push(node);
+	if (!too_near) {
+		let node = new Node(x, y, next_id++);
+		nodes.push(node);
 
-	draw_nodes();
-	update_shortest();
+		draw_nodes();
+		update_shortest();
+	}
 }
 
 function update_shortest() {
