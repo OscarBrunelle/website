@@ -59,15 +59,16 @@ function draw_arrow(pos1, pos2, text) {
 	const dx = pos1.x - pos2.x;
 	const dy = pos1.y - pos2.y;
 	const theta = Math.atan2(dy, dx);
-	pos1.x -= RADIUS * Math.cos(theta);
-	pos1.y -= RADIUS * Math.sin(theta);
-	pos2.x += RADIUS * Math.cos(theta);
-	pos2.y += RADIUS * Math.sin(theta);
+	let angle1 = theta - Math.PI / 8;
+	let angle2 = theta + Math.PI / 8;
+	pos1.x -= RADIUS * Math.cos(angle1);
+	pos1.y -= RADIUS * Math.sin(angle1);
+	pos2.x += RADIUS * Math.cos(angle2);
+	pos2.y += RADIUS * Math.sin(angle2);
 	const arrow_end = 15;
 
 	game_canvas.context.save();
 	game_canvas.context.beginPath();
-	//game_canvas.context.setLineDash([2, 5]);
 	game_canvas.context.moveTo(pos1.x, pos1.y);
 	/*if (pos1.y < pos2.y) {
 		if (pos1.x < pos2.x) {
