@@ -5,6 +5,11 @@ let number_nodes_y = DEFAULT_NUMBER_NODES_Y;
 const DEFAULT_NUMBER_OBSTACLES = 50;
 let number_obstacles = DEFAULT_NUMBER_OBSTACLES;
 
+/*
+TODO
+fix retrieve path -> use a .previous_node property
+*/
+
 let grid;
 
 let nodes = [];
@@ -165,17 +170,6 @@ function draw_nodes() {
 	grid.clear();
 	for (const node of nodes) {
 		node.draw();
-	}
-}
-
-function draw_single_path(path) {
-	grid.clear();
-	for (const node of nodes) {
-		if (path.indexOf(node) >= 0) {
-			node.color = "blue";
-		}
-		node.draw();
-		node.update_color();
 	}
 }
 
