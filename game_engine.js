@@ -68,12 +68,17 @@ class GameCanvas {
 		this.canvas.addEventListener("mousedown", event => {
 			if (event.button === 1 || event.button === 2) {
 				event.preventDefault();
+
 				mouse_buttons_pressed[event.button] = true;
 				const rect = this.canvas.getBoundingClientRect();
 				mouse_x = (event.clientX - rect.left);
 				mouse_y = (event.clientY - rect.top);
 				this.previous_cursor = this.canvas.style.cursor;
 				this.cursor("move", false);
+
+				if (event.button === 2 && this.onrightclick != null) {
+					this.onrightclick(mouse_x, mouse_y);
+				}
 			}
 		});
 		this.canvas.addEventListener("mouseup", event => {
