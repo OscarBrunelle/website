@@ -1,21 +1,29 @@
 "use strict"
 
+/*
+TODO
+multiple layers canvas
+this.delete = false; variable
+improve collision detection
+a* algorithm
+*/
+
 const UNDEFINED_IMAGE = new Image();
 
 class GameCanvas {
-	constructor(parent_selector, _width, _height, _id = "game_canvas") {
-		//create the canvas
-		this.canvas = document.createElement("canvas");
+	constructor(parent_selector, _width, _height, id = "game_canvas") {
+		let canvas = document.getElementById(id);
+		if (canvas == null) {
+			canvas = document.createElement("canvas");
+			document.querySelector(parent_selector).appendChild(this.canvas);
+		}
+		this.canvas = canvas;
 		this.canvas.tabIndex = 1;
-		this.id = _id;
+		this.id = id;
 		this.width = _width;
 		this.height = _height;
 		this.x = this.width / 2;
 		this.y = this.height / 2;
-
-		//append the canvas to the parent
-		const parent = document.querySelector(parent_selector);
-		parent.appendChild(this.canvas);
 
 		this.context = this.canvas.getContext("2d");
 
@@ -446,8 +454,8 @@ class Drawable {
 			this.x = obj_desc["x"] != null ? obj_desc["x"] : 0;
 			this.y = obj_desc["y"] != null ? obj_desc["y"] : 0;
 		}
-		this.width = obj_desc["width"] != null ? obj_desc["width"] : (this.game_canvas instanceof Grid ? this.game_canvas.frame_width : this.image.width);
-		this.height = obj_desc["height"] != null ? obj_desc["height"] : (this.game_canvas instanceof Grid ? this.game_canvas.frame_height : this.image.height);
+		this.width = obj_desc["width"] != null ? obj_desc["width"] : (this.game_canvas instanceof Grid ? this.game_canvas.frame_width : (this.image != null ? this.image.width : 0));
+		this.height = obj_desc["height"] != null ? obj_desc["height"] : (this.game_canvas instanceof Grid ? this.game_canvas.frame_height : (this.image != null ? this.image.height : 0));
 		this.rotation_rad = obj_desc["rotation_rad"] != null ? obj_desc["rotation_rad"] : 0;
 	}
 
