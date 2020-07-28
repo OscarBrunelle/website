@@ -86,7 +86,14 @@ function draw_arrow(pos1, pos2, text) {
 	let right_angle = theta - Math.PI / 4;
 	game_canvas.context.lineTo(x2 + arrow_end * Math.cos(right_angle), y2 + arrow_end * Math.sin(right_angle));
 	game_canvas.context.stroke();
-	game_canvas.context.fillText(text, x1 - (x1 - x2 + RADIUS) / 2, y1 - (y1 - y2 + RADIUS) / 2);
+	let text_x = x1 - (x1 - x2 + RADIUS) / 2;
+	let text_y = y1 - (y1 - y2 + RADIUS) / 2;
+	let text_size = game_canvas.context.measureText(text);
+	const TEXT_HEIGHT = 10;
+	game_canvas.context.fillStyle = "white";
+	game_canvas.fillRect(text_x, text_y, text_size.width, TEXT_HEIGHT);
+	game_canvas.context.fillStyle = "black";
+	game_canvas.fillText(text, text_x, text_y);
 	game_canvas.context.restore();
 }
 
