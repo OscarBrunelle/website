@@ -1,6 +1,7 @@
 const game_canvas = new GameCanvas("#main", 500, 500);
 let nodes = [];
 const RADIUS = 20;
+let next_id = 1;
 
 function find_shortest(id1, id2) {
 	let node1, node2;
@@ -184,7 +185,7 @@ function click_action(x, y) {
 		}
 	}
 
-	let node = new Node(x, y, nodes.length + 1);
+	let node = new Node(x, y, next_id++);
 	nodes.push(node);
 
 	draw_nodes();
@@ -218,6 +219,32 @@ function update_shortest() {
 
 function load_dijkstra() {
 	game_canvas.onclick(click_action);
+	game_canvas.onredraw = function () {
+		for (const node of nodes) {
+			node.draw();
+		}
+	};
+	game_canvas.onrightclick = function (x, y) {
+		let clicked_node;
+		for (let i = 0; i < nodes.length; i++) {
+			const node = nodes[i];
+			if (Math.abs(x - node.x) < node.radius && Math.abs(y - node.y) < node.radius) {
+				clicked_node = node;
+				nodes.splice(i, 1);
+			}
+		}
+		if (clicked_node != null) {
+			for (const node of nodes) {
+				for (let i = 0; i < node.paths.length; i++) {
+					const path = node.paths[i];
+					if (path.node === clicked_node) {
+						node.paths.splice(i--, 1);
+					}
+				}
+			}
+		}
+		draw_nodes();
+	};
 
 	let node1 = document.querySelector("input[name='node1']");
 	node1.addEventListener("change", update_shortest);
