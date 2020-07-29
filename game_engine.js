@@ -15,7 +15,7 @@ class GameCanvas {
 		let canvas = document.getElementById(id);
 		if (canvas == null) {
 			canvas = document.createElement("canvas");
-			document.querySelector(parent_selector).appendChild(this.canvas);
+			document.querySelector(parent_selector).appendChild(canvas);
 		}
 		this.canvas = canvas;
 		this.canvas.tabIndex = 1;
