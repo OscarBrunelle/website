@@ -63,8 +63,10 @@ $(document).ready(function () {
 function printResume() {
 	if (getComputedStyle(document.getElementById("resume-fr"), null).display === "block") {
 		print_element("resume-fr", "resume.css");
-	} else {
+	} else if (getComputedStyle(document.getElementById("resume-en"), null).display === "block") {
 		print_element("resume-en", "resume.css");
+	} else if (getComputedStyle(document.getElementById("resume-canadian-en"), null).display === "block") {
+		print_element("resume-canadian-en", "resume.css");
 	}
 }
 
@@ -74,7 +76,26 @@ function get_data(d) {
 	update_resume();
 }
 
-function update_resume() {
+function update_format() {
+	let lang = LANG_SELECTOR.language;
+	if (lang === "fr") {
+		if (document.getElementById("format-selector").innerHTML === "Format français") {
+			document.getElementById("format-selector").innerHTML = "Format canadien";
+		} else {
+			document.getElementById("format-selector").innerHTML = "Format français";
+		}
+	} else if (language === "en") {
+		if (document.getElementById("format-selector").innerHTML === "French format") {
+			document.getElementById("format-selector").innerHTML = "Canadian format";
+		} else {
+			document.getElementById("format-selector").innerHTML = "French format";
+		}
+	}
+
+	update_resume(false);
+}
+
+function update_resume(updating_language = true) {
 	/*
 	$("#resume").empty();
 	$("#resume").append("<div id='resume-content'></div>");
@@ -82,13 +103,34 @@ function update_resume() {
 	*/
 
 	language = LANG_SELECTOR.language;
+	if (updating_language) {
+		if (language === "fr") {
+			document.getElementById("format-selector").innerHTML = "Format canadien";
+		} else if (language === "en") {
+			document.getElementById("format-selector").innerHTML = "Canadian format";
+		}
+	}
 	if (language === "fr") {
-		document.getElementById("resume-fr").style.display = "block";
+		if (document.getElementById("format-selector").innerHTML === "Format français") {
+			document.getElementById("resume-fr").style.display = "none";
+			document.getElementById("resume-canadian-fr").style.display = "block";
+		} else {
+			document.getElementById("resume-fr").style.display = "block";
+			document.getElementById("resume-canadian-fr").style.display = "none";
+		}
 		document.getElementById("resume-en").style.display = "none";
+		document.getElementById("resume-canadian-en").style.display = "none";
 		document.getElementById("print_resume").innerHTML = "Imprimer";
-	} else {
+	} else if (language === "en") {
+		if (document.getElementById("format-selector").innerHTML === "French format") {
+			document.getElementById("resume-en").style.display = "none";
+			document.getElementById("resume-canadian-en").style.display = "block";
+		} else {
+			document.getElementById("resume-en").style.display = "block";
+			document.getElementById("resume-canadian-en").style.display = "none";
+		}
 		document.getElementById("resume-fr").style.display = "none";
-		document.getElementById("resume-en").style.display = "block";
+		document.getElementById("resume-canadian-fr").style.display = "none";
 		document.getElementById("print_resume").innerHTML = "Print";
 	}
 	//iterate_data(resume_data, language, $("#resume-content"));
