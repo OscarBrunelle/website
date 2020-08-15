@@ -262,8 +262,10 @@ ul>li>p:nth-child(2)::before {
 	}
 
 	#infos {
+		width: fit-content;
 		height: 70px;
 		margin-top: calc((50% - 70px) / 2);
+		margin-left: calc(100% - 170px);
 	}
 
 	.bordered_container {
