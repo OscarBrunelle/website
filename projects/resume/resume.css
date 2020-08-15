@@ -64,12 +64,6 @@ body {
 	padding: 25px 25px 0 12.5px;
 }
 #resume-fr #container-right {
-}
-@media (max-width: 600px) {
-	#container-left, #container-right {
-		width: 100%;
-		position: relative;
-	}
 	padding: 20px 25px 0 12.5px;
 }
 
@@ -246,4 +240,49 @@ ul>li>p:nth-child(2)::before {
 }
 .icon_container>p::before {
 	content: "\00a0\00a0";
+}
+
+@media screen and (max-width: 600px) {
+	#resume-fr #container-left, #resume-en #container-left, #resume-fr #container-right, #resume-en #container-right {
+		width: 100%;
+		position: relative;
+		padding: 10px 10px 0 10px;
+	}
+
+	#personal {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		gap: 10px;
+		margin-bottom: 10px;
+	}
+
+	#profile_pic, #infos {
+		width: 100%;
+		margin: 0;
+	}
+
+	#infos {
+		height: 70px;
+		margin-top: calc((50% - 70px) / 2);
+	}
+
+	.bordered_container {
+		margin-bottom: 10px;
+	}
+}
+
+@media screen and (max-width: 300px) {
+	#personal {
+		display: block;
+	}
+
+	#profile_pic {
+		width: 50%;
+		margin-left: 25%;
+	}
+
+	#infos {
+		height: fit-content;
+		margin: 0;
+	}
 }
