@@ -64,6 +64,11 @@ body {
 	padding: 20px 12.5px 0 25px;
 }
 
+#resume-canadian-fr #container-left,
+#resume-canadian-en #container-left {
+	padding: 45px 12.5px 0 25px;
+}
+
 #container-right {
 	width: 68%;
 	display: inline-block;
@@ -77,6 +82,11 @@ body {
 	padding: 20px 25px 0 12.5px;
 }
 
+#resume-canadian-fr #container-right,
+#resume-canadian-en #container-right {
+	padding: 45px 25px 0 12.5px;
+}
+
 .resume p,
 .resume h1,
 .resume h2,
@@ -87,18 +97,18 @@ body {
 	text-align: justify;
 }
 
+#main_title {
+	font-size: 22px;
+	color: orangered;
+	font-weight: bold;
+}
+
 .resume h1 {
 	margin-bottom: 15px;
 	text-align: center;
 	font-size: 12px;
 	font-weight: initial;
 	text-transform: uppercase;
-}
-
-#main_title {
-	font-size: 22px;
-	color: orangered;
-	font-weight: bold;
 }
 
 .resume h2 {
@@ -129,6 +139,14 @@ body {
 	border: 2px solid darkblue;
 	border-radius: 10px;
 	margin-bottom: 25px;
+}
+
+#canadian_name {
+	margin: 15px;
+	text-align: center;
+	font-size: 26px;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 /* PERSONAL */
