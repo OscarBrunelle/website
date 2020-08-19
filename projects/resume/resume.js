@@ -65,6 +65,8 @@ function printResume() {
 		print_element("resume-fr", "resume.css");
 	} else if (getComputedStyle(document.getElementById("resume-en"), null).display === "block") {
 		print_element("resume-en", "resume.css");
+	} else if (getComputedStyle(document.getElementById("resume-canadian-fr"), null).display === "block") {
+		print_element("resume-canadian-fr", "resume.css");
 	} else if (getComputedStyle(document.getElementById("resume-canadian-en"), null).display === "block") {
 		print_element("resume-canadian-en", "resume.css");
 	}
