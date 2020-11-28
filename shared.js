@@ -188,3 +188,54 @@ function play_frequency(frequency, duration, callback) {
 	oscillator.start(0);
 	oscillator.stop(context.currentTime + duration);
 }
+
+function getMousePos(canvas, evt) {
+	var rect = canvas.getBoundingClientRect();
+	return {
+		x: evt.clientX - rect.left,
+		y: evt.clientY - rect.top
+	};
+}
+
+function floor(number, rounding = 1) {
+	return Math.floor(number / rounding) * rounding;
+}
+
+function round_to_nearest(number, rounding) {
+	if (rounding == null) {
+		console.error("rounding is null");
+		return number;
+	}
+	return (number === rounding || floor(number, rounding) % 1 === rounding) ? floor(number, rounding) : floor(number + rounding, rounding);
+}
+
+
+/* START OF SVG */
+const xmlns = "http://www.w3.org/2000/svg";
+function svgline(parent, x1, y1, x2, y2, className = null) {
+	let line = document.createElementNS(xmlns, "line");
+	if (className != null) {
+		line.setAttributeNS(null, "class", className);
+	}
+	line.setAttributeNS(null, "x1", x1);
+	line.setAttributeNS(null, "y1", y1);
+	line.setAttributeNS(null, "x2", x2);
+	line.setAttributeNS(null, "y2", y2);
+	parent.appendChild(line);
+}
+
+class BasicSVG {
+	constructor(parent = null, width = 400, height = 400) {
+		this.width = width;
+		this.height = height;
+
+		let svgroot = document.createElementNS(xmlns, "svg");
+		svgroot.setAttributeNS(null, "width", this.width);
+		svgroot.setAttributeNS(null, "height", this.height);
+		if (parent != null) {
+			parent.appendChild(svgroot);
+		}
+		this.svgroot = svgroot;
+	}
+}
+/* END OF SVG */
