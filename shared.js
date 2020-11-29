@@ -238,4 +238,68 @@ class BasicSVG {
 		this.svgroot = svgroot;
 	}
 }
+
+function create2DArray(nI, nJ, defaultValue = null) {
+	let array = [];
+	for (let i = 0; i < nI; i++) {
+		let innerArr = [];
+		for (let j = 0; j < nJ; j++) {
+			let value;
+			if (typeof(defaultValue) === "function") {
+				value = defaultValue(i, j);
+			} else {
+				value = defaultValue;
+			}
+			innerArr.push(value);
+		}
+		array.push(innerArr);
+	}
+	return array;
+}
+
+function SVG2DArray(basicSVG, array, elementFunction) {
+	if (elementFunction == null) {
+		elementFunction = function (d, i, j) {
+			let textElement = document.createElementNS(null, "text");
+			textElement.innerHTML = d;
+			return textElement;
+		};
+	}
+
+	let squareSize = (basicSVG.width - 1) / array.length;
+
+	let gridLinesX = document.createElementNS(xmlns, "g");
+	gridLinesX.setAttributeNS(null, "class", "gridLines-x");
+	basicSVG.svgroot.appendChild(gridLinesX);
+	for (let x = 0; x < array.length + 1; x++) {
+		let posX = round_to_nearest(x * squareSize, 0.5);
+		svgline(gridLinesX, posX, 0, posX, svg.height, "gridLine-x");
+	}
+
+	let gridLinesY = document.createElementNS(xmlns, "g");
+	gridLinesY.setAttributeNS(null, "class", "gridLines-y");
+	basicSVG.svgroot.appendChild(gridLinesY);
+	for (let y = 0; y < array[0].length + 1; y++) {
+		let posY = round_to_nearest(y * squareSize, 0.5);
+		svgline(gridLinesY, 0, posY, svg.width, posY, "gridLine-y");
+	}
+
+
+	let dataG = document.createElementNS(xmlns, "g");
+	dataG.setAttributeNS(null, "class", "data-g");
+	basicSVG.svgroot.appendChild(dataG);
+	for (let x = 0; x < array.length; x++) {
+		for (let y = 0; y < array[0].length; y++) {
+			let dataElement = elementFunction(array[x][y], x, y);
+			let numberCharacters = dataElement.innerHTML.length;
+			let posX = round_to_nearest(x * squareSize + squareSize / 2 - (numberCharacters * fontSize / 4), 0.5);
+			let posY = round_to_nearest(y * squareSize + squareSize / 2 + fontSize / 4, 0.5);
+			if (dataElement != null) {
+				dataElement.setAttributeNS(null, "x", posX);
+				dataElement.setAttributeNS(null, "y", posY);
+				dataG.appendChild(dataElement);
+			}
+		}
+	}
+}
 /* END OF SVG */
