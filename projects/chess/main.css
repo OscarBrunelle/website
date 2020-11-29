@@ -1,0 +1,10 @@
+svg line {
+	stroke-width: 1px;
+	stroke: black;
+}
+
+svg text {
+	font-size: 16px;
+	text-anchor: middle;
+	dominant-baseline: middle;
+}
