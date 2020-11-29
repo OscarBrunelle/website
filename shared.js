@@ -228,6 +228,7 @@ class BasicSVG {
 	constructor(parent = null, width = 400, height = 400) {
 		this.width = width;
 		this.height = height;
+		this.fontSize = 16;
 
 		let svgroot = document.createElementNS(xmlns, "svg");
 		svgroot.setAttributeNS(null, "width", this.width);
@@ -292,8 +293,8 @@ function SVG2DArray(basicSVG, array, elementFunction) {
 		for (let y = 0; y < array[0].length; y++) {
 			let dataElement = elementFunction(array[x][y], x, y);
 			let numberCharacters = dataElement.innerHTML.length;
-			let posX = round_to_nearest(x * squareSize + squareSize / 2 - (numberCharacters * fontSize / 4), 0.5);
-			let posY = round_to_nearest(y * squareSize + squareSize / 2 + fontSize / 4, 0.5);
+			let posX = round_to_nearest(x * squareSize + squareSize / 2 - (numberCharacters * svg.fontSize / 4), 0.5);
+			let posY = round_to_nearest(y * squareSize + squareSize / 2 + svg.fontSize / 4, 0.5);
 			if (dataElement != null) {
 				dataElement.setAttributeNS(null, "x", posX);
 				dataElement.setAttributeNS(null, "y", posY);
