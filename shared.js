@@ -290,12 +290,14 @@ function SVG2DArray(basicSVG, array, elementFunction) {
 	basicSVG.svgroot.appendChild(dataG);
 	for (let x = 0; x < array.length; x++) {
 		for (let y = 0; y < array[0].length; y++) {
-			let dataElement = elementFunction(array[x][y], x, y);
+			let dataElement = elementFunction(array[x][y], x, y, squareSize);
 			if (dataElement != null) {
-				let posX = round_to_nearest(x * squareSize + squareSize / 2, 0.5);
-				let posY = round_to_nearest(y * squareSize + squareSize / 2, 0.5);
+				let posX = round_to_nearest(x * squareSize, 0.5);
+				let posY = round_to_nearest(y * squareSize, 0.5);
 				dataElement.setAttributeNS(null, "x", posX);
 				dataElement.setAttributeNS(null, "y", posY);
+				dataElement.setAttributeNS(null, "width", squareSize);
+				dataElement.setAttributeNS(null, "height", squareSize);
 				dataG.appendChild(dataElement);
 			}
 		}
