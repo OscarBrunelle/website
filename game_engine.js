@@ -108,6 +108,9 @@ class GameCanvas {
 		this.key_map = {};
 		document.getElementById(this.id).addEventListener("keydown", event => {
 			this.key_map[event.key] = true;
+			if (this.onkeydown_action != null) {
+				this.onkeydown_action(event.key);
+			}
 		});
 		document.getElementById(this.id).addEventListener("keyup", event => {
 			this.key_map[event.key] = false;
@@ -167,8 +170,8 @@ class GameCanvas {
 	fillRect(x, y, width, height, color) {
 		x = x - width / 2;
 		y = y - height / 2;
-		x = (Math.floor(x / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(x / 0.5) * 0.5) : (Math.floor((x + 0.5) / 0.5) * 0.5);
-		y = (Math.floor(y / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(y / 0.5) * 0.5) : (Math.floor((y + 0.5) / 0.5) * 0.5);
+		x = (Math.floor(x / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(/*++*/x / 0.5) * 0.5) : (Math.floor((x + 0.5) / 0.5) * 0.5);
+		y = (Math.floor(y / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(/*++*/y / 0.5) * 0.5) : (Math.floor((y + 0.5) / 0.5) * 0.5);
 		width = Math.floor(width);
 		height = Math.floor(height);
 		this.context.save();
@@ -517,6 +520,7 @@ class Movable extends Drawable {
 	 * @param {GameCanvas} game_canvas 
 	 * @param {Array} obj_desc Options:
 	 * 		image: Image
+	 * 		color: String
 	 * 		x: Number
 	 * 		y: Number
 	 * 		grid_x: Number
@@ -583,6 +587,7 @@ class Controllable extends Movable {
 	 * @param {GameCanvas} game_canvas 
 	 * @param {Array} obj_desc Options:
 	 * 		image: Image
+	 * 		color: String
 	 * 		x: Number
 	 * 		y: Number
 	 * 		grid_x: Number

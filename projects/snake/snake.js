@@ -1,224 +1,264 @@
-var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
+const NUMBER_FRAMES_X = 10;
+const NUMBER_FRAMES_Y = 10;
 
-var eatingSound = new Audio('eating.mp3');
-eatingSound.loop = false;
-var deathSound = new Audio('death.mp3');
-deathSound.loop = false;
+const DIRECTIONS = {
+	"UP": 0,
+	"LEFT": 1,
+	"DOWN": 2,
+	"RIGHT": 3
+};
 
-var snake;
-var fruit;
+let grid;
+let snake;
+let score;
+let fruit;
 
-var updateTime = 100;
-var interval;
+let game_lost;
 
-function loadGame() {
+let speed = 100;
 
-  /*canvas.setAttribute("tabindex", "1");
-  canvas.focus();*/
-  canvas.style.background = "grey";
-  /*if (window.innerWidth > 500) {
-    canvas.width = window.innerWidth - 30;
-    canvas.height = window.innerHeight - 120;
-  } else {
-    canvas.width = window.innerWidth - 5;
-    canvas.height = window.innerHeight - 80;
-  }*/
-  canvas.width = 600;
-  canvas.height = 400;
+let d_t;
+let previous_time;
+let previous_direction;
 
-  document.addEventListener('keydown', function (event) {
-    var key = event.key;
-    if (key == "ArrowUp") {
-      if (snake.yDir != 1) {
-        snake.xDir = 0;
-        snake.yDir = -1;
-      }
-    } else if (key == "ArrowLeft") {
-      if (snake.xDir != 1) {
-        snake.xDir = -1;
-        snake.yDir = 0;
-      }
-    } else if (key == "ArrowDown") {
-      if (snake.yDir != -1) {
-        snake.xDir = 0;
-        snake.yDir = +1;
-      }
-    } else if (key == "ArrowRight") {
-      if (snake.xDir != -1) {
-        snake.xDir = +1;
-        snake.yDir = 0;
-      }
-    }
-    key = event.which;
-    if (key == 49) {
-      changeGameSpeed(0.5);
-    } else if (key == 50) {
-      changeGameSpeed(1);
-    } else if (key == 51) {
-      changeGameSpeed(2);
-    } else if (key == 52) {
-      changeGameSpeed(4);
-    }
-  });
-  interval = setInterval(update, updateTime);
-  restartGame();
+function update(time_from_start = 0) {
+	d_t += time_from_start - previous_time;
+	previous_time = time_from_start;
+
+	if (d_t > speed || time_from_start === 0) {
+		d_t = 0;
+		previous_direction = snake.direction;
+		grid.clear();
+		snake.update();
+		snake.draw();
+		fruit.draw();
+	}
+
+	if (!game_lost) {
+		requestAnimationFrame(update);
+	}
 }
 
-class BodyPart {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.width = 20;
-    this.height = 20;
-    this.outline = 2;
-    this.speed = 20;
-    this.child = null;
-    this.xDir = 0;
-    this.yDir = 0;
-  }
+function load_snake() {
+	grid = new Grid("#main", 400, 400, NUMBER_FRAMES_X, NUMBER_FRAMES_Y);
+	grid.canvas.focus();
+	snake = new Snake();
+	fruit = new Fruit();
 
-  addNewChild() {
-    var newChild = new BodyPart(this.x - this.xDir * this.speed, this.y - this.yDir * this.speed);
-    if (this.child != null) {
-      this.child.addChild(newChild);
-    } else {
-      this.child = newChild;
-    }
-  }
+	game_lost = false;
 
-  addChild(child) {
-    var newChild = new BodyPart(this.x - this.xDir * this.speed, this.y - this.yDir * this.speed);
-    if (this.child != null) {
-      this.child.addChild(newChild);
-    } else {
-      this.child = newChild;
-    }
-  }
+	grid.onkeydown_action = function (key) {
+		switch (key) {
+			case "ArrowUp":
+				if (previous_direction !== DIRECTIONS.DOWN) {
+					snake.direction = DIRECTIONS.UP;
+				}
+				break;
+			case "ArrowLeft":
+				if (previous_direction !== DIRECTIONS.RIGHT) {
+					snake.direction = DIRECTIONS.LEFT;
+				}
+				break;
+			case "ArrowDown":
+				if (previous_direction !== DIRECTIONS.UP) {
+					snake.direction = DIRECTIONS.DOWN;
+				}
+				break;
+			case "ArrowRight":
+				if (previous_direction !== DIRECTIONS.LEFT) {
+					snake.direction = DIRECTIONS.RIGHT;
+				}
+				break;
+			default:
+				break;
+		}
+	};
 
-  draw() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-    ctx.fillRect(this.x + this.outline, this.y + this.outline, this.width - 2 * this.outline, this.height - 2 * this.outline);
-    if (this.child != null) {
-      this.child.draw();
-    }
-  }
-
-  die() {
-    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-      console.log("Hit a wall!");
-      return true;
-    }
-    if (this.child != null) {
-      return this.child.isHit(this);
-    }
-    return false;
-  }
-
-  isHit(other) {
-    if ((this.x + this.outline <= other.x + other.width && this.x + this.width - this.outline >= other.x) && (this.y + this.outline <= other.y + other.height && this.y + this.height - this.outline >= other.y)) {
-      console.log("Hit your own body!");
-      return true;
-    }
-    if (this.child != null) {
-      return this.child.isHit(other);
-    }
-    return false;
-  }
-
-  move(prevPartXDir, prevPartYDir) {
-    this.x += prevPartXDir * this.speed;
-    this.y += prevPartYDir * this.speed;
-    if (this.child != null) {
-      this.child.move(this.xDir, this.yDir);
-    }
-    this.xDir = prevPartXDir;
-    this.yDir = prevPartYDir;
-  }
+	update();
 }
 
-class Snake {
-  constructor(x = 0, y = 0) {
-    this.head = new BodyPart(x, y);
-    this.xDir = 0;
-    this.yDir = 0;
-  }
-  move() {
-    this.head.move(this.xDir, this.yDir);
-  }
-  draw() {
-    this.head.draw();
-  }
-  eat(fruit) {
-    if ((this.head.x <= fruit.x && (this.head.x + this.head.width) >= (fruit.x + fruit.width)) && (this.head.y <= fruit.y && (this.head.y + this.head.height) >= (fruit.y + fruit.height))) {
-      this.head.addNewChild();
-      return true;
-    }
-    return false;
-  }
-  die() {
-    return this.head.die();
-  }
+function lose() {
+	game_lost = true;
+	alert("Lost");
+	reset();
+	update();
 }
 
-function initializeSnake() {
-  snake = new Snake(20, 20);
+function reset() {
+	game_lost = false;
+	snake.reset();
+	previous_direction = null;
+	fruit.reset();
+
+	//update();
 }
 
-function initializeFruit() {
-  fruit = new Fruit();
+class Snake extends Controllable {
+	constructor() {
+		let starting_pos = random_pos();
+		super(grid, {
+			grid_x: starting_pos.x,
+			grid_y: starting_pos.y
+		});
+
+		this.add_part();
+	}
+
+	add_part() {
+		let new_part;
+		if (this.parts == null || this.parts.length < 1) {
+			this.parts = [];
+			new_part = new SnakePart(this.grid_x, this.grid_y);
+		} else {
+			let last_part = this.parts[this.parts.length - 1];
+			new_part = new SnakePart(last_part.grid_x, last_part.grid_y, this.parts.length);
+			new_part.direction = last_part.direction;
+		}
+		this.parts.push(new_part);
+		new_part.draw();
+	}
+
+	draw() {
+		for (const part of this.parts) {
+			part.draw();
+		}
+	}
+
+	update() {
+		if (this.parts == null) {
+			return;
+		}
+
+		let parts_length = this.parts.length;
+		let last_direction = this.direction;
+		let head = this.parts[0];
+		let next_head_pos = head.next_position();
+		if (next_head_pos.x < 0 || next_head_pos.x > grid.number_frames_x || next_head_pos.y < 0 || next_head_pos.y > grid.number_frames_y) {
+			head.color = "red";
+			lose();
+			return;
+		}
+
+		if (next_head_pos.x === fruit.grid_x && next_head_pos.y === fruit.grid_y) {
+			this.add_part();
+			fruit.reset();
+		}
+
+		for (let i = 0; i < parts_length; i++) {
+			const part = this.parts[i];
+			if (this.direction != null) {
+				[part.direction, last_direction] = [last_direction, part.direction];
+			}
+			part.update();
+		}
+
+		for (let i = 1; i < this.parts.length; i++) {
+			const part = this.parts[i];
+			if (part.grid_x === head.grid_x && part.grid_y === head.grid_y) {
+				head.color = "red";
+				lose();
+				return;
+			}
+		}
+	}
+
+	reset() {
+		this.parts = [];
+		let starting_pos = random_pos();
+		this.grid_x = starting_pos.x;
+		this.grid_y = starting_pos.y;
+		this.direction = null;
+
+		this.add_part();
+	}
 }
 
-class Fruit {
-  constructor() {
-    this.setNewPos();
-    this.width = 10;
-    this.height = 10;
-  }
-  draw() {
-    ctx.fillStyle = 'rgba(255, 255, 255, 1)';
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-  }
-  setNewPos() {
-    this.x = Math.floor((Math.random() * canvas.width + 1) / 20) * 20 + 5;
-    this.y = Math.floor((Math.random() * canvas.height + 1) / 20) * 20 + 5;
-  }
+class SnakePart extends Movable {
+	constructor(x, y, index = 0) {
+		let multiplier = Math.max(0.5, 1 - index / 50);
+		super(grid, {
+			grid_x: x,
+			grid_y: y,
+			width: grid.frame_width * multiplier,
+			height: grid.frame_height * multiplier,
+			color: "brown"
+		});
+	}
+
+	next_position() {
+		let x = this.grid_x;
+		let y = this.grid_y;
+		switch (this.direction) {
+			case DIRECTIONS.UP:
+				y--;
+				break;
+			case DIRECTIONS.LEFT:
+				x--;
+				break;
+			case DIRECTIONS.DOWN:
+				y++;
+				break;
+			case DIRECTIONS.RIGHT:
+				x++;
+				break;
+			default:
+				break;
+		}
+		return {
+			x: x,
+			y: y
+		};
+	}
+
+	update() {
+		let next_pos = this.next_position();
+		this.grid_x = next_pos.x;
+		this.grid_y = next_pos.y;
+	}
 }
 
-function update() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+class Fruit extends Drawable {
+	constructor() {
+		let starting_pos = random_pos();
+		super(grid, {
+			grid_x: starting_pos.x,
+			grid_y: starting_pos.y,
+			width: grid.frame_width / 2,
+			height: grid.frame_height / 2,
+			color: "green"
+		});
 
-  snake.move();
-  snake.draw();
-  if (snake.die()) {
-    deathSound.play();
-    restartGame();
-  }
-  if (snake.eat(fruit)) {
-    eatingSound.play();
-    fruit.setNewPos();
-  }
-  fruit.draw();
+		this.reset();
+	}
+
+	reset() {
+		let pos = random_pos();
+		while (test_for_conflict(pos)) {
+			pos = random_pos();
+		}
+		this.grid_x = pos.x;
+		this.grid_y = pos.y;
+	}
 }
 
-function restartGame() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  initializeSnake();
-  initializeFruit();
+function random_pos() {
+	let x = Math.floor(Math.random() * NUMBER_FRAMES_X);
+	let y = Math.floor(Math.random() * NUMBER_FRAMES_Y);
+
+	return {
+		x: x,
+		y: y
+	};
 }
 
-function changeGameSpeed(gameSpeed = 1) {
-  if (gameSpeed == 4) {
-    updateTime = 50;
-  } else if (gameSpeed == 2) {
-    updateTime = 100;
-  } else if (gameSpeed == 0.5) {
-    updateTime = 400;
-  } else {
-    updateTime = 200;
-  }
-  clearInterval(interval);
-  interval = setInterval(update, updateTime);
+function test_for_conflict(pos) {
+	for (let i = 1; i < snake.parts.length; i++) {
+		const part = snake.parts[i];
+		if (part.grid_x === pos.x && part.grid_y === pos.y) {
+			return true;
+		}
+	}
+	return false;
 }
 
-document.body.onload = loadGame();
+document.onload = load_snake();
