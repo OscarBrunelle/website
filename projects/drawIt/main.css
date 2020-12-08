@@ -1,0 +1,10 @@
+#svg {
+	width: 600px;
+	height: 400px;
+	user-select: none;
+}
+
+#svg>* {
+	stroke: black;
+	stroke-width: 1;
+}
