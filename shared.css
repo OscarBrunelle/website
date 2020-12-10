@@ -3,10 +3,10 @@ html * {
 }
 
 body {
+	width: 100vw;
+	height: 100vh;
 	margin: 0;
-	padding: 5px; /* TODO: remove */
-	/* width: 100vw;
-	height: 100vh; */
+	padding: 0;
 }
 
 footer {
