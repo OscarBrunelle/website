@@ -168,7 +168,7 @@ function get_note_frequency(note) {
 	}
 }
 
-function play_frequency(frequency, duration, callback) {
+function play_frequency(frequency, duration, callback = null) {
 	const context = new AudioContext();
 	const oscillator = context.createOscillator();
 	const gain = context.createGain();
@@ -184,13 +184,17 @@ function play_frequency(frequency, duration, callback) {
 	oscillator.connect(gain);
 	gain.connect(context.destination);
 
-	oscillator.onended = callback;
+	if (callback != null) {
+		oscillator.onended = function () {
+			callback();
+		};
+	}
 	oscillator.start(0);
 	oscillator.stop(context.currentTime + duration);
 }
 
-function getMousePos(canvas, evt) {
-	var rect = canvas.getBoundingClientRect();
+function getMousePos(element, evt) {
+	var rect = element.getBoundingClientRect();
 	return {
 		x: evt.clientX - rect.left,
 		y: evt.clientY - rect.top
@@ -212,6 +216,7 @@ function round_to_nearest(number, rounding) {
 
 /* START OF SVG */
 const xmlns = "http://www.w3.org/2000/svg";
+
 function svgline(parent, x1, y1, x2, y2, className = null) {
 	let line = document.createElementNS(xmlns, "line");
 	if (className != null) {
@@ -245,7 +250,7 @@ function create2DArray(nI, nJ, defaultValue = null) {
 		let innerArr = [];
 		for (let j = 0; j < nJ; j++) {
 			let value;
-			if (typeof(defaultValue) === "function") {
+			if (typeof (defaultValue) === "function") {
 				value = defaultValue(i, j);
 			} else {
 				value = defaultValue;
@@ -266,25 +271,28 @@ function SVG2DArray(basicSVG, array, elementFunction) {
 		};
 	}
 
-	let squareSize = (basicSVG.width - 1) / array.length;
+	let squareSize = round_to_nearest((basicSVG.width - 1) / array.length, 0.5);
+	let gridWidth = squareSize * array.length;
+	let gridHeight = squareSize * array[0].length;
 
 	let gridLinesX = document.createElementNS(xmlns, "g");
 	gridLinesX.setAttributeNS(null, "class", "gridLines-x");
 	basicSVG.svgroot.appendChild(gridLinesX);
 	for (let x = 0; x < array.length + 1; x++) {
-		let posX = round_to_nearest(x * squareSize, 0.5);
-		svgline(gridLinesX, posX, 0, posX, svg.height, "gridLine-x");
+		let posY = round_to_nearest(x * squareSize, 0.5);
+		svgline(gridLinesX, 0, posY, gridWidth, posY, "gridLine-x");
 	}
 
 	let gridLinesY = document.createElementNS(xmlns, "g");
 	gridLinesY.setAttributeNS(null, "class", "gridLines-y");
 	basicSVG.svgroot.appendChild(gridLinesY);
 	for (let y = 0; y < array[0].length + 1; y++) {
-		let posY = round_to_nearest(y * squareSize, 0.5);
-		svgline(gridLinesY, 0, posY, svg.width, posY, "gridLine-y");
+		let posX = round_to_nearest(y * squareSize, 0.5);
+		svgline(gridLinesY, posX, 0, posX, gridHeight, "gridLine-y");
 	}
 
 
+	// squareSize += 1;
 	let dataG = document.createElementNS(xmlns, "g");
 	dataG.setAttributeNS(null, "class", "data-g");
 	basicSVG.svgroot.appendChild(dataG);
@@ -292,12 +300,13 @@ function SVG2DArray(basicSVG, array, elementFunction) {
 		for (let y = 0; y < array[0].length; y++) {
 			let dataElement = elementFunction(array[x][y], x, y, squareSize);
 			if (dataElement != null) {
-				let posX = round_to_nearest(x * squareSize, 0.5);
-				let posY = round_to_nearest(y * squareSize, 0.5);
-				dataElement.setAttributeNS(null, "x", posX);
-				dataElement.setAttributeNS(null, "y", posY);
-				dataElement.setAttributeNS(null, "width", squareSize);
-				dataElement.setAttributeNS(null, "height", squareSize);
+				let posX = round_to_nearest(x * squareSize, 0.5); // - 0.5;
+				let posY = round_to_nearest(y * squareSize, 0.5); // - 0.5;
+				dataElement.setAttributeNS(null, "transform", "translate(" + posX + "," + posY + ")");
+				// dataElement.setAttributeNS(null, "x", posX);
+				// dataElement.setAttributeNS(null, "y", posY);
+				// dataElement.setAttributeNS(null, "width", squareSize);
+				// dataElement.setAttributeNS(null, "height", squareSize);
 				dataG.appendChild(dataElement);
 			}
 		}
