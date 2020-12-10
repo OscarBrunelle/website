@@ -1,52 +1,22 @@
-.horizontal_list {
+#banner {
 	width: 100%;
-	margin: 0;
-	padding: 0;
-	/* list-style-type: none; */
-}
-
-.horizontal_list > li {
-	width: 33%;
+	height: 20%;
 	display: inline-block;
 }
 
 #projects {
-	display: grid;
-	gap: 20px;
+	height: 80%;
 }
 
 .projects_list {
-	display: grid;
-	gap: 10px;
-}
-
-@media (min-width: 900px) {
-	.projects_list {
-		grid-template-columns: repeat(4, 1fr);
-	}
-}
-
-@media (max-width: 899px) {
-	.projects_list {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
-@media (max-width: 599px) {
-	.projects_list {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media (max-width: 299px) {
-	.projects_list {
-		grid-template-columns: repeat(1, 1fr);
-	}
+	height: fit-content;
+	padding: 10px;
 }
 
 .projects_list-title {
+	height: fit-content;
 	margin: 0px;
-	padding: 10px;
+	padding: 7px;
 	grid-column: 1 / -1;
 	text-align: center;
 	color: #2f3235;
@@ -56,17 +26,80 @@
 	border-top: 1px dashed black;
 }
 
+.horizontal_list {
+	max-width: 100%;
+	height: fit-content;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	/* list-style-type: none; */
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.horizontal_list>li {
+	width: 30%;
+	max-width: 400px;
+	padding-top: calc(min(16.875%, 225px));/* ratio of 56.25% or 16:9 */;
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+}
+
 .project {
-	display: grid;
-	gap: 10px;
-	padding: 5px;
-	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	padding: 8px;
+	border-radius: 10px;
 	border: 1px solid black;
+	text-decoration: none;
 	cursor: pointer;
 }
 
+.project>img {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.project>svg {
+	width: 100%;
+	height: 100%;
+}
+
+.project>svg>text {
+	text-anchor: middle;
+	alignment-baseline: central;
+}
+
+.project>div {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.project>div>span {
+	width: max-content;
+	font-size: 32px;
+	color: black;
+	background-color: white;
+}
+
+.project svg>text {
+	fill: black;
+}
+
 .project-title {
-	margin: 0px;
+	height: 28px;
+	margin: 0;
+	margin-bottom: 5px;
 	background-color: transparent;
 	text-decoration: none !important;
 	outline: none !important;
@@ -87,7 +120,12 @@
 }
 
 .project-description {
+	max-width: 100%;
+	height: calc(100% - 33px);
 	margin: 0px;
+	border: 1px dashed black;
+	overflow-y: auto;
+	white-space: initial;
 	font-family: Lora, sans-serif;
 	font-size: 1em;
 	font-style: normal;
