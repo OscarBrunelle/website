@@ -23,6 +23,18 @@ $(document).ready(function() {
 });
 */
 
+function switchTab(tabClass) {
+	document.querySelectorAll(".tab").forEach(function(tabElement) {
+		tabElement.style.display = "none";
+	});
+	document.querySelector(".tab." + tabClass).style.display = "block";
+
+	$(".tab-button").each(function(){
+		$(this).removeClass("active_tab-button");
+	});
+	$(".tab-button." + tabClass).addClass("active_tab-button");
+}
+
 function load_home() {
 	document.getElementById("lang-button").addEventListener("click", update_language);
 	update_language();

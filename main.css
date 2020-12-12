@@ -1,7 +1,58 @@
+#top-nav {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr) 44px;
+}
+
+.tab-button {
+	padding: 6px;
+	border: 1px solid black;
+	border-radius: 0;
+	cursor: pointer;
+}
+
+.tab-button.active_tab-button {
+	background-color: rgba(200, 200, 200, 0.8);
+	border-bottom: none;
+}
+
 #banner {
 	width: 100%;
 	height: 20%;
 	display: inline-block;
+	background-color: rgba(200, 200, 200, 0.8);
+}
+
+main {
+	background-color: rgba(200, 200, 200, 0.8);
+}
+
+.tab {
+	display: none;
+}
+
+.vertical_list {
+	margin: 0;
+	padding: 5px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 5px;
+}
+
+.vertical_list>li {
+	position: relative;
+	list-style-type: none;
+}
+
+.vertical_list>li>a {
+	width: 100%;
+	height: 100%;
+	display: block;
+	padding: 8px;
+	border-radius: 10px;
+	border: 1px solid black;
+	text-decoration: none;
+	cursor: pointer;
+	background-color: white;
 }
 
 #projects {
@@ -40,13 +91,15 @@
 .horizontal_list>li {
 	width: 30%;
 	max-width: 400px;
-	padding-top: calc(min(16.875%, 225px));/* ratio of 56.25% or 16:9 */;
+	padding-top: calc(min(16.875%, 225px));
+	/* ratio of 56.25% or 16:9 */
+	;
 	position: relative;
 	display: inline-block;
 	vertical-align: top;
 }
 
-.project {
+.projects_list .project {
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -58,6 +111,7 @@
 	border: 1px solid black;
 	text-decoration: none;
 	cursor: pointer;
+	background-color: white;
 }
 
 .project>img {
@@ -71,7 +125,7 @@
 	height: 100%;
 }
 
-.project>svg>text {
+.project-svg>text {
 	text-anchor: middle;
 	alignment-baseline: central;
 }
@@ -133,10 +187,4 @@
 	line-height: 1.7;
 	color: #4c4f53;
 	text-align: justify;
-}
-
-#lang-button {
-	position: absolute;
-	top: 5px;
-	right: 5px;
 }
