@@ -38,6 +38,12 @@ main {
 	gap: 5px;
 }
 
+@media (max-width: 599px) {
+	.vertical_list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
 .vertical_list>li {
 	position: relative;
 	list-style-type: none;
@@ -97,6 +103,13 @@ main {
 	position: relative;
 	display: inline-block;
 	vertical-align: top;
+}
+
+@media (max-width: 599px) {
+	.horizontal_list>li {
+		width: 60%;
+		padding-top: 32.875%;
+	}
 }
 
 .projects_list .project {
