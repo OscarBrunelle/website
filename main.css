@@ -201,3 +201,7 @@ main {
 	color: #4c4f53;
 	text-align: justify;
 }
+
+svg>image {
+	opacity: 0.5;
+}
