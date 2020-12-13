@@ -1,0 +1,26 @@
+svg line {
+	stroke-width: 1px;
+	stroke: red;
+}
+
+svg text {
+	font-size: 16px;
+	text-anchor: middle;
+	dominant-baseline: middle;
+}
+
+.tile-white rect {
+	fill: white;
+}
+
+.tile-black rect {
+	fill: #825454;
+}
+
+.pieceWhite {
+	fill: white;
+}
+
+.pieceBlack {
+	fill: black;
+}
