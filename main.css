@@ -1,6 +1,10 @@
 #top-nav {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr) 44px;
+	grid-template-columns: repeat(3, 1fr) 48px;
+}
+
+#top-nav>* {
+	font-size: 20px;
 }
 
 .tab-button {
@@ -21,7 +25,12 @@
 	display: inline-block;
 }
 
+#banner>p {
+	margin: 5px;
+}
+
 main {
+	min-height: calc(100vh - 38px);
 	background-color: rgba(200, 200, 200, 0.8);
 }
 
@@ -58,10 +67,6 @@ main {
 	text-decoration: none;
 	cursor: pointer;
 	background-color: white;
-}
-
-#projects {
-	height: 80%;
 }
 
 .projects_list {
