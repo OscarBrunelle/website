@@ -1,5 +1,12 @@
 main {
+	width: 100%;
+	height: 100%;
 	text-align: center;
+	background-color: black;
+}
+
+svg {
+	height: 100%;
 }
 
 svg line {
@@ -14,11 +21,15 @@ svg text {
 }
 
 .tile-white rect {
-	fill: white;
+	fill: tan;
 }
 
 .tile-black rect {
-	fill: #825454;
+	fill: saddlebrown;
+}
+
+.piece {
+	cursor: pointer;
 }
 
 .piece:hover, .piece.active {
@@ -34,11 +45,11 @@ svg text {
 }
 
 .piece.team0.active {
-	fill: yellow;
+	fill: cyan;
 }
 
 .piece.team1.active {
-	fill: yellow;
+	fill: cyan;
 }
 
 .team0 {
