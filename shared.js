@@ -235,8 +235,7 @@ class BasicSVG {
 		this.height = height;
 
 		let svgroot = document.createElementNS(xmlns, "svg");
-		svgroot.setAttributeNS(null, "width", this.width);
-		svgroot.setAttributeNS(null, "height", this.height);
+		svgroot.setAttributeNS(null, "viewBox", "0 0 " + this.width + " " + this.height);
 		if (parent != null) {
 			parent.appendChild(svgroot);
 		}
