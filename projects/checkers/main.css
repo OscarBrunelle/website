@@ -7,6 +7,7 @@ main {
 
 svg {
 	height: 100%;
+	user-select: none;
 }
 
 svg line {
@@ -15,9 +16,9 @@ svg line {
 }
 
 svg text {
-	font-size: 16px;
+	font-size: 36px;
 	text-anchor: middle;
-	dominant-baseline: central;
+	dominant-baseline: middle;
 }
 
 .tile-white rect {
@@ -26,6 +27,10 @@ svg text {
 
 .tile-black rect {
 	fill: saddlebrown;
+}
+
+.tile-rect.possible_move, .possible_move-text {
+	cursor: pointer;
 }
 
 .piece {
