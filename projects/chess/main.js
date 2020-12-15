@@ -1,30 +1,86 @@
+"use strict"
+
 let svg;
 let board;
-const piecesOrder = ["tour", "cavalier", "fou", "dame", "roi", "fou", "cavalier", "tour"];
+const piecesCodes = {
+	"king": "&#9812", //roi
+	"queen": "&#9813", //dame
+	"rook": "&#9814", //tour
+	"bishop": "&#9815", //fou
+	"knight": "&#9816", //cavalier
+	"pawn": "&#9817", //pion
+};
+const piecesOrder = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"];
+
+class ChessPiece {
+	constructor(i, j, pieceType, team) {
+		this.pos = {
+			"i": i,
+			"j": j
+		};
+		this.pieceType = pieceType;
+		this.team = team;
+		this.DOMElement = null;
+	}
+
+	addTo(parentElement, parentSize) {
+		let pieceElement = document.createElementNS(xmlns, "text");
+
+		let pieceCode = piecesCodes[this.pieceType];
+		if (this.team === 1) {
+			pieceCode = pieceCode.substring(0, 4) + (parseInt(pieceCode.substring(4)) + 6);
+		}
+		pieceElement.innerHTML = pieceCode;
+		pieceElement.setAttributeNS(null, "class", "piece team" + this.team);
+		pieceElement.setAttributeNS(null, "x", parentSize/2);
+		pieceElement.setAttributeNS(null, "y", parentSize/2);
+		this.DOMElement = pieceElement;
+
+		const ref = this;
+		pieceElement.addEventListener("mouseover", function (e) {
+			console.log(ref);
+		});
+		pieceElement.addEventListener("click", function (e) {
+			for (const boardLine of board) {
+				for (const piece of boardLine) {
+					if (piece != null) {
+						$(piece.DOMElement).removeClass("active");
+					}
+				}
+			}
+
+			$(this).addClass("active");
+		});
+		parentElement.appendChild(pieceElement);
+	}
+}
 
 function createBoard() {
 	board = create2DArray(8, 8, function (i, j) {
 		if (j === 0 || j === 7) {
-			return piecesOrder[i];
+			return new ChessPiece(i, j, piecesOrder[i], (j === 0 ? 0 : 1));
 		} else if (j === 1 || j === 6) {
-			return "pion";
+			return new ChessPiece(i, j, "pawn", (j === 1 ? 0 : 1));
 		} else {
 			return null;
 		}
 	});
 
 	SVG2DArray(svg, board, function (d, i, j, squareSize) {
-		let rectElement = document.createElementNS(xmlns, "rect");
-		rectElement.setAttributeNS(null, "class", (((i % 2 === 0 && j % 2!== 0) || (i % 2 !== 0 && j % 2 === 0)) ? "tile-white" : "tile-black"));
+		let gElement = document.createElementNS(xmlns, "g");
+		gElement.setAttributeNS(null, "class", (((i % 2 === 0 && j % 2 !== 0) || (i % 2 !== 0 && j % 2 === 0)) ? "tile-white" : "tile-black"));
 
-		let numberElement = document.createElementNS(xmlns, "text");
-		numberElement.innerHTML = d;
-		numberElement.setAttributeNS(null, "class", "piece-" + i + "-" + j);
-		numberElement.addEventListener("mouseover", function (e) {
-			console.log(d);
-		});
-		rectElement.appendChild(numberElement);
-		return rectElement;
+		let rectElement = document.createElementNS(xmlns, "rect");
+		rectElement.setAttributeNS(null, "x", 0);
+		rectElement.setAttributeNS(null, "y", 0);
+		rectElement.setAttributeNS(null, "width", squareSize);
+		rectElement.setAttributeNS(null, "height", squareSize);
+		gElement.appendChild(rectElement);
+
+		if (d != null) {
+			d.addTo(gElement, squareSize);
+		}
+		return gElement;
 	});
 }
 
