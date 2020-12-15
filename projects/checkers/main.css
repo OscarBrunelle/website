@@ -1,6 +1,10 @@
+main {
+	text-align: center;
+}
+
 svg line {
 	stroke-width: 1px;
-	stroke: red;
+	stroke: black;
 }
 
 svg text {
@@ -17,10 +21,30 @@ svg text {
 	fill: #825454;
 }
 
-.pieceWhite {
+.piece:hover, .piece.active {
+	stroke-width: 3px;
+}
+
+.piece.team0:hover {
+	stroke: black;
+}
+
+.piece.team1:hover {
+	stroke: white;
+}
+
+.piece.team0.active {
+	fill: yellow;
+}
+
+.piece.team1.active {
+	fill: yellow;
+}
+
+.team0 {
 	fill: white;
 }
 
-.pieceBlack {
+.team1 {
 	fill: black;
 }
