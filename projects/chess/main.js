@@ -3,12 +3,12 @@
 let svg;
 let board;
 const piecesCodes = {
-	"king": "&#9812", //roi
-	"queen": "&#9813", //dame
-	"rook": "&#9814", //tour
-	"bishop": "&#9815", //fou
-	"knight": "&#9816", //cavalier
-	"pawn": "&#9817", //pion
+	"king": "&#9818", //roi
+	"queen": "&#9819", //dame
+	"rook": "&#9820", //tour
+	"bishop": "&#9821", //fou
+	"knight": "&#9822", //cavalier
+	"pawn": "&#9823", //pion
 };
 const piecesOrder = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"];
 
@@ -26,11 +26,7 @@ class ChessPiece {
 	addTo(parentElement, parentSize) {
 		let pieceElement = document.createElementNS(xmlns, "text");
 
-		let pieceCode = piecesCodes[this.pieceType];
-		if (this.team === 1) {
-			pieceCode = pieceCode.substring(0, 4) + (parseInt(pieceCode.substring(4)) + 6);
-		}
-		pieceElement.innerHTML = pieceCode;
+		pieceElement.innerHTML = piecesCodes[this.pieceType];
 		pieceElement.setAttributeNS(null, "class", "piece team" + this.team);
 		pieceElement.setAttributeNS(null, "x", parentSize/2);
 		pieceElement.setAttributeNS(null, "y", parentSize/2);
