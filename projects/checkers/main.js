@@ -4,13 +4,12 @@ let svg;
 let circles;
 let board;
 
-let globalss = 49.5;
 /*
 - depaclement normal
 x prise
 */
 
-class Piece {
+class CheckersPiece {
 	constructor(i, j, team) {
 		this.pos = {
 			"i": i,
@@ -20,12 +19,12 @@ class Piece {
 		this.DOMElement = null;
 	}
 
-	addTo(parentElement) {
+	addTo(parentElement, parentSize) {
 		let pieceElement = document.createElementNS(xmlns, "circle");
 		pieceElement.setAttributeNS(null, "class", "piece team" + this.team);
-		pieceElement.setAttributeNS(null, "cx", globalss / 2);
-		pieceElement.setAttributeNS(null, "cy", globalss / 2);
-		pieceElement.setAttributeNS(null, "r", globalss / 3);
+		pieceElement.setAttributeNS(null, "cx", parentSize / 2);
+		pieceElement.setAttributeNS(null, "cy", parentSize / 2);
+		pieceElement.setAttributeNS(null, "r", parentSize / 3);
 		this.DOMElement = pieceElement;
 
 		const ref = this;
@@ -50,9 +49,9 @@ class Piece {
 function createBoard() {
 	board = create2DArray(8, 8, function (i, j) {
 		if (((j === 0 || j === 2) && i % 2 === 0) || (j === 1 && i % 2 === 1)) {
-			return new Piece(i, j, 0);
+			return new CheckersPiece(i, j, 0);
 		} else if (((j === 5 || j === 7) && i % 2 === 1) || (j === 6 && i % 2 === 0)) {
-			return new Piece(i, j, 1);
+			return new CheckersPiece(i, j, 1);
 		} else {
 			return null;
 		}
@@ -71,7 +70,7 @@ function createBoard() {
 		gElement.appendChild(rectElement);
 
 		if(d!=null){
-			d.addTo(gElement);
+			d.addTo(gElement, squareSize);
 
 		}
 
