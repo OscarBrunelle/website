@@ -34,7 +34,7 @@ class ChessPiece {
 
 		const ref = this;
 		pieceElement.addEventListener("mouseover", function (e) {
-			console.log(ref);
+			// console.log(ref);
 		});
 		pieceElement.addEventListener("click", function (e) {
 			for (const boardLine of board) {
