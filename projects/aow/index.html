@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="../../shared.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="icon" type="image/png" href="icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Age of war-like game">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Age of War</title>
+</head>
+
+<body>
+	<main id="main" role="main">
+		<div id="game-div">
+			<canvas id="game-canvas"></canvas>
+			<div id="ui-div">
+				<div id="ui-infos-div">
+					<button id="ui-parameters"></button>
+					<div>
+						<span>$</span>
+						<span id="ui-money">7360</span>
+					</div>
+					<div>
+						<span>Exp</span>
+						<span id="ui-exp">45976</span>
+					</div>
+				</div>
+				<div id="ui-queue-div">
+					<div id="ui-queue-progress"></div>
+					<div id="ui-queue-units">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+				<div id="ui-shop-div">
+					<button id="ui-units"></button>
+					<button id="ui-turrets"></button>
+					<button id="ui-add_turret"></button>
+					<button id="ui-sell_turret"></button>
+					<button id="ui-evolve"></button>
+				</div>
+				<button id="ui-power"></button>
+				<div id="ui-lifebar-p1"></div>
+				<div id="ui-lifebar-p2"></div>
+			</div>
+		</div>
+	</main>
+
+	<script type="text/javascript" src="../../jquery.js"></script>
+	<script type="text/javascript" src="../../shared.js"></script>
+	<script type="text/javascript" src="../../game_engine.js"></script>
+	<script type="text/javascript" src="ages.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
