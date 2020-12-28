@@ -72,12 +72,57 @@ function finishShape(e) {
 	}
 }
 
+function drawSnowFlake() {
+	const numberBranches = 6;
+	for (let i = 0; i < numberBranches; i++) {
+		drawPart({
+			x: 50,
+			y: 50
+		}, 50, i * Math.PI / (numberBranches/2), 0);
+	}
+}
+
+function drawPart(prevPos = {
+	x: 0,
+	y: 0
+}, length = 10, orientation = 0, recursion = 0) {
+	if (recursion > 3) {
+		return;
+	}
+
+	let x2 = prevPos.x + length * Math.cos(orientation);
+	let y2 = prevPos.y + length * Math.sin(orientation);
+	let line = document.createElementNS(xmlns, "line");
+	line.setAttributeNS(null, "x1", prevPos.x);
+	line.setAttributeNS(null, "y1", prevPos.y);
+	line.setAttributeNS(null, "x2", x2);
+	line.setAttributeNS(null, "y2", y2);
+	svg.appendChild(line)
+
+	let midX2 = prevPos.x + length * Math.cos(orientation)/2;
+	let midY2 = prevPos.y + length * Math.sin(orientation)/2;
+	drawPart({
+		x: midX2,
+		y: midY2
+	}, length / 2, orientation - Math.PI / 5, recursion + 1);
+	// drawPart({
+	// 	x: x2,
+	// 	y: y2
+	// }, length / 2, orientation, recursion + 1);
+	drawPart({
+		x: midX2,
+		y: midY2
+	}, length / 2, orientation + Math.PI / 5, recursion + 1);
+}
+
 function loadDrawIt() {
 	svg = document.getElementById("svg");
 	shapeSelect = document.getElementById("shape-select");
 	svg.addEventListener("mousedown", createShape);
 	svg.addEventListener("mousemove", moveShape);
 	svg.addEventListener("mouseup", finishShape);
+
+	drawSnowFlake();
 }
 
 document.onload = loadDrawIt();

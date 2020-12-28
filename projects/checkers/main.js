@@ -59,68 +59,85 @@ class CheckersPiece {
 		resetPossibleMoves();
 
 		if (this.isKing === true) {
-
+			this.isMovementPossible(this.pos.i, this.pos.j);
 		} else {
-			let moveDirection = (this.team === 0) ? 1 : -1;
-			let j1 = this.pos.j + moveDirection
-			if (j1 >= 0 && j1 < 8) {
-				let i1 = this.pos.i - 1
-				if (i1 >= 0 && i1 < 8) {
-					let enemyPresent = false;
-					for (const boardLine of board) {
-						for (const piece of boardLine) {
-							if (piece != null && piece.pos.i === i1 && piece.pos.j === j1) {
-								enemyPresent = true;
-								break;
-							}
-						}
-					}
-					if (!enemyPresent) {
-						let width = document.querySelector(".tile-" + i1 + "-" + j1 + " .tile-rect").getAttributeNS(null, "width");
-						let height = document.querySelector(".tile-" + i1 + "-" + j1 + " .tile-rect").getAttributeNS(null, "height");
+			let direction = (this.team === 0) ? 1 : -1;
+			this.isMovementPossible(this.pos.i, this.pos.j, direction);
+		}
+	}
+
+	isMovementPossible(posI, posJ, direction) {
+		if (direction == null) {
+			this.isMovementPossible(posI, posJ, -1);
+			this.isMovementPossible(posI, posJ, +1);
+		}
+
+		posJ = posJ + direction;
+		for (let iplus = 0; iplus <= 1; iplus++) {
+			let i = posI - 1 + 2 * iplus;
+			let j = posJ;
+			if (i >= 0 && i < 8) {
+				let adjacentPiece = pieceAt(i, j);
+				if (adjacentPiece == null) {
+					let width = document.querySelector(".tile-" + i + "-" + j + " .tile-rect").getAttributeNS(null, "width");
+					let height = document.querySelector(".tile-" + i + "-" + j + " .tile-rect").getAttributeNS(null, "height");
+					let text = document.createElementNS(xmlns, "text");
+					text.innerHTML = "-";
+					text.setAttributeNS(null, "class", "possible_move-text");
+					text.setAttributeNS(null, "x", width / 2);
+					text.setAttributeNS(null, "y", height / 2);
+					text.addEventListener("click", function (e) {
+						selectedPiece.moveTo(i, j);
+						nextTurn();
+					});
+					document.querySelector(".tile-" + i + "-" + j).appendChild(text);
+					$(".tile-" + i + "-" + j + " .tile-rect").addClass("possible_move");
+				} else {
+					i = i - 1 + 2 * iplus;
+					j = j + direction;
+					if (adjacentPiece.team != this.team && pieceAt(i, j) == null) {
+						let width = document.querySelector(".tile-" + i + "-" + j + " .tile-rect").getAttributeNS(null, "width");
+						let height = document.querySelector(".tile-" + i + "-" + j + " .tile-rect").getAttributeNS(null, "height");
 						let text = document.createElementNS(xmlns, "text");
-						text.innerHTML = "-";
+						text.innerHTML = "x";
 						text.setAttributeNS(null, "class", "possible_move-text");
 						text.setAttributeNS(null, "x", width / 2);
 						text.setAttributeNS(null, "y", height / 2);
 						text.addEventListener("click", function (e) {
-							selectedPiece.moveTo(i1, j1);
+							selectedPiece.moveTo(i, j);
+							adjacentPiece.DOMElement.remove();
+							board[j].splice(i);
 							nextTurn();
 						});
-						document.querySelector(".tile-" + i1 + "-" + j1).appendChild(text);
-						$(".tile-" + i1 + "-" + j1 + " .tile-rect").addClass("possible_move");
-					}
-				}
-				let i2 = this.pos.i + 1;
-				if (i2 >= 0 && i2 < 8) {
-					let enemyPresent = false;
-					for (const boardLine of board) {
-						for (const piece of boardLine) {
-							if (piece != null && piece.pos.i === i2 && piece.pos.j === j1) {
-								enemyPresent = true;
-								break;
-							}
-						}
-					}
-					if (!enemyPresent) {
-						let width = document.querySelector(".tile-" + i2 + "-" + j1 + " .tile-rect").getAttributeNS(null, "width");
-						let height = document.querySelector(".tile-" + i2 + "-" + j1 + " .tile-rect").getAttributeNS(null, "height");
-						let text = document.createElementNS(xmlns, "text");
-						text.innerHTML = "-";
-						text.setAttributeNS(null, "class", "possible_move-text");
-						text.setAttributeNS(null, "x", width / 2);
-						text.setAttributeNS(null, "y", height / 2);
-						text.addEventListener("click", function (e) {
-							selectedPiece.moveTo(i2, j1);
-							nextTurn();
-						});
-						document.querySelector(".tile-" + i2 + "-" + j1).appendChild(text);
-						$(".tile-" + i2 + "-" + j1 + " .tile-rect").addClass("possible_move");
+						document.querySelector(".tile-" + i + "-" + j).appendChild(text);
+						$(".tile-" + i + "-" + j + " .tile-rect").addClass("possible_move");
 					}
 				}
 			}
 		}
 	}
+}
+
+function pieceAt(i, j) {
+	for (const boardLine of board) {
+		for (const piece of boardLine) {
+			if (piece != null && piece.pos.i === i && piece.pos.j === j) {
+				return piece;
+			}
+		}
+	}
+	return null;
+}
+
+function isEnemyPresent(i, j) {
+	for (const boardLine of board) {
+		for (const piece of boardLine) {
+			if (piece != null && piece.pos.i === i && piece.pos.j === j) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 function unselectPiece() {
