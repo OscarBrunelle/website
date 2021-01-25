@@ -62,13 +62,13 @@ $(document).ready(function () {
 
 function printResume() {
 	if (getComputedStyle(document.getElementById("resume-fr"), null).display === "block") {
-		print_element("resume-fr", "resume.css");
+		print_element("resume-fr", "main.css");
 	} else if (getComputedStyle(document.getElementById("resume-en"), null).display === "block") {
-		print_element("resume-en", "resume.css");
+		print_element("resume-en", "main.css");
 	} else if (getComputedStyle(document.getElementById("resume-canadian-fr"), null).display === "block") {
-		print_element("resume-canadian-fr", "resume.css");
+		print_element("resume-canadian-fr", "main.css");
 	} else if (getComputedStyle(document.getElementById("resume-canadian-en"), null).display === "block") {
-		print_element("resume-canadian-en", "resume.css");
+		print_element("resume-canadian-en", "main.css");
 	}
 }
 
