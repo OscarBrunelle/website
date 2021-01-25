@@ -54,7 +54,7 @@ header>p {
 main {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 1px;
+	gap: 5px;
 	background-color: var(--secondary-background-color);
 }
 
