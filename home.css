@@ -52,6 +52,8 @@ header>p {
 }
 
 main {
+	min-height: calc(100% - 37px - 95px);
+	height: fit-content;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	gap: 5px;
