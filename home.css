@@ -87,6 +87,10 @@ main>div>div {
 	outline: none;
 }
 
+.projects_list>div>a>* {
+	transition: 0.25s;
+}
+
 .projects_list>div>a>:first-child {
 	display: flex;
 	margin: auto;
@@ -113,7 +117,6 @@ main>div>div {
 	color: var(--primary-text-color);
 	background: var(--primary-background-color);
 	text-align: center;
-	transition: 0.25s ease;
 }
 
 @media (hover: none) {
@@ -126,7 +129,6 @@ main>div>div {
 
 .projects_list>div>a:hover>:first-child {
 	transform: scale(1.2);
-	transition: 0.25s ease;
 }
 
 .projects_list>div>a:hover>:last-child {
