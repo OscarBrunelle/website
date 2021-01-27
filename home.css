@@ -76,6 +76,7 @@ main>div>div {
 	position: relative;
 	border: 1px solid black;
 	text-decoration: none;
+	aspect-ratio: 16 / 9;
 }
 
 .projects_list>div>a:focus {
@@ -115,7 +116,7 @@ main>div>div {
 	.projects_list>div>a>.caption {
 		opacity: 1;
 		height: 33%;
-		background-color:var(--primary-background-color);
+		background-color: var(--primary-background-color);
 	}
 }
 
