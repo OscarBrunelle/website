@@ -24,16 +24,44 @@ main>div {
 }
 
 main>div>a {
-	width: 100%;
-	height: 100%;
+	width: 95%;
+	height: 95%;
 	text-align: center;
 }
 
 main>div>a>button {
-	width: 95%;
-	height: 95%;
 	padding: 5px;
 	font-size: 4vw;
-	border-radius: 5px;
 	cursor: pointer;
+}
+
+.language-button {
+	display: flex;
+	align-items: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: 0;
+}
+
+.language-button>button {
+	width: 100%;
+	opacity: 0.8;
+	border-radius: 5px;
+}
+
+#french-button {
+	background-image: url("images/flag-france.svg");
+}
+
+#french-button>button {
+	aspect-ratio: 3/2;
+}
+
+#english-button {
+	background-image: url("images/flag-england.svg");
+}
+
+#english-button>button {
+	aspect-ratio: 2/1;
 }
