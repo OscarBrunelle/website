@@ -1,3 +1,7 @@
+main {
+	height: 100%;
+}
+
 #food-input {
 
 }
@@ -24,4 +28,14 @@
 
 #shopping_list>div>button {
 	cursor: pointer;
+}
+
+#map {
+	height: 50%;
+	aspect-ratio: 1/1;
+}
+
+#lines>line {
+	stroke: blue;
+	stroke-width: 0.1;
 }
