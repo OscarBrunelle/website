@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="icon" type="image/png" href="icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="chess clock">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Chess clock</title>
+</head>
+
+<body>
+	<main id="main" role="main">
+		<div>
+			<button onclick="startClock();">Start</button>
+			<button onclick="switchPlayer();">Switch</button>
+			<button onclick="resetClock();" disabled>Reset</button>
+		</div>
+		<div>
+			<div><span id="p1TimeSpan">0</span></div>
+			<div><span id="p2TimeSpan">0</span></div>
+		</div>
+	</main>
+
+	<!-- <script type="text/javascript" src="../../shared/jquery.js"></script>
+	<script type="text/javascript" src="../../shared/shared.js"></script> -->
+	<script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
