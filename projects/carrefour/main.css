@@ -1,0 +1,18 @@
+#food-input {
+
+}
+
+#search_suggestions {
+	width: 234px;
+	padding: 5px;
+	border: 1px solid black;
+}
+
+#search_suggestions:empty {
+	display: none;
+}
+
+#search_suggestions>span {
+	width: min-content;
+	display: block;
+}
