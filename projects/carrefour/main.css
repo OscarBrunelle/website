@@ -13,6 +13,15 @@
 }
 
 #search_suggestions>span {
-	width: min-content;
+	width: 100%;
 	display: block;
+	cursor: pointer;
+}
+
+#search_suggestions>span:hover {
+	background: lightgreen;
+}
+
+#shopping_list>div>button {
+	cursor: pointer;
 }

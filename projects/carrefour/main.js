@@ -2,7 +2,11 @@ let shoppingList = [];
 
 document.getElementById("search-input").addEventListener("input", searchItem);
 document.getElementById("search-input").addEventListener("focus", searchItem);
-document.getElementById("search-input").addEventListener("keypress", addItem);
+document.getElementById("search-input").addEventListener("keypress", function(e) {
+	if (e.key == "Enter") {
+		addItem();
+	}
+});
 
 let bestSuggestion = null;
 function searchItem(e) {
@@ -10,9 +14,6 @@ function searchItem(e) {
 	let suggestionsContainer = document.getElementById("search_suggestions");
 	suggestionsContainer.innerHTML = "";
 	bestSuggestion = null;
-	if (search == "") {
-		return;
-	}
 
 	for (const item of items) {
 			if (item.name.includes(search) && !shoppingList.includes(item)) {
@@ -21,14 +22,16 @@ function searchItem(e) {
 				}
 				let suggestion = document.createElement("span");
 				suggestion.innerHTML = item.name;
+				suggestion.addEventListener("click", function(e) {
+					addItem(item);
+				});
 				suggestionsContainer.appendChild(suggestion);
 			}
 	}
 }
 
-function addItem(e) {
-	let addedItem = bestSuggestion;
-	if (e.key == "Enter" && document.getElementById("search-input").value != "" && addedItem != null && !shoppingList.includes(addedItem)) {
+function addItem(addedItem = bestSuggestion) {
+	if (addedItem != null && !shoppingList.includes(addedItem)) {
 		shoppingList.push(addedItem);
 		console.log(shoppingList);
 
@@ -50,5 +53,12 @@ function addItem(e) {
 		document.getElementById("search-input").value = "";
 		let suggestionsContainer = document.getElementById("search_suggestions");
 		suggestionsContainer.innerHTML = "";
+	}
+}
+
+function findBestPath() {
+	if (shoppingList.length <= 0) {
+		alert("Shopping list is empty");
+		return null;
 	}
 }
