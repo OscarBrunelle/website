@@ -130,7 +130,7 @@ function findBestPath() {
 	}
 
 	let exitPos = {
-		x: 5,
+		x: 10,
 		y: 0
 	};
 	svgline(lines, currentPos.x, currentPos.y, exitPos.x, exitPos.y);

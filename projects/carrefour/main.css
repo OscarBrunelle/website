@@ -8,6 +8,8 @@ main {
 
 #search_suggestions {
 	width: 234px;
+	max-height: 200px;
+	overflow-y: auto;
 	padding: 5px;
 	border: 1px solid black;
 }
@@ -33,6 +35,13 @@ main {
 #map {
 	height: 50%;
 	aspect-ratio: 1/1;
+}
+
+#map>rect {
+	fill: grey;
+	opacity: 0.8;
+	stroke: black;
+	stroke-width: 0.1;
 }
 
 #lines>line {
