@@ -1,67 +1,47 @@
+:root {
+	--primary-background-color: rgb(52, 123, 152);
+	--primary-text-color: white;
+
+	--secondary-background-color: rgb(190, 238, 255);
+	--secondary-text-color: black;
+}
+
+header {
+	padding: 10px;
+	background-color: var(--primary-background-color);
+	color: var(--primary-text-color);
+}
+
+header>h1 {
+	margin: 0 0 10px 0;
+	text-align: center;
+	font-size: 40px;
+	font-weight: normal;
+}
+
 main {
-	height: 100%;
-	overflow-y: auto;
-}
-
-main>p {
-	min-height: 50%;
-	display: grid;
-	grid-template-columns: 1fr auto 1fr;
-	margin: 0;
-	align-items: center;
-}
-
-main>p>span {
+	min-height: calc(100% - 76.4px);
+	height: fit-content;
+	padding: 20px;
+	font-size: 16px;
 	text-align: center;
-	font-size: 4vw;
-}
-
-main>div {
-	min-height: 50%;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	align-items: center;
-}
-
-main>div>a {
-	width: 95%;
-	height: 95%;
-	text-align: center;
-}
-
-main>div>a>button {
-	padding: 5px;
-	font-size: 4vw;
-	cursor: pointer;
-}
-
-.language-button {
+	background-color: var(--secondary-background-color);
 	display: flex;
-	align-items: center;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-	padding: 0;
+  justify-content: center;
+  align-items: center;
 }
 
-.language-button>button {
-	width: 100%;
-	opacity: 0.8;
+main>div>div:first-child {
+	margin-bottom: 40px;
+}
+
+main>div>div:last-child {
+	margin-top: 40px;
+}
+
+main button {
+	padding: 10px;
+	font-size: 24px;
 	border-radius: 5px;
-}
-
-#french-button {
-	background-image: url("images/flag-france.svg");
-}
-
-#french-button>button {
-	aspect-ratio: 3/2;
-}
-
-#english-button {
-	background-image: url("images/flag-england.svg");
-}
-
-#english-button>button {
-	aspect-ratio: 2/1;
+	cursor: pointer;
 }
