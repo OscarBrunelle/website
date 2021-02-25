@@ -1,136 +1,17 @@
-:root {
-	--primary-background-color: rgb(52, 123, 152);
-	--primary-text-color: white;
-
-	--secondary-background-color: rgb(190, 238, 255);
-	--secondary-text-color: black;
-}
-
-header {
-	padding: 10px;
-	background-color: var(--primary-background-color);
-	color: var(--primary-text-color);
-}
-
-header>h1 {
-	margin: 0 0 10px 0;
-	text-align: center;
-	font-size: 40px;
-	font-weight: normal;
-}
-
-header>p {
-	margin: 0;
-	text-align: center;
-}
-
-#top-nav {
-	margin: auto;
-	display: grid;
-	grid-template-columns: repeat(2, minmax(10px, 1fr)) 48px;
-}
-
-#top-nav>a>button {
-	width: 100%;
-	font-size: 20px;
-	padding: 6px;
-	border: 1px solid black;
-	border-left: none;
-	border-radius: 0;
-	cursor: pointer;
-	background-color: var(--primary-background-color);
-	color: var(--primary-text-color);
-}
-
-#top-nav>a:last-child>button {
-	border-right: none;
-}
-
-#top-nav>a>button.active {
-	background-color: var(--secondary-background-color);
-	border-bottom-color: var(--secondary-background-color);
-	color: black;
-}
-
 main {
-	min-height: calc(100% - 37px - 95px);
-	height: fit-content;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 5px;
-	background-color: var(--secondary-background-color);
-}
-
-main>div>h1 {
-	text-align: center;
-	font-weight: normal;
-}
-
-main>div>div {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 5px;
-}
-
-.projects_list>div>a {
-	min-height: 100px;
-	height: auto;
-	position: relative;
-	overflow: hidden;
-	text-decoration: none;
-	aspect-ratio: 16 / 9;
-	border: 1px solid black;
-}
-
-.projects_list>div>a:focus {
-	border-width: 2px;
-	outline: none;
-}
-
-.projects_list>div>a>* {
-	transition: 0.25s;
-}
-
-.projects_list>div>a>:first-child {
 	display: flex;
-	margin: auto;
-	align-items: center;
 	justify-content: center;
-	text-align: center;
-	max-width: 100%;
-	height: 100%;
-	font-size: 20px;
-	background-color: white;
-	color: var(--primary-background-color);
-}
-
-.projects_list>div>a>:last-child {
-	position: absolute;
-	bottom: 0;
-	display: flex;
 	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
-	opacity: 0;
-	color: var(--primary-text-color);
-	background: var(--primary-background-color);
 	text-align: center;
 }
 
-@media (hover: none) {
-	.projects_list>div>a>:last-child {
-		opacity: 1;
-		height: 33%;
-		background-color: var(--primary-background-color);
-	}
+main>div>div:first-child {
+	margin-bottom: 40px;
 }
 
-.projects_list>div>a:hover>:first-child {
-	transform: scale(1.2);
-}
-
-.projects_list>div>a:hover>:last-child {
-	opacity: 0.9;
+main button {
+	padding: 10px;
+	font-size: 24px;
+	border-radius: 5px;
+	cursor: pointer;
 }
