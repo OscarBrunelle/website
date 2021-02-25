@@ -1,0 +1,20 @@
+#mainMenuDiv {
+	margin: 8px;
+	text-align: center;
+}
+
+#mainMenuDiv button {
+	display: block;
+	width: max-content;
+	margin: auto;
+	margin-top: 8px;
+	cursor: pointer;
+}
+
+#mainMenuDiv button:disabled {
+	cursor: not-allowed;
+}
+
+#mainMenuDiv>a {
+	width: min-content;
+}

@@ -39,8 +39,6 @@ function onLoad() {
       paddle1.release("down");
     }
   });
-
-  set();
 }
 
 function set() {

@@ -1,0 +1,15 @@
+main {
+	text-align: center;
+}
+
+main>button {
+	margin: 8px;
+}
+
+main>div {
+	display: block;
+}
+
+canvas {
+	background-color: black;
+}

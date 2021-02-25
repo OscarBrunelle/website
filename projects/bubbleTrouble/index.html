@@ -2,46 +2,58 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Bubble Trouble</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="icon" type="image/png" href="icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Bubble Trouble">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Bubble Trouble</title>
 </head>
 
 <body>
-  <div id="mainMenu" class="fixedDiv">
-    <button id="play1" class="menuButton" onclick="loadGame(1)">1 Player</button>
-    <button id="play2" class="menuButton" onclick="loadGame(2)">2 Players</button>
-    <button id="instructions" class="menuButton" onclick="toggleInstuctions()">Instructions</button>
-    <button id="options" class="menuButton" onclick="toggleOptionsMenu()">Options</button>
-    <button id="credits" class="menuButton">Credits</button>
-    <button id="back" class="menuButton">Back to home page</button>
-  </div>
+	<header>
+		<h1>Bubble Trouble</h1>
+	</header>
 
-  <div id="optionsMenu">
-    <div class="fixedDiv">
-      <button id="sound" class="menuButton">Sound</button>
-      <button id="music" class="menuButton">Music</button>
-      <button id="language" class="menuButton">Language</button>
-      <button id="backMainMenu" class="menuButton" onclick="loadMainMenu('button')">Main Menu</button>
-    </div>
-  </div>
+	<nav role="navigation" id="top-nav"></nav>
 
-  <div id="game">
-    <canvas id="canvas"></canvas>
-    <div>
-      <button onclick="nextLevel()">Next Level</button>
-    </div>
-  </div>
+	<main role="main">
+		<div id="mainMenu">
+			<button id="play1" class="menuButton" onclick="loadGame(1)">1 Player</button>
+			<button id="play2" class="menuButton" onclick="loadGame(2)">2 Players</button>
+			<button id="instructions" class="menuButton" onclick="toggleInstuctions()" disabled>Instructions</button>
+			<button id="options" class="menuButton" onclick="toggleOptionsMenu()">Options</button>
+			<button id="credits" class="menuButton" disabled>Credits</button>
+			<a href="../../index.html"><button id="back" class="menuButton">Back to home page</button></a>
+		</div>
 
-  <image src="images/player1.png" id="imagePlayer1" style="display: none;"></image>
-  <image src="images/player2.png" id="imagePlayer2" style="display: none;"></image>
+		<div id="optionsMenu">
+			<div class="fixedDiv">
+				<button id="sound" class="menuButton">Sound</button>
+				<button id="music" class="menuButton">Music</button>
+				<button id="language" class="menuButton">Language</button>
+				<button id="backMainMenu" class="menuButton" onclick="loadMainMenu('button')">Main Menu</button>
+			</div>
+		</div>
 
-  <script src="Laser.js"></script>
-  <script src="Bubble.js"></script>
-  <script src="Player.js"></script>
-  <script src="main.js"></script>
+		<div id="game">
+			<canvas id="canvas"></canvas>
+			<div>
+				<button onclick="nextLevel()">Next Level</button>
+			</div>
+		</div>
+	</main>
+
+	<image src="images/player1.png" id="imagePlayer1" style="display: none;"></image>
+	<image src="images/player2.png" id="imagePlayer2" style="display: none;"></image>
+
+	<script src="Laser.js"></script>
+	<script src="Bubble.js"></script>
+	<script src="Player.js"></script>
+	<script src="main.js"></script>
 </body>
 
 </html>
