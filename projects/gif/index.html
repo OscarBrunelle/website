@@ -4,6 +4,7 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="icon" type="image/png" href="icon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +15,40 @@
 </head>
 
 <body>
+	<header>
+		<h1>GIF</h1>
+	</header>
+
+	<nav role="navigation" id="top-nav"></nav>
+
 	<main id="main" role="main">
-		
+		<div id="drawing">
+			<div>
+				<button></button>
+			</div>
+			<div>
+				<canvas id="drawing-canvas"></canvas>
+				<div id="drawing-tools">
+					<select id="number_colors-select">
+						<option value="2">2</option>
+						<option value="4" selected>4</option>
+						<option value="8">8</option>
+					</select>
+					<div id="color_pickers"></div>
+				</div>
+			</div>
+			<div>
+				<button></button>
+			</div>
+		</div>
+
+		<div id="output">
+			<span id="output-code"></span>
+		</div>
 	</main>
 
+	<script type="text/javascript" src="../../shared/shared.js"></script>
+	<script type="text/javascript" src="creator.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </body>
 

@@ -1,0 +1,39 @@
+main {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	gap: 3px;
+	padding: 3px;
+}
+
+#drawing-canvas, #output-code {
+	border: 1px solid var(--primary-background-color);
+}
+
+#drawing {
+	display: grid;
+	grid-template-rows: 50px 1fr 50px;
+}
+
+#drawing>div:nth-child(2) {
+	display: grid;
+	grid-template-columns: 1fr 50px;
+	gap: 3px;
+}
+
+#drawing-canvas {
+	width: 100%;
+	background-color: white;
+}
+
+#drawing-tools {
+	border: 1px solid var(--primary-background-color);
+}
+
+#output-code {
+	display: block;
+	width: 100%;
+	min-height: 50px;
+	height: fit-content;
+	word-break: break-all;
+	padding: 10px;
+}
