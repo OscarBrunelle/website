@@ -16,7 +16,7 @@ main {
 
 #drawing>div:nth-child(2) {
 	display: grid;
-	grid-template-columns: 1fr 50px;
+	grid-template-columns: 50px 1fr;
 	gap: 3px;
 }
 
@@ -34,6 +34,7 @@ main {
 	width: 100%;
 	min-height: 50px;
 	height: fit-content;
-	word-break: break-all;
+	margin: 0;
+	word-break: break-word;
 	padding: 10px;
 }
