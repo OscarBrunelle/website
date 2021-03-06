@@ -29,17 +29,24 @@
 			<div>
 				<canvas id="drawing-canvas"></canvas>
 				<div id="drawing-tools">
-					<span>Nombre de couleurs différentes</span>
-					<select id="number_colors-select">
-						<option value="2">2</option>
-						<option value="4" selected>4</option>
-						<option value="8">8</option>
-					</select>
-					<div id="color_pickers"></div>
-					<span>Sélection de la couleur</span>
-					<select id="painting_color-select"></select>
-					<span>Taille du pinceau</span>
-					<input id="brush_size" value="1">
+					<div>
+						<span>Nombre de couleurs différentes</span>
+						<select id="number_colors-select">
+							<option value="2">2</option>
+							<option value="4" selected>4</option>
+							<option value="8">8</option>
+						</select>
+						<div id="color_pickers"></div>
+					</div>
+
+					<div>
+						<span>Sélection de la couleur</span>
+						<select id="painting_color-select"></select>
+					</div>
+					<div>
+						<span>Taille du pinceau</span>
+						<input id="brush_size" value="1" type="number" maxlength=4>
+					</div>
 				</div>
 			</div>
 			<div>
@@ -47,11 +54,11 @@
 					<span>Dimensions</span>
 					<div>
 						<span>Largeur</span>
-						<input id="width" value="10">
+						<input id="width" value="10" type="number" maxlength="4">
 					</div>
 					<div>
 						<span>Hauteur</span>
-						<input id="height" value="10">
+						<input id="height" value="10" type="number" maxlength="4">
 					</div>
 				</div>
 			</div>

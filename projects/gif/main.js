@@ -18,7 +18,6 @@ function getFileData() {
 		let hexcode = +("0x" + hex);
 		hexcodeArray.push(hexcode);
 		let str = String.fromCharCode(hexcode);
-		console.log(hexcode, str, str.charCodeAt(0));
 		file += str;
 	}
 
@@ -56,6 +55,7 @@ function updateColorPickers() {
 		let colorPicker = document.createElement("input");
 		colorPicker.id = "color_picker-" + i;
 		colorPicker.className = "color_picker";
+		colorPicker.maxLength = 6;
 		colorPicker.value = colors[i];
 		colorPicker.addEventListener("change", updateColorPickers);
 		colorPickersContainer.appendChild(colorPicker);
