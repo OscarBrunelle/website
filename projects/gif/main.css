@@ -11,18 +11,18 @@ main {
 
 #drawing {
 	display: grid;
-	grid-template-rows: 50px 1fr 50px;
+	grid-template-rows: auto 1fr auto;
 }
 
 #drawing>div:nth-child(2) {
 	display: grid;
-	grid-template-columns: 50px 1fr;
+	grid-template-columns: 200px 1fr;
 	gap: 3px;
 }
 
 #drawing-canvas {
 	width: 100%;
-	background-color: white;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 #drawing-tools {

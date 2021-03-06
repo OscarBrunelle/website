@@ -24,31 +24,54 @@
 	<main id="main" role="main">
 		<div id="drawing">
 			<div>
-				<button></button>
+				<button onclick="eraseCanvas();">Erase</button>
 			</div>
 			<div>
 				<canvas id="drawing-canvas"></canvas>
 				<div id="drawing-tools">
+					<span>Nombre de couleurs différentes</span>
 					<select id="number_colors-select">
 						<option value="2">2</option>
 						<option value="4" selected>4</option>
 						<option value="8">8</option>
 					</select>
 					<div id="color_pickers"></div>
+					<span>Sélection de la couleur</span>
+					<select id="painting_color-select"></select>
+					<span>Taille du pinceau</span>
+					<input id="brush_size" value="1">
 				</div>
 			</div>
 			<div>
-				<button></button>
+				<div id="dimensions">
+					<span>Dimensions</span>
+					<div>
+						<span>Largeur</span>
+						<input id="width" value="10">
+					</div>
+					<div>
+						<span>Hauteur</span>
+						<input id="height" value="10">
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<div id="output">
+			<div>
+				<button onclick="compileGIF();" disabled>Convert</button>
+				<button onclick="toggleAutoConversion();" disabled>Disable auto-convert</button>
+				<button onclick="copyToClipboard();">Copy to clipboard</button>
+				<button onclick="saveGIF();">Save</button>
+			</div>
 			<p id="output-code"></p>
+			<img id="output-image">
 		</div>
 	</main>
 
 	<script type="text/javascript" src="../../shared/shared.js"></script>
 	<script type="text/javascript" src="creator.js"></script>
+	<script type="text/javascript" src="painter.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </body>
 

@@ -2,8 +2,8 @@
 
 const headerBlock = "474946383961";
 
-let width = "0A00"; // 10
-let height = "0A00"; // 10
+let gifWidth = "0A00"; // 10
+let gifHeight = "0A00"; // 10
 let colors = ["FFFFFF", "FF0000", "0000FF", "000000"];
 
 function compileGIF() {	
@@ -12,11 +12,11 @@ function compileGIF() {
 	let sortFlag = "0";
 	let globalColorTableSize = to_fixed_length(dec_to_hex(Math.log2(colors.length) - 1), 3);
 	let packedFieldLogical = globalColorTableFlag + colorResolution + sortFlag + globalColorTableSize;
-	packedFieldLogical = hex_to_dec(packedFieldLogical).toString();
+	packedFieldLogical = "91"; // hex_to_dec(packedFieldLogical).toString();
 	
 	let backgroundColorIndex = "00";
 	let pixelAspectRatio = "00";
-	let logicalScreenDescriptor = width + height + packedFieldLogical + backgroundColorIndex + pixelAspectRatio;
+	let logicalScreenDescriptor = gifWidth + gifHeight + packedFieldLogical + backgroundColorIndex + pixelAspectRatio;
 	
 	let globalColorTable = "";
 	for (color of colors) {
@@ -61,7 +61,6 @@ function compileGIF() {
 	const trailer = "3B";
 
 	let completeGIF = headerBlock + logicalScreenDescriptor + globalColorTable + graphicControlExtension + imageDescriptor + localColorTable + imageData + trailer;
-
-	document.getElementById("output-code").innerHTML = completeGIF
-	;
+	
+	return completeGIF;
 }
