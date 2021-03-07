@@ -1,11 +1,5 @@
-body {
-	width: 100vw;
-	height: 100vh;
-	margin: 0px;
-}
-
 main {
-	background-color: lightgrey;
+	text-align: center;
 	user-select: none;
 }
 

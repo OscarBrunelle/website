@@ -101,7 +101,7 @@ function load() {
 	//const width = document.getElementById("game").clientWidth;
 	//const height = document.getElementById("game").clientHeight;
 	let width = document.body.clientWidth - 20;
-	let height = document.body.clientHeight - 100;
+	let height = document.body.clientHeight - 200;
 	let size = Math.min(width, height);
 	if (grid_cookie != null) {
 		const obj_grid = JSON.parse(grid_cookie);
