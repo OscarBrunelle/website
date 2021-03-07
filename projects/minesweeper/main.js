@@ -14,7 +14,7 @@ const SMALL_SIZE = 14;
 var CASE_WIDTH = screen_width > 600 ? NORMAL_SIZE : SMALL_SIZE;
 var CASE_HEIGHT = screen_width > 600 ? NORMAL_SIZE : SMALL_SIZE;;
 
-const game = new Game("body", GAME_DIV_ID);
+const game = new Game("main", GAME_DIV_ID);
 const instructions_text = "Don't click the mines.";
 const menu_options = [
 	new MenuOption("Sound", "sound")
