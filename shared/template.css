@@ -12,20 +12,19 @@ body {
 }
 
 header {
-	padding: 10px;
 	background-color: var(--primary-background-color);
 	color: var(--primary-text-color);
 }
 
 header>h1 {
-	margin: 0 0 10px 0;
+	margin: 10px;
 	text-align: center;
 	font-size: 40px;
 	font-weight: normal;
 }
 
 header>p {
-	margin: 0;
+	margin: 10px;
 	text-align: center;
 }
 
