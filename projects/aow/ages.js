@@ -50,30 +50,69 @@ rocket launcher: 9000
 double machine gun: 14000
 */
 
-const ages = [
-	new Age(0,
-		[
-			new Unit(15, 0, 20, 0, 1, 1, 0)
-		]
-	)
-];
-
 class Age {
-	constructor(exp, units, turrets) {
-		this.exp = exp;
+	constructor(expNeeded, units, turrets, life, power) {
+		this.expNeeded = expNeeded;
 		this.units = units;
 		this.turrets = turrets;
+		this.life = life;
+		this.power = power;
 	}
 }
 
 class Unit {
-	constructor(cost, killGain, expOwner, expEnemy, damage, speed, range) {
+	constructor(cost, killGain, expOwner, expEnemy, damage, rate, range) {
+		this.x = 0;
+		this.y = 0;
+	}
+
+	draw() {
+		context.fillRect(this.x, canvas.height - 50, 20, 50);
+	}
+
+	update() {
+		this.x++;
+		this.y++;
+		this.draw();
+	}
+}
+
+class Turret {
+	constructor(cost, damage, rate, range) {
 
 	}
 }
 
-class CaveMan extends Unit {
+class Power {
 	constructor() {
-		super(15, 0, 20, 0, 1, 1, 0);
+	}
+}
+
+const ages = [
+	new Age(0,
+		[
+			new Unit(15, 0, 10, 40, 1, 1, 0),
+			new Unit(25, 0, 16, 64, 1, 1, 0),
+			new Unit(100, 0, 65, 260, 1, 1, 0)
+		],
+		[
+			new Turret(100, 1, 1, 10)
+		],
+		[
+			new Power()
+		],
+		100
+	)
+];
+
+class Player {
+	constructor() {
+		this.money = 100;
+		this.exp = 0;
+		this.units = [];
+		this.turrets = [];
+		this.age = ages[0];
+		this.life = this.age.life;
+		this.power = this.age.power;
 	}
 }

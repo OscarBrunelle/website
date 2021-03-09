@@ -1,0 +1,111 @@
+#game-canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image: url("background.jpg");
+	background-size: cover;
+}
+
+#ui-div {
+	position: relative;
+	display: grid;
+	grid-template-columns: 2fr 1fr 2fr;
+	gap: 3%;
+}
+
+#ui-infos-div {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+}
+
+#ui-parameters {
+	width: 100%;
+	aspect-ratio: 1/1;
+}
+
+#ui-infos-div>div>p {
+	margin: 0;
+	display: grid;
+	grid-template-columns: 25% 1fr;
+	gap: 5%;
+	font-size: 3vw;
+}
+
+#ui-infos-div>div>p>span:first-child {
+	text-align: right;
+}
+
+#ui-infos-div>div>p>span:last-child {
+	text-align: left;
+}
+
+#ui-queue-div {
+	display: grid;
+	grid-template-rows: auto auto 1fr;
+	gap: 2px;
+}
+
+#ui-queue-progress {
+	width: 100%;
+	height: 10px;
+	border: 1px solid black;
+}
+
+#ui-queue-progress-current {
+	width: 40%;
+	height: 100%;
+	background-color: red;
+}
+
+#ui-queue-unit_type {
+	font-size: 2vw;
+}
+
+#ui-queue-units {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 1%;
+}
+
+#ui-queue-units>div {
+	width: 100%;
+	aspect-ratio: 1/1;
+	border: 1px solid black;
+}
+
+#ui-shop-div {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	gap: 2px;
+}
+
+#ui-shop-buttons {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 1%;
+}
+
+#ui-shop-buttons>button {
+	width: 100%;
+	aspect-ratio: 1/1;
+}
+
+#ui-lifebar-p1 {
+	width: 10px;
+	height: 100px;
+	position: absolute;
+	top: 100px;
+	left: 0;
+	background-color: red;
+	border: 1px solid black;
+}
+
+#ui-lifebar-p2 {
+	width: 10px;
+	height: 100px;
+	position: absolute;
+	top: 100px;
+	right: 0;
+	background-color: red;
+	border: 1px solid black;
+}

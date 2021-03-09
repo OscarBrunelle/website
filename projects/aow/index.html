@@ -3,7 +3,8 @@
 <html lang="en">
 
 <head>
-	<link rel="stylesheet" type="text/css" href="../../shared.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="icon" type="image/png" href="icon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,23 +15,28 @@
 </head>
 
 <body>
+	<header>
+		<h1>Age of War</h1>
+	</header>
+
+	<nav role="navigation" id="top-nav"></nav>
+
 	<main id="main" role="main">
 		<div id="game-div">
-			<canvas id="game-canvas"></canvas>
+			<canvas id="game-canvas" width="750" height="400"></canvas>
 			<div id="ui-div">
 				<div id="ui-infos-div">
 					<button id="ui-parameters"></button>
 					<div>
-						<span>$</span>
-						<span id="ui-money">7360</span>
-					</div>
-					<div>
-						<span>Exp</span>
-						<span id="ui-exp">45976</span>
+						<p><span>$</span><span id="ui-money">7360</span></p>
+						<p><span>Exp</span><span id="ui-exp">45976</span></p>
 					</div>
 				</div>
 				<div id="ui-queue-div">
-					<div id="ui-queue-progress"></div>
+					<div id="ui-queue-progress">
+						<div id="ui-queue-progress-current"></div>
+					</div>
+					<span id="ui-queue-unit_type">Training God's Blade</span>
 					<div id="ui-queue-units">
 						<div></div>
 						<div></div>
@@ -40,22 +46,25 @@
 					</div>
 				</div>
 				<div id="ui-shop-div">
-					<button id="ui-units"></button>
-					<button id="ui-turrets"></button>
-					<button id="ui-add_turret"></button>
-					<button id="ui-sell_turret"></button>
-					<button id="ui-evolve"></button>
+					<div id="ui-shop-buttons">
+						<button id="ui-units"></button>
+						<button id="ui-turrets"></button>
+						<button id="ui-add_turret"></button>
+						<button id="ui-sell_turret"></button>
+						<button id="ui-evolve"></button>
+						<button id="ui-power"></button>
+					</div>
+					<button id="ui-power"></button>
 				</div>
-				<button id="ui-power"></button>
 				<div id="ui-lifebar-p1"></div>
 				<div id="ui-lifebar-p2"></div>
 			</div>
 		</div>
 	</main>
 
-	<script type="text/javascript" src="../../jquery.js"></script>
-	<script type="text/javascript" src="../../shared.js"></script>
-	<script type="text/javascript" src="../../game_engine.js"></script>
+	<script type="text/javascript" src="../../shared/jquery.js"></script>
+	<script type="text/javascript" src="../../shared/shared.js"></script>
+	<script type="text/javascript" src="../../shared/game_engine.js"></script>
 	<script type="text/javascript" src="ages.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </body>
