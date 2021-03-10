@@ -117,6 +117,11 @@ function drawPart(prevPos = {
 	}, length / 2, orientation + Math.PI / 5, recursion + 1);
 }
 
+function copyToClipboard() {
+	let text = svg.outerHTML;
+	navigator.clipboard.writeText(text);
+}
+
 function loadDrawIt() {
 	svg = document.getElementById("svg");
 	shapeSelect = document.getElementById("shape-select");
