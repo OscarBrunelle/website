@@ -123,8 +123,6 @@ function loadDrawIt() {
 	svg.addEventListener("mousedown", createShape);
 	svg.addEventListener("mousemove", moveShape);
 	svg.addEventListener("mouseup", finishShape);
-
-	drawSnowFlake();
 }
 
 document.onload = loadDrawIt();
