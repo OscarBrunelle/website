@@ -76,19 +76,3 @@ footer>span {
 	grid-column: 2 / 3;
 	text-align: center;
 }
-
-@media (max-width: 599px) {
-	main {
-		min-height: calc(100vh - 10px - 48px);
-	}
-
-	footer {
-		height: 48px;
-		grid-template-columns: 1fr 1fr;
-	}
-
-	footer>span {
-		grid-row: 1;
-		grid-column: 1 / 3;
-	}
-}
