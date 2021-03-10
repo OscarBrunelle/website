@@ -6,7 +6,7 @@ let shapes = [];
 let mousePressed = false;
 
 function createShape(e) {
-	if (shapeSelect.value === "erase" && shapes.length > 0) {
+	if (shapeSelect.value === "undo" && shapes.length > 0) {
 		let shape = shapes.pop();
 		shape.remove();
 	} else {
@@ -19,10 +19,10 @@ function createShape(e) {
 			shape.setAttributeNS(null, "x2", pos.x);
 			shape.setAttributeNS(null, "y2", pos.y);
 		} else if (shapeSelect.value === "rect") {
-			shape.setAttributeNS(null, "x1", pos.x);
-			shape.setAttributeNS(null, "y1", pos.y);
-			shape.setAttributeNS(null, "x2", pos.x);
-			shape.setAttributeNS(null, "y2", pos.y);
+			shape.setAttributeNS(null, "x", pos.x);
+			shape.setAttributeNS(null, "y", pos.y);
+			shape.setAttributeNS(null, "width", 0);
+			shape.setAttributeNS(null, "height", 0);
 		} else if (shapeSelect.value === "circle") {
 			shape.setAttributeNS(null, "cx", pos.x);
 			shape.setAttributeNS(null, "cy", pos.y);
@@ -46,8 +46,10 @@ function moveShape(e) {
 			tempShape.setAttributeNS(null, "x2", pos.x);
 			tempShape.setAttributeNS(null, "y2", pos.y);
 		} else if (shapeSelect.value === "rect") {
-			tempShape.setAttributeNS(null, "x2", pos.x);
-			tempShape.setAttributeNS(null, "y2", pos.y);
+			let w = Math.abs(pos.x - tempShape.getAttribute("x"));
+			let h = Math.abs(pos.y - tempShape.getAttribute("y"));
+			tempShape.setAttributeNS(null, "width", w);
+			tempShape.setAttributeNS(null, "height", h);
 		} else if (shapeSelect.value === "circle") {
 			let rx = pos.x - parseFloat(tempShape.getAttribute("cx"));
 			let ry = pos.y - parseFloat(tempShape.getAttribute("cy"));
@@ -65,7 +67,7 @@ function finishShape(e) {
 	if (mousePressed === true) {
 		mousePressed = false;
 		let pos = getMousePos(svg, e);
-		if (tempShape.getAttribute("x1") == pos.x && tempShape.getAttribute("y1") == pos.y) {
+		if ((tempShape.getAttribute("x1") == pos.x && tempShape.getAttribute("y1") == pos.y) || tempShape.getAttribute("width") == 0 || tempShape.getAttribute("height") == 0) {
 			tempShape.remove();
 		}
 		tempShape = null;
