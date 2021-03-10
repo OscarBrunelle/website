@@ -20,6 +20,8 @@ function updateAll() {
 				player.queue.pop();
 				player.units.push(unit);
 			}
+		} else if (player == player1) {
+			document.getElementById("ui-queue-progress-current").style.width = "0%";
 		}
 		for (const turret of player.turrets) {
 			turret.update(deltaTime);

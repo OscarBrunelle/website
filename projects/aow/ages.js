@@ -67,7 +67,7 @@ class Unit {
 		this.x = 0;
 		this.y = 90;
 
-		this.trainingTime = 500;
+		this.trainingTime = 1000;
 		this.remainingTime = this.trainingTime;
 
 		this.svgRef = document.createElementNS(xmlns, "rect");
