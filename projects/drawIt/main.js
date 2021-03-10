@@ -82,7 +82,7 @@ function drawSnowFlake() {
 		drawPart({
 			x: 50,
 			y: 50
-		}, 50, i * Math.PI / (numberBranches/2), 0);
+		}, 50, i * Math.PI / (numberBranches / 2), 0);
 	}
 }
 
@@ -103,8 +103,8 @@ function drawPart(prevPos = {
 	line.setAttributeNS(null, "y2", y2);
 	svg.appendChild(line)
 
-	let midX2 = prevPos.x + length * Math.cos(orientation)/2;
-	let midY2 = prevPos.y + length * Math.sin(orientation)/2;
+	let midX2 = prevPos.x + length * Math.cos(orientation) / 2;
+	let midY2 = prevPos.y + length * Math.sin(orientation) / 2;
 	drawPart({
 		x: midX2,
 		y: midY2
@@ -122,6 +122,25 @@ function drawPart(prevPos = {
 function copyToClipboard() {
 	let text = svg.outerHTML;
 	navigator.clipboard.writeText(text);
+}
+
+function saveSVG() {
+	let data = svg.outerHTML;
+	saveData(data, "creation.svg");
+}
+
+function saveData(data, fileName) {
+	const json = JSON.stringify(data);
+	const blob = new Blob([data], {
+		type: "octet/stream"
+	});
+	const url = window.URL.createObjectURL(blob);
+	const a = document.createElement("a");
+	document.body.appendChild(a);
+	a.style = "display: none";
+	a.href = url;
+	a.download = fileName;
+	a.click();
 }
 
 function loadDrawIt() {
