@@ -6,6 +6,8 @@ let shapes = [];
 let mousePressed = false;
 
 function createShape(e) {
+	if (e.button != 0) return;
+
 	if (shapeSelect.value === "undo" && shapes.length > 0) {
 		let shape = shapes.pop();
 		shape.remove();
