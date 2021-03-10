@@ -23,10 +23,22 @@
 
 	<main id="main" role="main">
 		<div id="game-div">
-			<svg id="game-view">
+			<svg id="game-view" viewBox="0 0 200 100">
+				<g id="bases">
+					<svg id="ui-lifebar-p1" x="1" y="50">
+						<rect id="ui-lifebar-p1-container" class="ui-lifebar-container" x="0" y="0" width="5" height="30">
+						</rect>
+						<rect id="ui-lifebar-p1-current" class="ui-lifebar-current" x="1" y="1" width="3" height="28"></rect>
+					</svg>
+					<svg id="ui-lifebar-p2" x="194" y="50">
+						<rect id="ui-lifebar-p2-container" class="ui-lifebar-container" x="0" y="0" width="5" height="30">
+						</rect>
+						<rect id="ui-lifebar-p2-current" class="ui-lifebar-current" x="1" y="1" width="3" height="28"></rect>
+					</svg>
+				</g>
 				<image href="assets/units/caveman.svg" width="10" height="20">
 			</svg>
-			
+
 			<!-- <div>
 				<canvas id="game-canvas-background"></canvas>
 				<canvas id="game-canvas" width="750" height="400"></canvas>
@@ -62,8 +74,6 @@
 					</div>
 					<div id="ui-power-container"><button id="ui-power"></button></div>
 				</div>
-				<div id="ui-lifebar-p1"></div>
-				<div id="ui-lifebar-p2"></div>
 			</div>
 		</div>
 	</main>

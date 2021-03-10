@@ -120,6 +120,7 @@ class Player {
 	constructor() {
 		this.money = 100;
 		this.exp = 0;
+		this.queue = [];
 		this.units = [];
 		this.turrets = [];
 		this.age = ages[0];
