@@ -1,5 +1,7 @@
 "use strict"
 
+const gameView = document.getElementById("game-view");
+
 /*
 ages
 stone
@@ -64,10 +66,19 @@ class Unit {
 	constructor(cost, killGain, expOwner, expEnemy, damage, rate, range) {
 		this.x = 0;
 		this.y = 0;
+
+		this.svgRef = document.createElementNS(xmlns, "rect");
+		this.svgRef.setAttributeNS(null, "x", this.x);
+		this.svgRef.setAttributeNS(null, "y", this.y);
+		this.svgRef.setAttributeNS(null, "width", 10);
+		this.svgRef.setAttributeNS(null, "height", 10);
+		gameView.appendChild(this.svgRef);
 	}
+	
 
 	draw() {
-		context.fillRect(this.x, canvas.height - 50, 20, 50);
+		this.svgRef.setAttributeNS(null, "x", this.x);
+		this.svgRef.setAttributeNS(null, "y", this.y);
 	}
 
 	update() {

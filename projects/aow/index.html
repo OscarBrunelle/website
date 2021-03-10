@@ -23,10 +23,17 @@
 
 	<main id="main" role="main">
 		<div id="game-div">
-			<canvas id="game-canvas" width="750" height="400"></canvas>
+			<svg id="game-view">
+				<image href="assets/units/caveman.svg" width="10" height="20">
+			</svg>
+			
+			<!-- <div>
+				<canvas id="game-canvas-background"></canvas>
+				<canvas id="game-canvas" width="750" height="400"></canvas>
+			</div> -->
 			<div id="ui-div">
 				<div id="ui-infos-div">
-					<button id="ui-parameters"></button>
+					<button id="ui-parameters"><img src="assets/ui/parameter.svg"></button>
 					<div>
 						<p><span>$</span><span id="ui-money">7360</span></p>
 						<p><span>Exp</span><span id="ui-exp">45976</span></p>
@@ -52,9 +59,8 @@
 						<button id="ui-add_turret"></button>
 						<button id="ui-sell_turret"></button>
 						<button id="ui-evolve"></button>
-						<button id="ui-power"></button>
 					</div>
-					<button id="ui-power"></button>
+					<div id="ui-power-container"><button id="ui-power"></button></div>
 				</div>
 				<div id="ui-lifebar-p1"></div>
 				<div id="ui-lifebar-p2"></div>
