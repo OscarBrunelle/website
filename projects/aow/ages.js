@@ -65,7 +65,10 @@ class Age {
 class Unit {
 	constructor(cost, killGain, expOwner, expEnemy, damage, rate, range) {
 		this.x = 0;
-		this.y = 0;
+		this.y = 90;
+
+		this.trainingTime = 500;
+		this.remainingTime = this.trainingTime;
 
 		this.svgRef = document.createElementNS(xmlns, "rect");
 		this.svgRef.setAttributeNS(null, "x", this.x);
@@ -81,9 +84,8 @@ class Unit {
 		this.svgRef.setAttributeNS(null, "y", this.y);
 	}
 
-	update() {
-		this.x++;
-		this.y++;
+	update(deltaTime) {
+		this.x += 0.1 * deltaTime;
 		this.draw();
 	}
 }

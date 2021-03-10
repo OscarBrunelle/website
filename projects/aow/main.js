@@ -13,10 +13,11 @@ function updateAll() {
 		if (player.queue.length > 0) {
 			const unit = player.queue[0];
 			unit.remainingTime -= deltaTime;
-			let percentage = unit.remainingTime / unit.trainingTime * 100;
+			let percentage = (1 - unit.remainingTime / unit.trainingTime) * 100;
+			percentage = Math.min(percentage, 100);
 			document.getElementById("ui-queue-progress-current").style.width = percentage + "%";
 			if (unit.remainingTime <= 0) {
-				unit = player.queue.pop();
+				player.queue.pop();
 				player.units.push(unit);
 			}
 		}
@@ -32,7 +33,7 @@ function updateAll() {
 function loadAOW() {
 	previousUpdateTime = new Date();
 	gameInterval = setInterval(updateAll, 15);
-	gameView.addEventListener("click", function(event) {
+	document.getElementById("ui-units").addEventListener("click", function(event) {
 		let child = player1.age.units[0];
 		var clone = $.extend(true, Object.create(Object.getPrototypeOf(child)), child);
 		player1.queue.push(clone);

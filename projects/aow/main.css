@@ -66,7 +66,7 @@
 }
 
 #ui-queue-progress-current {
-	width: 40%;
+	width: 0%;
 	height: 100%;
 	background-color: red;
 }
@@ -123,4 +123,12 @@
 .ui-lifebar-current {
 	stroke: none;
 	fill: red;
+}
+
+#ui-lifebar-p1-current {
+	height: calc(1 * calc(100% - 2px));
+}
+
+#ui-lifebar-p2-current {
+	height: calc(1 * calc(100% - 2px));
 }
