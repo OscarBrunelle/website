@@ -23,16 +23,20 @@
 	<nav role="navigation" id="top-nav"></nav>
 
 	<main id="main" role="main">
-		<svg id="svg" width="600" height="400"></svg>
-		<select id="shape-select">
-			<option value="line">Line</option>
-			<option value="rect">Rectangle</option>
-			<option value="circle">Circle</option>
-			<option value="ellipse">Ellipse</option>
-			<option value="undo">Undo</option>
-		</select>
-		<button onclick="copyToClipboard();">Copy svg to clipboard</button>
-		<button onclick="drawSnowFlake();">Draw snowflake</button>
+		<div>
+			<svg id="svg"></svg>
+		</div>
+		<div>
+			<select id="shape-select">
+				<option value="line">Line</option>
+				<option value="rect">Rectangle</option>
+				<option value="circle">Circle</option>
+				<option value="ellipse">Ellipse</option>
+				<option value="undo">Undo</option>
+			</select>
+			<button onclick="copyToClipboard();">Copy svg to clipboard</button>
+			<button onclick="drawSnowFlake();">Draw snowflake</button>
+		</div>
 	</main>
 
 	<!-- <script type="text/javascript" src="../../shared/jquery.js"></script> -->
