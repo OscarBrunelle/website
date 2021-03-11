@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="icon" type="image/png" href="icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Logic gates simulator.">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Logic</title>
+</head>
+
+<body>
+	<header>
+		<h1>Logic</h1>
+	</header>
+
+	<nav role="navigation" id="top-nav"></nav>
+
+	<main id="main" role="main">
+		<svg id="svg"></svg>
+		<div>
+			<input type="radio" id="gate-choice-not"
+			 name="gate" value="not">
+			<label for="gate-choice-and">NOT</label>
+		
+			<input type="radio" id="gate-choice-or"
+			 name="gate" value="or">
+			<label for="gate-choice-and">OR</label>
+		
+			<input type="radio" id="gate-choice-and"
+			 name="gate" value="and">
+			<label for="gate-choice-and">AND</label>
+		  </div>
+	</main>
+
+	<script type="text/javascript" src="../../shared/jquery.js"></script>
+	<script type="text/javascript" src="../../shared/shared.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
