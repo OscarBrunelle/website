@@ -278,15 +278,26 @@ function to_fixed_length(number, length) {
 const xmlns = "http://www.w3.org/2000/svg";
 
 function svgline(parent, x1, y1, x2, y2, className = null) {
-	let line = document.createElementNS(xmlns, "line");
+	let shape = document.createElementNS(xmlns, "line");
 	if (className != null) {
-		line.setAttributeNS(null, "class", className);
+		shape.setAttributeNS(null, "class", className);
 	}
-	line.setAttributeNS(null, "x1", x1);
-	line.setAttributeNS(null, "y1", y1);
-	line.setAttributeNS(null, "x2", x2);
-	line.setAttributeNS(null, "y2", y2);
-	parent.appendChild(line);
+	shape.setAttributeNS(null, "x1", x1);
+	shape.setAttributeNS(null, "y1", y1);
+	shape.setAttributeNS(null, "x2", x2);
+	shape.setAttributeNS(null, "y2", y2);
+	parent.appendChild(shape);
+}
+
+function svgcircle(parent, x, y, radius, className = null) {
+	let shape = document.createElementNS(xmlns, "circle");
+	if (className != null) {
+		shape.setAttributeNS(null, "class", className);
+	}
+	shape.setAttributeNS(null, "cx", x);
+	shape.setAttributeNS(null, "cy", y);
+	shape.setAttributeNS(null, "r", radius);
+	parent.appendChild(shape);
 }
 
 class BasicSVG {
