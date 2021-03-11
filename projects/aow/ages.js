@@ -75,9 +75,9 @@ class Unit {
 		this.svgRef.setAttributeNS(null, "y", this.y);
 		this.svgRef.setAttributeNS(null, "width", 10);
 		this.svgRef.setAttributeNS(null, "height", 10);
+		this.svgRef.style.display = "none";
 		gameView.appendChild(this.svgRef);
 	}
-	
 
 	draw() {
 		this.svgRef.setAttributeNS(null, "x", this.x);
@@ -85,7 +85,7 @@ class Unit {
 	}
 
 	update(deltaTime) {
-		this.x += 0.1 * deltaTime;
+		this.x = round_to_nearest(this.x + 0.01 * deltaTime, 0.01);
 		this.draw();
 	}
 }
@@ -102,20 +102,18 @@ class Power {
 }
 
 const ages = [
-	new Age(0,
-		[
-			new Unit(15, 0, 10, 40, 1, 1, 0),
-			new Unit(25, 0, 16, 64, 1, 1, 0),
-			new Unit(100, 0, 65, 260, 1, 1, 0)
+	{
+		"expNeeded": 0,
+		"units": [
+			[15, 0, 10, 40, 1, 1, 0],
+			[25, 0, 16, 64, 1, 1, 0],
+			[100, 0, 65, 260, 1, 1, 0]
 		],
-		[
-			new Turret(100, 1, 1, 10)
+		"turrets": [
+			[100, 1, 1, 10]
 		],
-		[
-			new Power()
-		],
-		100
-	)
+		"power": {}
+	}
 ];
 
 class Player {

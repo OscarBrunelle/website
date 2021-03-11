@@ -19,6 +19,7 @@ function updateAll() {
 			if (unit.remainingTime <= 0) {
 				player.queue.pop();
 				player.units.push(unit);
+				unit.svgRef.style.display = "";
 			}
 		} else if (player == player1) {
 			document.getElementById("ui-queue-progress-current").style.width = "0%";
@@ -36,9 +37,9 @@ function loadAOW() {
 	previousUpdateTime = new Date();
 	gameInterval = setInterval(updateAll, 15);
 	document.getElementById("ui-units").addEventListener("click", function(event) {
-		let child = player1.age.units[0];
-		var clone = $.extend(true, Object.create(Object.getPrototypeOf(child)), child);
-		player1.queue.push(clone);
+		let stats = player1.age.units[0];
+		// var clone = $.extend(true, Object.create(Object.getPrototypeOf(child)), child);
+		player1.queue.push(new Unit([...stats]));
 	});
 }
 
