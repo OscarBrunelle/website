@@ -14,6 +14,12 @@ function svgClicked(event) {
 		case "and":
 			new AndGate(pos.x, pos.y);
 			break;
+		case "switch":
+			new Switch(pos.x, pos.y);
+			break;
+		case "light":
+			new Light(pos.x, pos.y);
+			break;
 	};
 }
 

@@ -1,4 +1,4 @@
-class Gate {
+class Part {
 	constructor(x, y, width = 10, height = 10) {
 		this.svgRef = document.createElementNS(xmlns, "svg");
 		this.svgRef.setAttributeNS(null, "x", x);
@@ -6,6 +6,12 @@ class Gate {
 		this.svgRef.setAttributeNS(null, "width", width);
 		this.svgRef.setAttributeNS(null, "height", height);
 		svg.appendChild(this.svgRef);
+	}
+}
+
+class Gate extends Part {
+	constructor(x, y) {
+		super(x, y);
 	}
 }
 
@@ -46,5 +52,38 @@ class AndGate extends Gate {
 		svgline(this.svgRef, 10, 3, 10, 7);
 		svgline(this.svgRef, 10, 7, 7, 9);
 		svgline(this.svgRef, 7, 9, 0, 10);
+	}
+}
+
+class Switch extends Part {
+	constructor(x, y, isOn = false) {
+		super(x, y);
+
+		this.isOn = isOn;
+		svgcircle(this.svgRef, 5, 5, 5);
+		if (this.isOn) {
+			svgline(this.svgRef, 5, 3, 5, 7, "sign");
+		} else {
+			svgcircle(this.svgRef, 5, 5, 2, "sign");
+		}
+	}
+
+	switch () {
+		this.isOn = !this.isOn;
+		this.svgRef.querySelector("sign").remove();
+		if (this.isOn) {
+			svgline(this.svgRef, 5, 4, 5, 6, "sign");
+		} else {
+			svgcircle(this.svgRef, 5, 5, 2, "sign");
+		}
+	}
+}
+
+class Light extends Part {
+	constructor(x, y) {
+		super(x, y);
+
+		svgcircle(this.svgRef, 5, 5, 5);
+		svgcircle(this.svgRef, 5, 5, 0.5);
 	}
 }
