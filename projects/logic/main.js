@@ -23,8 +23,14 @@ function svgClicked(event) {
 	};
 }
 
+function update(frameId) {
+	requestAnimationFrame(update);
+}
+
 function load() {
 	svg.addEventListener("click", svgClicked);
+
+	// requestAnimationFrame(update);
 }
 
 document.onload = load();
