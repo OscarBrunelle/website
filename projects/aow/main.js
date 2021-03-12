@@ -1,10 +1,10 @@
-let gameInterval;
 let player1 = new Player();
 let player2 = new Player();
 const players = [player1, player2];
 
+let frameId;
 let previousUpdateTime;
-function updateAll() {
+function update(timestamp) {
 	let currentTime = new Date();
 	let deltaTime = currentTime - previousUpdateTime;
 	previousUpdateTime = currentTime;
@@ -31,11 +31,13 @@ function updateAll() {
 			unit.update(deltaTime);
 		}
 	}
+
+	frameId = requestAnimationFrame(update);
 }
 
 function loadAOW() {
 	previousUpdateTime = new Date();
-	gameInterval = setInterval(updateAll, 15);
+	frameId = requestAnimationFrame(update);
 	document.getElementById("ui-units").addEventListener("click", function(event) {
 		let stats = player1.age.units[0];
 		// var clone = $.extend(true, Object.create(Object.getPrototypeOf(child)), child);

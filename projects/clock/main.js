@@ -1,4 +1,3 @@
-let currentFrameId;
 let p1Time = 600000,
 	p2Time = 600000;
 let p1Turn = true;
@@ -16,10 +15,10 @@ function switchPlayer() {
 	p1Turn = !p1Turn;
 }
 
+let frameId;
 let previousUpdateTime;
+function updateTime(timestamp) {
 
-function updateTime(frameId) {
-	currentFrameId = frameId;
 	const currentUpdateTime = new Date();
 	const deltaTime = currentUpdateTime - previousUpdateTime;
 	previousUpdateTime = currentUpdateTime;
@@ -38,15 +37,16 @@ function updateTime(frameId) {
 		}
 	}
 	updateDisplay();
-	requestAnimationFrame(updateTime);
+
+	frameId = requestAnimationFrame(updateTime);
 }
 
 function startClock() {
 	previousUpdateTime = new Date();
 	if (clockRunning) {
-		cancelAnimationFrame(currentFrameId);
+		cancelAnimationFrame(frameId);
 	} else {
-		requestAnimationFrame(updateTime);
+		frameId = requestAnimationFrame(updateTime);
 	}
 	clockRunning = !clockRunning;
 	updateDisplay();
