@@ -1,5 +1,11 @@
+#main {
+	display: grid;
+	grid-template-rows: 1fr auto;
+}
+
 #svg {
 	width: 100%;
+	height: 100%;
 	border: 1px solid black;
 }
 
@@ -14,6 +20,12 @@
 
 #svg circle {
 	stroke: black;
+	stroke-width: 1;
+	fill: none;
+}
+
+.grid-rect {
+	stroke: rgba(0, 0, 0, 0.1);
 	stroke-width: 1;
 	fill: none;
 }

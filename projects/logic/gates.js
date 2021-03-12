@@ -1,5 +1,5 @@
 class Part {
-	constructor(x, y, width = 10, height = 10) {
+	constructor(x, y, width = gridWidth, height = gridHeight) {
 		this.svgRef = document.createElementNS(xmlns, "svg");
 		this.svgRef.setAttributeNS(null, "x", x);
 		this.svgRef.setAttributeNS(null, "y", y);
