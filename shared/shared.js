@@ -289,6 +289,18 @@ function svgline(parent, x1, y1, x2, y2, className = null) {
 	parent.appendChild(shape);
 }
 
+function svgrect(parent, x, y, width, height, className = null) {
+	let shape = document.createElementNS(xmlns, "rect");
+	if (className != null) {
+		shape.setAttributeNS(null, "class", className);
+	}
+	shape.setAttributeNS(null, "x", x);
+	shape.setAttributeNS(null, "y", y);
+	shape.setAttributeNS(null, "width", width);
+	shape.setAttributeNS(null, "height", height);
+	parent.appendChild(shape);
+}
+
 function svgcircle(parent, x, y, radius, className = null) {
 	let shape = document.createElementNS(xmlns, "circle");
 	if (className != null) {
