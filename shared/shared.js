@@ -277,6 +277,15 @@ function to_fixed_length(number, length) {
 /* START OF SVG */
 const xmlns = "http://www.w3.org/2000/svg";
 
+function svgg(parent, className = null) {
+	let g = document.createElementNS(xmlns, "g");
+	if (className != null) {
+		g.setAttributeNS(null, "class", className);
+	}
+	parent.appendChild(g);
+	return g;
+}
+
 function svgline(parent, x1, y1, x2, y2, className = null) {
 	let shape = document.createElementNS(xmlns, "line");
 	if (className != null) {
