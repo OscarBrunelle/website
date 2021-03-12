@@ -296,6 +296,7 @@ function svgline(parent, x1, y1, x2, y2, className = null) {
 	shape.setAttributeNS(null, "x2", x2);
 	shape.setAttributeNS(null, "y2", y2);
 	parent.appendChild(shape);
+	return shape;
 }
 
 function svgrect(parent, x, y, width, height, className = null) {
@@ -308,6 +309,7 @@ function svgrect(parent, x, y, width, height, className = null) {
 	shape.setAttributeNS(null, "width", width);
 	shape.setAttributeNS(null, "height", height);
 	parent.appendChild(shape);
+	return shape;
 }
 
 function svgcircle(parent, x, y, radius, className = null) {
@@ -319,6 +321,7 @@ function svgcircle(parent, x, y, radius, className = null) {
 	shape.setAttributeNS(null, "cy", y);
 	shape.setAttributeNS(null, "r", radius);
 	parent.appendChild(shape);
+	return shape;
 }
 
 class BasicSVG {
