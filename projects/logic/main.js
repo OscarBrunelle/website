@@ -57,6 +57,18 @@ function createGrid(width, height) {
 	}
 }
 
+/*
+when left click on gate, drawline that follows mouse
+when click, if possible set input/output
+when right click, cancel
+
+set logic of gates
+
+update gates
+
+enjoy
+*/
+
 function load() {
 	createGrid(1000, 1000);
 	svg.addEventListener("click", svgClicked);
