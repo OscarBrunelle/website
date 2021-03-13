@@ -44,9 +44,10 @@ function update(timestamp) {
 }
 
 function createGrid(width, height) {
+	let gridG = svgg(svg, "grid-g");
 	for (let x = 0; x < width; x += gridWidth) {
 		for (let y = 0; y < height; y += gridHeight) {
-			svgrect(svg, x, y, gridWidth, gridHeight, "grid-rect");
+			svgrect(gridG, x, y, gridWidth, gridHeight, "grid-rect");
 		}
 	}
 }

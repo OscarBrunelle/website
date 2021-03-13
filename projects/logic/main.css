@@ -24,6 +24,12 @@
 	fill: none;
 }
 
+#svg path {
+	stroke: black;
+	stroke-width: 1;
+	fill: none;
+}
+
 .grid-rect {
 	stroke: rgba(0, 0, 0, 0.1);
 	stroke-width: 1;
