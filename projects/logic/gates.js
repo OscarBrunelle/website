@@ -56,7 +56,7 @@ class OrGate extends Gate {
 	createShape() {
 		const x0 = 0,
 			y0 = 0,
-			x1 = this.width * 0.8,
+			x1 = this.width,
 			y1 = this.height / 2,
 			x2 = 0,
 			y2 = this.height,
@@ -80,7 +80,7 @@ class AndGate extends Gate {
 	createShape() {
 		const x0 = 0,
 			y0 = 0,
-			x1 = this.width * 0.7,
+			x1 = this.width * 0.5,
 			y1 = 0,
 			cx0 = x1,
 			cy0 = y1 + this.height / 2,
