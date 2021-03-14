@@ -291,50 +291,50 @@ function svgcontainer(parent, x, y, width, height, className = null) {
 }
 
 function svgg(parent, className = null) {
-	let g = document.createElementNS(xmlns, "g");
+	let element = document.createElementNS(xmlns, "g");
 	if (className != null) {
-		g.setAttributeNS(null, "class", className);
+		element.setAttributeNS(null, "class", className);
 	}
-	parent.appendChild(g);
-	return g;
+	parent.appendChild(element);
+	return element;
 }
 
 function svgline(parent, x1, y1, x2, y2, className = null) {
-	let shape = document.createElementNS(xmlns, "line");
+	let element = document.createElementNS(xmlns, "line");
 	if (className != null) {
-		shape.setAttributeNS(null, "class", className);
+		element.setAttributeNS(null, "class", className);
 	}
-	shape.setAttributeNS(null, "x1", x1);
-	shape.setAttributeNS(null, "y1", y1);
-	shape.setAttributeNS(null, "x2", x2);
-	shape.setAttributeNS(null, "y2", y2);
-	parent.appendChild(shape);
-	return shape;
+	element.setAttributeNS(null, "x1", x1);
+	element.setAttributeNS(null, "y1", y1);
+	element.setAttributeNS(null, "x2", x2);
+	element.setAttributeNS(null, "y2", y2);
+	parent.appendChild(element);
+	return element;
 }
 
 function svgrect(parent, x, y, width, height, className = null) {
-	let shape = document.createElementNS(xmlns, "rect");
+	let element = document.createElementNS(xmlns, "rect");
 	if (className != null) {
-		shape.setAttributeNS(null, "class", className);
+		element.setAttributeNS(null, "class", className);
 	}
-	shape.setAttributeNS(null, "x", x);
-	shape.setAttributeNS(null, "y", y);
-	shape.setAttributeNS(null, "width", width);
-	shape.setAttributeNS(null, "height", height);
-	parent.appendChild(shape);
-	return shape;
+	element.setAttributeNS(null, "x", x);
+	element.setAttributeNS(null, "y", y);
+	element.setAttributeNS(null, "width", width);
+	element.setAttributeNS(null, "height", height);
+	parent.appendChild(element);
+	return element;
 }
 
 function svgcircle(parent, x, y, radius, className = null) {
-	let shape = document.createElementNS(xmlns, "circle");
+	let element = document.createElementNS(xmlns, "circle");
 	if (className != null) {
-		shape.setAttributeNS(null, "class", className);
+		element.setAttributeNS(null, "class", className);
 	}
-	shape.setAttributeNS(null, "cx", x);
-	shape.setAttributeNS(null, "cy", y);
-	shape.setAttributeNS(null, "r", radius);
-	parent.appendChild(shape);
-	return shape;
+	element.setAttributeNS(null, "cx", x);
+	element.setAttributeNS(null, "cy", y);
+	element.setAttributeNS(null, "r", radius);
+	parent.appendChild(element);
+	return element;
 }
 
 class BasicSVG {
