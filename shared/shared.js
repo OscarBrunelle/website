@@ -277,6 +277,19 @@ function to_fixed_length(number, length) {
 /* START OF SVG */
 const xmlns = "http://www.w3.org/2000/svg";
 
+function svgcontainer(parent, x, y, width, height, className = null) {
+	const element = document.createElementNS(xmlns, "svg");
+	if (className != null) {
+		element.setAttributeNS(null, "class", className);
+	}
+	element.setAttributeNS(null, "x", x);
+	element.setAttributeNS(null, "y", y);
+	element.setAttributeNS(null, "width", width);
+	element.setAttributeNS(null, "height", height);
+	parent.appendChild(element);
+	return element;
+}
+
 function svgg(parent, className = null) {
 	let g = document.createElementNS(xmlns, "g");
 	if (className != null) {
