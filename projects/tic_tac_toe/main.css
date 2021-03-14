@@ -1,4 +1,16 @@
+
+
+#svg svg {
+	overflow: visible;
+}
+
 #svg line {
 	stroke: black;
 	stroke-width: 1;
+}
+
+#svg circle {
+	stroke: black;
+	stroke-width: 1;
+	fill: none;
 }
