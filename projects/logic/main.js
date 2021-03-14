@@ -9,8 +9,8 @@ function svgClicked(event) {
 
 	if (gateSelected == null) return;
 
-	pos.x = pos.x - (pos.x % gridWidth);
-	pos.y = pos.y - (pos.y % gridHeight);
+	pos.x = floor(pos.x, gridWidth);
+	pos.y = floor(pos.y, gridHeight);
 	for (const gate of gates) {
 		if (gate.x == pos.x && gate.y == pos.y) {
 			return;
