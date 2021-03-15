@@ -12,6 +12,12 @@ class Part {
 		this.svgRef.setAttributeNS(null, "height", height);
 		svg.appendChild(this.svgRef);
 	}
+
+	linkTo(linkedGate) {
+		this.linkedGate = linkedGate;
+		svgline(svg, this.x + this.width, this.y + this.height / 2, linkedGate.x, linkedGate.y + linkedGate.height / 2);
+		inputGate = null;
+	}
 }
 
 class Gate extends Part {

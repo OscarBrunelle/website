@@ -18,9 +18,8 @@ function svgClicked(event) {
 			if (gateSelected.value == "link") {
 				if (inputGate == null) {
 					inputGate = gate;
-				} else {
-					svgline(svg, inputGate.x + inputGate.width, inputGate.y + inputGate.height / 2, gate.x, gate.y + gate.height / 2);
-					inputGate = null;
+				} else if (inputGate != gate) {
+					inputGate.linkTo(gate);
 				}
 			}
 			return;
