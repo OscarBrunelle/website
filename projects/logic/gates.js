@@ -16,8 +16,11 @@ class Part {
 	linkTo(linkedGate) {
 		this.linkedGate = linkedGate;
 		svgline(svg, this.x + this.width, this.y + this.height / 2, linkedGate.x, linkedGate.y + linkedGate.height / 2);
+		// add small arrow at the middle of line
 		inputGate = null;
 	}
+
+	update() {}
 }
 
 class Gate extends Part {
@@ -49,6 +52,15 @@ class NotGate extends Gate {
 		svgline(this.svgRef, x1, y1, x2, y2);
 
 		svgline(this.svgRef, x2, y2, x0, y0);
+	}
+
+	update() {
+		if (this.linkedGate == null) return;
+		if (this.input == null) {
+			this.linkedGate.input = false;
+		} else {
+			this.linkedGate.input = !this.input;
+		}
 	}
 }
 
@@ -138,6 +150,11 @@ class Switch extends Part {
 			svgcircle(this.svgRef, 5, 5, 2, "sign");
 		}
 	}
+
+	update() {
+		if (this.linkedGate == null) return;
+		this.linkedGate.input = this.isOn;
+	}
 }
 
 class Light extends Part {
@@ -149,6 +166,7 @@ class Light extends Part {
 	}
 
 	createShape() {
+		this.svgRef.innerHTML = "";
 		const cx0 = this.width / 2,
 			cy0 = this.height / 2,
 			cr0 = this.width / 2,
@@ -160,11 +178,16 @@ class Light extends Part {
 			cy1 = cy0,
 			cr1 = this.width * 0.2;
 		svgcircle(this.svgRef, cx0, cy0, cr0);
-		if (this.isOn) {
+		if (this.isOn == true) {
 			svgline(this.svgRef, x0, y0, x1, y1, "sign");
 		} else {
 			svgcircle(this.svgRef, cx1, cy1, cr1, "sign");
 		}
+	}
+
+	update() {
+		this.isOn = this.input;
+		this.createShape();
 	}
 }
 

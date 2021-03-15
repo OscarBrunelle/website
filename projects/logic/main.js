@@ -55,7 +55,7 @@ let framesHistory = [];
 
 function update(timestamp) {
 	for (const gate of gates) {
-		// gate.update();
+		gate.update();
 	}
 	framesHistory.push(timestamp);
 	for (const frameTs of framesHistory) {
