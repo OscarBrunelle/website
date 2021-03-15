@@ -57,6 +57,7 @@ header>p {
 }
 
 #main {
+	position: relative;
 	background-color: var(--secondary-background-color);
 }
 
