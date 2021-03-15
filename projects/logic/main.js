@@ -21,6 +21,8 @@ function svgClicked(event) {
 				} else if (inputGate != gate) {
 					inputGate.linkTo(gate);
 				}
+			} else if (gateSelected.value == "interact") {
+				gate.interact();
 			}
 			return;
 		}
