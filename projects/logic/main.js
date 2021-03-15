@@ -2,10 +2,12 @@ const svg = document.getElementById("svg");
 let gridWidth = 40;
 let gridHeight = 40;
 let gates = [];
+let gateSelected = document.querySelector('input[name="gate"]:checked');
+
+let inputGate;
 
 function svgClicked(event) {
 	const pos = getMousePos(svg, event);
-	const gateSelected = document.querySelector('input[name="gate"]:checked');
 
 	if (gateSelected == null) return;
 
@@ -13,6 +15,14 @@ function svgClicked(event) {
 	pos.y = floor(pos.y, gridHeight);
 	for (const gate of gates) {
 		if (gate.x == pos.x && gate.y == pos.y) {
+			if (gateSelected.value == "link") {
+				if (inputGate == null) {
+					inputGate = gate;
+				} else {
+					svgline(svg, inputGate.x + inputGate.width, inputGate.y + inputGate.height / 2, gate.x, gate.y + gate.height / 2);
+					inputGate = null;
+				}
+			}
 			return;
 		}
 	}
@@ -35,6 +45,7 @@ function svgClicked(event) {
 			gate = new Light(pos.x, pos.y);
 			break;
 	};
+
 	if (gate != null) {
 		gates.push(gate);
 	}
@@ -42,6 +53,7 @@ function svgClicked(event) {
 
 let frameId;
 let framesHistory = [];
+
 function update(timestamp) {
 	for (const gate of gates) {
 		// gate.update();
@@ -79,7 +91,16 @@ update gates
 enjoy
 */
 
+function selectGate(event) {
+	gateSelected = document.querySelector('input[name="gate"]:checked');
+	inputGate = null;
+}
+
 function load() {
+	const gateOptions = document.querySelectorAll('input[name="gate"]');
+	for (const gateOption of gateOptions) {
+		gateOption.addEventListener("change", selectGate);
+	}
 	createGrid(1000, 1000);
 	svg.addEventListener("click", svgClicked);
 
