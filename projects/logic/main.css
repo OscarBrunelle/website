@@ -35,3 +35,9 @@
 	stroke-width: 1;
 	fill: none;
 }
+
+#frame_counter {
+	position: absolute;
+	top: 0;
+	right: 0;
+}

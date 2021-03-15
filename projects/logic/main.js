@@ -41,10 +41,20 @@ function svgClicked(event) {
 }
 
 let frameId;
+let framesHistory = [];
 function update(timestamp) {
 	for (const gate of gates) {
 		// gate.update();
 	}
+	framesHistory.push(timestamp);
+	for (const frameTs of framesHistory) {
+		if (timestamp - frameTs > 1000) {
+			framesHistory.shift();
+		} else {
+			break;
+		}
+	}
+	document.getElementById("frame_counter").innerHTML = framesHistory.length;
 	requestAnimationFrame(update);
 }
 
@@ -73,7 +83,7 @@ function load() {
 	createGrid(1000, 1000);
 	svg.addEventListener("click", svgClicked);
 
-	// frameId = requestAnimationFrame(update);
+	frameId = requestAnimationFrame(update);
 }
 
 document.onload = load();
