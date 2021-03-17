@@ -15,7 +15,10 @@ class Part {
 
 	linkTo(linkedGate) {
 		this.linkedGate = linkedGate;
-		svgline(svg, this.x + this.width, this.y + this.height / 2, linkedGate.x, linkedGate.y + linkedGate.height / 2);
+		if (this.outputLink != null) {
+			this.outputLink.remove();
+		}
+		this.outputLink = svgline(svg, this.x + this.width, this.y + this.height / 2, linkedGate.x, linkedGate.y + linkedGate.height / 2);
 		// add small arrow at the middle of line
 		inputGate = null;
 	}
