@@ -201,6 +201,10 @@ function getMousePos(element, evt) {
 	};
 }
 
+function random_int(min = 0, max = 1) {
+	return Math.floor(Math.random() * (max + 1 - min) + min);
+}
+
 function floor(number, rounding = 1) {
 	return Math.floor(number / rounding) * rounding;
 }
