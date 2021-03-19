@@ -1,9 +1,21 @@
-class Part {
-	constructor(x, y, width = gridWidth, height = gridHeight) {
+class Component {
+	constructor(x, y, width = gridWidth, height = gridHeight, ninputs = 1, noutputs = 1) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+
+		this.inputs = {};
+		for (let i = 0; i < ninputs; i++) {
+			this.inputs[i] = false;
+		}
+		this.outputs = {};
+		for (let i = 0; i < noutputs; i++) {
+			this.outputs[i] = {
+				value: false,
+				links: []
+			};
+		}
 
 		this.svgRef = document.createElementNS(xmlns, "svg");
 		this.svgRef.setAttributeNS(null, "x", x);
@@ -13,7 +25,7 @@ class Part {
 		svg.appendChild(this.svgRef);
 	}
 
-	get input() {
+	get_input() {
 		return this.inputs[0];
 	}
 
@@ -24,15 +36,20 @@ class Part {
 
 	set_output(value, index = 0) {
 		this.outputs[index].value = value;
-		for (const link of this.outputs[index].links) {
+		const links = this.outputs[index].links;
+		for (const linkIndex in links) {
+			const link = links[linkIndex];
 			link.component.set_input(value, link.index);
 		}
 	}
 
 	linkTo(component, outputIndex = 0, componentInputIndex = 0) {
-		for (const link of this.outputs[outputIndex].links) {
+		const links = this.outputs[outputIndex].links;
+		for (const linkIndex in links) {
+			const link = links[linkIndex];
 			if (link.component == component) return;
 		}
+		inputComponent = null;
 
 		const outputLine = svgg(svg);
 		const x0 = this.x + this.width,
@@ -54,7 +71,7 @@ class Part {
 			"line": outputLine
 		});
 
-		inputComponent = null;
+		this.update(0);
 	}
 
 	interact() {}
@@ -62,7 +79,7 @@ class Part {
 	update() {}
 }
 
-class Clock extends Part {
+class Clock extends Component {
 	constructor(x, y) {
 		super(x, y);
 
@@ -101,18 +118,25 @@ class Clock extends Part {
 	}
 
 	update(delta) {
+		const previousState = this.isOn;
+		if (isNaN(this.currentDelay)) {
+			console.log("here officer");
+		} else {
+			console.log(this.currentDelay);
+		}
 		this.currentDelay += delta;
 		while (this.currentDelay > this.delay) {
 			this.currentDelay -= this.delay;
 			this.isOn = !this.isOn;
 		}
 
-		if (this.linkedGate == null) return;
-		this.linkedGate.input = this.isOn;
+		if (this.isOn != previousState) {
+			this.set_output(this.isOn);
+		}
 	}
 }
 
-class Switch extends Part {
+class Switch extends Component {
 	constructor(x, y, isOn = true) {
 		super(x, y);
 
@@ -161,33 +185,15 @@ class Switch extends Part {
 
 	interact() {
 		this.switch();
+		this.update();
 	}
 
 	update() {
-		if (this.linkedGate == null) return;
-		this.linkedGate.input = this.isOn;
+		this.set_output(this.isOn);
 	}
 }
 
-class Gate extends Part {
-	constructor(x, y, ninputs = 1, noutputs = 1) {
-		super(x, y);
-
-		this.inputs = {};
-		for (let i = 0; i < ninputs; i++) {
-			this.inputs[i] = false;
-		}
-		this.outputs = {};
-		for (let i = 0; i < noutputs; i++) {
-			this.outputs[i] = {
-				value: false,
-				links: []
-			};
-		}
-	}
-}
-
-class NotGate extends Gate {
+class NotGate extends Component {
 	constructor(x, y) {
 		super(x, y);
 
@@ -213,16 +219,11 @@ class NotGate extends Gate {
 	}
 
 	update() {
-		if (this.linkedGate == null) return;
-		if (this.input == null) {
-			this.linkedGate.input = false;
-		} else {
-			this.linkedGate.input = !this.input;
-		}
+		this.set_output(!this.get_input());
 	}
 }
 
-class OrGate extends Gate {
+class OrGate extends Component {
 	constructor(x, y) {
 		super(x, y);
 
@@ -244,9 +245,20 @@ class OrGate extends Gate {
 		svgline(this.svgRef, x2, y2, x3, y3);
 		svgline(this.svgRef, x3, y3, x0, y0);
 	}
+
+	update() {
+		let oneTrue = false;
+		for (const inputIndex in this.inputs) {
+			if (this.inputs[inputIndex] == true) {
+				oneTrue = true;
+				break;
+			}
+		}
+		this.set_output(oneTrue);
+	}
 }
 
-class AndGate extends Gate {
+class AndGate extends Component {
 	constructor(x, y) {
 		super(x, y);
 
@@ -270,9 +282,20 @@ class AndGate extends Gate {
 		svgline(this.svgRef, x2, y2, x3, y3);
 		svgline(this.svgRef, x3, y3, x0, y0);
 	}
+
+	update() {
+		let allTrue = true;
+		for (const inputIndex in this.inputs) {
+			if (this.inputs[inputIndex] == false) {
+				allTrue = false;
+				break;
+			}
+		}
+		this.set_output(allTrue);
+	}
 }
 
-class Light extends Part {
+class Light extends Component {
 	constructor(x, y) {
 		super(x, y);
 
@@ -301,7 +324,7 @@ class Light extends Part {
 	}
 
 	update() {
-		this.isOn = this.input;
+		this.isOn = this.get_input();
 		this.createShape();
 	}
 }
