@@ -321,6 +321,17 @@ class Light extends Component {
 	update(delta = 0) {
 		this.isOn = this.get_input();
 		this.svgRef.querySelector(".sign").remove();
+
+		const cx0 = this.width / 2,
+			cy0 = this.height / 2,
+			cr0 = this.width / 2,
+			x0 = cx0,
+			y0 = cy0 - this.height * 0.2,
+			x1 = cx0,
+			y1 = cy0 + this.height * 0.2,
+			cx1 = cx0,
+			cy1 = cy0,
+			cr1 = this.width * 0.2;
 		if (this.isOn == true) {
 			svgline(this.svgRef, x0, y0, x1, y1, "sign");
 		} else {
