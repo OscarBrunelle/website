@@ -2,9 +2,10 @@ const svg = document.getElementById("svg");
 let gridWidth = 40;
 let gridHeight = 40;
 let components = [];
+let clocks = [];
 let selectedComponent = document.querySelector('input[name="component"]:checked');
 
-let inputGate;
+let inputComponent;
 
 function svgClicked(event) {
 	const pos = getMousePos(svg, event);
@@ -16,10 +17,10 @@ function svgClicked(event) {
 	for (const component of components) {
 		if (component.x == pos.x && component.y == pos.y) {
 			if (selectedComponent.value == "link") {
-				if (inputGate == null) {
-					inputGate = component;
-				} else if (inputGate != component) {
-					inputGate.linkTo(component);
+				if (inputComponent == null) {
+					inputComponent = component;
+				} else if (inputComponent != component) {
+					inputComponent.linkTo(component);
 				}
 			} else if (selectedComponent.value == "interact") {
 				component.interact();
@@ -32,6 +33,7 @@ function svgClicked(event) {
 	switch (selectedComponent.value) {
 		case "clock":
 			component = new Clock(pos.x, pos.y);
+			clocks.push(component);
 			break;
 		case "switch":
 			component = new Switch(pos.x, pos.y);
@@ -61,8 +63,8 @@ let framesHistory = [];
 let previousTimestamp;
 function update(timestamp) {
 	const deltaTime = timestamp - previousTimestamp;
-	for (const component of components) {
-		component.update(deltaTime);
+	for (const clock of clocks) {
+		clock.update(deltaTime);
 	}
 	framesHistory.push(timestamp);
 	for (const frameTs of framesHistory) {
@@ -100,7 +102,7 @@ enjoy
 
 function selectComponent(event) {
 	selectedComponent = document.querySelector('input[name="component"]:checked');
-	inputGate = null;
+	inputComponent = null;
 }
 
 function load() {

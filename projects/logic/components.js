@@ -13,14 +13,48 @@ class Part {
 		svg.appendChild(this.svgRef);
 	}
 
-	linkTo(linkedGate) {
-		this.linkedGate = linkedGate;
-		if (this.outputLink != null) {
-			this.outputLink.remove();
+	get input() {
+		return this.inputs[0];
+	}
+
+	set_input(value, index = 0) {
+		this.inputs[index] = value;
+		this.update();
+	}
+
+	set_output(value, index = 0) {
+		this.outputs[index].value = value;
+		for (const link of this.outputs[index].links) {
+			link.component.set_input(value, link.index);
 		}
-		this.outputLink = svgline(svg, this.x + this.width, this.y + this.height / 2, linkedGate.x, linkedGate.y + linkedGate.height / 2);
-		// add small arrow at the middle of line
-		inputGate = null;
+	}
+
+	linkTo(component, outputIndex = 0, componentInputIndex = 0) {
+		for (const link of this.outputs[outputIndex].links) {
+			if (link.component == component) return;
+		}
+
+		const outputLine = svgg(svg);
+		const x0 = this.x + this.width,
+			y0 = this.y + this.height / 2,
+			x1 = component.x,
+			y1 = component.y + component.height / 2;
+		svgline(outputLine, x0, y0, x1, y1);
+		const ar = gridWidth/8;
+		let mid = get_middle(x0, y0, x1, y1);
+		const deltaAngle = Math.PI / 4,
+			a0 = mid.angle - deltaAngle,
+			a1 = mid.angle + deltaAngle;
+		svgline(outputLine, mid.x, mid.y, mid.x - Math.cos(a0) * ar, mid.y - Math.sin(a0) * ar);
+		svgline(outputLine, mid.x, mid.y, mid.x - Math.cos(a1) * ar, mid.y - Math.sin(a1) * ar);
+
+		this.outputs[outputIndex].links.push({
+			"component": component,
+			"index": componentInputIndex,
+			"line": outputLine
+		});
+
+		inputComponent = null;
 	}
 
 	interact() {}
@@ -136,8 +170,20 @@ class Switch extends Part {
 }
 
 class Gate extends Part {
-	constructor(x, y) {
+	constructor(x, y, ninputs = 1, noutputs = 1) {
 		super(x, y);
+
+		this.inputs = {};
+		for (let i = 0; i < ninputs; i++) {
+			this.inputs[i] = false;
+		}
+		this.outputs = {};
+		for (let i = 0; i < noutputs; i++) {
+			this.outputs[i] = {
+				value: false,
+				links: []
+			};
+		}
 	}
 }
 
