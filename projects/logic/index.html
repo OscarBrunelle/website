@@ -9,7 +9,7 @@
 	<link rel="icon" type="image/png" href="icon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
-	<meta name="description" content="Logic gates simulator.">
+	<meta name="description" content="Logic components simulator.">
 	<meta name="author" content="Oscar Brunelle">
 	<title>Logic</title>
 </head>
@@ -26,26 +26,29 @@
 			<svg id="svg"></svg>
 		</div>
 		<div>
-			<input type="radio" id="gate-choice-not" name="gate" value="not">
-			<label for="gate-choice-and">NOT</label>
+			<input type="radio" id="component-clock" name="component" value="clock">
+			<label for="component-clock">Clock</label>
 
-			<input type="radio" id="gate-choice-or" name="gate" value="or">
-			<label for="gate-choice-and">OR</label>
+			<input type="radio" id="component-switch" name="component" value="switch">
+			<label for="component-switch">Switch</label>
 
-			<input type="radio" id="gate-choice-and" name="gate" value="and">
-			<label for="gate-choice-and">AND</label>
+			<input type="radio" id="component-not" name="component" value="not">
+			<label for="component-and">NOT</label>
 
-			<input type="radio" id="gate-choice-switch" name="gate" value="switch">
-			<label for="gate-choice-switch">Switch</label>
+			<input type="radio" id="component-or" name="component" value="or">
+			<label for="component-and">OR</label>
 
-			<input type="radio" id="gate-choice-light" name="gate" value="light">
-			<label for="gate-choice-light">Light</label>
+			<input type="radio" id="component-and" name="component" value="and">
+			<label for="component-and">AND</label>
 
-			<input type="radio" id="gate-choice-link" name="gate" value="link">
-			<label for="gate-choice-link">Link</label>
+			<input type="radio" id="component-light" name="component" value="light">
+			<label for="component-light">Light</label>
 
-			<input type="radio" id="gate-choice-interact" name="gate" value="interact">
-			<label for="gate-choice-interact">Interact</label>
+			<input type="radio" id="component-link" name="component" value="link">
+			<label for="component-link">Link</label>
+
+			<input type="radio" id="component-interact" name="component" value="interact">
+			<label for="component-interact">Interact</label>
 		</div>
 		<span id="frame_counter"></span>
 	</main>
@@ -53,7 +56,7 @@
 	<!-- <script type="text/javascript" src="../../shared/jquery.js"></script> -->
 	<script type="text/javascript" src="../../shared/shared.js"></script>
 	<script type="text/javascript" src="main.js"></script>
-	<script type="text/javascript" src="gates.js"></script>
+	<script type="text/javascript" src="components.js"></script>
 </body>
 
 </html>

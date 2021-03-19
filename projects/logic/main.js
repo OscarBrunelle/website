@@ -1,54 +1,57 @@
 const svg = document.getElementById("svg");
 let gridWidth = 40;
 let gridHeight = 40;
-let gates = [];
-let gateSelected = document.querySelector('input[name="gate"]:checked');
+let components = [];
+let selectedComponent = document.querySelector('input[name="component"]:checked');
 
 let inputGate;
 
 function svgClicked(event) {
 	const pos = getMousePos(svg, event);
 
-	if (gateSelected == null) return;
+	if (selectedComponent == null) return;
 
 	pos.x = floor(pos.x, gridWidth);
 	pos.y = floor(pos.y, gridHeight);
-	for (const gate of gates) {
-		if (gate.x == pos.x && gate.y == pos.y) {
-			if (gateSelected.value == "link") {
+	for (const component of components) {
+		if (component.x == pos.x && component.y == pos.y) {
+			if (selectedComponent.value == "link") {
 				if (inputGate == null) {
-					inputGate = gate;
-				} else if (inputGate != gate) {
-					inputGate.linkTo(gate);
+					inputGate = component;
+				} else if (inputGate != component) {
+					inputGate.linkTo(component);
 				}
-			} else if (gateSelected.value == "interact") {
-				gate.interact();
+			} else if (selectedComponent.value == "interact") {
+				component.interact();
 			}
 			return;
 		}
 	}
 
-	let gate;
-	switch (gateSelected.value) {
-		case "not":
-			gate = new NotGate(pos.x, pos.y);
-			break;
-		case "or":
-			gate = new OrGate(pos.x, pos.y);
-			break;
-		case "and":
-			gate = new AndGate(pos.x, pos.y);
+	let component;
+	switch (selectedComponent.value) {
+		case "clock":
+			component = new Clock(pos.x, pos.y);
 			break;
 		case "switch":
-			gate = new Switch(pos.x, pos.y);
+			component = new Switch(pos.x, pos.y);
+			break;
+		case "not":
+			component = new NotGate(pos.x, pos.y);
+			break;
+		case "or":
+			component = new OrGate(pos.x, pos.y);
+			break;
+		case "and":
+			component = new AndGate(pos.x, pos.y);
 			break;
 		case "light":
-			gate = new Light(pos.x, pos.y);
+			component = new Light(pos.x, pos.y);
 			break;
 	};
 
-	if (gate != null) {
-		gates.push(gate);
+	if (component != null) {
+		components.push(component);
 	}
 }
 
@@ -56,8 +59,8 @@ let frameId;
 let framesHistory = [];
 
 function update(timestamp) {
-	for (const gate of gates) {
-		gate.update();
+	for (const component of components) {
+		component.update();
 	}
 	framesHistory.push(timestamp);
 	for (const frameTs of framesHistory) {
@@ -92,15 +95,15 @@ update gates
 enjoy
 */
 
-function selectGate(event) {
-	gateSelected = document.querySelector('input[name="gate"]:checked');
+function selectComponent(event) {
+	selectedComponent = document.querySelector('input[name="component"]:checked');
 	inputGate = null;
 }
 
 function load() {
-	const gateOptions = document.querySelectorAll('input[name="gate"]');
-	for (const gateOption of gateOptions) {
-		gateOption.addEventListener("change", selectGate);
+	const componentChoices = document.querySelectorAll('input[name="component"]');
+	for (const componentChoice of componentChoices) {
+		componentChoice.addEventListener("change", selectComponent);
 	}
 	createGrid(1000, 1000);
 	svg.addEventListener("click", svgClicked);
