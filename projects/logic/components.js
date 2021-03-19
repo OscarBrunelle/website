@@ -1,21 +1,9 @@
 class Component {
-	constructor(x, y, width = gridWidth, height = gridHeight, ninputs = 1, noutputs = 1) {
+	constructor(x, y, ninputs = 1, noutputs = 1, width = gridWidth, height = gridHeight) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-
-		this.inputs = {};
-		for (let i = 0; i < ninputs; i++) {
-			this.inputs[i] = false;
-		}
-		this.outputs = {};
-		for (let i = 0; i < noutputs; i++) {
-			this.outputs[i] = {
-				value: false,
-				links: []
-			};
-		}
 
 		this.svgRef = document.createElementNS(xmlns, "svg");
 		this.svgRef.setAttributeNS(null, "x", x);
@@ -23,6 +11,20 @@ class Component {
 		this.svgRef.setAttributeNS(null, "width", width);
 		this.svgRef.setAttributeNS(null, "height", height);
 		svg.appendChild(this.svgRef);
+
+		this.inputs = {};
+		for (let i = 0; i < ninputs; i++) {
+			this.inputs[i] = false;
+			svgcircle(this.svgRef, 0, this.height / (ninputs + 1) * (i + 1), this.height / 16, "input-circle");
+		}
+		this.outputs = {};
+		for (let i = 0; i < noutputs; i++) {
+			this.outputs[i] = {
+				value: false,
+				links: []
+			};
+			svgcircle(this.svgRef, this.width, this.height / (noutputs + 1) * (i + 1), this.height / 16, "output-circle");
+		}
 	}
 
 	get_input() {
@@ -57,7 +59,7 @@ class Component {
 			x1 = component.x,
 			y1 = component.y + component.height / 2;
 		svgline(outputLine, x0, y0, x1, y1);
-		const ar = gridWidth/8;
+		const ar = gridWidth / 8;
 		let mid = get_middle(x0, y0, x1, y1);
 		const deltaAngle = Math.PI / 4,
 			a0 = mid.angle - deltaAngle,
@@ -80,7 +82,7 @@ class Component {
 
 class Clock extends Component {
 	constructor(x, y) {
-		super(x, y);
+		super(x, y, 0, 1);
 
 		this.isOn = false;
 		this.delay = 1000;
@@ -132,7 +134,7 @@ class Clock extends Component {
 
 class Switch extends Component {
 	constructor(x, y, isOn = true) {
-		super(x, y);
+		super(x, y, 0, 1);
 
 		this.isOn = isOn;
 		this.createShape();
@@ -189,7 +191,7 @@ class Switch extends Component {
 
 class NotGate extends Component {
 	constructor(x, y) {
-		super(x, y);
+		super(x, y, 1, 1);
 
 		this.createShape();
 	}
@@ -219,7 +221,7 @@ class NotGate extends Component {
 
 class OrGate extends Component {
 	constructor(x, y) {
-		super(x, y);
+		super(x, y, 2, 1);
 
 		this.createShape();
 	}
@@ -254,7 +256,7 @@ class OrGate extends Component {
 
 class AndGate extends Component {
 	constructor(x, y) {
-		super(x, y);
+		super(x, y, 2, 1);
 
 		this.createShape();
 	}
@@ -291,14 +293,13 @@ class AndGate extends Component {
 
 class Light extends Component {
 	constructor(x, y) {
-		super(x, y);
+		super(x, y, 1, 0);
 
 		this.isOn = false;
 		this.createShape();
 	}
 
 	createShape() {
-		this.svgRef.innerHTML = "";
 		const cx0 = this.width / 2,
 			cy0 = this.height / 2,
 			cr0 = this.width / 2,
@@ -319,6 +320,11 @@ class Light extends Component {
 
 	update(delta = 0) {
 		this.isOn = this.get_input();
-		this.createShape();
+		this.svgRef.querySelector(".sign").remove();
+		if (this.isOn == true) {
+			svgline(this.svgRef, x0, y0, x1, y1, "sign");
+		} else {
+			svgcircle(this.svgRef, cx1, cy1, cr1, "sign");
+		}
 	}
 }
