@@ -341,6 +341,38 @@ function svgcircle(parent, x, y, radius, className = null) {
 	return element;
 }
 
+// angles in radians
+function svgarc(parent, x, y, r, startAngle, endAngle, invert = false, className = "") {
+	if (Math.abs(endAngle - startAngle) == 2 * Math.PI) {
+		return svgcircle(parent, x, y, r, className);
+	}
+	const x0 = x + Math.cos(startAngle) * r,
+		y0 = y - Math.sin(startAngle) * r,
+		x1 = x + Math.cos(endAngle) * r,
+		y1 = y - Math.sin(endAngle) * r;
+
+	let d = "M " + x0 + "," + y0;
+	d += " A" + r + "," + r; // radius x and y
+	d += " 0"; // x-axis-rotation
+	let largeArcFlag;
+	if (endAngle > startAngle) {
+		largeArcFlag = (endAngle - startAngle < Math.PI ? "0" : "1");
+	} else {
+		largeArcFlag = (startAngle - endAngle > Math.PI ? "0" : "1");
+	}
+	d += " " + largeArcFlag; // large-arc-flag -> determine which direction the arc is going
+	d += " " + (invert ? "1" : "0"); // sweep-flag -> which circle to use
+	d += " " + x1 + "," + y1;
+
+	let shape = document.createElementNS(xmlns, "path");
+	if (className != null) {
+		shape.setAttributeNS(null, "class", className);
+	}
+	shape.setAttributeNS(null, "d", d);
+	parent.appendChild(shape);
+	return shape;
+}
+
 class BasicSVG {
 	constructor(parent = null, width = 400, height = 400) {
 		this.width = width;
