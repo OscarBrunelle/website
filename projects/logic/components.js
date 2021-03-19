@@ -71,12 +71,11 @@ class Component {
 			"line": outputLine
 		});
 
-		this.update(0);
+		this.update();
 	}
 
 	interact() {}
-
-	update() {}
+	update(delta = 0) {}
 }
 
 class Clock extends Component {
@@ -117,13 +116,8 @@ class Clock extends Component {
 		}
 	}
 
-	update(delta) {
+	update(delta = 0) {
 		const previousState = this.isOn;
-		if (isNaN(this.currentDelay)) {
-			console.log("here officer");
-		} else {
-			console.log(this.currentDelay);
-		}
 		this.currentDelay += delta;
 		while (this.currentDelay > this.delay) {
 			this.currentDelay -= this.delay;
@@ -188,7 +182,7 @@ class Switch extends Component {
 		this.update();
 	}
 
-	update() {
+	update(delta = 0) {
 		this.set_output(this.isOn);
 	}
 }
@@ -218,7 +212,7 @@ class NotGate extends Component {
 		svgline(this.svgRef, x2, y2, x0, y0);
 	}
 
-	update() {
+	update(delta = 0) {
 		this.set_output(!this.get_input());
 	}
 }
@@ -246,7 +240,7 @@ class OrGate extends Component {
 		svgline(this.svgRef, x3, y3, x0, y0);
 	}
 
-	update() {
+	update(delta = 0) {
 		let oneTrue = false;
 		for (const inputIndex in this.inputs) {
 			if (this.inputs[inputIndex] == true) {
@@ -283,7 +277,7 @@ class AndGate extends Component {
 		svgline(this.svgRef, x3, y3, x0, y0);
 	}
 
-	update() {
+	update(delta = 0) {
 		let allTrue = true;
 		for (const inputIndex in this.inputs) {
 			if (this.inputs[inputIndex] == false) {
@@ -323,7 +317,7 @@ class Light extends Component {
 		}
 	}
 
-	update() {
+	update(delta = 0) {
 		this.isOn = this.get_input();
 		this.createShape();
 	}
