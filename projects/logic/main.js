@@ -112,6 +112,4 @@ function load() {
 	svg.addEventListener("click", svgClicked);
 
 	frameId = requestAnimationFrame(update);
-
-	components.push(new Clock(40, 40));
 }
