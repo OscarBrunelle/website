@@ -108,7 +108,7 @@ function load() {
 	for (const componentChoice of componentChoices) {
 		componentChoice.addEventListener("change", selectComponent);
 	}
-	createGrid(1000, 1000);
+	createGrid(2000, 2000);
 	svg.addEventListener("click", svgClicked);
 
 	frameId = requestAnimationFrame(update);
