@@ -277,6 +277,17 @@ function to_fixed_length(number, length) {
 	return string.substring(string.length - length, string.length);
 }
 
+// get_distance ?
+
+function get_middle(x0, y0, x1, y1) {
+	const deltaX = (x1 - x0),
+		deltaY = (y1 - y0);
+	return {
+		x: x1 - deltaX / 2,
+		y: y1 - deltaY / 2,
+		angle: Math.atan2(deltaY, deltaX)
+	};
+}
 
 /* START OF SVG */
 const xmlns = "http://www.w3.org/2000/svg";
