@@ -39,7 +39,23 @@ class Clock extends Part {
 	}
 
 	createShape() {
-		svgcircle(this.svgRef, this.width / 2, this.height / 2, this.width / 2);
+		const x0 = 0,
+			y0 = this.height,
+			x1 = this.width / 4,
+			y1 = y0,
+			x2 = x1,
+			y2 = this.height / 2,
+			x3 = this.width * 3 / 4,
+			y3 = y2,
+			x4 = x3,
+			y4 = y0,
+			x5 = this.width,
+			y5 = y0;
+		svgline(this.svgRef, x0, y0, x1, y1);
+		svgline(this.svgRef, x1, y1, x2, y2);
+		svgline(this.svgRef, x2, y2, x3, y3);
+		svgline(this.svgRef, x3, y3, x4, y4);
+		svgline(this.svgRef, x4, y4, x5, y5);
 	}
 
 	interact() {
@@ -56,7 +72,7 @@ class Clock extends Part {
 			this.currentDelay -= this.delay;
 			this.isOn = !this.isOn;
 		}
-		
+
 		if (this.linkedGate == null) return;
 		this.linkedGate.input = this.isOn;
 	}
@@ -204,7 +220,7 @@ class AndGate extends Gate {
 			x3 = 0,
 			y3 = this.height;
 		svgline(this.svgRef, x0, y0, x1, y1);
-		svgarc(this.svgRef, cx0, cy0, cr0, 0, 180);
+		svgarc(this.svgRef, cx0, cy0, cr0, Math.PI / 2, Math.PI * 3 / 2, true);
 		svgline(this.svgRef, x2, y2, x3, y3);
 		svgline(this.svgRef, x3, y3, x0, y0);
 	}
@@ -242,44 +258,4 @@ class Light extends Part {
 		this.isOn = this.input;
 		this.createShape();
 	}
-}
-
-
-
-// move to shared when finished
-// ref: https://stackoverflow.com/questions/5736398/how-to-calculate-the-svg-path-for-an-arc-of-a-circle
-function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-	var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
-
-	return {
-		x: centerX + (radius * Math.cos(angleInRadians)),
-		y: centerY + (radius * Math.sin(angleInRadians))
-	};
-}
-
-function describeArc(x, y, radius, startAngle, endAngle) {
-
-	var start = polarToCartesian(x, y, radius, endAngle);
-	var end = polarToCartesian(x, y, radius, startAngle);
-
-	var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-
-	var d = [
-		"M", start.x, start.y,
-		"A", radius, radius, 0, largeArcFlag, 0, end.x, end.y
-	].join(" ");
-
-	return d;
-}
-
-function svgarc(parent, x, y, r, startAngle, endAngle, className = "") {
-	const d = describeArc(x, y, r, startAngle, endAngle);
-
-	let shape = document.createElementNS(xmlns, "path");
-	if (className != null) {
-		shape.setAttributeNS(null, "class", className);
-	}
-	shape.setAttributeNS(null, "d", d);
-	parent.appendChild(shape);
-	return shape;
 }
