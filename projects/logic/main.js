@@ -58,9 +58,11 @@ function svgClicked(event) {
 let frameId;
 let framesHistory = [];
 
+let previousTimestamp;
 function update(timestamp) {
+	const deltaTime = timestamp - previousTimestamp;
 	for (const component of components) {
-		component.update();
+		component.update(deltaTime);
 	}
 	framesHistory.push(timestamp);
 	for (const frameTs of framesHistory) {
@@ -71,6 +73,7 @@ function update(timestamp) {
 		}
 	}
 	document.getElementById("frame_counter").innerHTML = framesHistory.length;
+	previousTimestamp = timestamp;
 	requestAnimationFrame(update);
 }
 

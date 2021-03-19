@@ -32,6 +32,9 @@ class Clock extends Part {
 	constructor(x, y) {
 		super(x, y);
 
+		this.isOn = false;
+		this.delay = 1000;
+		this.currentDelay = 0;
 		this.createShape();
 	}
 
@@ -40,9 +43,22 @@ class Clock extends Part {
 	}
 
 	interact() {
+		if (this.delay == 1000) {
+			this.delay = 100;
+		} else {
+			this.delay = 1000;
+		}
 	}
 
-	update() {
+	update(delta) {
+		this.currentDelay += delta;
+		while (this.currentDelay > this.delay) {
+			this.currentDelay -= this.delay;
+			this.isOn = !this.isOn;
+		}
+		
+		if (this.linkedGate == null) return;
+		this.linkedGate.input = this.isOn;
 	}
 }
 
