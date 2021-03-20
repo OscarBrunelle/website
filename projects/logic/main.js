@@ -119,6 +119,13 @@ function load() {
 	createGrid(2000, 2000);
 	svg.addEventListener("click", svgClicked);
 	svg.addEventListener("mousemove", svgMove);
+	svg.addEventListener("contextmenu", function (event) {
+		if (selectComponent == "link") {
+			outputComponent = null;
+			outputIndex = null;
+			if (linkLine != null) linkLine.remove();
+		}
+	});
 
 	frameId = requestAnimationFrame(update);
 }
