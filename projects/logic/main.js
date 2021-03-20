@@ -120,11 +120,12 @@ function load() {
 	svg.addEventListener("click", svgClicked);
 	svg.addEventListener("mousemove", svgMove);
 	svg.addEventListener("contextmenu", function (event) {
-		if (selectComponent == "link") {
+		if (selectedComponent.value == "link") {
 			outputComponent = null;
 			outputIndex = null;
 			if (linkLine != null) linkLine.remove();
 		}
+		event.preventDefault();
 	});
 
 	frameId = requestAnimationFrame(update);
