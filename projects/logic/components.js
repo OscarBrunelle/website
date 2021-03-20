@@ -40,14 +40,13 @@ class Component {
 			if (link.component == this) return;
 		}
 		outputComponent = null;
-		outputIndex = null;
 		if (linkLine != null) linkLine.remove();
 
 		const outputLine = svgg(svg, "", true);
 		const x0 = this.x + this.width,
-			y0 = this.y + this.height / 2,
+			y0 = this.y + (outputIndex + 1) * this.height / (this.noutputs + 1),
 			x1 = component.x,
-			y1 = component.y + component.height / 2;
+			y1 = component.y + (linkedComponentInputIndex + 1) * component.height / (component.ninputs + 1);
 		svgline(outputLine, x0, y0, x1, y1);
 		const ar = gridWidth / 8;
 		let mid = get_middle(x0, y0, x1, y1);
