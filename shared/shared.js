@@ -305,16 +305,24 @@ function svgcontainer(parent, x, y, width, height, className = null) {
 	return element;
 }
 
-function svgg(parent, className = null) {
-	let element = document.createElementNS(xmlns, "g");
+function addSVGElement(parent, element, className = null, prependEl = false) {
 	if (className != null) {
 		element.setAttributeNS(null, "class", className);
 	}
-	parent.appendChild(element);
+	if (prependEl) {
+		parent.prepend(element);
+	} else {
+		parent.appendChild(element);
+	}
 	return element;
 }
 
-function svgline(parent, x1, y1, x2, y2, className = null) {
+function svgg(parent, className = null, prependEl = false) {
+	let element = document.createElementNS(xmlns, "g");
+	return addSVGElement(parent, element, className, prependEl);
+}
+
+function svgline(parent, x1, y1, x2, y2, className = null, prependEl = false) {
 	let element = document.createElementNS(xmlns, "line");
 	if (className != null) {
 		element.setAttributeNS(null, "class", className);
@@ -323,7 +331,11 @@ function svgline(parent, x1, y1, x2, y2, className = null) {
 	element.setAttributeNS(null, "y1", y1);
 	element.setAttributeNS(null, "x2", x2);
 	element.setAttributeNS(null, "y2", y2);
-	parent.appendChild(element);
+	if (prependEl) {
+		parent.prepend(element);
+	} else {
+		parent.appendChild(element);
+	}
 	return element;
 }
 
