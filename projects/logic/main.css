@@ -41,3 +41,19 @@
 	top: 0;
 	right: 0;
 }
+
+#svg .io-circle {
+	cursor: pointer;
+}
+
+#svg .io-circle:hover {
+	fill: green;
+}
+
+#svg .input-circle {
+	fill: blue;
+}
+
+#svg .output-circle {
+	fill: brown;
+}

@@ -2,6 +2,8 @@ class Component {
 	constructor(x, y, ninputs = 1, noutputs = 1, width = gridWidth, height = gridHeight) {
 		this.x = x;
 		this.y = y;
+		this.ninputs = ninputs;
+		this.noutputs = noutputs;
 		this.width = width;
 		this.height = height;
 
@@ -11,20 +13,6 @@ class Component {
 		this.svgRef.setAttributeNS(null, "width", width);
 		this.svgRef.setAttributeNS(null, "height", height);
 		svg.appendChild(this.svgRef);
-
-		this.inputs = {};
-		for (let i = 0; i < ninputs; i++) {
-			this.inputs[i] = false;
-			svgcircle(this.svgRef, 0, this.height / (ninputs + 1) * (i + 1), this.height / 16, "input-circle");
-		}
-		this.outputs = {};
-		for (let i = 0; i < noutputs; i++) {
-			this.outputs[i] = {
-				value: false,
-				links: []
-			};
-			svgcircle(this.svgRef, this.width, this.height / (noutputs + 1) * (i + 1), this.height / 16, "output-circle");
-		}
 	}
 
 	get_input() {
@@ -45,19 +33,20 @@ class Component {
 		}
 	}
 
-	linkTo(component, outputIndex = 0, componentInputIndex = 0) {
+	linkTo(component, outputIndex = 0, linkedComponentInputIndex = 0) {
 		const links = this.outputs[outputIndex].links;
 		for (const linkIndex in links) {
 			const link = links[linkIndex];
 			if (link.component == component) return;
 		}
-		inputComponent = null;
+		outputComponent = null;
 
-		const outputLine = svgg(svg);
+		const outputLine = svgg(svg, "", true);
 		const x0 = this.x + this.width,
 			y0 = this.y + this.height / 2,
 			x1 = component.x,
 			y1 = component.y + component.height / 2;
+		if (linkLine != null) linkLine.remove();
 		svgline(outputLine, x0, y0, x1, y1);
 		const ar = gridWidth / 8;
 		let mid = get_middle(x0, y0, x1, y1);
@@ -69,11 +58,53 @@ class Component {
 
 		this.outputs[outputIndex].links.push({
 			"component": component,
-			"index": componentInputIndex,
+			"index": linkedComponentInputIndex,
 			"line": outputLine
 		});
 
 		this.update();
+	}
+
+	addIO() {
+		this.inputs = {};
+		for (let i = 0; i < this.ninputs; i++) {
+			this.inputs[i] = false;
+			const cx = 0,
+				cy = this.height / (this.ninputs + 1) * (i + 1),
+				cr = this.height / 8;
+			const inputCircle = svgcircle(this.svgRef, cx, cy, cr, "io-circle input-circle");
+			const ref = this;
+			inputCircle.addEventListener("click", function (event) {
+				if (selectedComponent.value == "link" && outputComponent != null && outputComponent != ref) {
+					if (linkLine != null) linkLine.remove();
+					linkLine = svgline(svg, outputComponent.x, outputComponent.y + outputIndex / outputComponent.noutputs, cx, cy, "link_line", true);
+
+					outputComponent.linkTo(ref, outputIndex, i);
+				}
+			});
+		}
+
+		this.outputs = {};
+		for (let i = 0; i < this.noutputs; i++) {
+			this.outputs[i] = {
+				value: false,
+				links: []
+			};
+			const cx = this.width,
+				cy = this.height / (this.noutputs + 1) * (i + 1),
+				cr = this.height / 8;
+			const outputCircle = svgcircle(this.svgRef, cx, cy, cr, "io-circle output-circle");
+			const ref = this;
+			outputCircle.addEventListener("click", function (event) {
+				if (selectedComponent.value == "link" && outputComponent != ref) {
+					outputComponent = ref;
+					outputIndex = i;
+
+					if (linkLine != null) linkLine.remove();
+					linkLine = svgline(svg, cx, cy, cx, cy, "link_line", true);
+				}
+			});
+		}
 	}
 
 	interact() {}
@@ -88,6 +119,7 @@ class Clock extends Component {
 		this.delay = 1000;
 		this.currentDelay = 0;
 		this.createShape();
+		this.addIO();
 	}
 
 	createShape() {
@@ -133,11 +165,12 @@ class Clock extends Component {
 }
 
 class Switch extends Component {
-	constructor(x, y, isOn = true) {
+	constructor(x, y, isOn = false) {
 		super(x, y, 0, 1);
 
 		this.isOn = isOn;
 		this.createShape();
+		this.addIO();
 	}
 
 	createShape() {
@@ -194,6 +227,7 @@ class NotGate extends Component {
 		super(x, y, 1, 1);
 
 		this.createShape();
+		this.addIO();
 	}
 
 	createShape() {
@@ -224,6 +258,7 @@ class OrGate extends Component {
 		super(x, y, 2, 1);
 
 		this.createShape();
+		this.addIO();
 	}
 
 	createShape() {
@@ -259,6 +294,7 @@ class AndGate extends Component {
 		super(x, y, 2, 1);
 
 		this.createShape();
+		this.addIO();
 	}
 
 	createShape() {
@@ -297,6 +333,7 @@ class Light extends Component {
 
 		this.isOn = false;
 		this.createShape();
+		this.addIO();
 	}
 
 	createShape() {

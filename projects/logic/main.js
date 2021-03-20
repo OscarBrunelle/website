@@ -5,7 +5,7 @@ let components = [];
 let clocks = [];
 let selectedComponent = document.querySelector('input[name="component"]:checked');
 
-let inputComponent;
+let outputComponent, outputIndex, linkLine;
 
 function svgClicked(event) {
 	const pos = getMousePos(svg, event);
@@ -16,13 +16,7 @@ function svgClicked(event) {
 	pos.y = floor(pos.y, gridHeight);
 	for (const component of components) {
 		if (component.x == pos.x && component.y == pos.y) {
-			if (selectedComponent.value == "link") {
-				if (inputComponent == null) {
-					inputComponent = component;
-				} else if (inputComponent != component) {
-					inputComponent.linkTo(component);
-				}
-			} else if (selectedComponent.value == "interact") {
+			if (selectedComponent.value == "interact") {
 				component.interact();
 			}
 			return;
@@ -57,10 +51,20 @@ function svgClicked(event) {
 	}
 }
 
+function svgMove(event) {
+	const pos = getMousePos(svg, event);
+
+	if (outputComponent != null) {
+		if (linkLine != null) linkLine.remove();
+		linkLine = svgline(svg, outputComponent.x + outputComponent.width, outputComponent.y + (outputIndex + 1) * outputComponent.height / (outputComponent.noutputs + 1), pos.x, pos.y, "link_line", true);
+	}
+}
+
 let frameId;
 let framesHistory = [];
 
 let previousTimestamp;
+
 function update(timestamp) {
 	const deltaTime = timestamp - previousTimestamp;
 	for (const clock of clocks) {
@@ -102,7 +106,9 @@ enjoy
 
 function selectComponent(event) {
 	selectedComponent = document.querySelector('input[name="component"]:checked');
-	inputComponent = null;
+	outputComponent = null;
+	outputIndex = null;
+	if (linkLine != null) linkLine.remove();
 }
 
 function load() {
@@ -112,6 +118,7 @@ function load() {
 	}
 	createGrid(2000, 2000);
 	svg.addEventListener("click", svgClicked);
+	svg.addEventListener("mousemove", svgMove);
 
 	frameId = requestAnimationFrame(update);
 }
