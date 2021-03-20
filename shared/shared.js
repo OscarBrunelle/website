@@ -324,48 +324,32 @@ function svgg(parent, className = null, prependEl = false) {
 
 function svgline(parent, x1, y1, x2, y2, className = null, prependEl = false) {
 	let element = document.createElementNS(xmlns, "line");
-	if (className != null) {
-		element.setAttributeNS(null, "class", className);
-	}
 	element.setAttributeNS(null, "x1", x1);
 	element.setAttributeNS(null, "y1", y1);
 	element.setAttributeNS(null, "x2", x2);
 	element.setAttributeNS(null, "y2", y2);
-	if (prependEl) {
-		parent.prepend(element);
-	} else {
-		parent.appendChild(element);
-	}
-	return element;
+	return addSVGElement(parent, element, className, prependEl);
 }
 
-function svgrect(parent, x, y, width, height, className = null) {
+function svgrect(parent, x, y, width, height, className = null, prependEl = false) {
 	let element = document.createElementNS(xmlns, "rect");
-	if (className != null) {
-		element.setAttributeNS(null, "class", className);
-	}
 	element.setAttributeNS(null, "x", x);
 	element.setAttributeNS(null, "y", y);
 	element.setAttributeNS(null, "width", width);
 	element.setAttributeNS(null, "height", height);
-	parent.appendChild(element);
-	return element;
+	return addSVGElement(parent, element, className, prependEl);
 }
 
-function svgcircle(parent, x, y, radius, className = null) {
+function svgcircle(parent, x, y, radius, className = null, prependEl = false) {
 	let element = document.createElementNS(xmlns, "circle");
-	if (className != null) {
-		element.setAttributeNS(null, "class", className);
-	}
 	element.setAttributeNS(null, "cx", x);
 	element.setAttributeNS(null, "cy", y);
 	element.setAttributeNS(null, "r", radius);
-	parent.appendChild(element);
-	return element;
+	return addSVGElement(parent, element, className, prependEl);
 }
 
 // angles in radians
-function svgarc(parent, x, y, r, startAngle, endAngle, invert = false, className = "") {
+function svgarc(parent, x, y, r, startAngle, endAngle, invert = false, className = "", prependEl = false) {
 	if (Math.abs(endAngle - startAngle) == 2 * Math.PI) {
 		return svgcircle(parent, x, y, r, className);
 	}
@@ -388,12 +372,8 @@ function svgarc(parent, x, y, r, startAngle, endAngle, invert = false, className
 	d += " " + x1 + "," + y1;
 
 	let shape = document.createElementNS(xmlns, "path");
-	if (className != null) {
-		shape.setAttributeNS(null, "class", className);
-	}
 	shape.setAttributeNS(null, "d", d);
-	parent.appendChild(shape);
-	return shape;
+	return addSVGElement(parent, element, className, prependEl);
 }
 
 class BasicSVG {
