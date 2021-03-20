@@ -371,8 +371,8 @@ function svgarc(parent, x, y, r, startAngle, endAngle, invert = false, className
 	d += " " + (invert ? "1" : "0"); // sweep-flag -> which circle to use
 	d += " " + x1 + "," + y1;
 
-	let shape = document.createElementNS(xmlns, "path");
-	shape.setAttributeNS(null, "d", d);
+	let element = document.createElementNS(xmlns, "path");
+	element.setAttributeNS(null, "d", d);
 	return addSVGElement(parent, element, className, prependEl);
 }
 
