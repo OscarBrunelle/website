@@ -29,16 +29,20 @@ function getFileData() {
 	return file;
 }
 
-function updateColorPickers() {
-	let numberColors = parseInt(document.getElementById("number_colors-select").value);
-	let colorPickersContainer = document.getElementById("color_pickers");
-	colorPickersContainer.innerHTML = "";
+function updateColors(e) {
+	let i = 0;
+	for (const inputColor of e.target.parentElement.querySelectorAll("input")) {
+		colors[i] = inputColor.value;
+		i++;
+	}
+	updateColorPicker();
+	resultingGif = compileGIF();
+	document.getElementById("output-code").innerHTML = resultingGif;
+}
+
+function updateColorPicker() {
 	let paintingColors = document.getElementById("painting_color-select");
 	paintingColors.innerHTML = "";
-
-	while (colors.length > numberColors) {
-		colors.pop();
-	}
 
 	let paintingColor = document.createElement("option");
 	paintingColor.id = "painting_color-eraser";
@@ -46,6 +50,26 @@ function updateColorPickers() {
 	paintingColor.value = "eraser";
 	paintingColor.innerHTML = "Gomme";
 	paintingColors.appendChild(paintingColor);
+
+	for (const i in colors) {
+		let paintingColor = document.createElement("option");
+		paintingColor.id = "painting_color-" + i;
+		paintingColor.className = "painting_color";
+		paintingColor.value = colors[i];
+		if (i == 0) paintingColor.selected = true;
+		paintingColor.innerHTML = colors[i];
+		paintingColors.appendChild(paintingColor);
+	}
+}
+
+function updateColorPickers() {
+	let numberColors = parseInt(document.getElementById("number_colors-select").value);
+	let colorPickersContainer = document.getElementById("color_pickers");
+	colorPickersContainer.innerHTML = "";
+
+	while (colors.length > numberColors) {
+		colors.pop();
+	}
 
 	for (let i = 0; i < numberColors; i++) {
 		if (i > colors.length - 1) {
@@ -57,17 +81,11 @@ function updateColorPickers() {
 		colorPicker.className = "color_picker";
 		colorPicker.maxLength = 6;
 		colorPicker.value = colors[i];
-		colorPicker.addEventListener("change", updateColorPickers);
+		colorPicker.addEventListener("input", updateColors);
 		colorPickersContainer.appendChild(colorPicker);
-
-		let paintingColor = document.createElement("option");
-		paintingColor.id = "painting_color-" + i;
-		paintingColor.className = "painting_color";
-		paintingColor.value = colors[i];
-		if (i == 0) paintingColor.selected = true;
-		paintingColor.innerHTML = colors[i];
-		paintingColors.appendChild(paintingColor);
 	}
+
+	updateColorPicker();
 
 	resultingGif = compileGIF();
 
