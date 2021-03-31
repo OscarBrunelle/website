@@ -33,6 +33,7 @@ function updateColors(e) {
 	let i = 0;
 	for (const inputColor of e.target.parentElement.querySelectorAll("input")) {
 		colors[i] = inputColor.value;
+		inputColor.parentElement.style.background = "#" + inputColor.value;
 		i++;
 	}
 	updateColorPicker();
@@ -76,13 +77,18 @@ function updateColorPickers() {
 			colors.push("FFFFFF");
 		}
 
+		let colorPickerDiv = document.createElement("div");
+		colorPickerDiv.style.background = "#" + colors[i];
+
 		let colorPicker = document.createElement("input");
 		colorPicker.id = "color_picker-" + i;
 		colorPicker.className = "color_picker";
 		colorPicker.maxLength = 6;
 		colorPicker.value = colors[i];
 		colorPicker.addEventListener("input", updateColors);
-		colorPickersContainer.appendChild(colorPicker);
+
+		colorPickerDiv.appendChild(colorPicker);
+		colorPickersContainer.appendChild(colorPickerDiv);
 	}
 
 	updateColorPicker();

@@ -5,7 +5,8 @@ main {
 	padding: 3px;
 }
 
-#drawing-canvas, #output-code {
+#drawing-canvas,
+#output-code {
 	border: 1px solid var(--primary-background-color);
 }
 
@@ -41,4 +42,14 @@ main {
 	margin: 0;
 	word-break: break-word;
 	padding: 10px;
+}
+
+#color_pickers>div {
+	width: fit-content;
+}
+
+#color_pickers input {
+	background: transparent;
+	color: white;
+	mix-blend-mode: difference;
 }
