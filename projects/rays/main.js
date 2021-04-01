@@ -17,7 +17,7 @@ function createRect(x, y, w, h) {
 	context.fillRect(x, y, w, h);
 }
 
-let nextM = 20;
+let nextM = 5;
 
 function calculateRay(x, y, angle) {
 	let prevX = x + 0;
@@ -48,24 +48,32 @@ function calculateRay(x, y, angle) {
 	context.stroke();
 }
 
-let aIterations = 100;
+let aIterations = 500;
 
 function calculateRays(event = null) {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 
 	if (event != null) {
-		lightPos = getMousePos(canvas, event);
+		const mousePos = getMousePos(canvas, event);
+		lightPos.x = mousePos.x / mousePos.parentWidth * canvas.width;
+		lightPos.y = mousePos.y / mousePos.parentHeight * canvas.height;
 	}
 
+	let insideRect = false;
 	for (const rect of rects) {
 		context.fillStyle = "darkgrey";
 		context.fillRect(rect.x, rect.y, rect.w, rect.h);
+		if (!insideRect && rect.x <= lightPos.x && rect.y <= lightPos.y && (rect.x + rect.w) >= lightPos.x && (rect.y + rect.h) >= lightPos.y) {
+			insideRect = true;
+		}
 	}
 
-	for (let a = 0; a < aIterations; a++) {
-		let angle = 360 * a / aIterations;
-		let radAngle = angle * Math.PI / 180;
-		calculateRay(lightPos.x, lightPos.y, radAngle);
+	if (!insideRect) {
+		for (let a = 0; a < aIterations; a++) {
+			let angle = 360 * a / aIterations;
+			let radAngle = angle * Math.PI / 180;
+			calculateRay(lightPos.x, lightPos.y, radAngle);
+		}
 	}
 }
 
@@ -73,12 +81,11 @@ function load() {
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");
 
-	canvas.addEventListener("mousemove", calculateRays);
+	canvas.addEventListener("click", calculateRays);
 
-	let rect0 = createRect(100, 100, 100, 100);
-	let rect1 = createRect(100, 300, 100, 100);
-	let rect2 = createRect(300, 100, 100, 100);
-	let rect3 = createRect(300, 300, 100, 100);
+	for (let i = 0; i < 5; i++) {
+		createRect(random_int(0, canvas.width - 200), random_int(0, canvas.height - 200), 200, 200);
+	}
 
 	calculateRays();
 
