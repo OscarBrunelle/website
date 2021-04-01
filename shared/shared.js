@@ -193,11 +193,13 @@ function play_frequency(frequency, duration, callback = null) {
 	oscillator.stop(context.currentTime + duration);
 }
 
-function getMousePos(element, evt) {
+function getMousePos(element, event) {
 	var rect = element.getBoundingClientRect();
 	return {
-		x: evt.clientX - rect.left,
-		y: evt.clientY - rect.top
+		x: event.clientX - rect.left,
+		y: event.clientY - rect.top,
+		parentWidth: rect.width,
+		parentHeight: rect.height
 	};
 }
 
