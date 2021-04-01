@@ -20,8 +20,10 @@ function createRect(x, y, w, h) {
 let nextM = 20;
 
 function calculateRay(x, y, angle) {
-	let nextX = x + nextM * Math.cos(angle);
-	let nextY = y + nextM * Math.sin(angle);
+	let prevX = x + 0;
+	let prevY = y + 0;
+	let nextX = prevX + nextM * Math.cos(angle);
+	let nextY = prevY + nextM * Math.sin(angle);
 	let it = 0;
 	while (nextX >= 0 && nextY >= 0 && nextX <= canvas.width && nextY <= canvas.height && it++ < (canvas.width / nextM + 10)) {
 		let inRectFlag = false;
@@ -32,16 +34,18 @@ function calculateRay(x, y, angle) {
 			}
 		}
 		if (inRectFlag) {
-			return;
+			break;
 		}
-		context.strokeStyle = "white";
-		context.beginPath();
-		context.moveTo(x, y);
-		context.lineTo(nextX, nextY);
-		context.stroke();
+		prevX = nextX;
+		prevY = nextY;
 		nextX += nextM * Math.cos(angle);
 		nextY += nextM * Math.sin(angle);
 	}
+	context.strokeStyle = "white";
+	context.beginPath();
+	context.moveTo(x, y);
+	context.lineTo(prevX, prevY);
+	context.stroke();
 }
 
 let aIterations = 100;
@@ -77,6 +81,13 @@ function load() {
 	let rect3 = createRect(300, 300, 100, 100);
 
 	calculateRays();
+
+	document.getElementById("nextM").addEventListener("input", function (e) {
+		nextM = parseInt(e.target.value);
+	});
+	document.getElementById("aIterations").addEventListener("input", function (e) {
+		aIterations = parseInt(e.target.value);
+	});
 }
 
 document.onload = load();
