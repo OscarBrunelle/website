@@ -51,6 +51,10 @@ function calculateRay(x, y, angle) {
 let aIterations = 500;
 
 function calculateRays(event = null) {
+	if (nextM <= 0) {
+		return;
+	}
+
 	context.clearRect(0, 0, canvas.width, canvas.height);
 
 	if (event != null) {
