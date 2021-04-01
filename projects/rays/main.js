@@ -77,13 +77,15 @@ function calculateRays(event = null) {
 	}
 }
 
+const numberRects = 4;
+
 function load() {
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");
 
-	canvas.addEventListener("click", calculateRays);
+	canvas.addEventListener("mousemove", calculateRays);
 
-	for (let i = 0; i < 5; i++) {
+	for (let i = 0; i < numberRects; i++) {
 		createRect(random_int(0, canvas.width - 200), random_int(0, canvas.height - 200), 200, 200);
 	}
 
