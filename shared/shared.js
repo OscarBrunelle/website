@@ -203,6 +203,12 @@ function getMousePos(element, event) {
 	};
 }
 
+/**
+ * min and max both included
+ * @param {Number} min 
+ * @param {Number} max 
+ * @returns 
+ */
 function random_int(min = 0, max = 1) {
 	return Math.floor(Math.random() * (max + 1 - min) + min);
 }
