@@ -1,3 +1,7 @@
+/*
+Inspired by: https://github.com/LebsterFace/Raycast-Tests
+*/
+
 let canvas, context;
 
 let lightPos = {
@@ -6,14 +10,15 @@ let lightPos = {
 };
 let rects = [];
 
-function createRect(x, y, w, h) {
+function createRect(x, y, w, h, color) {
 	rects.push({
 		x: x,
 		y: y,
 		w: w,
-		h: h
+		h: h,
+		color: color
 	});
-	context.fillStyle = "darkgrey";
+	context.fillStyle = color;
 	context.fillRect(x, y, w, h);
 }
 
@@ -99,7 +104,8 @@ function calculateRay(x, y, angle) {
 					shortestDistance = c.distance;
 					intersection = {
 						x: c.x,
-						y: c.y
+						y: c.y,
+						color: rect.color
 					};
 				}
 			}
@@ -138,7 +144,8 @@ function calculateRay(x, y, angle) {
 					shortestDistance = c.distance;
 					intersection = {
 						x: c.x,
-						y: c.y
+						y: c.y,
+						color: "white"
 					};
 				}
 			}
@@ -153,6 +160,8 @@ function calculateRay(x, y, angle) {
 	context.moveTo(x, y);
 	context.lineTo(intersection.x, intersection.y);
 	context.stroke();
+	context.fillStyle = intersection.color;
+	context.fillRect(intersection.x, intersection.y, 1, 1);
 	return;
 
 
@@ -209,6 +218,7 @@ function calculateRays() {
 	requestAnimationFrame(calculateRays);
 }
 
+const colors = ["blue", "red", "green", "yellow", "orange", "pink", "cyan", "purple"];
 const numberRects = 8;
 
 function load() {
@@ -222,7 +232,7 @@ function load() {
 	});
 
 	for (let i = 0; i < numberRects; i++) {
-		createRect(random_int(0, canvas.width - 200), random_int(0, canvas.height - 200), 200, 200);
+		createRect(random_int(0, canvas.width - 200), random_int(0, canvas.height - 200), 200, 200, colors[random_int(0, colors.length - 1)]);
 	}
 
 	document.getElementById("aIterations").addEventListener("input", function (e) {
