@@ -156,7 +156,7 @@ function create_grid() {
 		let index_x = Math.floor(Math.random() * number_nodes_x);
 		let index_y = Math.floor(Math.random() * number_nodes_y);
 		let node = get_node(index_x, index_y);
-		if (!node.is_obstacle) {
+		if (!node.is_obstacle && !node.is_start && !node.is_end) {
 			node.is_obstacle = true;
 			i--;
 		}
