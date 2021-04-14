@@ -2,7 +2,7 @@ const DEFAULT_NUMBER_NODES_X = 15;
 let number_nodes_x = DEFAULT_NUMBER_NODES_X;
 const DEFAULT_NUMBER_NODES_Y = 10;
 let number_nodes_y = DEFAULT_NUMBER_NODES_Y;
-const DEFAULT_NUMBER_OBSTACLES = 50;
+const DEFAULT_NUMBER_OBSTACLES = 30;
 let number_obstacles = DEFAULT_NUMBER_OBSTACLES;
 
 /*
@@ -58,16 +58,15 @@ function parameter_change(event) {
 
 	switch (element.name) {
 		case "number_obstacles":
-			if (value >= 0 && value <= (number_nodes_x * number_nodes_y - 2)) {
+			if (check_number(value, 0, number_nodes_x * number_nodes_y - 2)) {
 				number_obstacles = value;
 			} else {
-				//element.parentElement.querySelector("label[name='" + element.name + "']")
-				console.log("Error: value for number of obstacles incorrect");
+				console.log("Error: incorrect number of obstacles.");
 				return;
 			}
 			break;
 		case "number_nodes_x":
-			if (value > 0 && number_obstacles <= (value * number_nodes_y - 2)) {
+			if (check_number(value, 1, (number_obstacles + 2) / number_nodes_y)) {
 				number_nodes_x = value;
 				grid.number_nodes_x = number_nodes_x;
 				grid.resize();
@@ -76,7 +75,7 @@ function parameter_change(event) {
 			}
 			break;
 		case "number_nodes_y":
-			if (value > 0 && number_obstacles <= (number_nodes_x * value - 2)) {
+			if (check_number(value, 1, (number_obstacles + 2) / number_nodes_x)) {
 				number_nodes_y = value;
 				grid.number_nodes_y = number_nodes_y;
 				grid.resize();
@@ -85,28 +84,28 @@ function parameter_change(event) {
 			}
 			break;
 		case "start-x":
-			if (value >= 0 && value < number_nodes_x) {
+			if (check_number(value, 0, number_nodes_x - 1)) {
 				start.x = value;
 			} else {
 				return;
 			}
 			break;
 		case "start-y":
-			if (value >= 0 && value < number_nodes_y) {
+			if (check_number(value, 0, number_nodes_y - 1)) {
 				start.y = value;
 			} else {
 				return;
 			}
 			break;
 		case "end-x":
-			if (value >= 0 && value < number_nodes_x) {
+			if (check_number(value, 0, number_nodes_x - 1)) {
 				end.x = value;
 			} else {
 				return;
 			}
 			break;
 		case "end-y":
-			if (value >= 0 && value < number_nodes_y) {
+			if (check_number(value, 0, number_nodes_y - 1)) {
 				end.y = value;
 			} else {
 				return;
