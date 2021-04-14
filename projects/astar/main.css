@@ -1,6 +1,24 @@
-#grid-div, #buttons {
+#grid-div,
+#buttons {
 	text-align: center;
-#parameters> * {
+}
+
+#parameters>* {
 	display: block;
 }
+
+canvas {
+	display: none;
+}
+
+#svg {
+	width: 100%;
+	max-height: calc(100vh - 250px);
+	aspect-ratio: 16/9;
+}
+
+.square {
+	stroke: black;
+	stroke-width: 0.1;
+	fill: none;
 }

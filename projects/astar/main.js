@@ -11,6 +11,7 @@ fix retrieve path -> use a .previous_node property
 */
 
 let grid;
+const svg = document.getElementById("svg");
 
 let nodes = [];
 let start = {
@@ -23,7 +24,7 @@ let end = {
 };
 
 function load() {
-	grid = new Grid("#grid-div", 600, 400, number_nodes_x, number_nodes_y, "grid");
+	grid = new Grid("#grid-div", 300, 200, number_nodes_x, number_nodes_y, "grid");
 
 	create_grid();
 
@@ -165,10 +166,16 @@ function create_grid() {
 	find_best_path();
 }
 
+function draw_node(node) {
+	const rect = svgrect(svg, node.grid_x * 160 / number_nodes_x, node.grid_y * 90 / number_nodes_y, 160 / number_nodes_x, 90 / number_nodes_y, "square");
+	rect.style.fill = node.color;
+}
+
 function draw_nodes() {
 	grid.clear();
+	svg.innerHTML = "";
 	for (const node of nodes) {
-		node.draw();
+		draw_node(node);
 	}
 }
 
@@ -219,7 +226,7 @@ function find_best_path_call() {
 	let end_node = get_node(end.x, end.y);
 	if (node !== get_node(start.x, start.y) && node !== end_node) {
 		node.color = "cyan";
-		node.draw();
+		draw_node(node);
 	}
 	if (node === end_node) {
 		clearInterval(best_path_interval);
