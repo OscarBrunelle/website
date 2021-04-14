@@ -226,6 +226,16 @@ function round_to_nearest(number, rounding) {
 }
 
 /**
+ * Min and max both included
+ * @param {Number} value 
+ * @param {Number} min 
+ * @param {Number} max 
+ */
+function check_number(value, min, max) {
+	return (value >= min && value <= max);
+}
+
+/**
  * Returns the hexadecimal equivalent of a decimal number.
  * Use >>> to convert to unsigned representation.
  * @param {Number} number the decimal number
