@@ -206,7 +206,7 @@ function find_best_path() {
 	starting_node.g = 0;
 	nodes_queue.push(starting_node);
 
-	best_path_interval = setInterval(find_best_path_call, 25);
+	best_path_interval = setInterval(find_best_path_call, 5);
 }
 
 function find_best_path_call() {
