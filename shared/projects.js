@@ -101,7 +101,8 @@ const PROJECTS = [{
 		"desc_en": "",
 		"desc_fr": "",
 		"tags": ["useful"],
-		"img_path": "bg.png"
+		"img_path": "bg.png",
+		"top": true
 	},
 	{
 		"link": "cookieClicker",
@@ -143,8 +144,7 @@ const PROJECTS = [{
 		"title_fr": "Créateur de gif",
 		"desc_en": "",
 		"desc_fr": "",
-		"tags": ["creative"],
-		"top": true
+		"tags": ["creative"]
 	},
 	{
 		"link": "helper",
