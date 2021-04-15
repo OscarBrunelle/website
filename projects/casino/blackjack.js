@@ -12,14 +12,14 @@ class Card {
 	draw(parent) {
 		this.svg = svgparent(parent, "0 0 100 200");
 		svgrect(this.svg, 0, 0, 100, 200, "border");
-		svgtext(this.svg, 10, 10, this.number, this.sign);
-		svgtext(this.svg, 10, 20, get_visual_sign(this.sign), this.sign);
-		svgtext(this.svg, 90, 10, this.number, this.sign);
-		svgtext(this.svg, 90, 20, get_visual_sign(this.sign), this.sign);
-		svgtext(this.svg, 10, 10, this.number, this.sign + " bottom-left");
-		svgtext(this.svg, 10, 20, get_visual_sign(this.sign), this.sign + " bottom-left");
-		svgtext(this.svg, 90, 10, this.number, this.sign + " bottom-right");
-		svgtext(this.svg, 90, 20, get_visual_sign(this.sign), this.sign + " bottom-right");
+		svgtext(this.svg, 10, 10, get_visual_name(this.number), this.sign);
+		svgtext(this.svg, 10, 25, get_visual_sign(this.sign), this.sign);
+		svgtext(this.svg, 90, 10, get_visual_name(this.number), this.sign);
+		svgtext(this.svg, 90, 25, get_visual_sign(this.sign), this.sign);
+		svgtext(this.svg, 10, 190, get_visual_name(this.number), this.sign + " bottom");
+		svgtext(this.svg, 10, 175, get_visual_sign(this.sign), this.sign + " bottom");
+		svgtext(this.svg, 90, 190, get_visual_name(this.number), this.sign + " bottom");
+		svgtext(this.svg, 90, 175, get_visual_sign(this.sign), this.sign + " bottom");
 	}
 }
 
@@ -34,7 +34,20 @@ function get_visual_sign(text_sign) {
 		case "Carreau":
 			return "♦";
 		default:
-			return null;
+			return text_sign;
+	}
+}
+
+function get_visual_name(text_name) {
+	switch (text_name) {
+		case "Valet":
+			return "V";
+		case "Dame":
+			return "D";
+		case "Roi":
+			return "R";
+		default:
+			return text_name;
 	}
 }
 

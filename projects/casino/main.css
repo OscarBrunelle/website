@@ -23,10 +23,8 @@ svg text.Carreau {
 	fill: red;
 }
 
-svg text.bottom-left {
-	transform: translate(20px, 200px) rotateX(180deg) rotateY(180deg);
-}
-
-svg text.bottom-right {
-	transform: translate(180px, 200px) rotateX(180deg) rotateY(180deg);
+svg text.bottom {
+	transform-box: fill-box;
+	transform-origin: center;
+	transform: rotate(180deg);
 }
