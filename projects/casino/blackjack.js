@@ -8,6 +8,34 @@ class Card {
 		let values = ["As", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi"];
 		return values.indexOf(this.number);
 	}
+
+	draw(parent) {
+		this.svg = svgparent(parent, "0 0 100 200");
+		svgrect(this.svg, 0, 0, 100, 200, "border");
+		svgtext(this.svg, 10, 10, this.number, this.sign);
+		svgtext(this.svg, 10, 20, get_visual_sign(this.sign), this.sign);
+		svgtext(this.svg, 90, 10, this.number, this.sign);
+		svgtext(this.svg, 90, 20, get_visual_sign(this.sign), this.sign);
+		svgtext(this.svg, 10, 10, this.number, this.sign + " bottom-left");
+		svgtext(this.svg, 10, 20, get_visual_sign(this.sign), this.sign + " bottom-left");
+		svgtext(this.svg, 90, 10, this.number, this.sign + " bottom-right");
+		svgtext(this.svg, 90, 20, get_visual_sign(this.sign), this.sign + " bottom-right");
+	}
+}
+
+function get_visual_sign(text_sign) {
+	switch (text_sign) {
+		case "Trèfle":
+			return "♣";
+		case "Coeur":
+			return "♥";
+		case "Pique":
+			return "♠";
+		case "Carreau":
+			return "♦";
+		default:
+			return null;
+	}
 }
 
 class Deck {
@@ -23,7 +51,7 @@ class Deck {
 		let signs = ["Trèfle", "Coeur", "Pique", "Carreau"];
 
 		for (let number = 0; number < values.length; number++) {
-			for(let sign = 0; sign < signs.length; sign++) {
+			for (let sign = 0; sign < signs.length; sign++) {
 				this.base_deck.push(new Card(values[number], signs[sign]));
 			}
 		}
@@ -32,9 +60,9 @@ class Deck {
 	select_card() {
 		let random_index = Math.floor(Math.random() * this.deck.length);
 		let random_card = this.deck[random_index];
-		
+
 		this.deck.splice(random_index, 1);
-		
+
 		return random_card;
 	}
 
@@ -74,24 +102,25 @@ class Spot {
 let deck = new Deck();
 let spots = [];
 
-function start(){
+function start() {
 	spots.push(new Spot(-1, "#board", "dealer_spot"));
 	for (let i = 0; i < 5; i++) {
 		spots.push(new Spot(i, "#board"));
 	}
 }
 
-function pick_card(){
+function pick_card() {
 	const card = deck.select_card();
+	card.draw(document.getElementById("main"));
 
 	let card_element = document.getElementById("cards_picked");
 	card_element.innerHTML = card_element.innerHTML + "<br/>" + card.number + " de " + card.sign;
-	
+
 	const total_element = document.getElementById("total");
 	let total = parseInt(total_element.innerHTML) + card.value + 1;
 	total_element.innerHTML = total;
-	
-	if (total > 21){
+
+	if (total > 21) {
 		stop();
 	}
 }
@@ -99,47 +128,48 @@ function pick_card(){
 function stop() {
 	const pick_button = document.getElementById("pick");
 	pick_button.setAttribute("disabled", true);
-	
+
 	let card_element = document.getElementById("cards_picked");
 	card_element.innerHTML = card_element.innerHTML + "<br/>-----";
-	
+
 	ai_pick();
-	
+
 	getWinner();
 }
 
-function ai_pick(){
+function ai_pick() {
 	let total = 0;
-	while(total<17){
+	while (total < 17) {
 		const card = deck.select_card();
 		const total_element = document.getElementById("ai_total");
-	total = parseInt(total_element.innerHTML) + values.indexOf(card.number) + 1;
-	total_element.innerHTML = total;
+		total = parseInt(total_element.innerHTML) + values.indexOf(card.number) + 1;
+		total_element.innerHTML = total;
 
-	let card_element = document.getElementById("cards_picked");
-	card_element.innerHTML = card_element.innerHTML + "<br/>" + card.number + " de " + card.sign;
+		let card_element = document.getElementById("cards_picked");
+		card_element.innerHTML = card_element.innerHTML + "<br/>" + card.number + " de " + card.sign;
 	}
 }
 
 function getWinner() {
 	const total1_el = document.getElementById("total");
 	const total1 = parseInt(total1_el.innerHTML);
-	
+
 	const total2_el = document.getElementById("ai_total");
 	const total2 = parseInt(total2_el.innerHTML);
-	
+
 	let card_element = document.getElementById("cards_picked");
-	if (total1 <= 21 && (total2 > 21 || total1 > total2)){
-	card_element.innerHTML = card_element.innerHTML + "<br/>->Player wins!";
+	if (total1 <= 21 && (total2 > 21 || total1 > total2)) {
+		card_element.innerHTML = card_element.innerHTML + "<br/>->Player wins!";
 	} else {
-	card_element.innerHTML = card_element.innerHTML + "<br/>->AI wins :(";
+		card_element.innerHTML = card_element.innerHTML + "<br/>->AI wins :(";
 	}
 }
 
-function reset(){
+function reset() {
 	document.getElementById("cards_picked").innerHTML = "";
-	document.getElementById("total").innerHTML = "0";    document.getElementById("ai_total").innerHTML = "0";
-	
+	document.getElementById("total").innerHTML = "0";
+	document.getElementById("ai_total").innerHTML = "0";
+
 	const pick_button = document.getElementById("pick");
 	pick_button.removeAttribute("disabled");
 }

@@ -1,0 +1,32 @@
+svg {
+	width: 10%;
+}
+
+svg rect.border {
+	stroke: black;
+	stroke-width: 1;
+	fill: none;
+}
+
+svg text {
+	text-anchor: middle;
+	alignment-baseline: middle;
+}
+
+svg text.Pique,
+svg text.Trèfle {
+	fill: black;
+}
+
+svg text.Coeur,
+svg text.Carreau {
+	fill: red;
+}
+
+svg text.bottom-left {
+	transform: translate(20px, 200px) rotateX(180deg) rotateY(180deg);
+}
+
+svg text.bottom-right {
+	transform: translate(180px, 200px) rotateX(180deg) rotateY(180deg);
+}
