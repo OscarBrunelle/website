@@ -221,6 +221,7 @@ const PROJECTS = [{
 		"desc_en": "",
 		"desc_fr": "",
 		"tags": ["poc"],
+		"img_path": "bg.png",
 		"top": true
 	},
 	{
