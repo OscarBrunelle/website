@@ -1,14 +1,11 @@
-const DEFAULT_NUMBER_NODES_X = 15;
+const DEFAULT_NUMBER_NODES_X = 45;
 let number_nodes_x = DEFAULT_NUMBER_NODES_X;
-const DEFAULT_NUMBER_NODES_Y = 10;
+const DEFAULT_NUMBER_NODES_Y = 30;
 let number_nodes_y = DEFAULT_NUMBER_NODES_Y;
-const DEFAULT_NUMBER_OBSTACLES = 30;
+const DEFAULT_NUMBER_OBSTACLES = 300;
 let number_obstacles = DEFAULT_NUMBER_OBSTACLES;
-
-/*
-TODO
-fix retrieve path -> use a .previous_node property
-*/
+const DEFAULT_SEARCH_SPEED = 5;
+let search_speed = 5;
 
 let grid;
 const svg = document.getElementById("svg");
@@ -48,6 +45,7 @@ function load() {
 	document.getElementById("start-y-input").addEventListener("change", parameter_change);
 	document.getElementById("end-x-input").addEventListener("change", parameter_change);
 	document.getElementById("end-y-input").addEventListener("change", parameter_change);
+	document.getElementById("search_speed-input").addEventListener("change", parameter_change);
 }
 
 function reset_start_and_end() {
@@ -119,6 +117,14 @@ function parameter_change(event) {
 		case "end-y":
 			if (check_number(value, 0, number_nodes_y - 1)) {
 				end.y = value;
+			} else {
+				return;
+			}
+			break;
+		case "search_speed":
+			if (check_number(value, 1, 50)) {
+				search_speed = value;
+				reset_interval();
 			} else {
 				return;
 			}
@@ -212,6 +218,11 @@ let nodes_queue = [];
 let nodes_done = [];
 let best_path_interval;
 
+function reset_interval() {
+	clearInterval(best_path_interval);
+	best_path_interval = setInterval(find_best_path_call, search_speed);
+}
+
 function find_best_path() {
 	clearInterval(best_path_interval);
 	nodes_queue = [];
@@ -224,7 +235,7 @@ function find_best_path() {
 	starting_node.g = 0;
 	nodes_queue.push(starting_node);
 
-	best_path_interval = setInterval(find_best_path_call, 5);
+	reset_interval();
 }
 
 function find_best_path_call() {

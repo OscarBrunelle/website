@@ -17,7 +17,7 @@
 <body>
 	<header>
 		<h1>A* algorithm</h1>
-		<p>The A* algorithm is used to find the shortest path between two points.</p>
+		<p>The A* algorithm is used to find the shortest path between two known points.</p>
 	</header>
 
 	<nav role="navigation" id="top-nav"></nav>
@@ -35,31 +35,35 @@
 		<div id="parameters">
 			<div>
 				<label for="number_obstacles">Number of obstacles</label>
-				<input id="number_obstacles-input" name="number_obstacles" type="range" min="0" max="148" value="50">
+				<input id="number_obstacles-input" name="number_obstacles" type="range" min="0" max="1350" value="300">
 			</div>
 			<div>
 				<label for="number_nodes_x">Number of nodes x</label>
-				<input id="number_nodes_x-input" name="number_nodes_x" type="range" min="1" max="15" value="15">
+				<input id="number_nodes_x-input" name="number_nodes_x" type="range" min="1" max="100" value="45">
 			</div>
 			<div>
 				<label for="number_nodes_y">Number of nodes y</label>
-				<input id="number_nodes_y-input" name="number_nodes_y" type="range" min="1" max="10" value="10">
+				<input id="number_nodes_y-input" name="number_nodes_y" type="range" min="1" max="100" value="30">
 			</div>
 			<div>
 				<label for="start-x">Start x</label>
-				<input id="start-x-input" name="start-x" type="range" min="0" max="15" value="0">
+				<input id="start-x-input" name="start-x" type="range" min="0" max="45" value="0">
 			</div>
 			<div>
 				<label for="start-y">Start y</label>
-				<input id="start-y-input" name="start-y" type="range" min="0" max="10" value="0">
+				<input id="start-y-input" name="start-y" type="range" min="0" max="30" value="0">
 			</div>
 			<div>
 				<label for="end-x">End x</label>
-				<input id="end-x-input" name="end-x" type="range" min="0" max="14" value="14">
+				<input id="end-x-input" name="end-x" type="range" min="0" max="45" value="45">
 			</div>
 			<div>
 				<label for="end-y">End y</label>
-				<input id="end-y-input" name="end-y" type="range" min="0" max="9" value="9">
+				<input id="end-y-input" name="end-y" type="range" min="0" max="30" value="30">
+			</div>
+			<div>
+				<label for="search_speed">Search speed</label>
+				<input id="search_speed-input" name="search_speed" type="range" min="1" max="50" value="5">
 			</div>
 		</div>
 	</main>
