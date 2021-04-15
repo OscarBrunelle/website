@@ -122,7 +122,7 @@ function parameter_change(event) {
 			}
 			break;
 		case "search_speed":
-			if (check_number(value, 1, 50)) {
+			if (check_number(value, 0, 50)) {
 				search_speed = value;
 				reset_interval();
 			} else {
@@ -220,6 +220,10 @@ let best_path_interval;
 
 function reset_interval() {
 	clearInterval(best_path_interval);
+	if (search_speed == 0) {
+		find_best_path_call(true);
+		return;
+	}
 	best_path_interval = setInterval(find_best_path_call, search_speed);
 }
 
@@ -238,7 +242,7 @@ function find_best_path() {
 	reset_interval();
 }
 
-function find_best_path_call() {
+function find_best_path_call(no_wait = false) {
 	if (nodes_queue.length < 1) {
 		clearInterval(best_path_interval);
 		return;
@@ -273,6 +277,9 @@ function find_best_path_call() {
 		}
 		return 0;
 	});
+	if (no_wait == true) {
+		find_best_path_call(no_wait);
+	}
 }
 
 function find_distance(a, b) {
