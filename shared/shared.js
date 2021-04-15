@@ -310,6 +310,16 @@ function get_middle(x0, y0, x1, y1) {
 /* START OF SVG */
 const xmlns = "http://www.w3.org/2000/svg";
 
+function svgparent(parent, viewBox = "0 0 100 100", className = null) {
+	const element = document.createElementNS(xmlns, "svg");
+	if (className != null) {
+		element.setAttributeNS(null, "class", className);
+	}
+	element.setAttributeNS(null, "viewBox", viewBox);
+	parent.appendChild(element);
+	return element;
+}
+
 function svgcontainer(parent, x, y, width, height, className = null) {
 	const element = document.createElementNS(xmlns, "svg");
 	if (className != null) {
@@ -337,6 +347,14 @@ function addSVGElement(parent, element, className = null, prependEl = false) {
 
 function svgg(parent, className = null, prependEl = false) {
 	let element = document.createElementNS(xmlns, "g");
+	return addSVGElement(parent, element, className, prependEl);
+}
+
+function svgtext(parent, x, y, text, className = null, prependEl = false) {
+	let element = document.createElementNS(xmlns, "text");
+	element.setAttributeNS(null, "x", x);
+	element.setAttributeNS(null, "y", y);
+	element.innerHTML = text;
 	return addSVGElement(parent, element, className, prependEl);
 }
 
