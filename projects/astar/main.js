@@ -7,6 +7,9 @@ let number_obstacles = DEFAULT_NUMBER_OBSTACLES;
 const DEFAULT_SEARCH_SPEED = 5;
 let search_speed = 5;
 
+let constant_reset = true;
+let waiting_for_reset = false;
+// TODO: add obstacle on click
 let grid;
 const svg = document.getElementById("svg");
 
@@ -46,6 +49,13 @@ function load() {
 	document.getElementById("end-x-input").addEventListener("change", parameter_change);
 	document.getElementById("end-y-input").addEventListener("change", parameter_change);
 	document.getElementById("search_speed-input").addEventListener("change", parameter_change);
+
+	toggle_constant_reset(true);
+}
+
+function toggle_constant_reset(value = !constant_reset) {
+	constant_reset = value;
+	document.getElementById("constant_reset").innerHTML = "Constant reset: " + (constant_reset ? "ON" : "OFF");
 }
 
 function reset_start_and_end() {
@@ -124,7 +134,6 @@ function parameter_change(event) {
 		case "search_speed":
 			if (check_number(value, 0, 50)) {
 				search_speed = value;
-				reset_interval();
 			} else {
 				return;
 			}
@@ -155,6 +164,7 @@ function create_grid() {
 		return;
 	}
 	clearInterval(best_path_interval);
+	waiting_for_reset = false;
 	nodes = [];
 
 	for (let index_x = 0; index_x < number_nodes_x; index_x++) {
@@ -242,9 +252,17 @@ function find_best_path() {
 	reset_interval();
 }
 
+function call_constant_reset() {
+	if (constant_reset && !waiting_for_reset) {
+		waiting_for_reset = true;
+		setTimeout(create_grid, 1000);
+	}
+}
+
 function find_best_path_call(no_wait = false) {
 	if (nodes_queue.length < 1) {
 		clearInterval(best_path_interval);
+		call_constant_reset();
 		return;
 	}
 	let node = nodes_queue.pop();
@@ -261,6 +279,7 @@ function find_best_path_call(no_wait = false) {
 			path_node.is_path = true;
 		}
 		draw_nodes();
+		call_constant_reset();
 		return;
 	}
 	let neighbours = get_neighbours(node);

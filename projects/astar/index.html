@@ -28,6 +28,7 @@
 
 		<div id="buttons">
 			<button onclick="create_grid()">Shuffle grid</button>
+			<button id="constant_reset" onclick="toggle_constant_reset()">Constant reset: ON</button>
 			<button style="display: none;" onclick="createRandomArray()">Create new array</button>
 			<button style="display: none;" onclick="findBestPath()">Find best path</button>
 		</div>
@@ -62,7 +63,7 @@
 				<input id="end-y-input" name="end-y" type="range" min="0" max="30" value="30">
 			</div>
 			<div>
-				<label for="search_speed">Search speed</label>
+				<label for="search_speed">Search speed (0 for instant)</label>
 				<input id="search_speed-input" name="search_speed" type="range" min="0" max="50" value="5">
 			</div>
 		</div>
