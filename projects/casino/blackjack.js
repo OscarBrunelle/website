@@ -1,3 +1,6 @@
+let values = ["As", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi"];
+let signs = ["Trèfle", "Coeur", "Pique", "Carreau"];
+
 class Card {
 	constructor(_number, _sign) {
 		this.number = _number;
@@ -60,9 +63,6 @@ class Deck {
 	}
 
 	create_deck() {
-		let values = ["As", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi"];
-		let signs = ["Trèfle", "Coeur", "Pique", "Carreau"];
-
 		for (let number = 0; number < values.length; number++) {
 			for (let sign = 0; sign < signs.length; sign++) {
 				this.base_deck.push(new Card(values[number], signs[sign]));
