@@ -4,7 +4,8 @@ const PROJECTS = [{
 		"title_fr": "Animations",
 		"desc_en": "",
 		"desc_fr": "",
-		"tags": ["creative"]
+		"tags": ["creative"],
+		"img_path": ""
 	},
 	{
 		"link": "aow",
