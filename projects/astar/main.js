@@ -50,6 +50,17 @@ function load() {
 	document.getElementById("end-y-input").addEventListener("change", parameter_change);
 }
 
+function reset_start_and_end() {
+	start.x = 0;
+	start.y = 0;
+	end.x = number_nodes_x - 1;
+	end.y = number_nodes_y - 1;
+	document.getElementById("start-x-input").value = start.x;
+	document.getElementById("start-y-input").value = start.y;
+	document.getElementById("end-x-input").value = end.x;
+	document.getElementById("end-y-input").value = end.y;
+}
+
 function parameter_change(event) {
 	let element = event.target;
 	let value = parse_input(element.value, true);
@@ -62,24 +73,24 @@ function parameter_change(event) {
 			if (check_number(value, 0, number_nodes_x * number_nodes_y - 2)) {
 				number_obstacles = value;
 			} else {
-				console.log("Error: incorrect number of obstacles.");
+				console.log("Error: invalid number of obstacles.");
+				console.log("still here");
 				return;
 			}
 			break;
 		case "number_nodes_x":
-			if (check_number(value, 1, (number_obstacles + 2) / number_nodes_y)) {
+			if (value > 0 && number_obstacles <= (value * number_nodes_y - 2)) {
 				number_nodes_x = value;
-				grid.number_nodes_x = number_nodes_x;
-				grid.resize();
+				reset_start_and_end();
 			} else {
+				console.error("Error: invalid number of x nodes.");
 				return;
 			}
 			break;
 		case "number_nodes_y":
-			if (check_number(value, 1, (number_obstacles + 2) / number_nodes_x)) {
+			if (value > 0 && number_obstacles <= (number_nodes_x * value - 2)) {
 				number_nodes_y = value;
-				grid.number_nodes_y = number_nodes_y;
-				grid.resize();
+				reset_start_and_end();
 			} else {
 				return;
 			}
