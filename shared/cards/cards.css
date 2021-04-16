@@ -1,0 +1,34 @@
+svg {
+	width: 10%;
+}
+
+svg rect.border {
+	stroke: black;
+	stroke-width: 1;
+	fill: none;
+}
+
+svg text {
+	text-anchor: middle;
+	alignment-baseline: middle;
+}
+
+svg text.Pique,
+svg text.Trèfle {
+	fill: black;
+}
+
+svg text.Coeur,
+svg text.Carreau {
+	fill: red;
+}
+
+svg text.bottom {
+	transform-box: fill-box;
+	transform-origin: center;
+	transform: rotate(180deg);
+}
+
+svg text.inner {
+	font-size: 200%;
+}
