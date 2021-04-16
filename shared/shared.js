@@ -307,18 +307,37 @@ function get_middle(x0, y0, x1, y1) {
 	};
 }
 
+function addDocElement(parent, element, className = null, prependEl = false) {
+	if (className != null) {
+		element.setAttribute("class", className);
+	}
+	if (prependEl) {
+		parent.prepend(element);
+	} else {
+		parent.appendChild(element);
+	}
+}
+
+function docimg(parent, src, className = null) {
+	const element = document.createElement("img");
+	element.setAttribute("src", src);
+	return addDocElement(parent, element, className);
+}
+
+function docobject(parent, data, className = null) {
+	const element = document.createElement("object");
+	element.setAttribute("data", data);
+	return addDocElement(parent, element, className);
+}
+
+function docsvg(parent, viewBox = "0 0 100 100", className = null) {
+	const element = document.createElement("svg");
+	element.setAttribute("viewBox", viewBox);
+	return addDocElement(parent, element, className);
+}
+
 /* START OF SVG */
 const xmlns = "http://www.w3.org/2000/svg";
-
-function svgparent(parent, viewBox = "0 0 100 100", className = null) {
-	const element = document.createElementNS(xmlns, "svg");
-	if (className != null) {
-		element.setAttributeNS(null, "class", className);
-	}
-	element.setAttributeNS(null, "viewBox", viewBox);
-	parent.appendChild(element);
-	return element;
-}
 
 function svgcontainer(parent, x, y, width, height, className = null) {
 	const element = document.createElementNS(xmlns, "svg");
