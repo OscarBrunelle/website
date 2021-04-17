@@ -316,6 +316,7 @@ function addDocElement(parent, element, className = null, prependEl = false) {
 	} else {
 		parent.appendChild(element);
 	}
+	return element;
 }
 
 function docimg(parent, src, className = null) {
