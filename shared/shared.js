@@ -319,6 +319,17 @@ function addDocElement(parent, element, className = null, prependEl = false) {
 	return element;
 }
 
+function docdiv(parent, className = null) {
+	const element = document.createElement("div");
+	return addDocElement(parent, element, className);
+}
+
+function docspan(parent, text = "", className = null) {
+	const element = document.createElement("span");
+	element.innerHTML = text;
+	return addDocElement(parent, element, className);
+}
+
 function docimg(parent, src, className = null) {
 	const element = document.createElement("img");
 	element.setAttribute("src", src);
