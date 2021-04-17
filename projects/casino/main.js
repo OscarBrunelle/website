@@ -2,7 +2,6 @@ let deck = new Deck();
 
 let players = [];
 let dealer;
-let player_score = 0;
 
 function again() {
 
@@ -42,6 +41,7 @@ function getWinner() {
 }
 
 function reset() {
+	deck.reset();
 	players[0].reset();
 	dealer.reset();
 

@@ -40,6 +40,7 @@ class Deck {
 	constructor() {
 		this.deck = [];
 		this.base_deck = [];
+		this.discard_pile = [];
 		this.create_deck();
 		this.reset();
 	}
@@ -55,6 +56,7 @@ class Deck {
 	select_card() {
 		let random_index = Math.floor(Math.random() * this.deck.length);
 		let random_card = this.deck[random_index];
+		this.discard_pile.push(random_card);
 
 		this.deck.splice(random_index, 1);
 
