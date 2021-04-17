@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
 	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
-	<link rel="stylesheet" type="text/css" href="blackjack.css">
 	<!-- <link rel="icon" type="image/png" href="icon.png"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
@@ -23,23 +22,24 @@
 	<nav role="navigation" id="top-nav"></nav>
 
 	<main id="main" role="main">
-		<p id="cards_picked"></p>
-		<span>Total: <p id="total">0</p></span>
-		<span>AI total: <p id="ai_total">0</p></span>
-		<div>
-			<button id="pick" onclick="pick_card()">Pick</button>
-			<button onclick="stop()">Stop</button>
-			<button onclick="reset()">Reset</button>
+		<div id="game">
+			<div id="game_area-dealer"></div>
+			<div id="game-buttons">
+				<button id="pick" onclick="pick()">Pick</button>
+				<button id="stay" onclick="stay()">Stay</button>
+				<button id="stop" onclick="reset()">Reset</button>
+			</div>
+			<div id="game_area-players"></div>
 		</div>
 
 		<div id="board">
-			
+
 		</div>
 	</main>
 
 	<script type="text/javascript" src="../../shared/shared.js"></script>
-	<script type="text/javascript" src="main.js"></script>
 	<script type="text/javascript" src="blackjack.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>

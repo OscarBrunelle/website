@@ -1,3 +1,38 @@
-#main img {
-	width: 10%;
+#game {
+	display: grid;
+	grid-template-rows: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 3fr);
+	border: 1px solid black;
+}
+
+/*#game_area-dealer, #game_area-players {*/
+#game>div {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: minmax(0, 1fr);
+	border: 1px solid black;
+}
+
+.spot {
+	display: grid;
+	grid-template-rows: 25px 100px;
+	grid-auto-rows: 25px;
+	align-items: center;
+	justify-items: center;
+}
+
+.spot .score {
+	border: 1px solid black;
+}
+
+.spot .cards {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: minmax(0, 1fr);
+	gap: 3%;
+	align-items: center;
+	justify-items: center;
+}
+
+.spot .cards .card {
+	height: 100px;
 }
