@@ -1,0 +1,9 @@
+#svg {
+	width: 100%;
+}
+
+.grid-rect {
+	stroke: black;
+	stroke-width: 0.1;
+	fill: none;
+}
