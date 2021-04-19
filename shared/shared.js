@@ -1,4 +1,5 @@
 const FA_ICONS = "../../icons/svgs/";
+const ALPHABET = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
 class LanguageSelector {
 	constructor(parent_selector, _languages, def_lang_index, _click_func) {
