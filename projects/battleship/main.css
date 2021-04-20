@@ -5,5 +5,11 @@
 .grid-rect {
 	stroke: black;
 	stroke-width: 0.1;
-	fill: none;
+	fill: transparent;
+}
+
+.grid-line {
+	stroke: black;
+	stroke-width: 0.1;
+	fill: transparent;
 }
