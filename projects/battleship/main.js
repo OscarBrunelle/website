@@ -6,7 +6,7 @@ const STATES = {
 	"GUESSING": 0,
 	"PLACING_BOAT": 1
 };
-let current_state = STATES.PLACING_BOAT;
+let current_state = STATES.GUESSING;
 let selected_boat_size = null;
 let boat_rotated = false;
 
@@ -17,6 +17,15 @@ let ai_grid = [];
 let ai_boats = [];
 let player_grid = [];
 let player_boats = [];
+
+/*
+TODO: check positions relative to the other boats
+change cursor depending on guess and boat being placed
+add visual feedback when placing a boat (previsualisation of boat pos)
+add visual feedback when wrong position
+play against ai?
+add opponent grid ?
+*/
 
 class Boat {
 	constructor(x, y, size, rotated = false) {
