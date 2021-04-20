@@ -78,7 +78,7 @@ function parameter_change(event) {
 
 	switch (element.name) {
 		case "number_obstacles":
-			if (check_number(value, 0, number_nodes_x * number_nodes_y - 2)) {
+			if (check_n(value, 0, number_nodes_x * number_nodes_y - 2)) {
 				number_obstacles = value;
 			} else {
 				console.log("Error: invalid number of obstacles.");
@@ -104,35 +104,35 @@ function parameter_change(event) {
 			}
 			break;
 		case "start-x":
-			if (check_number(value, 0, number_nodes_x - 1)) {
+			if (check_n(value, 0, number_nodes_x - 1)) {
 				start.x = value;
 			} else {
 				return;
 			}
 			break;
 		case "start-y":
-			if (check_number(value, 0, number_nodes_y - 1)) {
+			if (check_n(value, 0, number_nodes_y - 1)) {
 				start.y = value;
 			} else {
 				return;
 			}
 			break;
 		case "end-x":
-			if (check_number(value, 0, number_nodes_x - 1)) {
+			if (check_n(value, 0, number_nodes_x - 1)) {
 				end.x = value;
 			} else {
 				return;
 			}
 			break;
 		case "end-y":
-			if (check_number(value, 0, number_nodes_y - 1)) {
+			if (check_n(value, 0, number_nodes_y - 1)) {
 				end.y = value;
 			} else {
 				return;
 			}
 			break;
 		case "search_speed":
-			if (check_number(value, 0, 50)) {
+			if (check_n(value, 0, 50)) {
 				search_speed = value;
 			} else {
 				return;

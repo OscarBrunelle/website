@@ -232,7 +232,7 @@ function round_to_nearest(number, rounding) {
  * @param {Number} min 
  * @param {Number} max 
  */
-function check_number(value, min, max) {
+function check_n(value, min, max) {
 	return (value >= min && value <= max);
 }
 
