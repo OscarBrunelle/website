@@ -1,7 +1,7 @@
 class Generator {
-	constructor(x, y, cooldown = 5000) {
-		this.width = 10;
-		this.height = 10;
+	constructor(x, y, cooldown = 1000) {
+		this.width = 100;
+		this.height = 100;
 		this.x = x - this.width / 2;
 		this.y = y - this.height / 2;
 
@@ -52,7 +52,7 @@ function dir(direction) {
 
 class Bubble {
 	constructor(x, y, direction = 0, speed = 0.05) {
-		this.radius = 2.5;
+		this.radius = 10;
 		this.x = x;
 		this.y = y;
 		this.direction = dir(direction);

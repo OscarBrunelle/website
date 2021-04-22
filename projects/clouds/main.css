@@ -9,12 +9,8 @@
 	right: 0;
 }
 
-#svg {
-	width: 100%;
-	border: 1px solid black;
-}
-
 #canvas {
+	width: 100%;
 	border: 1px solid black;
 }
 

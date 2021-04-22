@@ -48,7 +48,7 @@ function update(timestamp) {
 }
 
 function load() {
-	generators.push(new Generator(50, 70));
+	generators.push(new Generator(250, 250));
 	animation_frame = requestAnimationFrame(update);
 }
 
