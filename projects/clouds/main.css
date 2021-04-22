@@ -1,5 +1,31 @@
+#svg-container {
+	display: grid;
+	justify-items: center;
+}
+
 #frame_rate-span {
 	position: absolute;
 	top: 0;
 	right: 0;
+}
+
+#svg {
+	width: 100%;
+	border: 1px solid black;
+}
+
+#svg svg {
+	overflow: visible;
+}
+
+.generator {
+	stroke: black;
+	stroke-width: 0.5;
+	fill: none;
+}
+
+.bubble {
+	stroke: black;
+	stroke-width: 0.2;
+	fill: none;
 }
