@@ -4,8 +4,10 @@ let generators = [];
 let bubbles = [];
 let animation_frame;
 
-const svg = document.getElementById("svg");
-const svg_width = 100, svg_height = 100;
+const canvas = document.getElementById("canvas");
+const canvas_width = canvas.width,
+	canvas_height = canvas.height;
+const context = canvas.getContext("2d");
 const frame_rate_span = document.getElementById("frame_rate-span");
 
 const SECOND_TO_MILLI = 1000;
@@ -31,6 +33,7 @@ function update(timestamp) {
 	}
 	const delta = timestamp - prev_timestamp;
 
+	context.clearRect(0, 0, canvas_width, canvas_height);
 	for (const generator of generators) {
 		generator.update(delta);
 	}

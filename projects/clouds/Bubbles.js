@@ -11,17 +11,18 @@ class Generator {
 		this.cooldown = cooldown;
 		this.remaining_cooldown = this.cooldown + 0;
 
-		this.create_svg();
+		this.draw();
 	}
 
-	create_svg() {
-		this.doccontainer = svgcontainer(svg, this.x, this.y, this.width, this.height);
-		svgrect(this.doccontainer, 0, 0, this.width, this.height, "generator");
+	draw() {
+		context.strokeRect(this.x,this.y,this.width,this.height);
 	}
 
 	update(delta) {
 		this.direction += delta * this.rotation_speed;
 		this.remaining_cooldown -= delta;
+
+		this.draw();
 
 		while (this.remaining_cooldown <= 0) {
 			const bubble = new Bubble(this.x + this.width / 2, this.y + this.height / 2, this.direction);
@@ -57,17 +58,13 @@ class Bubble {
 		this.direction = dir(direction);
 		this.speed = speed;
 
-		this.create_svg();
+		this.draw();
 	}
 
-	create_svg() {
-		this.doccontainer = svgcontainer(svg, this.x, this.y, this.radius * 2, this.radius * 2);
-		svgcircle(this.doccontainer, 0, 0, this.radius, "bubble");
-	}
-
-	update_svg() {
-		this.doccontainer.setAttributeNS(null, "x", this.x);
-		this.doccontainer.setAttributeNS(null, "y", this.y);
+	draw() {
+		context.beginPath();
+		context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+		context.stroke();
 	}
 
 	update(delta) {
@@ -77,17 +74,17 @@ class Bubble {
 		if ((this.x - this.radius) < 0 && this.direction > (Math.PI / 2) && this.direction < (Math.PI * 3 / 2)) {
 			this.direction = dir(Math.PI - this.direction);
 		}
-		if ((this.x + this.radius) > svg_width && !(this.direction >= (Math.PI / 2) && this.direction <= (Math.PI * 3 / 2))) {
+		if ((this.x + this.radius) > canvas_width && !(this.direction >= (Math.PI / 2) && this.direction <= (Math.PI * 3 / 2))) {
 			this.direction = dir(Math.PI - this.direction);
 		}
 
 		if ((this.y - this.radius) < 0 && this.direction > 0 && this.direction < Math.PI) {
 			this.direction = dir(Math.PI * 2 - this.direction);
 		}
-		if ((this.y + this.radius) > svg_width && !(this.direction >= 0 && this.direction <= Math.PI)) {
+		if ((this.y + this.radius) > canvas_height && !(this.direction >= 0 && this.direction <= Math.PI)) {
 			this.direction = dir(Math.PI * 2 - this.direction);
 		}
 
-		this.update_svg();
+		this.draw();
 	}
 }
