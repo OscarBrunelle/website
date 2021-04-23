@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="icon" type="image/png" href="icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Food">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Food</title>
+</head>
+
+<body>
+	<header>
+		<h1>Food</h1>
+	</header>
+
+	<nav role="navigation" id="top-nav"></nav>
+
+	<main id="main" role="main">
+		<input id="input-meal" placeholder="Plat (ex: Pâtes carbonara)">
+		<input id="input-ingredient" placeholder="Ingrédient (ex: Tomates)">
+		<button onclick="random_meal();">Plat au hasard</button>
+		<div id="meals_container"></div>
+	</main>
+
+	<!-- <script type="text/javascript" src="../../shared/jquery.js"></script> -->
+	<script type="text/javascript" src="../../shared/shared.js"></script>
+	<script type="text/javascript" src="ingredients.js"></script>
+	<script type="text/javascript" src="meals.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
