@@ -388,6 +388,28 @@ function doctd(parent, value = "", className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function fill_table(element, columns = [], values = [], empty = true) {
+	if (empty) {
+		element.innerHTML = "";
+	}
+
+	const tr_headers = doctr(element);
+	for (const col of columns) {
+		docth(tr_headers, col.title);
+	}
+
+	for (const val of values) {
+		const tr = doctr(element);
+		for (const col of columns) {
+			let text = "";
+			if (val[col.value] != null) {
+				text = val[col.value];
+			}
+			doctd(tr, text);
+		}
+	}
+}
+
 /* START OF SVG */
 const xmlns = "http://www.w3.org/2000/svg";
 
