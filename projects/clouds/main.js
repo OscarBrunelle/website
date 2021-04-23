@@ -13,7 +13,9 @@ const frame_rate_span = document.getElementById("frame_rate-span");
 const SECOND_TO_MILLI = 1000;
 let frames = [];
 
+// todo: move to shared
 function update_frame_rate(timestamp, element) {
+	const prev_frame_rate = frames.length;
 	frames.push(timestamp);
 	for (const frame_timestamp of frames) {
 		if (frame_timestamp < (timestamp - SECOND_TO_MILLI)) {
@@ -22,7 +24,9 @@ function update_frame_rate(timestamp, element) {
 			break;
 		}
 	}
-	element.innerHTML = frames.length;
+	if (frames.length != prev_frame_rate) {
+		element.innerHTML = frames.length;
+	}
 }
 
 let prev_timestamp;
