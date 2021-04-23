@@ -48,7 +48,7 @@ class Vector {
 
 function hit(bubble1, bubble2) {
 	const distance = get_distance(bubble1, bubble2);
-	return (distance < bubble1.radius*2 || distance < bubble2.radius*2);
+	return (distance < bubble1.radius * 2 || distance < bubble2.radius * 2);
 }
 
 function dir(direction) {
@@ -60,10 +60,14 @@ class Bubble {
 		this.radius = 10;
 		this.x = x;
 		this.y = y;
-		this.direction = dir(direction);
+		this.set_direction(direction);
 		this.speed = speed;
 
 		this.draw();
+	}
+
+	set_direction(value) {
+		this.direction = dir(value);
 	}
 
 	draw() {
@@ -76,18 +80,18 @@ class Bubble {
 		this.x += Math.cos(this.direction) * this.speed * delta;
 		this.y += Math.sin(this.direction + Math.PI) * this.speed * delta;
 
-		if ((this.x - this.radius) < 0 && this.direction > (Math.PI / 2) && this.direction < (Math.PI * 3 / 2)) {
-			this.direction = dir(Math.PI - this.direction);
+		if ((this.x - this.radius) <= 0 && this.direction > (Math.PI / 2) && this.direction < (Math.PI * 3 / 2)) {
+			this.set_direction(Math.PI - this.direction);
 		}
-		if ((this.x + this.radius) > canvas_width && !(this.direction >= (Math.PI / 2) && this.direction <= (Math.PI * 3 / 2))) {
-			this.direction = dir(Math.PI - this.direction);
+		if ((this.x + this.radius) >= canvas_width && !(this.direction >= (Math.PI / 2) && this.direction <= (Math.PI * 3 / 2))) {
+			this.set_direction(Math.PI - this.direction);
 		}
 
-		if ((this.y - this.radius) < 0 && this.direction > 0 && this.direction < Math.PI) {
-			this.direction = dir(Math.PI * 2 - this.direction);
+		if ((this.y - this.radius) <= 0 && this.direction > 0 && this.direction < Math.PI) {
+			this.set_direction(Math.PI * 2 - this.direction);
 		}
-		if ((this.y + this.radius) > canvas_height && !(this.direction >= 0 && this.direction <= Math.PI)) {
-			this.direction = dir(Math.PI * 2 - this.direction);
+		if ((this.y + this.radius) >= canvas_height && !(this.direction >= 0 && this.direction <= Math.PI)) {
+			this.set_direction(Math.PI * 2 - this.direction);
 		}
 
 		this.draw();

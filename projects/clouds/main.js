@@ -45,8 +45,8 @@ function update(timestamp) {
 		for (let j = i + 1; j < bubbles.length; j++) {
 			const bubble2 = bubbles[j];
 			if (hit(bubble1, bubble2)) {
-				bubble1.direction = Math.atan2(bubble2.y - bubble1.y, bubble1.x - bubble2.x);
-				bubble2.direction = Math.atan2(bubble1.y - bubble2.y, bubble2.x - bubble1.x);
+				bubble1.set_direction(Math.atan2(bubble2.y - bubble1.y, bubble1.x - bubble2.x));
+				bubble2.set_direction(Math.atan2(bubble1.y - bubble2.y, bubble2.x - bubble1.x));
 			}
 		}
 	}
