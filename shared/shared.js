@@ -352,6 +352,13 @@ function docimg(parent, src, className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function doca(parent, href, innerHTML = "", className = null) {
+	const element = document.createElement("a");
+	element.innerHTML = innerHTML;
+	element.setAttribute("href", href);
+	return addDocElement(parent, element, className);
+}
+
 function docobject(parent, data, className = null) {
 	const element = document.createElement("object");
 	element.setAttribute("data", data);
@@ -361,6 +368,23 @@ function docobject(parent, data, className = null) {
 function docsvg(parent, viewBox = "0 0 100 100", className = null) {
 	const element = document.createElement("svg");
 	element.setAttribute("viewBox", viewBox);
+	return addDocElement(parent, element, className);
+}
+
+function doctr(parent, className = null) {
+	const element = document.createElement("tr");
+	return addDocElement(parent, element, className);
+}
+
+function docth(parent, value = "", className = null) {
+	const element = document.createElement("th");
+	element.innerHTML = value;
+	return addDocElement(parent, element, className);
+}
+
+function doctd(parent, value = "", className = null) {
+	const element = document.createElement("td");
+	element.innerHTML = value;
 	return addDocElement(parent, element, className);
 }
 
