@@ -15,7 +15,7 @@ class Generator {
 	}
 
 	draw() {
-		context.strokeRect(this.x,this.y,this.width,this.height);
+		context.strokeRect(this.x, this.y, this.width, this.height);
 	}
 
 	update(delta) {
@@ -46,12 +46,17 @@ class Vector {
 	// }
 }
 
+function hit(bubble1, bubble2) {
+	const distance = get_distance(bubble1, bubble2);
+	return (distance < bubble1.radius*2 || distance < bubble2.radius*2);
+}
+
 function dir(direction) {
 	return (direction + 2 * Math.PI) % (2 * Math.PI);
 }
 
 class Bubble {
-	constructor(x, y, direction = 0, speed = 0.05) {
+	constructor(x, y, direction = 0, speed = 0.1) {
 		this.radius = 10;
 		this.x = x;
 		this.y = y;

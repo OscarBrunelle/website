@@ -40,6 +40,16 @@ function update(timestamp) {
 	for (const bubble of bubbles) {
 		bubble.update(delta);
 	}
+	for (let i = 0; i < bubbles.length; i++) {
+		const bubble1 = bubbles[i];
+		for (let j = i + 1; j < bubbles.length; j++) {
+			const bubble2 = bubbles[j];
+			if (hit(bubble1, bubble2)) {
+				bubble1.direction = Math.atan2(bubble2.y - bubble1.y, bubble2.x - bubble1.x);
+				bubble2.direction = Math.atan2(bubble1.y - bubble2.y, bubble1.x - bubble2.x);
+			}
+		}
+	}
 
 	update_frame_rate(timestamp, frame_rate_span);
 
