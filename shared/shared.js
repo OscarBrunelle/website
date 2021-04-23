@@ -204,6 +204,21 @@ function getMousePos(element, event) {
 	};
 }
 
+function get_distance(pointA, pointB) {
+	let a = Math.abs(pointA.x - pointB.x);
+	let b = Math.abs(pointA.y - pointB.y);
+	return Math.sqrt(a * a + b * b);
+}
+
+function get_middle(pointA, pointB) {
+	let a = Math.abs((pointA.x - pointB.x) / 2);
+	let b = Math.abs((pointA.y - pointB.y) / 2);
+	return {
+		x: a,
+		y: b
+	};
+}
+
 /**
  * min and max both included
  * @param {Number} min 
