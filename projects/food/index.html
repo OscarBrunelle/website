@@ -22,10 +22,14 @@
 	<nav role="navigation" id="top-nav"></nav>
 
 	<main id="main" role="main">
-		<input id="input-meal" placeholder="Plat (ex: Pâtes carbonara)">
-		<input id="input-ingredient" placeholder="Ingrédient (ex: Tomates)">
-		<button onclick="random_meal();">Plat au hasard</button>
-		<div id="meals_container"></div>
+		<div id="search-div">
+			<input id="input-meal" placeholder="Plat (ex: Pâtes carbonara)">
+			<input id="input-ingredient" placeholder="Ingrédient (ex: Tomates)">
+			<button onclick="random_meal();">Plat au hasard</button></div>
+		<div id="filters-div"></div>
+		<div id="meals-div">
+			<table id="meals-table"></table>
+		</div>
 	</main>
 
 	<!-- <script type="text/javascript" src="../../shared/jquery.js"></script> -->

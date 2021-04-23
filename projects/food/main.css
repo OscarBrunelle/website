@@ -1,3 +1,13 @@
-.meal {
+#meals-table {
+	border-spacing: 0;
 	border: 1px solid black;
+}
+
+#meals-table th,
+#meals-table td {
+	border: 1px solid black;
+}
+
+#meals-table th {
+	text-align: center;
 }

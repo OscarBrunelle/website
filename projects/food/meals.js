@@ -1,3 +1,8 @@
+const MEAL_TYPES = {
+	"PLAT": "plat",
+	"DESSERT": "dessert"
+};
+
 const MEALS = [{
 	"name": "Pâtes carbos",
 	"ingredients": [{
@@ -11,7 +16,7 @@ const MEALS = [{
 		"quantity": 1,
 		"optional": true
 	}],
-	"type": "plat",
+	"type": MEAL_TYPES.PLAT,
 	"preparation_time": 10,
 	"waiting_time": 0
 }, {
@@ -20,61 +25,61 @@ const MEALS = [{
 		"ingredient-name": INGREDIENTS.oeuf,
 		"quantity": 2
 	}],
-	"type": "plat"
+	"type": MEAL_TYPES.PLAT
 }, {
 	"name": "Quiche saumon / épinard",
 	"ingredients": [{
 		"ingredient-name": INGREDIENTS.oeuf,
 		"quantity": 2
 	}],
-	"type": "plat"
+	"type": MEAL_TYPES.PLAT
 }, {
 	"name": "Nuggets frites",
 	"ingredients": [{
 		"ingredient-name": INGREDIENTS.oeuf,
 		"quantity": 2
 	}],
-	"type": "plat"
+	"type": MEAL_TYPES.PLAT
 }, {
 	"name": "Risotto au poireau",
 	"ingredients": [{
 		"ingredient-name": INGREDIENTS.oeuf,
 		"quantity": 2
 	}],
-	"type": "plat"
+	"type": MEAL_TYPES.PLAT
 }, {
 	"name": "Bruchettas",
 	"ingredients": [{
 		"ingredient-name": INGREDIENTS.oeuf,
 		"quantity": 2
 	}],
-	"type": "plat"
+	"type": MEAL_TYPES.PLAT
 }, {
 	"name": "Fajitas",
 	"ingredients": [{
 		"ingredient-name": INGREDIENTS.oeuf,
 		"quantity": 2
 	}],
-	"type": "plat"
+	"type": MEAL_TYPES.PLAT
 }, {
 	"name": "Curry de chou-fleur aux pois-chiches et pommes de terre",
 	"ingredients": [{
 		"ingredient-name": INGREDIENTS.oeuf,
 		"quantity": 2
 	}],
-	"type": "plat"
+	"type": MEAL_TYPES.PLAT
 }, {
 	"name": "Crêpes salées au sarasin",
 	"ingredients": [{
 		"ingredient-name": INGREDIENTS.oeuf,
 		"quantity": 2
 	}],
-	"type": "plat"
+	"type": MEAL_TYPES.PLAT
 }, {
 	"name": "Cookies",
 	"ingredients": [{
 		"ingredient-name": INGREDIENTS.oeuf,
 		"quantity": 2
 	}],
-	"type": "plat"
+	"type": MEAL_TYPES.DESSERT
 }];

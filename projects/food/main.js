@@ -2,15 +2,35 @@
 
 const input_meal = document.getElementById("input-meal");
 const input_ingredient = document.getElementById("input-ingredient");
-const meals_container = document.getElementById("meals_container");
+const meals_container = document.getElementById("meals-div");
+const meals_table = document.getElementById("meals-table");
+const filters = document.querySelectorAll(".filter");
 
-function display_meals(meals) {
-	meals_container.innerHTML = "";
-
-	for (const meal of meals) {
-		const meal_container = docdiv(meals_container, "meal");
-		docspan(meal_container, meal.name);
+function filter_meals(values) {
+	let results = [];
+	for (const meal of values) {
+		for (const filter of filters) {
+			const filter_name = filter.name;
+			const filter_value = filter.value;
+			if (!(meal[filter_name] == filter_value)) {
+				break;
+			}
+		}
+		results.push(meal);
 	}
+	return results;
+}
+
+function display_meals(values) {
+	values = filter_meals(values);
+
+	fill_table(meals_table, [{
+		"title": "Nom",
+		"value": "name"
+	},{
+		"title": "Type",
+		"value": "type"
+	}], values);
 }
 
 function format_search(value) {
@@ -86,6 +106,10 @@ function random_meal() {
 function load() {
 	input_meal.addEventListener("input", search_by_meal);
 	input_ingredient.addEventListener("input", search_by_ingredient);
+	for (const filter of filters) {
+		filter.addEventListener("input", filter_meals);
+	}
+
 	display_meals(MEALS);
 }
 
