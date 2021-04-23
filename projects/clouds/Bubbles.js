@@ -1,9 +1,9 @@
 class Generator {
 	constructor(x, y, cooldown = 1000) {
-		this.width = 100;
-		this.height = 100;
-		this.x = x - this.width / 2;
-		this.y = y - this.height / 2;
+		this.width = 20;
+		this.height = 20;
+		this.x = x;
+		this.y = y;
 
 		this.direction = 0;
 		this.rotation_speed = 0.001;
@@ -15,7 +15,15 @@ class Generator {
 	}
 
 	draw() {
-		context.strokeRect(this.x, this.y, this.width, this.height);
+		const line_x = this.x + this.width * Math.cos(this.direction);
+		const line_y = this.y - this.height * Math.sin(this.direction);
+		context.beginPath();
+		context.moveTo(this.x, this.y);
+		context.lineTo(line_x, line_y);
+		context.lineTo(line_x + 5 * Math.cos(this.direction - Math.PI * 5 / 6), line_y - 5 * Math.sin(this.direction - Math.PI * 5 / 6));
+		context.moveTo(line_x, line_y);
+		context.lineTo(line_x + 5 * Math.cos(this.direction - Math.PI * 7 / 6), line_y - 5 * Math.sin(this.direction - Math.PI * 7 / 6));
+		context.stroke();
 	}
 
 	update(delta) {
@@ -25,7 +33,7 @@ class Generator {
 		this.draw();
 
 		while (this.remaining_cooldown <= 0) {
-			const bubble = new Bubble(this.x + this.width / 2, this.y + this.height / 2, this.direction);
+			const bubble = new Bubble(this.x, this.y, this.direction);
 			bubble.update(0 - this.remaining_cooldown);
 			bubbles.push(bubble);
 
