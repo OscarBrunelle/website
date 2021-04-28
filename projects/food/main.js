@@ -6,6 +6,21 @@ const meals_container = document.getElementById("meals-div");
 const meals_table = document.getElementById("meals-table");
 const filters = document.querySelectorAll(".filter");
 
+// TODO: add time, price
+const table_columns = [{
+	"title": "Nom",
+	"value": "name"
+}, {
+	"title": "Type",
+	"value": "type"
+}, {
+	"title": "Recette",
+	"value": "link"
+}];
+let table_values = [];
+
+let sort_column = "name";
+
 function change_url_parameter(parameter) {
 	const url = document.URL.split("index.html")[0] + "index.html";
 	window.history.pushState("", document.title, url + parameter);
@@ -47,24 +62,47 @@ function filter_meals(values) {
 	return results;
 }
 
-function display_meals(values) {
+function create_table() {
+	fill_table(meals_table, table_columns, table_values);
+	const headers = meals_table.querySelectorAll("th");
+	for (let i = 0; i < headers.length; i++) {
+		const th = headers[i];
+		th.addEventListener("click", function (event) {
+			change_sort(table_columns[i].value);
+		});
+	}
+}
+
+function change_sort(value) {
+	sort_column = value;
+
+	sort_table();
+	create_table();
+}
+
+function sort_table(values = table_values, sort_column_value = sort_column) {
+	function compare(a, b) {
+		if (a[sort_column_value] < b[sort_column_value]) {
+			return -1;
+		} else if (a[sort_column_value] > b[sort_column_value]) {
+			return 1;
+		}
+		return 0;
+	}
+
+	return values.sort(compare);
+}
+
+function display_meals(values, sort_column_value = sort_column) {
 	for (const meal_ref in values) {
 		const link = doca(null, "?meal_ref=" + meal_ref, "Lien");
 		values[meal_ref].link = link.outerHTML.toString();
 	}
 
 	values = filter_meals(values);
-	// add time, price
-	fill_table(meals_table, [{
-		"title": "Nom",
-		"value": "name"
-	}, {
-		"title": "Type",
-		"value": "type"
-	}, {
-		"title": "Recette",
-		"value": "link"
-	}], values);
+
+	table_values = sort_table(values, sort_column_value);
+	create_table();
 }
 
 function format_search(value) {

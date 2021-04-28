@@ -5,7 +5,7 @@ const MEAL_TYPES = {
 
 const MEALS = {
 	"PATES_CARBOS": {
-		"name": "Pâtes carbos",
+		"name": "Pâtes carbonara",
 		"ingredients": [{
 			"ingredient-name": INGREDIENTS.SPAGHETTIS,
 			"quantity": 777
