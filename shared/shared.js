@@ -373,6 +373,22 @@ function docsvg(parent, viewBox = "0 0 100 100", className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function docol(parent, className = null) {
+	const element = document.createElement("ol");
+	return addDocElement(parent, element, className);
+}
+
+function docul(parent, className = null) {
+	const element = document.createElement("ul");
+	return addDocElement(parent, element, className);
+}
+
+function docli(parent, text = "", className = null) {
+	const element = document.createElement("li");
+	element.innerHTML = text;
+	return addDocElement(parent, element, className);
+}
+
 function doctr(parent, className = null) {
 	const element = document.createElement("tr");
 	return addDocElement(parent, element, className);
