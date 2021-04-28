@@ -147,8 +147,8 @@ function show_recipe(meal_ref) {
 }
 
 function random_meal() {
-	const r = random_int(0, MEALS.length);
-	const meal = MEALS[r];
+	const r = random_int(0, Object.keys(MEALS).length - 1);
+	const meal = MEALS[Object.keys(MEALS)[r]];
 	display_meals([meal]);
 }
 
