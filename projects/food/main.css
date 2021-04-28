@@ -1,13 +1,36 @@
+#main {
+	display: grid;
+	grid-template-rows: auto auto 1fr auto;
+	gap: 5px;
+}
+
+#meals-div {
+	max-height: 50vh;
+	overflow-y: auto;
+	justify-self: center;
+}
+
 #meals-table {
 	border-spacing: 0;
 	border: 1px solid black;
 }
 
+#meals-table tr {
+	background-color: #ccc;
+}
+
+#meals-table tr:nth-child(even) {
+	background-color: #eee;
+}
+
 #meals-table th,
 #meals-table td {
+	padding: 5px;
 	border: 1px solid black;
 }
 
 #meals-table th {
+	background-color: #444;
+	color: white;
 	text-align: center;
 }
