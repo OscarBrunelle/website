@@ -327,10 +327,12 @@ function addDocElement(parent, element, className = null, prependEl = false) {
 	if (className != null) {
 		element.setAttribute("class", className);
 	}
-	if (prependEl) {
-		parent.prepend(element);
-	} else {
-		parent.appendChild(element);
+	if (parent != null) {
+		if (prependEl) {
+			parent.prepend(element);
+		} else {
+			parent.appendChild(element);
+		}
 	}
 	return element;
 }
