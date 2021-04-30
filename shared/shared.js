@@ -389,6 +389,11 @@ function docli(parent, text = "", className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function doctable(parent, className = null) {
+	const element = document.createElement("table");
+	return addDocElement(parent, element, className);
+}
+
 function doctr(parent, className = null) {
 	const element = document.createElement("tr");
 	return addDocElement(parent, element, className);
