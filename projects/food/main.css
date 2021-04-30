@@ -9,26 +9,26 @@
 	justify-self: center;
 }
 
-#meals-table {
+#meals-div table {
 	border-spacing: 0;
 	border: 1px solid black;
 }
 
-#meals-table tr {
+#meals-div table tr {
 	background-color: #ccc;
 }
 
-#meals-table tr:nth-child(even) {
+#meals-div table tr:nth-child(even) {
 	background-color: #eee;
 }
 
-#meals-table th,
-#meals-table td {
+#meals-div table th,
+#meals-div table td {
 	padding: 5px;
 	border: 1px solid black;
 }
 
-#meals-table th {
+#meals-div table th {
 	background-color: #444;
 	color: white;
 	text-align: center;

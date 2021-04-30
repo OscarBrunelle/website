@@ -425,8 +425,8 @@ function fill_table(element, columns = [], values = [], empty = true) {
 		const tr = doctr(element);
 		for (const col of columns) {
 			let text = "";
-			if (val[col.value] != null) {
-				text = val[col.value];
+			if (val[col.name] != null) {
+				text = val[col.name];
 			}
 			doctd(tr, text);
 		}
