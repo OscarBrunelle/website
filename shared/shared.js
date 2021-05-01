@@ -437,6 +437,9 @@ let current_theme;
 
 function toggle_theme() {
 	if (current_theme == null) {
+		if (document.getElementById("theme-btn") == null) {
+			return;
+		}
 		document.getElementById("theme-btn").addEventListener("click", toggle_theme);
 		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			current_theme = "dark";
