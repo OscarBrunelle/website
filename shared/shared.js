@@ -433,6 +433,39 @@ function fill_table(element, columns = [], values = [], empty = true) {
 	}
 }
 
+let current_theme;
+
+function toggle_theme() {
+	if (current_theme == null) {
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			current_theme = "dark";
+		} else {
+			current_theme = "light";
+		}
+	} else {
+		if (current_theme == "light") {
+			current_theme = "dark";
+		} else {
+			current_theme = "light";
+		}
+	}
+
+	switch (current_theme) {
+		case "light":
+			document.getElementById("theme-btn").innerHTML = "&#127761;";
+			document.body.classList.remove("theme-dark");
+			document.body.classList.add("theme-light");
+			break;
+		case "dark":
+			document.body.classList.remove("theme-light");
+			document.body.classList.add("theme-dark");
+			break;
+		default:
+			break;
+	}
+}
+document.onload = toggle_theme();
+
 /* START OF SVG */
 const xmlns = "http://www.w3.org/2000/svg";
 
