@@ -17,6 +17,7 @@ const MEALS = {
 			"quantity": 777,
 			"optional": true
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.PLAT,
 		"preparation_time": 10,
 		"waiting_time": 0
@@ -27,6 +28,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.OEUF,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.PLAT
 	},
 	"QUICHE_SAUMON_EPINARD": {
@@ -35,6 +37,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.OEUF,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.PLAT
 	},
 	"NUGGETS_FRITES": {
@@ -43,6 +46,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.OEUF,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.PLAT
 	},
 	"RISOTTO_POIREAU": {
@@ -51,6 +55,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.OEUF,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.PLAT
 	},
 	"BRUCHETTAS": {
@@ -59,6 +64,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.OEUF,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.PLAT
 	},
 	"FAJITAS": {
@@ -67,6 +73,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.OEUF,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.PLAT
 	},
 	"CURRY_CHOU_FLEUR": {
@@ -75,6 +82,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.OEUF,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.PLAT
 	},
 	"CREPES_SARASIN": {
@@ -83,6 +91,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.OEUF,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.PLAT
 	},
 	"COOKIES": {
@@ -129,6 +138,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.OEUF,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.DESSERT
 	},
 	"CAROTTES_RAPEES": {
@@ -137,6 +147,7 @@ const MEALS = {
 			"ingredient-name": INGREDIENTS.CAROTTE,
 			"quantity": 777
 		}],
+		"steps": [],
 		"type": MEAL_TYPES.DESSERT
 	}
 };

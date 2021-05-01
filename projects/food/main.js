@@ -3,7 +3,6 @@
 const input_meal = document.getElementById("input-meal");
 const input_ingredient = document.getElementById("input-ingredient");
 const meals_container = document.getElementById("meals-div");
-const meals_table = document.getElementById("meals-table");
 const filters = document.querySelectorAll(".filter");
 let custom_table;
 
@@ -65,7 +64,7 @@ function filter_meals(values) {
 
 class CustomTable {
 	constructor(parent, columns = [], values = []) {
-		this.table_element = doctable(parent, "custom-table");
+		this.table_element = doctable(parent, "shared-table");
 
 		this.set_columns(columns, false);
 		this.set_values(values, false);

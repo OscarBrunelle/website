@@ -9,27 +9,40 @@
 	justify-self: center;
 }
 
-#meals-div table {
+.shared-table {
 	border-spacing: 0;
 	border: 1px solid black;
+	color: var(--secondary-text-color);
+	background-color: white;
 }
 
-#meals-div table tr {
-	background-color: #ccc;
+.shared-table tr:nth-child(odd) {
+	background-color: rgba(0,0,0,.1);
 }
 
-#meals-div table tr:nth-child(even) {
-	background-color: #eee;
-}
-
-#meals-div table th,
-#meals-div table td {
-	padding: 5px;
+.shared-table th,
+.shared-table td {
+	padding: .75rem;
 	border: 1px solid black;
 }
 
-#meals-div table th {
-	background-color: #444;
-	color: white;
-	text-align: center;
+.shared-table th {
+	color: var(--primary-text-color);
+	background-color: var(--primary-background-color);
+}
+
+@media (prefers-color-scheme: dark) {
+	.shared-table {
+		color: var(--dark-secondary-text-color);
+		background-color: var(--dark-secondary-background-color);
+	}
+	
+	.shared-table tr:nth-child(odd) {
+		background-color: rgba(255,255,255,.1);
+	}
+	
+	.shared-table th {
+		color: var(--dark-primary-text-color);
+		background-color: var(--dark-primary-background-color);
+	}
 }
