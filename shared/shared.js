@@ -437,6 +437,7 @@ let current_theme;
 
 function toggle_theme() {
 	if (current_theme == null) {
+		document.getElementById("theme-btn").addEventListener("click", toggle_theme);
 		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			current_theme = "dark";
 		} else {
@@ -457,6 +458,7 @@ function toggle_theme() {
 			document.body.classList.add("theme-light");
 			break;
 		case "dark":
+			document.getElementById("theme-btn").innerHTML = "&#9728;&#65039;";
 			document.body.classList.remove("theme-light");
 			document.body.classList.add("theme-dark");
 			break;
