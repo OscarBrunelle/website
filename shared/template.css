@@ -4,6 +4,12 @@
 
 	--secondary-background-color: rgb(190, 238, 255);
 	--secondary-text-color: black;
+	
+	--dark-primary-background-color: #212529;
+	--dark-primary-text-color: white;
+
+	--dark-secondary-background-color: #32383e;
+	--dark-secondary-text-color: white;
 }
 
 body {
@@ -53,11 +59,12 @@ header>p {
 #top-nav>a>button.active {
 	background-color: var(--secondary-background-color);
 	border-bottom-color: var(--secondary-background-color);
-	color: black;
+	color: var(--secondary-text-color);
 }
 
 #main {
 	position: relative;
+	color: var(--secondary-text-color);
 	background-color: var(--secondary-background-color);
 }
 
@@ -77,4 +84,32 @@ footer>*:last-child {
 footer>span {
 	grid-column: 2 / 3;
 	text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+	header {
+		background-color: var(--dark-primary-background-color);
+		color: var(--dark-primary-text-color);
+	}
+
+	#top-nav>a>button {
+		border-color: white;
+		background-color: var(--dark-primary-background-color);
+		color: var(--dark-primary-text-color);
+	}
+
+	#top-nav>a>button.active {
+		background-color: var(--dark-secondary-background-color);
+		border-bottom-color: var(--dark-secondary-background-color);
+		color: var(--dark-secondary-text-color);
+	}
+
+	#main {
+		color: var(--dark-secondary-text-color);
+		background-color: var(--dark-secondary-background-color);
+	}
+	
+	footer {
+		border-color: white;
+	}
 }
