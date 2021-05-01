@@ -44,3 +44,20 @@
 	color: var(--dark-primary-text-color);
 	background-color: var(--dark-primary-background-color);
 }
+
+.recipe-container {
+	padding: 10px;
+	border: 1px solid var(--dark-primary-text-color);
+}
+
+.recipe-title {
+	text-decoration: underline;
+}
+
+.recipe-ingredients, .recipe-steps {
+	margin-top: 10px;
+}
+
+.recipe-ingredients>span, .recipe-steps>span {
+	text-decoration: underline;
+}

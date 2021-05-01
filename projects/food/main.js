@@ -241,11 +241,21 @@ function show_recipe(meal_ref) {
 	change_url_parameter("?meal_ref=" + meal_ref);
 	change_title(meal.name);
 
-	const container = docdiv(document.getElementById("main"));
-	docspan(container, "Voilà la recette pour " + meal.name);
-	const list = docol(container);
+	const container = docdiv(document.getElementById("main"), "recipe-container");
+	docspan(container, "Voilà la recette pour " + meal.name, "recipe-title");
+
+	const ingredients_div = docdiv(container, "recipe-ingredients");
+	docspan(ingredients_div, "Ingrédients");
+	const ingredients_list = docul(ingredients_div);
+	for (const ingredient of meal.ingredients) {
+		docli(ingredients_list, ingredient["ingredient-name"]["name-fr"] + " : " + ingredient.quantity);
+	}
+
+	const steps_div = docdiv(container, "recipe-steps");
+	docspan(steps_div, "Étapes");
+	const steps_list = docol(steps_div);
 	for (const step of meal.steps) {
-		docli(list, step);
+		docli(steps_list, step);
 	}
 }
 
