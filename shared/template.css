@@ -4,7 +4,7 @@
 
 	--secondary-background-color: rgb(190, 238, 255);
 	--secondary-text-color: black;
-	
+
 	--dark-primary-background-color: #212529;
 	--dark-primary-text-color: white;
 
@@ -23,6 +23,11 @@ header {
 	color: var(--primary-text-color);
 }
 
+.theme-dark header {
+	background-color: var(--dark-primary-background-color);
+	color: var(--dark-primary-text-color);
+}
+
 header>h1 {
 	margin: 10px;
 	text-align: center;
@@ -33,6 +38,19 @@ header>h1 {
 header>p {
 	margin: 10px;
 	text-align: center;
+}
+
+#theme-btn {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: transparent;
+	border: 1px solid var(--primary-text-color);
+	cursor: pointer;
+}
+
+.theme-dark #theme-btn {
+	border: 1px solid var(--dark-primary-text-color);
 }
 
 #top-nav {
@@ -52,6 +70,12 @@ header>p {
 	color: var(--primary-text-color);
 }
 
+.theme-dark #top-nav>a>button {
+	border-color: white;
+	background-color: var(--dark-primary-background-color);
+	color: var(--dark-primary-text-color);
+}
+
 #top-nav>a:last-child>button {
 	border-right: none;
 }
@@ -62,10 +86,21 @@ header>p {
 	color: var(--secondary-text-color);
 }
 
+.theme-dark #top-nav>a>button.active {
+	background-color: var(--dark-secondary-background-color);
+	border-bottom-color: var(--dark-secondary-background-color);
+	color: var(--dark-secondary-text-color);
+}
+
 #main {
 	position: relative;
 	color: var(--secondary-text-color);
 	background-color: var(--secondary-background-color);
+}
+
+.theme-dark #main {
+	color: var(--dark-secondary-text-color);
+	background-color: var(--dark-secondary-background-color);
 }
 
 footer {
@@ -77,6 +112,10 @@ footer {
 	border: 1px dashed black;
 }
 
+.theme-dark footer {
+	border-color: white;
+}
+
 footer>*:last-child {
 	text-align: right;
 }
@@ -84,32 +123,4 @@ footer>*:last-child {
 footer>span {
 	grid-column: 2 / 3;
 	text-align: center;
-}
-
-@media (prefers-color-scheme: dark) {
-	header {
-		background-color: var(--dark-primary-background-color);
-		color: var(--dark-primary-text-color);
-	}
-
-	#top-nav>a>button {
-		border-color: white;
-		background-color: var(--dark-primary-background-color);
-		color: var(--dark-primary-text-color);
-	}
-
-	#top-nav>a>button.active {
-		background-color: var(--dark-secondary-background-color);
-		border-bottom-color: var(--dark-secondary-background-color);
-		color: var(--dark-secondary-text-color);
-	}
-
-	#main {
-		color: var(--dark-secondary-text-color);
-		background-color: var(--dark-secondary-background-color);
-	}
-	
-	footer {
-		border-color: white;
-	}
 }

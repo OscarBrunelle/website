@@ -66,6 +66,16 @@ main>div>div {
 	text-align: center;
 }
 
+.theme-dark .projects_list>div a>:first-child {
+	background-color: rgba(0, 0, 0, 0.1);
+	color: var(--dark-primary-text-color);
+}
+
+.theme-dark .projects_list>div a>:last-child {
+	color: var(--dark-primary-text-color);
+	background: var(--dark-primary-background-color);
+}
+
 @media (hover: none) {
 	.projects_list>div a>:last-child {
 		opacity: 1;
@@ -80,16 +90,4 @@ main>div>div {
 
 .projects_list>div a:hover>:last-child {
 	opacity: 0.9;
-}
-
-@media (prefers-color-scheme: dark) {
-	.projects_list>div a>:first-child {
-		background-color: rgba(0,0,0,0.1);
-		color: var(--dark-primary-text-color);
-	}
-	
-	.projects_list>div a>:last-child {
-		color: var(--dark-primary-text-color);
-		background: var(--dark-primary-background-color);
-	}
 }

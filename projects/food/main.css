@@ -16,8 +16,17 @@
 	background-color: white;
 }
 
+.theme-dark .shared-table {
+	color: var(--dark-secondary-text-color);
+	background-color: var(--dark-secondary-background-color);
+}
+
 .shared-table tr:nth-child(odd) {
-	background-color: rgba(0,0,0,.1);
+	background-color: rgba(0, 0, 0, .1);
+}
+
+.theme-dark .shared-table tr:nth-child(odd) {
+	background-color: rgba(255, 255, 255, .1);
 }
 
 .shared-table th,
@@ -31,18 +40,7 @@
 	background-color: var(--primary-background-color);
 }
 
-@media (prefers-color-scheme: dark) {
-	.shared-table {
-		color: var(--dark-secondary-text-color);
-		background-color: var(--dark-secondary-background-color);
-	}
-	
-	.shared-table tr:nth-child(odd) {
-		background-color: rgba(255,255,255,.1);
-	}
-	
-	.shared-table th {
-		color: var(--dark-primary-text-color);
-		background-color: var(--dark-primary-background-color);
-	}
+.theme-dark .shared-table th {
+	color: var(--dark-primary-text-color);
+	background-color: var(--dark-primary-background-color);
 }
