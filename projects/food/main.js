@@ -248,7 +248,7 @@ function show_recipe(meal_ref) {
 	docspan(ingredients_div, "Ingrédients");
 	const ingredients_list = docul(ingredients_div);
 	for (const ingredient of meal.ingredients) {
-		docli(ingredients_list, ingredient["ingredient-name"]["name-fr"] + " : " + ingredient.quantity);
+		docli(ingredients_list, `${ingredient["ingredient-name"]["name-fr"]} : ${ingredient.quantity} ${ingredient["ingredient-name"].unit}`);
 	}
 
 	const steps_div = docdiv(container, "recipe-steps");
