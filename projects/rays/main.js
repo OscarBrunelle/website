@@ -15,11 +15,8 @@ function createRect(x, y, w, h, color) {
 		x: x,
 		y: y,
 		w: w,
-		h: h,
-		color: color
+		h: h
 	});
-	context.fillStyle = color;
-	context.fillRect(x, y, w, h);
 }
 
 function distanceBetween(x1, y1, x2, y2) {
@@ -104,8 +101,7 @@ function calculateRay(x, y, angle) {
 					shortestDistance = c.distance;
 					intersection = {
 						x: c.x,
-						y: c.y,
-						color: rect.color
+						y: c.y
 					};
 				}
 			}
@@ -144,8 +140,7 @@ function calculateRay(x, y, angle) {
 					shortestDistance = c.distance;
 					intersection = {
 						x: c.x,
-						y: c.y,
-						color: "white"
+						y: c.y
 					};
 				}
 			}
@@ -160,8 +155,6 @@ function calculateRay(x, y, angle) {
 	context.moveTo(x, y);
 	context.lineTo(intersection.x, intersection.y);
 	context.stroke();
-	context.fillStyle = intersection.color;
-	context.fillRect(intersection.x, intersection.y, 1, 1);
 	return;
 
 
@@ -232,7 +225,7 @@ function load() {
 	});
 
 	for (let i = 0; i < numberRects; i++) {
-		createRect(random_int(0, canvas.width - 200), random_int(0, canvas.height - 200), 200, 200, colors[random_int(0, colors.length - 1)]);
+		createRect(random_int(0, canvas.width - 200), random_int(0, canvas.height - 200), 200, 200);
 	}
 
 	document.getElementById("aIterations").addEventListener("input", function (e) {
