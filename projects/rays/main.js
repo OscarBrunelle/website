@@ -2,7 +2,10 @@
 Inspired by: https://github.com/LebsterFace/Raycast-Tests
 */
 
-let canvas, context;
+const canvas = document.getElementById("canvas-front");
+const context = canvas.getContext("2d");
+const bgcanvas = document.getElementById("canvas-background");
+const bgcontext = bgcanvas.getContext("2d");
 
 let lightPos = {
 	x: 30,
@@ -150,7 +153,7 @@ function calculateRay(x, y, angle) {
 		return;
 	}
 
-	context.strokeStyle = "white";
+	context.strokeStyle = "rgba(255, 255, 255, 0.4)";
 	context.beginPath();
 	context.moveTo(x, y);
 	context.lineTo(intersection.x, intersection.y);
@@ -193,8 +196,6 @@ function calculateRays() {
 
 	let insideRect = false;
 	for (const rect of rects) {
-		context.fillStyle = "darkgrey";
-		context.fillRect(rect.x, rect.y, rect.w, rect.h);
 		if (!insideRect && rect.x <= lightPos.x && rect.y <= lightPos.y && (rect.x + rect.w) >= lightPos.x && (rect.y + rect.h) >= lightPos.y) {
 			insideRect = true;
 		}
@@ -215,9 +216,6 @@ const colors = ["blue", "red", "green", "yellow", "orange", "pink", "cyan", "pur
 const numberRects = 8;
 
 function load() {
-	canvas = document.getElementById("canvas");
-	context = canvas.getContext("2d");
-
 	canvas.addEventListener("mousemove", function (event) {
 		const mousePos = getMousePos(canvas, event);
 		lightPos.x = mousePos.x / mousePos.parentWidth * canvas.width;
@@ -232,6 +230,10 @@ function load() {
 		aIterations = parseInt(e.target.value);
 	});
 
+	for (const rect of rects) {
+		bgcontext.fillStyle = "darkgrey";
+		bgcontext.fillRect(rect.x, rect.y, rect.w, rect.h);
+	}
 	calculateRays();
 }
 

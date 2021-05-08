@@ -1,15 +1,10 @@
-#main {
-	height: 100vh;
+.canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
-#canvas {
-	max-width: 100%;
-	max-height: 100%;
-	background: black;
-	/* aspect-ratio: 1920/1080; */
-}
-
-#main>div {
+#rays-n {
 	position: absolute;
 	bottom: 0;
 	left: 0;
