@@ -1,0 +1,12 @@
+#bottom>section>div {
+	width: 33%;
+	display: inline-block;
+}
+
+.title {
+	font-weight: bold;
+}
+
+.sub_title {
+	font-weight: 300;
+}

@@ -2,29 +2,19 @@
 
 const cv = document.getElementById("cv");
 const side_top = document.getElementById("top");
-const left = document.getElementById("left");
-const right = document.getElementById("right");
+const side_bottom = document.getElementById("bottom");
 
 const sections = [
 	{
-		side: 0,
-		title: "Section 1"
-	}, {
-		side: 0,
-		title: "Section 2"
-	}, {
-		side: 0,
-		title: "Section 2"
-	}, {
-		side: 0,
-		title: "Section 2"
-	}, {
-		side: 0,
-		title: "Section 2"
-	}, {
-		side: 0,
-		title: "Section 2"
-	}
+		title: "Expériences professionnelles",
+		sub_sections: [
+			{
+				title: "2020/09 - 2020/12 : Ingénieur Logiciels",
+				sub_title: "Schneider Electric / Angoulême - France",
+				description: "Utiliser Node-RED (bibl. Node.js) pour extraire les valeurs de capteurs.\nVisualiser des données en réalité virtuelle(Augmented Operator Advisor).\nVisualiser graphiquement des données sur le web (Aveva Insight)"
+			}
+		]
+	},
 ];
 const cv_data = {
 	first_name: "Oscar",
@@ -40,8 +30,17 @@ function load() {
 	docp(side_top, cv_data.description);
 
 	for (const section of sections) {
-		const sect = docsection(section.side == 0 ? left : right);
-		doch1(sect, section.title);
+		const sect = docsection(side_bottom);
+		doch1(sect, section.title.toUpperCase());
+		for (const sub_section of section.sub_sections) {
+			const ss = docdiv(sect);
+
+			const titles = docdiv(ss);
+			doch1(titles, sub_section.title, "title");
+			doch1(titles, sub_section.sub_title, "sub_title");
+
+			docp(ss, sub_section.description);
+		}
 	}
 }
 
