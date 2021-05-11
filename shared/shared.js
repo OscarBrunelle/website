@@ -347,14 +347,20 @@ function docsection(parent, className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function doch1(parent, text = "", className = null) {
+	const element = document.createElement("h1");
+	element.innerHTML = text;
+	return addDocElement(parent, element, className);
+}
+
 function docspan(parent, text = "", className = null) {
 	const element = document.createElement("span");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function doch1(parent, text = "", className = null) {
-	const element = document.createElement("h1");
+function docp(parent, text = "", className = null) {
+	const element = document.createElement("p");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
