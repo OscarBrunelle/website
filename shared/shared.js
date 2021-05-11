@@ -353,6 +353,12 @@ function doch1(parent, text = "", className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function doch2(parent, text = "", className = null) {
+	const element = document.createElement("h2");
+	element.innerHTML = text;
+	return addDocElement(parent, element, className);
+}
+
 function docspan(parent, text = "", className = null) {
 	const element = document.createElement("span");
 	element.innerHTML = text;
