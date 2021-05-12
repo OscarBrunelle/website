@@ -1,5 +1,6 @@
 #cv {
 	margin: 20px;
+	padding: 5%;
 	background-color: white;
 	color: black;
 }
@@ -8,9 +9,25 @@
 	text-align: center;
 }
 
+section {
+	border-top: 1px solid black;
+}
+
 section>div {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.name {
+	margin: 0;
+}
+
+.position {
+	margin: 0;
+}
+
+.description {
+	margin: 0;
 }
 
 .titles {
