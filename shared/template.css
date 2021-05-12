@@ -15,7 +15,7 @@
 body {
 	display: grid;
 	grid-template-rows: auto auto 1fr auto;
-	font: message-box;
+	font-family: system-ui;
 }
 
 header {
