@@ -458,12 +458,14 @@ function fill_table(element, columns = [], values = [], empty = true) {
 
 let current_theme;
 
-function toggle_theme() {
-	if (current_theme == null) {
-		if (document.getElementById("theme-btn") == null) {
-			return;
-		}
+function toggle_theme(theme = null) {
+	if (document.getElementById("theme-btn") != null) {
 		document.getElementById("theme-btn").addEventListener("click", toggle_theme);
+	}
+
+	if (theme != null && (theme == "light" || theme == "dark")) {
+		current_theme = theme;
+	} else if (current_theme == null) {
 		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			current_theme = "dark";
 		} else {
@@ -476,6 +478,7 @@ function toggle_theme() {
 			current_theme = "light";
 		}
 	}
+	set_cookie("preferred_theme", current_theme);
 
 	switch (current_theme) {
 		case "light":
@@ -492,7 +495,7 @@ function toggle_theme() {
 			break;
 	}
 }
-document.onload = toggle_theme();
+document.onload = toggle_theme(get_cookie("preferred_theme"));
 
 /* START OF SVG */
 const xmlns = "http://www.w3.org/2000/svg";
