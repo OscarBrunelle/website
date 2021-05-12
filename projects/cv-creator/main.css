@@ -1,6 +1,16 @@
+#cv {
+	margin: 20px;
+	background-color: white;
+	color: black;
+}
+
 #bottom>section>div {
 	width: 33%;
 	display: inline-block;
+}
+
+#top {
+	text-align: center;
 }
 
 .title {

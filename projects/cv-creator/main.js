@@ -25,9 +25,9 @@ const cv_data = {
 };
 
 function load() {
-	doch1(side_top, `${cv_data.first_name} ${cv_data.last_name.toUpperCase()}`);
-	docspan(side_top, cv_data.position);
-	docp(side_top, cv_data.description);
+	doch1(side_top, `${cv_data.first_name} ${cv_data.last_name.toUpperCase()}`, "name");
+	docspan(side_top, cv_data.position, "position");
+	docp(side_top, cv_data.description, "description");
 
 	for (const section of sections) {
 		const sect = docsection(side_bottom);
