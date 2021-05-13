@@ -2,18 +2,36 @@
 Inspired by: https://github.com/LebsterFace/Raycast-Tests
 */
 
-const canvas = document.getElementById("canvas-front");
-const context = canvas.getContext("2d");
-const bgcanvas = document.getElementById("canvas-background");
-const bgcontext = bgcanvas.getContext("2d");
+const COLORS_TO_RGB = {
+	"BLACK": "rgb(0, 0, 0)",
+	"WHITE": "rgb(255, 255, 255)",
+	"RED": "rgb(255, 0, 0)",
+	"GREEN": "rgb(0, 255, 0)",
+	"BLUE": "rgb(0, 0, 255)",
+	"YELLOW": "rgb(0, 255, 255)",
+	"ORANGE": "rgb(0, 0, 0)",
+	"PINK": "rgb(0, 0, 0)",
+	"CYAN": "rgb(0, 0, 0)",
+	"PURPLE": "rgb(0, 0, 0)"
+};
+const numberRects = 8;
+const lights = [];
 
-let lightPos = {
+const canvasbackground = document.getElementById("canvas-background");
+const contextbackground = canvasbackground.getContext("2d");
+const canvaslights = document.getElementById("canvas-lights");
+const contextlights = canvaslights.getContext("2d");
+const canvas = document.getElementById("canvas-front");
+const contextmouse = canvas.getContext("2d");
+
+let mouseLight = {
 	x: 30,
-	y: 30
+	y: 30,
+	color: COLORS_TO_RGB.BLUE
 };
 let rects = [];
 
-function createRect(x, y, w, h, color) {
+function createRect(x, y, w, h) {
 	rects.push({
 		x: x,
 		y: y,
@@ -60,7 +78,7 @@ function check(vector, line) {
 
 let nextM = 5;
 
-function calculateRay(x, y, angle) {
+function calculateRay(x, y, angle, context = contextmouse) {
 	let vect = {
 		x1: x,
 		y1: y,
@@ -153,7 +171,6 @@ function calculateRay(x, y, angle) {
 		return;
 	}
 
-	context.strokeStyle = "rgba(255, 255, 255, 0.4)";
 	context.beginPath();
 	context.moveTo(x, y);
 	context.lineTo(intersection.x, intersection.y);
@@ -191,35 +208,40 @@ function calculateRay(x, y, angle) {
 
 let aIterations = 3600;
 
-function calculateRays() {
-	context.clearRect(0, 0, canvas.width, canvas.height);
-
-	let insideRect = false;
+function calculateRaysOfLight(light, context = contextmouse) {
 	for (const rect of rects) {
-		if (!insideRect && rect.x <= lightPos.x && rect.y <= lightPos.y && (rect.x + rect.w) >= lightPos.x && (rect.y + rect.h) >= lightPos.y) {
-			insideRect = true;
+		if (rect.x <= light.x && rect.y <= light.y && (rect.x + rect.w) >= light.x && (rect.y + rect.h) >= light.y) {
+			return;
 		}
 	}
 
-	if (!insideRect) {
-		for (let a = 0; a < aIterations; a++) {
-			let angle = 360 * a / aIterations;
-			let radAngle = angle * Math.PI / 180;
-			calculateRay(lightPos.x, lightPos.y, radAngle);
-		}
+	context.globalAlpha = 0.2;
+	context.strokeStyle = light.color;
+	for (let a = 0; a < aIterations; a++) {
+		let angle = 360 * a / aIterations;
+		let radAngle = angle * Math.PI / 180;
+		calculateRay(light.x, light.y, radAngle, context);
 	}
+	context.globalAlpha = 1;
+}
+
+function calculateRays() {
+	contextmouse.clearRect(0, 0, canvas.width, canvas.height);
+
+	calculateRaysOfLight(mouseLight);
 
 	requestAnimationFrame(calculateRays);
 }
 
-const colors = ["blue", "red", "green", "yellow", "orange", "pink", "cyan", "purple"];
-const numberRects = 8;
-
 function load() {
 	canvas.addEventListener("mousemove", function (event) {
 		const mousePos = getMousePos(canvas, event);
-		lightPos.x = mousePos.x / mousePos.parentWidth * canvas.width;
-		lightPos.y = mousePos.y / mousePos.parentHeight * canvas.height;
+		mouseLight.x = mousePos.x / mousePos.parentWidth * canvas.width;
+		mouseLight.y = mousePos.y / mousePos.parentHeight * canvas.height;
+	});
+	canvas.addEventListener("click", function (event) {
+		lights.push(Object.assign({}, mouseLight));
+		calculateRaysOfLight(mouseLight, contextlights);
 	});
 
 	for (let i = 0; i < numberRects; i++) {
@@ -231,8 +253,8 @@ function load() {
 	});
 
 	for (const rect of rects) {
-		bgcontext.fillStyle = "darkgrey";
-		bgcontext.fillRect(rect.x, rect.y, rect.w, rect.h);
+		contextbackground.fillStyle = "darkgrey";
+		contextbackground.fillRect(rect.x, rect.y, rect.w, rect.h);
 	}
 	calculateRays();
 }
