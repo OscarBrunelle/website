@@ -129,7 +129,7 @@ function read_file(element_selector, finished_function, log_progress = false) {
 }
 
 // Function to download data to a file
-function download(data, filename, type) {
+function download(data, filename, type = "octet/stream") {
 	const file = new Blob([data], {
 		type: type
 	});
