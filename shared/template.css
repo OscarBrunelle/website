@@ -18,6 +18,23 @@ body {
 	font-family: system-ui;
 }
 
+button {
+	background-color: var(--primary-background-color);
+	color: var(--primary-text-color);
+	border: 1px solid var(--primary-text-color);
+}
+
+.theme-dark button {
+	background-color: var(--dark-primary-background-color);
+	color: var(--dark-primary-text-color);
+	border: 1px solid var(--dark-primary-text-color);
+}
+
+button:disabled {
+	color: grey;
+	cursor: not-allowed;
+}
+
 header {
 	background-color: var(--primary-background-color);
 	color: var(--primary-text-color);
