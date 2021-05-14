@@ -26,10 +26,9 @@ function fill_rect(color, coords) {
 	return add_line("0 0 612 792 re f");
 }
 
-function add_text() {
-	add_line("0 g");
-	add_line("BT /F1 12 Tf 2 780 Td (Hello world) Tj ET");
-	return add_line("BT /F1 12 Tf 2 766 Td (Second line) Tj ET");
+function add_text(text, pos, color = "0 g") {
+	add_line(color);
+	return add_line("BT /F1 12 Tf " + pos + " Td (" + text + ") Tj ET");
 }
 
 function create_pdf() {
@@ -47,7 +46,8 @@ function create_pdf() {
 	add_obj("/Length 167", false);
 	add_line("stream");
 	fill_rect();
-	add_text();
+	add_text("Hello world", "2 780");
+	add_text("Is this working ?", "2 766");
 	add_line("endstream");
 	add_line("endobj");
 
