@@ -148,6 +148,7 @@ footer>span {
 
 .shared-table {
 	border-spacing: 0;
+	border-collapse : collapse;
 	border: 1px solid black;
 	color: var(--secondary-text-color);
 	background-color: white;
