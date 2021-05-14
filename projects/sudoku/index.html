@@ -3,7 +3,9 @@
 <html lang="en">
 
 <head>
-	<link rel="shortcut icon" href="icon.png" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="shortcut icon" href="icon.png" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="sudoku.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
@@ -13,6 +15,13 @@
 </head>
 
 <body>
+	<header>
+		<h1>Sudoku</h1>
+		<button id="theme-btn"></button>
+	</header>
+
+	<nav role="navigation" id="top-nav"></nav>
+
 	<main id="main" role="main" id="main">
 		<div id="number_buttons"></div>
 		<div id='mode_buttons'></div>
@@ -25,6 +34,7 @@
 		</div>
 	</main>
 
+	<script type="text/javascript" src="../../shared/shared.js"></script>
 	<script src="../../shared/jquery.js"></script>
 	<script src="AI.js"></script>
 	<script src="graphics.js"></script>
