@@ -21,9 +21,9 @@ function add_obj(inp, end = true) {
 	return add_line(str);
 }
 
-function fill_rect(color, coords) {
-	add_line("0.7 0.7 1 rg");
-	return add_line("0 0 612 792 re f");
+function fill_rect(coords, color = "0 0 0") {
+	add_line(`${color} rg`);
+	return add_line(`${coords} re f`);
 }
 
 function add_text(text, pos, color = "0 g") {
@@ -45,7 +45,7 @@ function create_pdf() {
 
 	add_obj("/Length 167", false);
 	add_line("stream");
-	fill_rect();
+	fill_rect("0 0 612 792", "0.7 0.7 1");
 	add_text("Hello world", "2 780");
 	add_text("Is this working ?", "2 766");
 	add_line("endstream");
