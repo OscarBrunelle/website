@@ -36,10 +36,6 @@ class PdfPage {
 		this.size = 0;
 		this.fonts = [];
 		this.stream = [];
-		this.add_font();
-		this.fill_rect("0 0 612 792", "0.7 0.7 1");
-		this.add_text("Hello world", "2 780");
-		this.add_text("Is this still working ?", "2 766");
 	}
 
 	add_font(name = "Helvetica") {
@@ -71,11 +67,6 @@ class Pdf {
 		this.obj_counter = 1;
 		this.pages = [];
 		this.doc = "";
-		this.pages.push(new PdfPage());
-		this.create();
-		console.log(this.doc);
-		console.log(data_to_url(this.doc, "application/pdf"));
-		document.getElementById("pdf-display").setAttribute("src", data_to_url(this.doc, "application/pdf"));
 	}
 
 	add_line(str, prepend_nl = true) {
@@ -194,7 +185,18 @@ function load() {
 	console.log(pdf);
 	document.getElementById("pdf-display").setAttribute("src", data_to_url(pdf, "application/pdf"));
 	console.log("CREATING PDF");
-	new Pdf();
+
+	const p = new PdfPage();
+	p.add_font();
+	p.fill_rect("0 0 612 792", "0.7 0.7 1");
+	p.add_text("Hello world", "2 780");
+	p.add_text("Is this still working ?", "2 766");
+	const pd = new Pdf();
+	pd.pages.push(p);
+	pd.create();
+	console.log(pd.doc);
+	console.log(data_to_url(pd.doc, "application/pdf"));
+	document.getElementById("pdf-display").setAttribute("src", data_to_url(pd.doc, "application/pdf"));
 }
 
 document.onload = load();
