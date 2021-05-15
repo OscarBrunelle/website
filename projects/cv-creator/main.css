@@ -1,5 +1,9 @@
 #cv {
+	position: relative;
 	aspect-ratio: 592/842;
+	/* width: 592px;
+	height: 842px; */
+	overflow-y: auto;
 	margin: 20px;
 	padding: 40px;
 	background-color: white;
@@ -8,7 +12,8 @@
 
 #top {
 	margin-bottom: 30px;
-	text-align: center;
+	display: grid;
+	justify-items: center;
 }
 
 section {
