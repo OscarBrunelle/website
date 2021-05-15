@@ -61,7 +61,7 @@ class Pdf {
     this.objs = [];
     this.obj_counter = 1;
     this.pages = [];
-    this.doc = "%PDF-1.7";
+    this.doc = "";
   }
   
   add_line(str, prepend_nl = true) {
@@ -82,6 +82,45 @@ class Pdf {
   }
   
   create(){
+    this.add_line("%PDF-1.7", false);
+    this.add_obj("/Type /Catalog /Pages 2 0 R");
+    
+    let pages_i = [];
+    let pages_objs_c;
+    for (const page of this.pages) {
+      pages_i = this.obj_counter+1+pages_objs_c;
+      pages_objs_c+=1+page.fonts.length;
+    }
+    this.add_obj(`/Type /Pages /Kids [3 0 R] /Count 1 /MediaBox [0 0 612 792]`);
+    
+    for (const page of this.pages) {
+      this.add_obj(`/Type /Page /Resources 4 0 R /Parent 2 0 R /Contents 5 0 R`);
+      this.add_obj(`/Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> >>`);
+      add_obj("/Length 167", false);
+      add_line("stream");
+      fill_rect("0 0 612 792", "0.7 0.7 1");
+      add_text("Hello world", "2 780");
+      add_text("Is this working ?", "2 766");
+      add_line("endstream");
+      add_line("endobj");
+    }
+    
+    const stream_bytes = bytes_count;
+    add_line("xref");
+    add_line("0 " + (objs.length + 1));
+    for (let i = 0; i < objs.length; i++) {
+      if (i == 0) {
+        add_line("000000000 65535 f ");
+      }
+      add_line(to_fixed_length(objs[i], 9) + " 00000 n ");
+	}
+
+	add_line("trailer << /Size " + (objs.length + 1) + " /Root 1 0 R >>");
+	add_line(529);//stream_bytes);
+	
+	add_line("startxref");
+	add_line("%%EOF");
+    
     return this;
   }
   
