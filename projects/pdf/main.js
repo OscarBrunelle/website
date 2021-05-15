@@ -176,7 +176,7 @@ function dl() {
 function load() {
 	create_pdf();
 	console.log(pdf);
-	
+	document.getElementById("pdf-display").setAttribute("src", data_to_url(pdf, "application/pdf"));
 }
 
 document.onload = load();
