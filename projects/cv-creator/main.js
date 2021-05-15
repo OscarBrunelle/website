@@ -81,14 +81,14 @@ function load() {
 
 	for (const section of sections) {
 		const sect = docsection(side_bottom);
-		doch1(sect, section.title.toUpperCase());
+		doch2(sect, section.title.toUpperCase(), "section-title");
 
-		const ss_titles = docdiv(sect, "ss_titles");
-		const ss_subtitles = docdiv(sect, "ss_subtitles");
-		const ss_descriptions = docdiv(sect, "ss_descriptions");
+		const ss_titles = docdiv(sect, "ss-titles");
+		const ss_subtitles = docdiv(sect, "ss-subtitles");
+		const ss_descriptions = docdiv(sect, "ss-descriptions");
 		for (const sub_section of section.sub_sections) {
 			doch3(ss_titles, sub_section.title, "title");
-			doch4(ss_subtitles, sub_section.sub_title, "sub_title");
+			doch4(ss_subtitles, sub_section.sub_title, "subtitle");
 			docp(ss_descriptions, sub_section.description);
 		}
 	}
