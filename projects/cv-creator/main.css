@@ -64,3 +64,9 @@ section>div {
 section:last-child .ss-descriptions {
 	margin-bottom: 0;
 }
+
+embed {
+	display: none;
+	width: 100%;
+	height: 100%;
+}

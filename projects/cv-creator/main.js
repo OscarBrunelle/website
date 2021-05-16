@@ -74,6 +74,39 @@ const cv_data = {
 	sections: sections
 };
 
+let page;
+
+function yes(el) {
+	page.add_text(el.innerHTML, `${el.offsetLeft} ${842 - el.offsetTop}`);
+}
+
+function renderel(el) {
+	if (el.children.length > 0) {
+		for (const ch of el.children) {
+			renderel(ch);
+		}
+		return;
+	}
+	yes(el);
+}
+
+function renderpdf() {
+	page = new PdfPage();
+	page.add_font();
+
+	for (const el of document.getElementById("cv").children) {
+		renderel(el);
+	}
+
+	const pdf_file = new Pdf();
+	pdf_file.pages.push(page);
+	pdf_file.create();
+	console.log(pdf_file.doc);
+	document.getElementById("pdf-display").setAttribute("src", data_to_url(pdf_file.doc, "application/pdf"));
+
+	document.getElementById("cv").remove();
+}
+
 function load() {
 	doch1(side_top, `${cv_data.first_name} ${cv_data.last_name.toUpperCase()}`, "name");
 	docspan(side_top, cv_data.position, "position");
