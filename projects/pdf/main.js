@@ -1,36 +1,5 @@
 "use strict"
 
-let pdf;
-let obj_counter = 1;
-let objs = [];
-let bytes_count = 0;
-
-function add_line(str, prepend_nl = true) {
-	if (prepend_nl) {
-		pdf += "\n";
-	}
-	pdf += str;
-	bytes_count += str.length + 1;
-	return str;
-}
-
-function add_obj(inp, end = true) {
-	let str = `${obj_counter++} 0 obj << ${inp} >>`;
-	str += end ? " endobj" : "";
-	objs.push(pdf.length + 1);
-	return add_line(str);
-}
-
-function fill_rect(coords, color = "0 0 0") {
-	add_line(`${color} rg`);
-	return add_line(`${coords} re f`);
-}
-
-function add_text(text, pos, color = "0 g") {
-	add_line(color);
-	return add_line("BT /F1 12 Tf " + pos + " Td (" + text + ") Tj ET");
-}
-
 class PdfPage {
 	constructor() {
 		this.size = 0;
@@ -38,8 +7,11 @@ class PdfPage {
 		this.stream = [];
 	}
 
-	add_font(name = "Helvetica") {
-		this.fonts.push(name);
+	add_font(name = "Helvetica", size = 12) {
+		this.fonts.push({
+			name: name,
+			size: size
+		});
 		return this;
 	}
 
@@ -51,11 +23,20 @@ class PdfPage {
 		return this;
 	}
 
-	add_text(text, pos, color = "0 g") {
+	add_text(text, pos, font_index = 0, color = "0 g") {
 		this.stream.push(color);
 		this.size += color.length - 1;
-		this.stream.push("BT /F1 12 Tf " + pos + " Td (" + text + ") Tj ET");
-		this.size += ("BT /F1 12 Tf " + pos + " Td (" + text + ") Tj ET").length - 1;
+
+		const font = this.fonts[font_index];
+		const font_size = font.size;
+		const lines = text.split("\n");
+		for (let i = 0; i < lines.length; i++) {
+			const x = pos.x;
+			const y = pos.y - i * (font_size + 2);
+			const str = `BT /F${font} ${font_size} Tf ${x} ${y} Td (${lines[i]}) Tj ET`;
+			this.stream.push(str);
+			this.size += str.length - 1;
+		}
 		return this;
 	}
 }
@@ -101,8 +82,10 @@ class Pdf {
 
 		for (const page of this.pages) {
 			this.add_obj(`/Type /Page /Resources ${this.obj_counter + 1} 0 R /Parent 2 0 R /Contents ${this.obj_counter + 2} 0 R`);
-			for (const font of page.fonts) {
-				this.add_obj(`/Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /${font} >> >>`);
+
+			for (let i = 0; i < page.fonts.length; i++) {
+				const font = page.fonts[i];
+				this.add_obj(`/Font << /F${i + 1} << /Type /Font /Subtype /Type1 /BaseFont /${font.name} >> >>`);
 			}
 			this.add_obj("/Length 0", false);//TODO: change this line `/Length ${page.size}`, false);
 			this.add_line("stream");
@@ -115,15 +98,15 @@ class Pdf {
 
 		const stream_bytes = this.bytes_count;
 		this.add_line("xref");
-		this.add_line("0 " + (objs.length + 1));
-		for (let i = 0; i < objs.length; i++) {
+		this.add_line("0 " + (this.objs.length + 1));
+		for (let i = 0; i < this.objs.length; i++) {
 			if (i == 0) {
 				this.add_line("000000000 65535 f ");
 			}
-			this.add_line(to_fixed_length(objs[i], 9) + " 00000 n ");
+			this.add_line(to_fixed_length(this.objs[i], 9) + " 00000 n ");
 		}
 
-		this.add_line("trailer << /Size " + (objs.length + 1) + " /Root 1 0 R >>");
+		this.add_line("trailer << /Size " + (this.objs.length + 1) + " /Root 1 0 R >>");
 		this.add_line(stream_bytes);
 
 		this.add_line("startxref");
@@ -137,8 +120,7 @@ function load() {
 	const p = new PdfPage();
 	p.add_font();
 	p.fill_rect("0 0 592 842", "0.7 0.7 1");
-	p.add_text("Hello worldé", "2 780");
-	p.add_text("Is this still not working ?", "2 766");
+	p.add_text("Hello worldé\nIs this still not working ?", {x: 2, y: 772});
 	const pd = new Pdf();
 	pd.pages.push(p);
 	pd.create();
