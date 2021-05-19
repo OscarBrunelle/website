@@ -23,7 +23,7 @@ class PdfPage {
 		return this;
 	}
 
-	add_text(text = "", pos = {
+	add_text(text = "", pos = {//todo: add option to split over words
 		x: 0,
 		y: 0,
 		max_width: null,
