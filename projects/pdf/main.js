@@ -23,32 +23,37 @@ class PdfPage {
 		return this;
 	}
 
-	add_text(text = "", pos = {x: 0, y: 0, max_width: null}, font_index = 0, color = "0 g") {
+	add_text(text = "", pos = {
+		x: 0,
+		y: 0,
+		max_width: null
+	}, font_index = 0, color = "0 g") {
 		this.stream.push(color);
 		this.size += color.length - 1;
 
 		const font = this.fonts[font_index];
 		const font_size = font.size;
-		const lines = text.split("\n");
 		let x = pos.x;
 		let y = pos.y;
-		for (let i = 0; i < lines.length; i++) {
-			const line = lines[i];
-			if (i != 0) y -= (font_size + 4);
-			
-			let last_slice_i = 0;
-			for (let ci = 0; ci < line.length; ci++) {
-				let sub_line = line.substring(last_slice_i, ci + 1);
-				if ((pos.max_width != null && getTextWidth((last_slice_i > 0 ? "    " : "") + sub_line) > (pos.max_width)) || (ci == line.length - 1)) {
-					if (last_slice_i > 0) {
-						y -= (font_size);
+		let last_slice_i = 0;
+		let new_line_i;
+		for (let ci = 0; ci < text.length; ci++) {
+			let sub_line = text.substring(last_slice_i, ci + 1);
+			if (text[ci] == "\n") new_line_i = ci;
+			if ((new_line_i == ci) || (pos.max_width != null && getTextWidth(((new_line_i != null && new_line_i < ci) ? "" : "    ") + sub_line) > (pos.max_width)) || (ci == text.length - 1)) {
+				if (last_slice_i > 0) {
+					if (new_line_i != null && new_line_i < ci) {
+						y -= (font_size + 4);
+						new_line_i = null;
+					} else {
+						y -= font_size;
 						sub_line = "\t    " + sub_line; //TODO: add tab character if possible (think about including it in width calculations)
 					}
-					if (ci < line.length - 1) last_slice_i = ci + 1;
-					const str = `BT /F${font} ${font_size} Tf ${x} ${y} Td (${sub_line}) Tj ET`;
-					this.stream.push(str);
-					this.size += str.length - 1;
 				}
+				if (ci < text.length - 1) last_slice_i = ci + 1;
+				const str = `BT /F${font} ${font_size} Tf ${x} ${y} Td (${sub_line}) Tj ET`;
+				this.stream.push(str);
+				this.size += str.length - 1;
 			}
 		}
 		return this;
@@ -101,7 +106,7 @@ class Pdf {
 				const font = page.fonts[i];
 				this.add_obj(`/Font << /F${i + 1} << /Type /Font /Subtype /Type1 /BaseFont /${font.name} >> >>`);
 			}
-			this.add_obj("/Length 0", false);//TODO: change this line `/Length ${page.size}`, false);
+			this.add_obj("/Length 0", false); //TODO: change this line `/Length ${page.size}`, false);
 			this.add_line("stream");
 			for (const stream_line of page.stream) {
 				this.add_line(stream_line);
@@ -134,7 +139,11 @@ function load() {
 	const p = new PdfPage();
 	p.add_font();
 	p.fill_rect("0 0 592 842", "0.7 0.7 1");
-	p.add_text("Hello worldé\nIs this very long line splitting please ?", {x: 2, y: 772, max_width: 100});
+	p.add_text("Hello worldé\nIs this very very long line splitting please ?", {
+		x: 2,
+		y: 772,
+		max_width: 100
+	});
 	const pd = new Pdf();
 	pd.pages.push(p);
 	pd.create();
