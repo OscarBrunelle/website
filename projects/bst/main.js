@@ -4,6 +4,7 @@ var context = canvas.getContext("2d");
 var drawCircles = true;
 var drawLines = true;
 var root = null;
+const svg = document.getElementById("svg");
 
 function drawTree(node) {
 	if (node != null) {
@@ -11,6 +12,7 @@ function drawTree(node) {
 		var coef = Math.cos(Math.PI / 4);
 		if (node.left != null) {
 			if (drawLines) {
+				svgline(svg, node.x - coef * node.size, node.y + coef * node.size, node.left.x + coef * node.left.size, node.left.y - coef * node.left.size);
 				context.beginPath();
 				context.moveTo(node.x - coef * node.size, node.y + coef * node.size);
 				context.lineTo(node.left.x + coef * node.left.size, node.left.y - coef * node.left.size);
@@ -20,6 +22,7 @@ function drawTree(node) {
 		}
 		if (node.right != null) {
 			if (drawLines) {
+				svgline(svg, node.x + coef * node.size, node.y + coef * node.size, node.right.x - coef * node.right.size, node.right.y - coef * node.right.size);
 				context.beginPath();
 				context.moveTo(node.x + coef * node.size, node.y + coef * node.size);
 				context.lineTo(node.right.x - coef * node.right.size, node.right.y - coef * node.right.size);
@@ -78,6 +81,8 @@ class Node {
 		}
 	}
 	draw() {
+		svgcircle(svg, this.x, this.y, this.size);
+		svgtext(svg, this.x - 3 * this.valueLength, this.y+2, this.value);
 		this.ctx.beginPath();
 		if (drawCircles) {
 			this.ctx.arc(this.x, this.y, this.size, Math.PI * 2, 0, 0);
@@ -137,6 +142,7 @@ function add(node, tested) {
 
 function update() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
+	svg.innerHTML = "";
 	drawTree(root);
 }
 
@@ -166,7 +172,7 @@ function setDemoTree() {
 }
 
 function resizeWindow() {
-	canvas.width = window.innerWidth - 10;
+	canvas.width = window.innerWidth - 20;
 	canvas.height = window.innerHeight - 80;
 	calculatePositon(root);
 	update();

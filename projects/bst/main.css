@@ -1,3 +1,36 @@
 canvas {
 	background-color: white;
 }
+
+svg {
+	width: 100%;
+	/* height: fit-content; */
+	font-size: 10px;
+}
+
+svg circle {
+	fill: none;
+	stroke-width: 1;
+	stroke: var(--secondary-text-color);
+}
+
+.theme-dark svg circle {
+	stroke: var(--dark-secondary-text-color);
+}
+
+svg text {
+	fill: var(--secondary-text-color);
+}
+
+.theme-dark svg text {
+	fill: var(--dark-secondary-text-color);
+}
+
+svg line {
+	stroke-width: 1;
+	stroke: var(--secondary-text-color);
+}
+
+.theme-dark svg line {
+	stroke: var(--dark-secondary-text-color);
+}
