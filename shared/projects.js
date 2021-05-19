@@ -299,6 +299,7 @@ function displayProjects(parent, lang = "en") {
 			const projectImage = document.createElement("img");
 			const imgSrc = "../projects/" + project.link + "/";
 			projectImage.src = imgSrc + (project.img_path != null ? project.img_path : "icon.png");
+			projectImage.alt = title + " background image";
 			projectLink.appendChild(projectImage);
 		}
 
