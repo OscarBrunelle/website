@@ -2,37 +2,41 @@
 <html>
 
 <head>
-	<link rel="stylesheet" type="text/css" media="screen" href="bst.css">
-	<link rel="stylesheet" type="text/css" media="screen" href="toast.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="icon" type="image/png" href="icon.png">
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Binary Search Tree</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="Binary Search Tree tool">
+	<meta name="author" content="Oscar Brunelle">
+	<title>BST</title>
 </head>
 
 <body>
-	<div>
-		<canvas id="canvas"></canvas>
-	</div>
-	<div id="topButtons">
-		<button onclick="askValue()">Add</button>
-		<button onclick="equilibrateTree()">Balance</button>
-		<button onclick="reset()">Reset</button>
-	</div>
-	<div>
-		<button onclick="switchCircles()">Switch Circles</button>
-		<button onclick="switchLines()">Switch Lines</button>
-		<!--
-    <button onclick="copyToClipboard()">Copy to clipboard</button>
-    -->
-	</div>
+	<header>
+		<h1>Binary Search Tree</h1>
+		<button id="theme-btn" aria-label="toggle night mode"></button>
+	</header>
 
-	<div id="toast">Tree copied to clipboard</div>
+	<nav role="navigation" id="top-nav"></nav>
 
-	<script src="bst.js"></script>
-	<script src="toast.js"></script>
+	<main id="main" role="main">
+		<div>
+			<canvas id="canvas"></canvas>
+		</div>
+		<div id="topButtons">
+			<button onclick="askValue()">Add</button>
+			<button onclick="equilibrateTree()">Balance</button>
+			<button onclick="reset()">Reset</button>
+		</div>
+		<div>
+			<button onclick="switchCircles()">Switch Circles</button>
+			<button onclick="switchLines()">Switch Lines</button>
+		</div>
+	</main>
+	<script type="text/javascript" src="../../shared/shared.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>
