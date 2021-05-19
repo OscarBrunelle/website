@@ -26,7 +26,8 @@ class PdfPage {
 	add_text(text = "", pos = {
 		x: 0,
 		y: 0,
-		max_width: null
+		max_width: null,
+		line_return_tabs: false
 	}, font_index = 0, color = "0 g") {
 		this.stream.push(color);
 		this.size += color.length - 1;
@@ -40,14 +41,14 @@ class PdfPage {
 		for (let ci = 0; ci < text.length; ci++) {
 			let sub_line = text.substring(last_slice_i, ci + 1);
 			if (text[ci] == "\n") new_line_i = ci;
-			if ((new_line_i == ci) || (pos.max_width != null && getTextWidth(((new_line_i != null && new_line_i < ci) ? "" : "    ") + sub_line) > (pos.max_width)) || (ci == text.length - 1)) {
+			if ((new_line_i == ci) || (pos.max_width != null && getTextWidth(((!pos.line_return_tabs || (new_line_i != null && new_line_i < ci)) ? "" : "    ") + sub_line) > (pos.max_width)) || (ci == text.length - 1)) {
 				if (last_slice_i > 0) {
 					if (new_line_i != null && new_line_i < ci) {
 						y -= (font_size + 4);
 						new_line_i = null;
 					} else {
 						y -= font_size;
-						sub_line = "\t    " + sub_line; //TODO: add tab character if possible (think about including it in width calculations)
+						if (pos.line_return_tabs) sub_line = "\t    " + sub_line; //TODO: add tab character if possible (think about including it in width calculations)
 					}
 				}
 				if (ci < text.length - 1) last_slice_i = ci + 1;
