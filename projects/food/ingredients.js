@@ -1,10 +1,16 @@
 const REFS = {
+	/* SOLID START */
 	"SUCRE": "SUCRE",
 	"BEURRE": "BEURRE",
-	"CHOCOLAT": "CHOCOLAT"
+	"CHOCOLAT": "CHOCOLAT",
+	/* SOLID END */
+	/* LIQUID START */
+	"ALCOHOL": "ALCOHOL",
+	/* LIQUID END */
 };
 
 const INGREDIENTS = {
+	/* SOLID START */
 	"SPAGHETTIS": {
 		"name-fr": "Spaghettis",
 		"unit": "g",
@@ -79,5 +85,21 @@ const INGREDIENTS = {
 		"unit": "g",
 		"price": 777,
 		"ref": REFS.CHOCOLAT
-	}
+	},
+	/* SOLID END */
+	/* LIQUID START */
+	"WATER": {
+		"name-fr": "Chocolat blanc",
+		"unit": "cL",
+		"price": 777
+	},
+	/* ALCOHOLS START */
+	"PASTIS": {
+		"name-fr": "Pastis",
+		"unit": "cL",
+		"price": 777,
+		"ref": REFS.ALCOHOL
+	},
+	/* ALCOHOLS END */
+	/* LIQUID END */
 };

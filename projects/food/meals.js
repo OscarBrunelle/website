@@ -1,9 +1,16 @@
-const MEAL_TYPES = {
-	"PLAT": "plat",
-	"DESSERT": "dessert"
+const MEAL_TYPES = { //TODO: translate keys
+	"ENTREE": "Entrée",
+	"PLAT": "Plat",
+	"DESSERT": "Dessert",
+};
+
+const DRINKS_TYPES = {
+	"ALCOHOLIZED": "Alcoolisée",
+	"NON_ALCOHOLIZED": "Non-alcoolisée",
 };
 
 const MEALS = {
+	/* MEALS START */
 	"PATES_CARBOS": {
 		"name": "Pâtes carbonara",
 		"ingredients": [{
@@ -18,7 +25,8 @@ const MEALS = {
 			"optional": true
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.PLAT,
+		"type": "meal",
+		"meal_type": MEAL_TYPES.PLAT,
 		"preparation_time": 10,
 		"waiting_time": 0
 	},
@@ -29,7 +37,8 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.PLAT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.PLAT
 	},
 	"QUICHE_SAUMON_EPINARD": {
 		"name": "Quiche saumon / épinard",
@@ -38,7 +47,8 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.PLAT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.PLAT
 	},
 	"NUGGETS_FRITES": {
 		"name": "Nuggets frites",
@@ -47,7 +57,8 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.PLAT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.PLAT
 	},
 	"RISOTTO_POIREAU": {
 		"name": "Risotto au poireau",
@@ -56,7 +67,8 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.PLAT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.PLAT
 	},
 	"BRUCHETTAS": {
 		"name": "Bruchettas",
@@ -65,7 +77,8 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.PLAT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.PLAT
 	},
 	"FAJITAS": {
 		"name": "Fajitas",
@@ -74,7 +87,8 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.PLAT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.PLAT
 	},
 	"CURRY_CHOU_FLEUR": {
 		"name": "Curry de chou-fleur aux pois-chiches et pommes de terre",
@@ -83,7 +97,8 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.PLAT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.PLAT
 	},
 	"CREPES_SARASIN": {
 		"name": "Crêpes salées au sarasin",
@@ -92,7 +107,8 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.PLAT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.PLAT
 	},
 	"COOKIES": {
 		"name": "Cookies",
@@ -130,7 +146,8 @@ const MEALS = {
 			"Couper ensuite des tranches d’environ 2cm d’épaisseur et leur redonner légèrement une forme ronde sans les aplatir. Attention ils s'étalent à la cuisson, alors espacez-les sur votre plaque.",
 			"Cuire 12 min. Ne vous affolez pas s'ils sont encore un peu mous à la fin de cuisson, ils vont durcir en refroidissant. Faites les glisser sur une grille pour les laisser refroidir doucement."
 		],
-		"type": MEAL_TYPES.DESSERT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.DESSERT
 	},
 	"POP_CORN": {
 		"name": "Pop-corn",
@@ -139,7 +156,8 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.DESSERT
+		"type": "meal",
+		"meal_type": MEAL_TYPES.DESSERT
 	},
 	"CAROTTES_RAPEES": {
 		"name": "Carottes rapées",
@@ -148,6 +166,42 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": MEAL_TYPES.DESSERT
-	}
+		"type": "meal",
+		"meal_type": MEAL_TYPES.DESSERT
+	},
+	/* MEALS END */
+	/* DRINKS START */
+	"PASTIS": {
+		"name": "Pastis",
+		"ingredients": [{
+			"ingredient-name": INGREDIENTS.PASTIS,
+			"quantity": 777
+		}, {
+			"ingredient-name": INGREDIENTS.WATER,
+			"quantity": 777
+		}],
+		"steps": [
+			"Verser le pastis.",
+			"Verser l'eau.",
+			"Ajouter des glaçons si nécessaire."
+		],
+		"type": "drink",
+		"drink_type": DRIN
+	},
+	"MOJITO": {
+		"name": "Mojito",
+		"ingredients": [{
+			"ingredient-name": INGREDIENTS.PASTIS,
+			"quantity": 777
+		}, {
+			"ingredient-name": INGREDIENTS.WATER,
+			"quantity": 777
+		}],
+		"steps": [
+			"https://www.750g.com/mojito-r99211.htm"
+		],
+		"type": "meal",
+		"meal_type": MEAL_TYPES.DESSERT
+	},
+	/* DRINKS END */
 };
