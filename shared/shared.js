@@ -466,6 +466,32 @@ function docli(parent, text = "", className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function doclabel(parent, text = "", attr_for = null, className = null) {
+	const element = document.createElement("label");
+	element.innerHTML = text;
+	element.setAttribute("for", attr_for);
+	return addDocElement(parent, element, className);
+}
+
+function docinput(parent, id = null, name = null, type = "checkbox", default_value = null, className = null) {
+	const element = document.createElement("input");
+	element.id = id;
+	element.setAttribute("name", name);
+	element.setAttribute("type", type);
+	element.setAttribute("value", default_value);
+	return addDocElement(parent, element, className);
+}
+
+function docinputs(parent, options = [], type = "checkbox", className = null) {
+	let elements = [];
+	for (const option of options) {
+		const option_container = docdiv(parent, className);
+		doclabel(option_container, option.label, option.for);
+		docinput(option_container, option.for, option.name, type);
+	}
+	return elements;
+}
+
 function doctable(parent, className = null) {
 	const element = document.createElement("table");
 	return addDocElement(parent, element, className);
