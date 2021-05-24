@@ -473,22 +473,29 @@ function doclabel(parent, text = "", attr_for = null, className = null) {
 	return addDocElement(parent, element, className);
 }
 
-function docinput(parent, id = null, name = null, type = "checkbox", default_value = null, className = null) {
+function docinput(parent, id = null, name = null, type = "checkbox", default_value = null, checked = false, className = null) {
 	const element = document.createElement("input");
 	element.id = id;
 	element.setAttribute("name", name);
 	element.setAttribute("type", type);
 	element.setAttribute("value", default_value);
+	if (checked) element.setAttribute("checked", checked);
 	return addDocElement(parent, element, className);
 }
 
+let inputs_id_index = 0;
+
 function docinputs(parent, options = [], type = "checkbox", className = null) {
 	let elements = [];
+	let i = 0;
 	for (const option of options) {
+		const attr_for = `input-${inputs_id_index}-${i++}`;
 		const option_container = docdiv(parent, className);
-		doclabel(option_container, option.label, option.for);
-		docinput(option_container, option.for, option.name, type);
+		elements.push(option_container);
+		doclabel(option_container, option.label, attr_for);
+		docinput(option_container, attr_for, option.name, type, option.value, option.checked);
 	}
+	inputs_id_index++;
 	return elements;
 }
 
