@@ -1,0 +1,52 @@
+#main {
+	display: grid;
+	justify-items: center;
+}
+
+#view {
+	height: 100%;
+	padding: 20px;
+	display: grid;
+	gap: 20px;
+	justify-items: center;
+	border: 1px solid var(--primary-text-color);
+}
+
+.theme-dark {
+	border-color: var(--dark-primary-text-color);
+}
+
+#view-title {
+	font-size: 24px;
+}
+
+#view-choices {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 3px;
+}
+
+#view-choices>button {
+	padding: 10px;
+	font-size: 16px;
+}
+
+#view-controls {
+	width: 100%;
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+#view-controls>button {
+	padding: 10px;
+	font-size: 16px;
+	align-self: end;
+}
+
+#view-controls>button:first-child {
+	justify-self: left;
+}
+
+#view-controls>button:last-child {
+	justify-self: right;
+}
