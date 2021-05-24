@@ -30,6 +30,12 @@ button {
 	border: 1px solid var(--dark-primary-text-color);
 }
 
+button:hover {
+	color: var(--dark-primary-background-color);
+	background-color: var(--dark-primary-text-color);
+	border-color: var(--dark-primary-background-color);
+}
+
 button:disabled {
 	color: grey;
 	cursor: not-allowed;
