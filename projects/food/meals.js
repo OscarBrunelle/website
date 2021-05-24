@@ -1,3 +1,8 @@
+const FOOD_TYPES = { //TODO: add english translations
+	"MEAL": "Repas",
+	"DRINK": "Cocktail",
+};
+
 const MEAL_TYPES = { //TODO: translate keys
 	"ENTREE": "Entrée",
 	"PLAT": "Plat",
@@ -5,11 +10,11 @@ const MEAL_TYPES = { //TODO: translate keys
 };
 
 const DRINKS_TYPES = {
-	"ALCOHOLIZED": "Alcoolisée",
-	"NON_ALCOHOLIZED": "Non-alcoolisée",
+	"ALCOHOLIC": "Alcoolisée",
+	"NON_ALCOHOLIC": "Sans alcool",
 };
 
-const MEALS = {
+const FOODS = {
 	/* MEALS START */
 	"PATES_CARBOS": {
 		"name": "Pâtes carbonara",
@@ -25,7 +30,7 @@ const MEALS = {
 			"optional": true
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT,
 		"preparation_time": 10,
 		"waiting_time": 0
@@ -37,7 +42,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"QUICHE_SAUMON_EPINARD": {
@@ -47,7 +52,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"NUGGETS_FRITES": {
@@ -57,7 +62,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"RISOTTO_POIREAU": {
@@ -67,7 +72,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"BRUCHETTAS": {
@@ -77,7 +82,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"FAJITAS": {
@@ -87,7 +92,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"CURRY_CHOU_FLEUR": {
@@ -97,7 +102,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"CREPES_SARASIN": {
@@ -107,7 +112,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"COOKIES": {
@@ -146,7 +151,7 @@ const MEALS = {
 			"Couper ensuite des tranches d’environ 2cm d’épaisseur et leur redonner légèrement une forme ronde sans les aplatir. Attention ils s'étalent à la cuisson, alors espacez-les sur votre plaque.",
 			"Cuire 12 min. Ne vous affolez pas s'ils sont encore un peu mous à la fin de cuisson, ils vont durcir en refroidissant. Faites les glisser sur une grille pour les laisser refroidir doucement."
 		],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.DESSERT
 	},
 	"POP_CORN": {
@@ -156,7 +161,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.DESSERT
 	},
 	"CAROTTES_RAPEES": {
@@ -166,7 +171,7 @@ const MEALS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": "meal",
+		"type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.DESSERT
 	},
 	/* MEALS END */
@@ -185,8 +190,8 @@ const MEALS = {
 			"Verser l'eau.",
 			"Ajouter des glaçons si nécessaire."
 		],
-		"type": "drink",
-		"drink_type": DRINKS_TYPES.ALCOHOLIZED
+		"type": FOOD_TYPES.DRINK,
+		"drink_type": DRINKS_TYPES.ALCOHOLIC
 	},
 	"MOJITO": {
 		"name": "Mojito",
@@ -200,8 +205,8 @@ const MEALS = {
 		"steps": [
 			"https://www.750g.com/mojito-r99211.htm"
 		],
-		"type": "drink",
-		"drink_type": DRINKS_TYPES.ALCOHOLIZED
+		"type": FOOD_TYPES.DRINK,
+		"drink_type": DRINKS_TYPES.ALCOHOLIC
 	},
 	/* DRINKS END */
 };

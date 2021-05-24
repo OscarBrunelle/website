@@ -3,8 +3,14 @@
 const input_meal = document.getElementById("input-meal");
 const input_ingredient = document.getElementById("input-ingredient");
 const meals_container = document.getElementById("meals-div");
-const filters = document.querySelectorAll(".filter");
 let custom_table;
+
+const filters = [{
+	"title": "Type",
+	"name": "type",
+	"radio": true,
+	"options_array": FOOD_TYPES
+}];
 
 // TODO: add time, price
 const table_columns = [{
@@ -50,19 +56,19 @@ function filter_meals(values) {
 	let results = [];
 	for (const meal_ref in values) {
 		const meal = values[meal_ref];
-		for (const filter of filters) {
+		/*for (const filter of filters) {
 			const filter_name = filter.name;
 			const filter_value = filter.value;
 			if (!(meal[filter_name] == filter_value)) {
 				break;
 			}
-		}
+		}*/
 		results.push(meal);
 	}
 	return results;
 }
 
-function display_meals(values = MEALS, table = custom_table) {
+function display_meals(values = FOODS, table = custom_table) {
 	for (const meal_ref in values) {
 		const link = doca(null, "?meal_ref=" + meal_ref, "Lien");
 		values[meal_ref].link = link.outerHTML.toString();
@@ -89,8 +95,8 @@ function search_by_meal(search) {
 		words[word_index] = format_search(word);
 	}
 
-	for (const meal_ref in MEALS) {
-		const meal = MEALS[meal_ref];
+	for (const meal_ref in FOODS) {
+		const meal = FOODS[meal_ref];
 		let possible = true;
 		for (const word of words) {
 			if (!format_search(meal.name).includes(word)) {
@@ -115,8 +121,8 @@ function search_by_ingredient(search) {
 		words[word_index] = format_search(word);
 	}
 
-	for (const meal_ref in MEALS) {
-		const meal = MEALS[meal_ref];
+	for (const meal_ref in FOODS) {
+		const meal = FOODS[meal_ref];
 		let possible = true;
 		for (const word of words) {
 			let included = false;
@@ -140,7 +146,7 @@ function search_by_ingredient(search) {
 }
 
 function show_recipe(meal_ref) {
-	const meal = MEALS[meal_ref];
+	const meal = FOODS[meal_ref];
 	change_url_parameter("?meal_ref=" + meal_ref);
 	change_title(meal.name);
 
@@ -160,11 +166,12 @@ function show_recipe(meal_ref) {
 	for (const step of meal.steps) {
 		docli(steps_list, step);
 	}
+	container.scrollIntoView();
 }
 
 function random_meal() {
-	const r = random_int(0, Object.keys(MEALS).length - 1);
-	const meal = MEALS[Object.keys(MEALS)[r]];
+	const r = random_int(0, Object.keys(FOODS).length - 1);
+	const meal = FOODS[Object.keys(FOODS)[r]];
 	display_meals([meal]);
 }
 
@@ -176,11 +183,30 @@ function load() {
 		search_by_ingredient(event.target.value);
 	});
 	for (const filter of filters) {
-		filter.addEventListener("input", filter_meals);
+		const container = docdiv(document.getElementById("filters-div"), "filter-container");
+		doch3(container, filter.title, "filter-title");
+		const options_container = docdiv(container, "filter-options");
+		let options = [];
+		if (filter.options_array != null) {
+			for (const option_key in filter.options_array) {
+				options.push({
+					"name": filter.name,
+					"for": option_key,
+					"label": filter.options_array[option_key]
+				});
+			}
+		} else {
+			options = filter.options;
+		}
+		const inputs = docinputs(options_container, options, (filter.radio ? "radio" : "checkbox"));
+		console.log(options);
+		for (const inp of inputs) {
+			inp.addEventListener("input", filter_meals);
+		}
 	}
 
 	custom_table = new CustomTable(document.getElementById("meals-div"), table_columns, table_values);
-	display_meals(MEALS);
+	display_meals(FOODS);
 
 	const parameters = get_url_parameters();
 	if (parameters.search != null && parameters.search_type != null) {
