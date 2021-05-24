@@ -62,104 +62,7 @@ function filter_meals(values) {
 	return results;
 }
 
-class CustomTable {
-	constructor(parent, columns = [], values = []) {
-		this.table_element = doctable(parent, "shared-table");
-
-		this.set_columns(columns, false);
-		this.set_values(values, false);
-
-		this.update();
-	}
-
-	check_sorting_column() {
-		if (this.sorting_column != null) {
-			for (const col of this.columns) {
-				if (col.name == this.sorting_column.name && col.name == this.sorting_column.name) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	set_sorting_column(column, update = true) {
-		if (this.sorting_column == column) {
-			this.sorting_way = !this.sorting_way;
-		} else {
-			this.sorting_way = true;
-			this.sorting_column = column;
-		}
-		this.sort_table(this.sorting_column, update);
-		return this;
-	}
-
-	set_columns(columns, update = true) {
-		this.columns = columns;
-		if (!this.check_sorting_column()) {
-			this.set_sorting_column(this.columns[0]);
-		}
-
-		if (update) {
-			this.update();
-		}
-		return this;
-	}
-
-	set_values(values, update = true) {
-		this.values = values;
-		this.sorted_values = values;
-		this.sort_table(this.sorting_column, update);
-
-		if (update) {
-			this.update();
-		}
-		return this;
-	}
-
-	sort_table(column = this.sorting_column, update = true) {
-		const column_name = column.name;
-
-		const ref = this;
-		function compare(a, b) {
-			if (a[column_name] < b[column_name]) {
-				return (ref.sorting_way ? -1 : 1);
-			} else if (a[column_name] > b[column_name]) {
-				return (ref.sorting_way ? 1 : -1);
-			}
-			return 0;
-		}
-
-		if (this.sorted_values != null) {
-			this.sorted_values = this.sorted_values.sort(compare);
-		}
-
-		if (update) {
-			this.update();
-		}
-		return this;
-	}
-
-	update() {
-		fill_table(this.table_element, this.columns, this.sorted_values);
-		const headers = this.table_element.querySelectorAll("th");
-		for (let i = 0; i < headers.length; i++) {
-			const th = headers[i];
-			const ref = this;
-			if (this.columns[i] == this.sorting_column) {
-				$(th).addClass("sorter");
-			} else {
-				$(th).removeClass("sorter");
-			}
-			th.addEventListener("click", function (event) {
-				ref.set_sorting_column(ref.columns[i]);
-			});
-		}
-		return this;
-	}
-}
-
-function display_meals(values) {
+function display_meals(values = MEALS, table = custom_table) {
 	for (const meal_ref in values) {
 		const link = doca(null, "?meal_ref=" + meal_ref, "Lien");
 		values[meal_ref].link = link.outerHTML.toString();
@@ -167,7 +70,7 @@ function display_meals(values) {
 
 	values = filter_meals(values);
 
-	custom_table.set_values(values).update();
+	table.set_values(values).update();
 }
 
 function format_search(value) {
