@@ -5,7 +5,7 @@ const STEPS = {
 	"FOOD_OR_DRINK": {
 		"title": "Que voulez-vous faire ?",
 		"unique": true,
-		"filter_name": "cooking",
+		"filter_name": "food_or_drink",
 		"choices": [{
 			"label": "Repas",
 			"value": "food",
@@ -19,6 +19,7 @@ const STEPS = {
 	"FOOD_TYPE": {
 		"title": "Type de repas",
 		"unique": true,
+		"filter_name": "type",
 		"choices": [{
 			"label": "Entrée",
 			"step": "RESULTS"
@@ -28,23 +29,26 @@ const STEPS = {
 		}, {
 			"label": "Dessert",
 			"step": "RESULTS"
-		}]
+		}],
+		"prev": "FOOD_OR_DRINK"
 	},
 	"DRINK_TYPE": {
 		"title": "Type de boisson",
 		"unique": true,
+		"filter_name": "alcoholized",
 		"choices": [{
 			"label": "Alcoolisée",
 			"step": "RESULTS"
 		}, {
 			"label": "Non-alcoolisée",
 			"step": "RESULTS"
-		}]
+		}],
+		"prev": "FOOD_OR_DRINK"
 	},
 }
 
 let results_table;
-const filters = [];
+let filters = [];
 
 function add_filter(name, value) {
 	if (results_table == null) {
@@ -53,6 +57,17 @@ function add_filter(name, value) {
 			"name": "name"
 		}]);
 	}
+
+	filters[name] = value;
+
+	let filtered_results = [];
+	for (const filter_name in filters) {
+		for (const meal_ref in MEALS) {
+			const meal = MEALS[meal_ref];
+			filtered_results.push(meal);
+		}
+	}
+	results_table.set_values(filtered_results);
 }
 
 function load_step(step_name) {
@@ -62,7 +77,11 @@ function load_step(step_name) {
 	}
 
 	const step = STEPS[step_name];
+
+	// set title
 	document.getElementById("view-title").innerHTML = step.title;
+
+	// set choices
 	if (step.unique) { // != null && step.unique == true) {
 		const elch = document.getElementById("view-choices");
 		elch.innerHTML = "";
@@ -74,6 +93,18 @@ function load_step(step_name) {
 			});
 		}
 	}
+
+	// change prev and next buttons if needed
+	if (step.prev != null) {
+		var old_element = document.getElementById("prev");
+		var new_element = old_element.cloneNode(true);
+		old_element.parentNode.replaceChild(new_element, old_element);
+		document.getElementById("prev").addEventListener("click", function() {
+			load_step(step.prev);
+		});
+	}/* else {
+		document.getElementById("prev").setAttribute("disabled", "");
+	}*/
 }
 
 function load() {
