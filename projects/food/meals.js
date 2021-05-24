@@ -186,7 +186,7 @@ const MEALS = {
 			"Ajouter des glaçons si nécessaire."
 		],
 		"type": "drink",
-		"drink_type": DRIN
+		"drink_type": DRINKS_TYPES.ALCOHOLIZED
 	},
 	"MOJITO": {
 		"name": "Mojito",
@@ -200,8 +200,8 @@ const MEALS = {
 		"steps": [
 			"https://www.750g.com/mojito-r99211.htm"
 		],
-		"type": "meal",
-		"meal_type": MEAL_TYPES.DESSERT
+		"type": "drink",
+		"drink_type": DRINKS_TYPES.ALCOHOLIZED
 	},
 	/* DRINKS END */
 };
