@@ -5,11 +5,12 @@ const input_ingredient = document.getElementById("input-ingredient");
 const meals_container = document.getElementById("meals-div");
 let custom_table;
 
-const filters = [{
+const filters = [{ //add empty and maybe do it as a select
 	"title": "Type",
-	"name": "type",
+	"name": "food_type",
 	"radio": true,
-	"options_array": FOOD_TYPES
+	"options_array": FOOD_TYPES,
+	"default": FOOD_TYPES.MEAL
 }];
 
 // TODO: add time, price
@@ -54,16 +55,30 @@ function get_url_parameters(url = document.URL) {
 
 function filter_meals(values) {
 	let results = [];
+	const f_containers = document.querySelectorAll(".filter-container");
+	let act_filters = [];
+	for (const f_container of f_containers) {
+		let values = [];
+		const checked_inputs = f_container.querySelectorAll("input:checked");
+		for (const checked_input of checked_inputs) {
+			values.push(checked_input.value);
+		}
+		act_filters.push({
+			"name": f_container.id.split("filter-container-")[1],
+			"values": values
+		});
+	}
+
 	for (const meal_ref in values) {
 		const meal = values[meal_ref];
-		/*for (const filter of filters) {
-			const filter_name = filter.name;
-			const filter_value = filter.value;
-			if (!(meal[filter_name] == filter_value)) {
+		let flag = false;
+		/* for (const act_filter of act_filters) {
+			if (!flag && act_filter.values.includes((meal[act_filter.name]))) {
+				flag = true;
 				break;
 			}
-		}*/
-		results.push(meal);
+		} */
+		if (!flag) results.push(meal);
 	}
 	return results;
 }
@@ -184,24 +199,26 @@ function load() {
 	});
 	for (const filter of filters) {
 		const container = docdiv(document.getElementById("filters-div"), "filter-container");
+		container.id = "filter-container-" + filter.name;
 		doch3(container, filter.title, "filter-title");
 		const options_container = docdiv(container, "filter-options");
 		let options = [];
 		if (filter.options_array != null) {
 			for (const option_key in filter.options_array) {
+				const option = filter.options_array[option_key];
 				options.push({
 					"name": filter.name,
-					"for": option_key,
-					"label": filter.options_array[option_key]
+					"label": option,
+					"value": option_key,
+					"checked": (filter.default != null && filter.default == option)
 				});
 			}
 		} else {
 			options = filter.options;
 		}
 		const inputs = docinputs(options_container, options, (filter.radio ? "radio" : "checkbox"));
-		console.log(options);
 		for (const inp of inputs) {
-			inp.addEventListener("input", filter_meals);
+			inp.querySelector("input").addEventListener("input", filter_meals);
 		}
 	}
 

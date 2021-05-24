@@ -30,7 +30,7 @@ const FOODS = {
 			"optional": true
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT,
 		"preparation_time": 10,
 		"waiting_time": 0
@@ -42,7 +42,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"QUICHE_SAUMON_EPINARD": {
@@ -52,7 +52,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"NUGGETS_FRITES": {
@@ -62,7 +62,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"RISOTTO_POIREAU": {
@@ -72,7 +72,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"BRUCHETTAS": {
@@ -82,7 +82,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"FAJITAS": {
@@ -92,7 +92,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"CURRY_CHOU_FLEUR": {
@@ -102,7 +102,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"CREPES_SARASIN": {
@@ -112,7 +112,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.PLAT
 	},
 	"COOKIES": {
@@ -151,7 +151,7 @@ const FOODS = {
 			"Couper ensuite des tranches d’environ 2cm d’épaisseur et leur redonner légèrement une forme ronde sans les aplatir. Attention ils s'étalent à la cuisson, alors espacez-les sur votre plaque.",
 			"Cuire 12 min. Ne vous affolez pas s'ils sont encore un peu mous à la fin de cuisson, ils vont durcir en refroidissant. Faites les glisser sur une grille pour les laisser refroidir doucement."
 		],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.DESSERT
 	},
 	"POP_CORN": {
@@ -161,7 +161,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.DESSERT
 	},
 	"CAROTTES_RAPEES": {
@@ -171,7 +171,7 @@ const FOODS = {
 			"quantity": 777
 		}],
 		"steps": [],
-		"type": FOOD_TYPES.MEAL,
+		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.DESSERT
 	},
 	/* MEALS END */
@@ -190,7 +190,7 @@ const FOODS = {
 			"Verser l'eau.",
 			"Ajouter des glaçons si nécessaire."
 		],
-		"type": FOOD_TYPES.DRINK,
+		"food_type": FOOD_TYPES.DRINK,
 		"drink_type": DRINKS_TYPES.ALCOHOLIC
 	},
 	"MOJITO": {
@@ -205,7 +205,7 @@ const FOODS = {
 		"steps": [
 			"https://www.750g.com/mojito-r99211.htm"
 		],
-		"type": FOOD_TYPES.DRINK,
+		"food_type": FOOD_TYPES.DRINK,
 		"drink_type": DRINKS_TYPES.ALCOHOLIC
 	},
 	/* DRINKS END */
