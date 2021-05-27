@@ -1,6 +1,6 @@
 #main {
 	display: grid;
-	grid-template-rows: auto 1fr;
+	grid-template-rows: auto 1fr auto;
 	justify-items: center;
 	gap: 10px;
 }
@@ -18,19 +18,33 @@
 	gap: 10px;
 }
 
+/* TODO: switch to rem ? */
+#buttons-container>button {
+	width: 90%;
+	max-height: 50vh;
+	aspect-ratio: 1/1;
+	padding: 10px;
+	font-size: calc(min(15vw, 10rem));
+	border-radius: 50%;
+}
+
 /* TODO: set global small screen size */
 @media screen and (max-width: 600px) {
 	#buttons-container {
 		grid-template-columns: 1fr;
 	}
+
+	#buttons-container>button {
+		max-height: 30vh;
+	}
 }
 
-/* TODO: switch to rem ? */
-#buttons-container>button {
-	width: 90%;
-	max-height: 35vh;
-	aspect-ratio: 1/1;
-	padding: 10px;
-	font-size: 15vw;
-	border-radius: 50%;
+#bottom-buttons {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+#bottom-buttons>button {
+	font-size: 1.5em;
 }

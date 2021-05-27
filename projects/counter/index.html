@@ -26,8 +26,13 @@
 	<main id="main" role="main">
 		<span id="counter"></span>
 		<div id="buttons-container">
-			<button onclick="update_count(-1)">-1</button>
-			<button onclick="update_count(+1)">+1</button>
+			<button id="button-sub" onclick="update_count(-1);">-1</button>
+			<button id="button-add" onclick="update_count(+1);">+1</button>
+		</div>
+		<div id="bottom-buttons">
+			<button onclick="update_values(0.1);">/10</button>
+			<button onclick="reset_counter();">Reset</button>
+			<button onclick="update_values(10);">x10</button>
 		</div>
 	</main>
 
