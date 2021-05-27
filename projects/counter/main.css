@@ -1,0 +1,36 @@
+#main {
+	display: grid;
+	grid-template-rows: auto 1fr;
+	justify-items: center;
+	gap: 10px;
+}
+
+#counter {
+	font-size: 15vw;
+}
+
+#buttons-container {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	justify-items: center;
+	gap: 10px;
+}
+
+/* TODO: set global small screen size */
+@media screen and (max-width: 600px) {
+	#buttons-container {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* TODO: switch to rem ? */
+#buttons-container>button {
+	width: 90%;
+	max-height: 35vh;
+	aspect-ratio: 1/1;
+	padding: 10px;
+	font-size: 15vw;
+	border-radius: 50%;
+}
