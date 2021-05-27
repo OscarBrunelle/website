@@ -50,6 +50,11 @@ function getTextWidth(text, font = "12px arial") {
 	return metrics.width;
 }
 
+/**
+ * If set, returns the value of the cookie, else null
+ * @param {String} cookie_name The key for the cookie
+ * @returns String
+ */
 function get_cookie(cookie_name) {
 	const name = cookie_name + "=";
 	const decodedCookie = decodeURIComponent(document.cookie);
