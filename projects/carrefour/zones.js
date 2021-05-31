@@ -168,7 +168,7 @@ let raw_categories = [
 	["boissons", 16, 1, 1, 15],
 	["viande", 15, 15, 8, 1],
 	["asiatique", 10, 8, 2, 1]
-];
+];//carrefour
 
 let items = [];
 let categories = [];

@@ -1,8 +1,9 @@
 const REFS = {
 	/* SOLID START */
-	"SUCRE": "SUCRE",
 	"BEURRE": "BEURRE",
 	"CHOCOLAT": "CHOCOLAT",
+	"PATES": "PATES",
+	"SUCRE": "SUCRE",
 	/* SOLID END */
 	/* LIQUID START */
 	"ALCOHOL": "ALCOHOL",
@@ -14,7 +15,8 @@ const INGREDIENTS = {
 	"SPAGHETTIS": {
 		"name-fr": "Spaghettis",
 		"unit": "g",
-		"price": 777
+		"price": 777,
+		"ref": REFS.PATES
 	},
 	"BOEUF_HACHE": {
 		"name-fr": "Boeuf haché",
