@@ -60,21 +60,36 @@ function addItem(addedItem = bestSuggestion) {
 	}
 }
 
-function drawMap() {
+function drawMap(store_key = "LECLERC") {
+	const store = STORES[store_key];
 	let map = document.getElementById("map");
-	for (let i = 0; i < categories.length; i++) {
-		const category = categories[i];
+	map.setAttributeNS(null, "viewBox", `0 0 ${store.dimensions.w} ${store.dimensions.h}`);
+
+	const defs = store.defaults;
+	for (const category of store.gps) {
+		if (category.w == null && defs.w != null) {
+			category.w = defs.w;
+		}
+		if (category.h == null && defs.h != null) {
+			category.h = defs.h;
+		}
+		if (category.l == null && defs.l != null) {
+			category.l = defs.w;
+		}
+		if (category.r == null && defs.r != null) {
+			category.r = defs.r;
+		}
+		category.name = category.gp;
 		let rect = document.createElementNS(xmlns, "rect");
-		rect.setAttributeNS(null, "id", "category-" + i);
-		rect.setAttributeNS(null, "x", category.x * 10);
-		rect.setAttributeNS(null, "y", category.y * 10);
-		rect.setAttributeNS(null, "width", category.w * 10);
-		rect.setAttributeNS(null, "height", category.h * 10);
+		rect.setAttributeNS(null, "x", category.x);
+		rect.setAttributeNS(null, "y", category.y);
+		rect.setAttributeNS(null, "width", category.w);
+		rect.setAttributeNS(null, "height", category.h);
 		map.appendChild(rect);
 		let text = document.createElementNS(xmlns, "text");
 		text.innerHTML = category.name;
-		text.setAttributeNS(null, "x", category.x * 10 + category.w * 10 / 2);
-		text.setAttributeNS(null, "y", category.y * 10 + category.h * 10 / 2);
+		text.setAttributeNS(null, "x", category.x + category.w / 2);
+		text.setAttributeNS(null, "y", category.y + category.h / 2);
 		map.appendChild(text);
 	}
 
@@ -103,7 +118,7 @@ function findBestPath() {
 	lines.innerHTML = "";
 
 	if (shoppingList.length <= 0) {
-		svgline(lines, currentPos.x * 10, currentPos.y * 10, exitPos.x * 10, exitPos.y * 10);
+		svgline(lines, currentPos.x, currentPos.y, exitPos.x, exitPos.y);
 		alert("Shopping list is empty");
 		return null;
 	}
@@ -133,14 +148,14 @@ function findBestPath() {
 			}
 		}
 		doneItems.push(bestItem);
-		svgline(lines, currentPos.x * 10, currentPos.y * 10, bestX * 10, bestY * 10);
+		svgline(lines, currentPos.x, currentPos.y, bestX, bestY);
 		currentPos = {
 			x: bestX,
 			y: bestY
 		};
 	}
 
-	svgline(lines, currentPos.x * 10, currentPos.y * 10, exitPos.x * 10, exitPos.y * 10);
+	svgline(lines, currentPos.x, currentPos.y, exitPos.x, exitPos.y);
 }
 
 function load() {
