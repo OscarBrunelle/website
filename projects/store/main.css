@@ -50,7 +50,7 @@ svg text {
 	stroke-width: 1;
 }
 
-#lines>line {
+.lines>line {
 	stroke: blue;
 	stroke-width: 1;
 }

@@ -65,6 +65,7 @@ function drawMap(store_key = "LECLERC") {
 	let map = document.getElementById("map");
 	map.setAttributeNS(null, "viewBox", `0 0 ${store.dimensions.w} ${store.dimensions.h}`);
 
+	const shelfs = svgg(map, "shelfs");
 	const defs = store.defaults;
 	for (const category of store.gps) {
 		if (category.w == null && defs.w != null) {
@@ -80,22 +81,11 @@ function drawMap(store_key = "LECLERC") {
 			category.r = defs.r;
 		}
 		category.name = category.gp;
-		let rect = document.createElementNS(xmlns, "rect");
-		rect.setAttributeNS(null, "x", category.x);
-		rect.setAttributeNS(null, "y", category.y);
-		rect.setAttributeNS(null, "width", category.w);
-		rect.setAttributeNS(null, "height", category.h);
-		map.appendChild(rect);
-		let text = document.createElementNS(xmlns, "text");
-		text.innerHTML = category.name;
-		text.setAttributeNS(null, "x", category.x + category.w / 2);
-		text.setAttributeNS(null, "y", category.y + category.h / 2);
-		map.appendChild(text);
+		svgrect(shelfs, category.x, category.y, category.w, category.h);
+		svgtext(shelfs, category.x + category.w / 2, category.y + category.h / 2, category.name);
 	}
 
-	let lines = document.createElementNS(xmlns, "g");
-	lines.setAttributeNS(null, "id", "lines");
-	map.appendChild(lines);
+	svgg(map, "lines");
 }
 
 function distance(pointA, pointB) {
@@ -105,16 +95,11 @@ function distance(pointA, pointB) {
 }
 
 function findBestPath() {
-	let currentPos = {
-		x: 0,
-		y: 0
-	};
-	let exitPos = {
-		x: 10,
-		y: 0
-	};
+	const store = STORES.LECLERC;
+	let currentPos = store.in;
+	let exitPos = store.out;
 
-	let lines = document.getElementById("lines");
+	let lines = map.querySelector(".lines");
 	lines.innerHTML = "";
 
 	if (shoppingList.length <= 0) {

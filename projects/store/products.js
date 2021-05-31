@@ -8,6 +8,8 @@ const GP = {
 	"CREME": "CREME",
 	"BEURRE": "BEURRE",
 	"OEUFS": "OEUFS",
+	"FARINE": "FARINE",
+	"SUCRE": "SUCRE",
 	"TARTINER": "TARTINER",
 	"CONFITURES": "CONFITURES",
 	"SAUCES": "SAUCES",
@@ -17,6 +19,10 @@ const GP = {
 	"FROMAGES": "FROMAGES",
 	"LEGUMES": "LEGUMES",
 	"FRUITS": "FRUITS",
+	"CONSERVES_LEGUMES": "CONSERVES_LEGUMES",
+	"ALCOOL": "ALCOOL",
+	"EAU": "EAU",
+	"CHOCOLAT": "CHOCOLAT",
 };
 
 const PRODUCTS = {
@@ -43,7 +49,7 @@ const PRODUCTS = {
 		"name-fr": "Crème",
 		"unit": "cL",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.CREME,
 	},
 	"OEUF": {
 		"name-fr": "Oeufs",
@@ -55,31 +61,31 @@ const PRODUCTS = {
 		"name-fr": "Maïs",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.CONSERVES_LEGUMES,
 	},
 	"CAROTTE": {
 		"name-fr": "Carotte",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.LEGUMES,
 	},
 	"SUCRE_SEMOULE": {
 		"name-fr": "Sucre semoule",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.SUCRE,
 	},
 	"SUCRE_CASSONADE": {
 		"name-fr": "Sucre cassonade",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.SUCRE,
 	},
 	"FARINE": {
 		"name-fr": "Farine",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.FARINE,
 	},
 	"LEVURE_CHIMIQUE": {
 		"name-fr": "Levure chimique",
@@ -91,34 +97,34 @@ const PRODUCTS = {
 		"name-fr": "Beurre doux",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.BEURRE,
 	},
 	"CHOCOLAT_NOIR": {
 		"name-fr": "Chocolat noir",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.CHOCOLAT,
 	},
 	"CHOCOLAT_BLANC": {
 		"name-fr": "Chocolat blanc",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.CHOCOLAT,
 	},
 	/* SOLID END */
 	/* LIQUID START */
 	"WATER": {
-		"name-fr": "Chocolat blanc",
+		"name-fr": "Eau",
 		"unit": "cL",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.EAU,
 	},
 	/* ALCOHOLS START */
 	"PASTIS": {
 		"name-fr": "Pastis",
 		"unit": "cL",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.ALCOOL,
 	},
 	/* ALCOHOLS END */
 	/* LIQUID END */
