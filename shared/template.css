@@ -1,5 +1,8 @@
+/*
+TODO: replace code with template-primary & secondary classes
+*/
 :root {
-	--primary-background-color: rgb(52, 123, 152);
+	--primary-background-color: rgb(38, 95, 119);
 	--primary-text-color: white;
 
 	--secondary-background-color: rgb(190, 238, 255);
@@ -12,22 +15,28 @@
 	--dark-secondary-text-color: white;
 }
 
-body {
-	display: grid;
-	grid-template-rows: auto auto 1fr auto;
-	font-family: system-ui;
-}
-
-button {
+.template-primary {
 	background-color: var(--primary-background-color);
 	color: var(--primary-text-color);
-	border: 1px solid var(--primary-text-color);
+	border-color: var(--primary-text-color);
 }
 
-.theme-dark button {
+.theme-dark .template-primary {
 	background-color: var(--dark-primary-background-color);
 	color: var(--dark-primary-text-color);
-	border: 1px solid var(--dark-primary-text-color);
+	border-color: var(--dark-primary-text-color);
+}
+
+.template-secondary {
+	background-color: var(--secondary-background-color);
+	color: var(--secondary-text-color);
+	border-color: var(--secondary-text-color);
+}
+
+.theme-dark .template-secondary {
+	background-color: var(--dark-secondary-background-color);
+	color: var(--dark-secondary-text-color);
+	border-color: var(--dark-secondary-text-color);
 }
 
 button:hover {
@@ -41,14 +50,15 @@ button:disabled {
 	cursor: not-allowed;
 }
 
-header {
-	background-color: var(--primary-background-color);
-	color: var(--primary-text-color);
+body {
+	display: grid;
+	grid-template-rows: auto auto 1fr auto;
+	font-family: system-ui;
 }
 
-.theme-dark header {
-	background-color: var(--dark-primary-background-color);
-	color: var(--dark-primary-text-color);
+button.template-primary:disabled {
+	color: grey;
+	cursor: not-allowed;
 }
 
 header>h1 {
@@ -68,12 +78,13 @@ header>p {
 	top: 0;
 	right: 0;
 	background-color: transparent;
-	border: 1px solid var(--primary-text-color);
+	border: 1px solid;
+	border-color: var(--primary-text-color);
 	cursor: pointer;
 }
 
 .theme-dark #theme-btn {
-	border: 1px solid var(--dark-primary-text-color);
+	border-color: var(--dark-primary-text-color);
 }
 
 #top-nav {
@@ -153,8 +164,6 @@ footer>span {
 }
 
 .shared-table {
-	border-spacing: 0;
-	border-collapse : collapse;
 	border: 1px solid black;
 	color: var(--secondary-text-color);
 	background-color: white;
@@ -187,4 +196,27 @@ footer>span {
 .theme-dark .shared-table th {
 	color: var(--dark-primary-text-color);
 	background-color: var(--dark-primary-background-color);
+}
+
+.template-svg text {
+	fill: var(--primary-text-color);
+}
+
+.theme-dark .template-svg text {
+	fill: var(--dark-primary-text-color);
+}
+
+.template-svg rect {
+	fill: var(--primary-background-color);
+	opacity: 0.8;
+	stroke: black;
+	stroke-width: 1;
+}
+
+.theme-dark .template-svg rect {
+	fill: var(--dark-primary-background-color);
+	opacity: 0.8;
+	stroke: black;
+	stroke-width: 1;
+	fill: var(--dark-primary-text-color);
 }

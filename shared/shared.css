@@ -18,3 +18,13 @@ p {
 button {
 	cursor: pointer;
 }
+
+.shared-table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+.shared-svg {
+	text-anchor: middle;
+	dominant-baseline: central;
+}
