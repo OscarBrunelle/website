@@ -65,13 +65,17 @@ function drawMap() {
 	for (let i = 0; i < categories.length; i++) {
 		const category = categories[i];
 		let rect = document.createElementNS(xmlns, "rect");
-		rect.innerHTML = category.name;
 		rect.setAttributeNS(null, "id", "category-" + i);
-		rect.setAttributeNS(null, "x", category.x);
-		rect.setAttributeNS(null, "y", category.y);
-		rect.setAttributeNS(null, "width", category.w);
-		rect.setAttributeNS(null, "height", category.h);
+		rect.setAttributeNS(null, "x", category.x * 10);
+		rect.setAttributeNS(null, "y", category.y * 10);
+		rect.setAttributeNS(null, "width", category.w * 10);
+		rect.setAttributeNS(null, "height", category.h * 10);
 		map.appendChild(rect);
+		let text = document.createElementNS(xmlns, "text");
+		text.innerHTML = category.name;
+		text.setAttributeNS(null, "x", category.x * 10 + category.w * 10 / 2);
+		text.setAttributeNS(null, "y", category.y * 10 + category.h * 10 / 2);
+		map.appendChild(text);
 	}
 
 	let lines = document.createElementNS(xmlns, "g");
@@ -86,17 +90,24 @@ function distance(pointA, pointB) {
 }
 
 function findBestPath() {
-	if (shoppingList.length <= 0) {
-		alert("Shopping list is empty");
-		return null;
-	}
-
-	let lines = document.getElementById("lines");
-	lines.innerHTML = "";
 	let currentPos = {
 		x: 0,
 		y: 0
 	};
+	let exitPos = {
+		x: 10,
+		y: 0
+	};
+
+	let lines = document.getElementById("lines");
+	lines.innerHTML = "";
+
+	if (shoppingList.length <= 0) {
+		svgline(lines, currentPos.x * 10, currentPos.y * 10, exitPos.x * 10, exitPos.y * 10);
+		alert("Shopping list is empty");
+		return null;
+	}
+
 	let doneItems = [];
 	for (let iteration = 0; iteration < shoppingList.length; iteration++) {
 		let bestX, bestY, bestDistance, bestItem;
@@ -122,18 +133,18 @@ function findBestPath() {
 			}
 		}
 		doneItems.push(bestItem);
-		svgline(lines, currentPos.x, currentPos.y, bestX, bestY);
+		svgline(lines, currentPos.x * 10, currentPos.y * 10, bestX * 10, bestY * 10);
 		currentPos = {
 			x: bestX,
 			y: bestY
 		};
 	}
 
-	let exitPos = {
-		x: 10,
-		y: 0
-	};
-	svgline(lines, currentPos.x, currentPos.y, exitPos.x, exitPos.y);
+	svgline(lines, currentPos.x * 10, currentPos.y * 10, exitPos.x * 10, exitPos.y * 10);
 }
 
-document.onload = drawMap();
+function load() {
+	drawMap();
+}
+
+document.onload = load();

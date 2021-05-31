@@ -15,19 +15,19 @@
 </head>
 
 <body>
-	<header>
+	<header class="template-primary">
 		<h1>Carrefour</h1>
-		<button id="theme-btn" aria-label="toggle night mode"></button>
+		<button id="theme-btn" class="template-primary" aria-label="toggle night mode"></button>
 	</header>
 
 	<nav role="navigation" id="top-nav"></nav>
 
-	<main id="main" role="main">
+	<main id="main" class="template-secondary" role="main">
 		<input id="search-input">
 		<div id="search_suggestions"></div>
 		<div id="shopping_list"></div>
 		<button onclick="findBestPath();">Best path</button>
-		<svg id="map" viewbox="0 0 25 25"></svg>
+		<svg id="map" class="shared-svg template-svg" viewbox="0 0 250 250"></svg>
 	</main>
 
 	<!-- <script type="text/javascript" src="../../shared/jquery.js"></script> -->

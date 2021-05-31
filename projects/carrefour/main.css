@@ -2,6 +2,15 @@
 
 }
 
+svg {
+	font-size: 4px;
+}
+
+svg text {
+	text-anchor: middle;
+	dominant-baseline: central;
+}
+
 #search_suggestions {
 	width: 234px;
 	max-height: 200px;
@@ -37,10 +46,10 @@
 	fill: grey;
 	opacity: 0.8;
 	stroke: black;
-	stroke-width: 0.1;
+	stroke-width: 1;
 }
 
 #lines>line {
 	stroke: blue;
-	stroke-width: 0.1;
+	stroke-width: 1;
 }
