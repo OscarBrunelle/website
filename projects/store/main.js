@@ -94,7 +94,45 @@ function distance(pointA, pointB) {
 	return Math.sqrt(a * a + b * b);
 }
 
-function findBestPath() {
+function findMinInArray(items, func, args = null) {
+	let min_v = Number.MAX_VALUE,
+		min_i = -1;
+	for (let i = 0; i < items.length; i++) {
+		const item = items[i];
+		const v = func.call(this, item, min_v, ...args);
+		if (v < min_v) {
+			min_v = v;
+			min_i = i;
+		}
+	}
+	return min_i;
+}
+
+function findBestPathToCall() {
+
+}
+
+function findBestPathTo(item, current_min, pos) {
+	if (0 > current_min) {
+		return current_min + 1;
+	}
+}
+
+function findItemsPath() {
+	const store = STORES.LECLERC;
+	let currentPos = store.in;
+	let exitPos = store.out;
+
+	const remainings = shoppingList;
+	while (remainings.length > 0) {
+		const nearest_i = findMinInArray(remainings, findBestPathTo, currentPos);
+
+	}
+
+	findBestPathTo(currentPos, exitPos);
+}
+
+function findBestPathold() {
 	const store = STORES.LECLERC;
 	let currentPos = store.in;
 	let exitPos = store.out;
