@@ -53,9 +53,9 @@ const PROJECTS = [{
 		"img_path": "bg.png"
 	},
 	{
-		"link": "carrefour",
-		"title_en": "Carrefour",
-		"title_fr": "Carrefour",
+		"link": "store",
+		"title_en": "Store",
+		"title_fr": "Magasin",
 		"desc_en": "",
 		"desc_fr": "",
 		"tags": ["useful"]
