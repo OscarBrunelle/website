@@ -61,6 +61,16 @@ button.template-primary:disabled {
 	cursor: not-allowed;
 }
 
+header {
+	background-color: var(--primary-background-color);
+	color: var(--primary-text-color);
+}
+
+.theme-dark header {
+	background-color: var(--dark-primary-background-color);
+	color: var(--dark-primary-text-color);
+}
+
 header>h1 {
 	margin: 10px;
 	text-align: center;
