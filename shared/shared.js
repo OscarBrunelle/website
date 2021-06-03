@@ -871,3 +871,50 @@ class CustomTable {
 		return this;
 	}
 }
+
+function find_min_in_array(items, func, args = null) {
+	let min_i = -1,
+		min_v = Number.MAX_VALUE,
+		min_r = null;
+
+	for (let i = 0; i < items.length; i++) {
+		const item = items[i];
+		const r = func.call(this, item, min_v, ...args);
+		if (r.v < min_v) {
+			min_i = i;
+			min_v = r.v;
+			min_r = r;
+		}
+	}
+
+	return {
+		i: min_i,
+		v: min_v,
+		r: min_r
+	};
+}
+
+function find_best_path_call(grid, start, target, previous_path = {
+	path: [],
+	cost: 0
+}) {
+	return previous_path;
+}
+
+function find_best_path(grid, start, targets) {
+	let path = [];
+	let cost = 0;
+	while (targets.length > 0) {
+		const min_path = find_min_in_array(targets, function (target, min_v) {
+			const best_path = find_best_path_call(grid, start, target);
+			return {
+				v: best_path.cost,
+				best_path: best_path
+			};
+		});
+		path.push(min_path.r.path.path);
+		cost += min_path.r.path.cost;
+		targets.splice(min_path.i, 1);
+	}
+	return path;
+}

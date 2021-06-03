@@ -46,7 +46,7 @@ function addItem(addedItem = bestSuggestion) {
 			if (shoppingList.indexOf(addedItem) >= 0) {
 				shoppingList.splice(shoppingList.indexOf(addedItem), 1);
 				shoppingItem.remove();
-				findBestPath();
+				find_and_show_best_path();
 			}
 		});
 		shoppingItem.appendChild(itemDel);
@@ -56,7 +56,7 @@ function addItem(addedItem = bestSuggestion) {
 		let suggestionsContainer = document.getElementById("search_suggestions");
 		suggestionsContainer.innerHTML = "";
 
-		findBestPath();
+		find_and_show_best_path();
 	}
 }
 
@@ -97,42 +97,19 @@ function distance(pointA, pointB) {
 	return Math.sqrt(a * a + b * b);
 }
 
-function findMinInArray(items, func, args = null) {
-	let min_v = Number.MAX_VALUE,
-		min_i = -1;
-	for (let i = 0; i < items.length; i++) {
-		const item = items[i];
-		const v = func.call(this, item, min_v, ...args);
-		if (v < min_v) {
-			min_v = v;
-			min_i = i;
-		}
-	}
-	return min_i;
+function find_store_best_path() {
+	// return find_best_path(grid, start, targets);
 }
 
-function findBestPathToCall() {
-
-}
-
-function findBestPathTo(item, current_min, pos) {
-	if (0 > current_min) {
-		return current_min + 1;
+function show_store_best_path(path) {
+	for (const path_part of path) {
+		console.log(path_part);
 	}
 }
 
-function findItemsPath() {
-	const store = STORES.CARREFOUR;
-	let currentPos = store.in;
-	let exitPos = store.out;
-
-	const remainings = shoppingList;
-	while (remainings.length > 0) {
-		const nearest_i = findMinInArray(remainings, findBestPathTo, currentPos);
-		remainings.splice(nearest_i, 1);
-	}
-
-	findBestPathTo(currentPos, exitPos);
+function find_and_show_best_path() {
+	const path = find_store_best_path();
+	show_store_best_path(path);
 }
 
 function findBestPathold() {
