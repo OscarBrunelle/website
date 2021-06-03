@@ -1,3 +1,5 @@
+"use strict"
+
 let shoppingList = [];
 
 document.getElementById("search-input").addEventListener("input", searchItem);
@@ -91,14 +93,18 @@ function drawMap(store_key = "CARREFOUR") {
 	svgg(map, "lines");
 }
 
-function distance(pointA, pointB) {
-	let a = Math.abs(pointA.x - pointB.x);
-	let b = Math.abs(pointA.y - pointB.y);
-	return Math.sqrt(a * a + b * b);
-}
-
 function find_store_best_path() {
-	// return find_best_path(grid, start, targets);
+	const store = STORES["CARREFOUR"];
+	let grid = [];
+	const start = rect_center(store.in);
+	let targets = [];
+
+	for (const item of shoppingList) {
+		console.log(item);
+	}
+
+	return [];
+	find_best_path(grid, start, targets);
 }
 
 function show_store_best_path(path) {

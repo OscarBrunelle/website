@@ -249,6 +249,18 @@ function get_middle(pointA, pointB) {
 }
 
 /**
+ * Returns the center point of a given rectangle.
+ * @param {Array} rect {x: x, y: y, w: width, h: height}
+ * @returns 
+ */
+function rect_center(rect) {
+	return {
+		x: rect.x + rect.w / 2,
+		y: rect.y + rect.h / 2
+	}
+}
+
+/**
  * min and max both included
  * @param {Number} min 
  * @param {Number} max 
