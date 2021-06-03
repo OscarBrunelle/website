@@ -1,10 +1,7 @@
-#food-input {
-
-}
+#food-input {}
 
 svg {
 	border: 1px solid;
-	font-size: 4px;
 }
 
 svg text {
@@ -40,17 +37,22 @@ svg text {
 
 #map {
 	height: 50%;
-	aspect-ratio: 1/1;
 }
 
-#map>rect {
+.shelf {
 	fill: grey;
 	opacity: 0.8;
-	stroke: black;
-	stroke-width: 1;
+	stroke-width: 0;
 }
 
-.lines>line {
-	stroke: blue;
-	stroke-width: 1;
+.shelf-border {
+	fill: blue;
+}
+
+.shelf-name {
+	transform-box: fill-box;
+	transform-origin: center;
+	transform: rotate(90deg);
+	font-size: 1px;
+	fill: var(--primary-text-color);
 }

@@ -60,29 +60,32 @@ function addItem(addedItem = bestSuggestion) {
 	}
 }
 
-function drawMap(store_key = "LECLERC") {
+function drawMap(store_key = "CARREFOUR") {
 	const store = STORES[store_key];
 	let map = document.getElementById("map");
 	map.setAttributeNS(null, "viewBox", `0 0 ${store.dimensions.w} ${store.dimensions.h}`);
 
 	const shelfs = svgg(map, "shelfs");
 	const defs = store.defaults;
-	for (const category of store.gps) {
-		if (category.w == null && defs.w != null) {
-			category.w = defs.w;
+	for (const shelf of store.gps) {
+		if (shelf.w == null && defs.w != null) {
+			shelf.w = defs.w;
 		}
-		if (category.h == null && defs.h != null) {
-			category.h = defs.h;
+		if (shelf.h == null && defs.h != null) {
+			shelf.h = defs.h;
 		}
-		if (category.l == null && defs.l != null) {
-			category.l = defs.w;
+		if (shelf.l == null && defs.l != null) {
+			shelf.l = defs.l;
 		}
-		if (category.r == null && defs.r != null) {
-			category.r = defs.r;
+		if (shelf.r == null && defs.r != null) {
+			shelf.r = defs.r;
 		}
-		category.name = category.gp;
-		svgrect(shelfs, category.x, category.y, category.w, category.h);
-		svgtext(shelfs, category.x + category.w / 2, category.y + category.h / 2, category.name);
+		shelf.name = shelf.gp;
+		const g = svgg(shelfs);
+		svgrect(g, shelf.x, shelf.y, shelf.w, shelf.h, "shelf");
+		svgtext(g, shelf.x + shelf.w / 2, shelf.y + shelf.h / 2, shelf.name, "shelf-name");
+		svgrect(g, shelf.x - shelf.l, shelf.y, shelf.l, shelf.h, "shelf-border");
+		svgrect(g, shelf.x + shelf.w, shelf.y, shelf.r, shelf.h, "shelf-border");
 	}
 
 	svgg(map, "lines");
@@ -119,21 +122,21 @@ function findBestPathTo(item, current_min, pos) {
 }
 
 function findItemsPath() {
-	const store = STORES.LECLERC;
+	const store = STORES.CARREFOUR;
 	let currentPos = store.in;
 	let exitPos = store.out;
 
 	const remainings = shoppingList;
 	while (remainings.length > 0) {
 		const nearest_i = findMinInArray(remainings, findBestPathTo, currentPos);
-
+		remainings.splice(nearest_i, 1);
 	}
 
 	findBestPathTo(currentPos, exitPos);
 }
 
 function findBestPathold() {
-	const store = STORES.LECLERC;
+	const store = STORES.CARREFOUR;
 	let currentPos = store.in;
 	let exitPos = store.out;
 

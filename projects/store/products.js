@@ -23,6 +23,9 @@ const GP = {
 	"ALCOOL": "ALCOOL",
 	"EAU": "EAU",
 	"CHOCOLAT": "CHOCOLAT",
+	"JAMBON": "JAMBON",
+	"LARDONS": "LARDONS",
+	"CEREALES": "CEREALES",
 };
 
 const PRODUCTS = {
@@ -166,6 +169,43 @@ const STORES = {
 			"gp": GP.PATES,
 			"x": 24,
 			"y": 50
+		},]
+	},
+	"CARREFOUR": {
+		"defaults": {
+			w: 2,
+			h: 10,
+			l: 1,
+			r: 1
+		},
+		"dimensions": {
+			w: 100,
+			h: 100
+		},
+		"in": {
+			x: 100,
+			y: 100,
+			w: 5,
+			h: 1
+		},
+		"out": {
+			x: 0,
+			y: 100,
+			w: 90,
+			h: 1
+		},
+		"gps": [{
+			"gp": GP.LAITS,
+			"x": 50,
+			"y": 75
+		},{
+			"gp": GP.OEUFS,
+			"x": 50,
+			"y": 70
+		},{
+			"gp": GP.PATES,
+			"x": 24,
+			"y": 70
 		},]
 	},
 };
