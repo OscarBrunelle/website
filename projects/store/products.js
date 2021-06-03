@@ -173,10 +173,10 @@ const STORES = {
 	},
 	"CARREFOUR": {
 		"defaults": {
-			w: 2,
-			h: 10,
-			l: 1,
-			r: 1
+			w: 1,
+			h: 20,
+			l: 0,
+			r: 0
 		},
 		"dimensions": {
 			w: 100,
@@ -195,6 +195,28 @@ const STORES = {
 			h: 1
 		},
 		"gps": [{
+			"gp": GP.JAMBON,
+			"x": 90,
+			"y": 75,
+			"h": 5,
+			"r": 1,
+		},{
+			"gp": GP.LARDONS,
+			"x": 90,
+			"y": 80,
+			"h": 5,
+			"r": 1,
+		},{
+			"gp": GP.CREME,
+			"x": 86,
+			"y": 75,
+			"l": 1,
+		},{
+			"gp": GP.FROMAGES,
+			"x": 87,
+			"y": 75,
+			"r": 1,
+		},{
 			"gp": GP.LAITS,
 			"x": 50,
 			"y": 75

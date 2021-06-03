@@ -42,7 +42,8 @@ svg text {
 .shelf {
 	fill: grey;
 	opacity: 0.8;
-	stroke-width: 0;
+	stroke-width: 0.1;
+	stroke: black;
 }
 
 .shelf-border {
