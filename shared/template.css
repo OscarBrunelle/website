@@ -207,26 +207,3 @@ footer>span {
 	color: var(--dark-primary-text-color);
 	background-color: var(--dark-primary-background-color);
 }
-
-.template-svg text {
-	fill: var(--primary-text-color);
-}
-
-.theme-dark .template-svg text {
-	fill: var(--dark-primary-text-color);
-}
-
-.template-svg rect {
-	fill: var(--primary-background-color);
-	opacity: 0.8;
-	stroke: black;
-	stroke-width: 1;
-}
-
-.theme-dark .template-svg rect {
-	fill: var(--dark-primary-background-color);
-	opacity: 0.8;
-	stroke: black;
-	stroke-width: 1;
-	fill: var(--dark-primary-text-color);
-}
