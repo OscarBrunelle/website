@@ -119,7 +119,6 @@ function find_best_path_call(grid, start, target, queue, dones = []) {
 	dones.push(current);
 	if (!same(current, start) && !same(current, target)) {
 		current.type = GRID_CASE.VISITED;
-		svgrect(map, current.x, current.y, 1, 1, "visited");
 	}
 	if (same(current, target)) {
 		return retrieve_path(grid, start, [target]);
@@ -146,20 +145,20 @@ function find_best_path(grid, start, targets) {
 			const s = grid[start.x][start.y];
 			const t = grid[target.x][target.y];
 			let best_path = find_best_path_call(grid, s, t, [s]);
-			console.log(best_path);
 			if (best_path == null) {
-				best_path = {
+				return {
 					v: Number.MAX_VALUE,
 					path: []
 				};
+			} else {
+				return {
+					v: grid[target.x][target.y].f,
+					path: best_path
+				};
 			}
-			return {
-				v: best_path.cost,
-				best_path: best_path
-			};
 		});
 		if (min_path.r == null) return [];
-		path.push(min_path.r.best_path.path);
+		path.push(min_path.r.path);
 		targets.splice(min_path.i, 1);
 	}
 	return path;

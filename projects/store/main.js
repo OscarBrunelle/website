@@ -1,5 +1,6 @@
 "use strict"
 
+let map = document.getElementById("map");
 let shoppingList = [];
 
 document.getElementById("search-input").addEventListener("input", searchItem);
@@ -36,7 +37,6 @@ function searchItem(e) {
 function addItem(addedItem = bestSuggestion) {
 	if (addedItem != null && !shoppingList.includes(addedItem)) {
 		shoppingList.push(addedItem);
-		console.log(shoppingList);
 
 		let shoppingItem = document.createElement("div");
 		let itemName = document.createElement("span");
@@ -64,7 +64,6 @@ function addItem(addedItem = bestSuggestion) {
 
 function drawMap(store_key = "CARREFOUR") {
 	const store = STORES[store_key];
-	let map = document.getElementById("map");
 
 	const shelfs = svgg(map, "shelfs");
 	const defs = store.defaults;
@@ -114,9 +113,14 @@ function find_store_best_path() {
 	return find_best_path(grid, start, targets);
 }
 
+const path_rects = svgg(map, "path_rects");
+
 function show_store_best_path(path) {
+	path_rects.innerHTML = "";
 	for (const path_part of path) {
-		console.log(path_part);
+		for (const point of path_part) {
+			svgrect(path_rects, point.x, point.y, 1, 1, "visited");
+		}
 	}
 }
 
@@ -176,7 +180,6 @@ function findBestPathold() {
 
 function load() {
 	const store = STORES["CARREFOUR"];
-	let map = document.getElementById("map");
 	map.setAttributeNS(null, "viewBox", `0 0 ${store.dimensions.w} ${store.dimensions.h}`);
 
 	drawMap();
