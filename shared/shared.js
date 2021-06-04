@@ -253,11 +253,21 @@ function get_middle(pointA, pointB) {
  * @param {Array} rect {x: x, y: y, w: width, h: height}
  * @returns 
  */
-function rect_center(rect) {
-	return {
-		x: rect.x + rect.w / 2,
-		y: rect.y + rect.h / 2
+function rect_center(rect, round = false) {
+	let x = rect.x + rect.w / 2;
+	let y = rect.y + rect.h / 2;
+	if (round) {
+		x = parseInt(x);
+		y = parseInt(y);
 	}
+	return {
+		x: x,
+		y: y
+	}
+}
+
+function cons(n, min, max) {
+	return (n >= min && n <= max);
 }
 
 /**
@@ -912,6 +922,15 @@ function find_best_path_call(grid, start, target, previous_path = {
 }) {
 	return previous_path;
 }
+
+const GRID_CASE = {
+	EMPTY: 0,
+	OBSTACLE: 1,
+	START: 2,
+	TARGET: 3,
+	TARGET_FOUND: 4,
+	PATH: 5,
+};
 
 function find_best_path(grid, start, targets) {
 	let path = [];

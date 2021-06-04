@@ -65,7 +65,6 @@ function addItem(addedItem = bestSuggestion) {
 function drawMap(store_key = "CARREFOUR") {
 	const store = STORES[store_key];
 	let map = document.getElementById("map");
-	map.setAttributeNS(null, "viewBox", `0 0 ${store.dimensions.w} ${store.dimensions.h}`);
 
 	const shelfs = svgg(map, "shelfs");
 	const defs = store.defaults;
@@ -93,14 +92,29 @@ function drawMap(store_key = "CARREFOUR") {
 	svgg(map, "lines");
 }
 
+let base_grid;
+
 function find_store_best_path() {
 	const store = STORES["CARREFOUR"];
-	let grid = [];
-	const start = rect_center(store.in);
-	let targets = [];
+	let grid = base_grid;
 
+	const start = rect_center(store.in, true);
+	grid[start.x][start.y] = GRID_CASE.START;
+
+	let targets = [];
 	for (const item of shoppingList) {
 		console.log(item);
+		continue;
+		for (let l = item.l; l > 0; l--) {
+			for (let h = 0; h < item.h; h++) {
+				if (cons(x - l, 0, 100) && cons(item.y + h, 0, 100)) {
+					grid[x - l][item.y + h] = GRID_CASE.OBSTACLE;
+				}
+			}
+		}
+		const target = rect_center(item, true);
+		targets.push(target);
+		grid[target.x][target.y] = GRID_CASE.TARGET;
 	}
 
 	return [];
@@ -168,6 +182,19 @@ function findBestPathold() {
 }
 
 function load() {
+	const store = STORES["CARREFOUR"];
+	let map = document.getElementById("map");
+	map.setAttributeNS(null, "viewBox", `0 0 ${store.dimensions.w} ${store.dimensions.h}`);
+
+	base_grid = [];
+	for (let x = 0; x < store.dimensions.w; x++) {
+		let arr = [];
+		for (let y = 0; y < store.dimensions.h; y++) {
+			arr.push(GRID_CASE.EMPTY);
+		}
+		base_grid.push(arr);
+	}
+
 	drawMap();
 }
 
