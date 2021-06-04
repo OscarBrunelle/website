@@ -57,3 +57,7 @@ svg text {
 	font-size: 1px;
 	fill: var(--primary-text-color);
 }
+
+.visited {
+	fill: green;
+}

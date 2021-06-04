@@ -894,7 +894,7 @@ class CustomTable {
 	}
 }
 
-function find_min_in_array(items, func, args = null) {
+function find_min_in_array(items, func, args = []) {
 	let min_i = -1,
 		min_v = Number.MAX_VALUE,
 		min_r = null;
@@ -914,38 +914,4 @@ function find_min_in_array(items, func, args = null) {
 		v: min_v,
 		r: min_r
 	};
-}
-
-function find_best_path_call(grid, start, target, previous_path = {
-	path: [],
-	cost: 0
-}) {
-	return previous_path;
-}
-
-const GRID_CASE = {
-	EMPTY: 0,
-	OBSTACLE: 1,
-	START: 2,
-	TARGET: 3,
-	TARGET_FOUND: 4,
-	PATH: 5,
-};
-
-function find_best_path(grid, start, targets) {
-	let path = [];
-	let cost = 0;
-	while (targets.length > 0) {
-		const min_path = find_min_in_array(targets, function (target, min_v) {
-			const best_path = find_best_path_call(grid, start, target);
-			return {
-				v: best_path.cost,
-				best_path: best_path
-			};
-		});
-		path.push(min_path.r.path.path);
-		cost += min_path.r.path.cost;
-		targets.splice(min_path.i, 1);
-	}
-	return path;
 }
