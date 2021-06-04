@@ -110,16 +110,18 @@ function find_store_best_path() {
 
 	const grid = create_grid(store.dimensions.w, store.dimensions.h, start, targets, obstacles);
 
-	return find_best_path(grid, start, targets);
+	return find_best_path(grid, start, targets, true);
 }
 
 const path_rects = svgg(map, "path_rects");
 
 function show_store_best_path(path) {
 	path_rects.innerHTML = "";
+	let prev = path[0][0];
 	for (const path_part of path) {
 		for (const point of path_part) {
-			svgrect(path_rects, point.x, point.y, 1, 1, "visited");
+			svgline(path_rects, prev.x, prev.y, point.x, point.y, "visited");
+			prev = deep_copy(point);
 		}
 	}
 }

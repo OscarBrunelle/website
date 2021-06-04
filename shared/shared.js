@@ -915,3 +915,7 @@ function find_min_in_array(items, func, args = []) {
 		r: min_r
 	};
 }
+
+function deep_copy(obj) {
+	return JSON.parse(JSON.stringify(obj));
+}

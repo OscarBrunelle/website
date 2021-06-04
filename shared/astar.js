@@ -62,18 +62,21 @@ function create_grid(w, h, start, targets, obstacles) {
 	return grid;
 }
 
-function get_neighbours(grid, parent, end = null) {
+function get_neighbours(grid, parent, target = null) {
 	let neighbours = [];
 	let x = parent.x;
 	let y = parent.y;
+	if (target != null && parent.g == null) {
+		parent.g = get_distance(parent, target);
+	}
 	for (let i = -1; i < 2; i++) {
 		for (let j = -1; j < 2; j++) {
 			if (cons(x + i, 0, grid.length - 1) && cons(y + j, 0, grid[0].length - 1)) {
 				const point = grid[x + i][y + j];
-				if (end != null && !same(point, parent) && point.type != GRID_CASE.OBSTACLE.type) {
+				if (target != null && !same(point, parent) && point.type != GRID_CASE.OBSTACLE.type) {
 					const previous_g = (point.g != null) ? point.g : Number.MAX_VALUE;
 					point.g = Math.min(parent.g + get_distance(point, parent), previous_g);
-					point.h = get_distance(point, end);
+					point.h = get_distance(point, target);
 					point.f = point.g + point.h;
 				}
 				neighbours.push(point);
@@ -111,7 +114,7 @@ function retrieve_path(grid, start, path) {
 	return retrieve_path(grid, start, path);
 }
 
-function find_best_path_call(grid, start, target, queue, dones = []) {
+function find_best_path_call(grid, start, target, queue = [start], dones = []) {
 	if (queue.length < 1) {
 		return null;
 	}
@@ -138,13 +141,16 @@ function find_best_path_call(grid, start, target, queue, dones = []) {
 	return find_best_path_call(grid, start, target, queue, dones);
 }
 
-function find_best_path(grid, start, targets) {
+function find_best_path(grid, start, targets, loop = false) {
+	const base_grid = deep_copy(grid);
 	let path = [];
+	let last_target;
 	while (targets.length > 0) {
 		const min_path = find_min_in_array(targets, function (target, min_v) {
+			grid = deep_copy(base_grid);
 			const s = grid[start.x][start.y];
 			const t = grid[target.x][target.y];
-			let best_path = find_best_path_call(grid, s, t, [s]);
+			let best_path = find_best_path_call(grid, s, t);
 			if (best_path == null) {
 				return {
 					v: Number.MAX_VALUE,
@@ -159,7 +165,16 @@ function find_best_path(grid, start, targets) {
 		});
 		if (min_path.r == null) return [];
 		path.push(min_path.r.path);
+		last_target = targets[min_path.i];
 		targets.splice(min_path.i, 1);
+	}
+	if (loop) {
+		grid = deep_copy(base_grid);
+		const s = grid[start.x][start.y];
+		const r_path = find_best_path_call(grid, last_target, s);
+		if (r_path != null) {
+			path.push(r_path);
+		}
 	}
 	return path;
 }

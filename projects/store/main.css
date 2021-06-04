@@ -59,5 +59,6 @@ svg text {
 }
 
 .visited {
-	fill: green;
+	stroke: green;
+	stroke-width: 0.1;
 }
