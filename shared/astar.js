@@ -49,12 +49,12 @@ function create_grid(w, h, start, targets, obstacles) {
 		}
 	}
 
-	for (const o of obstacles) {
-		if (cons(c.x, 0, w) && cons(c.y, 0, h)) {
+	for (const c of obstacles) {
+		if (cons(c.x, 0, w - 1) && cons(c.y, 0, h - 1)) {
 			grid[c.x][c.y] = {
 				type: GRID_CASE.OBSTACLE,
-				x: x,
-				y: y
+				x: c.x,
+				y: c.y
 			};
 		}
 	}
@@ -62,24 +62,32 @@ function create_grid(w, h, start, targets, obstacles) {
 	return grid;
 }
 
+function gd(point1, point2) {
+	return round_to_nearest(get_distance(point1, point2), 0.1);
+}
+
 function get_neighbours(grid, parent, target = null) {
 	let neighbours = [];
 	let x = parent.x;
 	let y = parent.y;
 	if (target != null && parent.g == null) {
-		parent.g = get_distance(parent, target);
+		parent.g = gd(parent, target);
 	}
 	for (let i = -1; i < 2; i++) {
 		for (let j = -1; j < 2; j++) {
 			if (cons(x + i, 0, grid.length - 1) && cons(y + j, 0, grid[0].length - 1)) {
 				const point = grid[x + i][y + j];
-				if (target != null && !same(point, parent) && point.type != GRID_CASE.OBSTACLE.type) {
+				if (target == null) {
+					neighbours.push(point);
+				} else if (!same(point, parent) && point.type != GRID_CASE.OBSTACLE.type) {
 					const previous_g = (point.g != null) ? point.g : Number.MAX_VALUE;
-					point.g = Math.min(parent.g + get_distance(point, parent), previous_g);
-					point.h = get_distance(point, target);
-					point.f = point.g + point.h;
+					point.g = Math.min(parent.g + gd(point, parent), previous_g);
+					point.h = gd(point, target);
+					if (point.f == null || (point.f != null && point.f > (point.g + point.h))) {
+						point.f = point.g + point.h;
+						neighbours.push(point);
+					}
 				}
-				neighbours.push(point);
 			}
 		}
 	}
@@ -114,21 +122,37 @@ function retrieve_path(grid, start, path) {
 	return retrieve_path(grid, start, path);
 }
 
+let call_stack = 0;
+
 function find_best_path_call(grid, start, target, queue = [start], dones = []) {
 	if (queue.length < 1) {
 		return null;
+	} else if (queue.length == 1 && queue[0] == start) {
+		call_stack = 0;
+		path_rects.innerHTML = "";
+		svgrect(path_rects, start.x, start.y, 1, 1, "target");
+		svgrect(path_rects, target.x, target.y, 1, 1, "target");
 	}
+	if (call_stack++ > grid.length * grid[0].length) {
+		console.error("Error: Call stack exceeded");
+		return null;
+	}
+	
 	let current = queue.pop();
 	dones.push(current);
 	if (!same(current, start) && !same(current, target)) {
 		current.type = GRID_CASE.VISITED;
+		svgrect(path_rects, current.x, current.y, 1, 1, "visited");
+		svgtext(path_rects, current.x+0.4, current.y+0.4, to_fixed_length(current.f, 3), "visited-text");
 	}
 	if (same(current, target)) {
 		return retrieve_path(grid, start, [target]);
 	}
 	const neighbours = get_neighbours(grid, current, target);
 	for (const neighbour of neighbours) {
-		if (arr_index_of_p(queue, neighbour) < 0 && arr_index_of_p(dones, neighbour) < 0) queue.push(neighbour);
+		if (arr_index_of_p(queue, neighbour) < 0) {
+			queue.push(neighbour);
+		}
 	}
 	queue.sort((a, b) => {
 		if (a.f < b.f) {
@@ -144,11 +168,11 @@ function find_best_path_call(grid, start, target, queue = [start], dones = []) {
 function find_best_path(grid, start, targets, loop = false) {
 	const base_grid = deep_copy(grid);
 	let path = [];
-	let last_target;
+	let starting_point = start;
 	while (targets.length > 0) {
 		const min_path = find_min_in_array(targets, function (target, min_v) {
 			grid = deep_copy(base_grid);
-			const s = grid[start.x][start.y];
+			const s = grid[starting_point.x][starting_point.y];
 			const t = grid[target.x][target.y];
 			let best_path = find_best_path_call(grid, s, t);
 			if (best_path == null) {
@@ -165,13 +189,13 @@ function find_best_path(grid, start, targets, loop = false) {
 		});
 		if (min_path.r == null) return [];
 		path.push(min_path.r.path);
-		last_target = targets[min_path.i];
+		starting_point = targets[min_path.i];
 		targets.splice(min_path.i, 1);
 	}
 	if (loop) {
 		grid = deep_copy(base_grid);
 		const s = grid[start.x][start.y];
-		const r_path = find_best_path_call(grid, last_target, s);
+		const r_path = find_best_path_call(grid, starting_point, s);
 		if (r_path != null) {
 			path.push(r_path);
 		}

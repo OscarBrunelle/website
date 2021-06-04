@@ -98,13 +98,28 @@ function find_store_best_path() {
 
 	let targets = [];
 	let obstacles = [];
-	for (const item of shoppingList) {
-		for (let l = item.l; l > 0; l--) {
-			for (let h = 0; h < item.h; h++) {
-				obstacles.push(x - l, item.y + h);
-			}
+	for (const shelf of store.gps) {
+		if (shelf.w == null && defs.w != null) {
+			shelf.w = defs.w;
 		}
-		const target = rect_center(item.category, true);
+		if (shelf.h == null && defs.h != null) {
+			shelf.h = defs.h;
+		}
+		if (shelf.l == null && defs.l != null) {
+			shelf.l = defs.l;
+		}
+		if (shelf.r == null && defs.r != null) {
+			shelf.r = defs.r;
+		}
+		// for (let l = shelf.l; l > 0; l--) {
+		// 	for (let h = 0; h < shelf.h; h++) {
+		// 		obstacles.push({
+		// 			x: shelf.x - l,
+		// 			y: shelf.y + h
+		// 		});
+		// 	}
+		// }
+		const target = rect_center(shelf, true);
 		targets.push(target);
 	}
 
@@ -117,12 +132,14 @@ const path_rects = svgg(map, "path_rects");
 
 function show_store_best_path(path) {
 	path_rects.innerHTML = "";
+	if (path.length <= 0) return;
 	let prev = path[0][0];
 	for (const path_part of path) {
 		for (const point of path_part) {
-			svgline(path_rects, prev.x, prev.y, point.x, point.y, "visited");
+			svgline(path_rects, prev.x, prev.y, point.x, point.y, "path");
 			prev = deep_copy(point);
 		}
+		svgrect(path_rects, prev.x, prev.y, 1, 1, "target");
 	}
 }
 

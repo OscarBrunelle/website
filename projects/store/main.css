@@ -41,6 +41,10 @@ svg text {
 	height: 50%;
 }
 
+.shelfs {
+	opacity: 0.5;
+}
+
 .shelf {
 	fill: grey;
 	opacity: 0.8;
@@ -75,4 +79,9 @@ svg text {
 	fill: red;
 	stroke: black;
 	stroke-width: 0.1;
+}
+
+.path {
+    stroke: blue;
+    stroke-width: 0.1;
 }
