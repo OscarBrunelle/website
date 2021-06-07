@@ -137,13 +137,11 @@ function find_best_path_call(grid, start, target, queue = [start], dones = []) {
 		console.error("Error: Call stack exceeded");
 		return null;
 	}
-	
+
 	let current = queue.pop();
 	dones.push(current);
 	if (!same(current, start) && !same(current, target)) {
 		current.type = GRID_CASE.VISITED;
-		svgrect(path_rects, current.x, current.y, 1, 1, "visited");
-		svgtext(path_rects, current.x+0.4, current.y+0.4, to_fixed_length(current.f, 3), "visited-text");
 	}
 	if (same(current, target)) {
 		return retrieve_path(grid, start, [target]);
