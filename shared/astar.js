@@ -79,18 +79,14 @@ function get_neighbours(grid, parent, target = null) {
 				if (point.type == GRID_CASE.OBSTACLE) continue;
 				if (target == null) {
 					neighbours.push(point);
-				} else if (!same(point, parent)) {
+				} else if (!same(point, parent)) {// && point.type != GRID_CASE.VISITED) {
 					if (point.g == null || point.g > (parent.g + gd(point, parent))) {
-						// point.g = parent.g + gd(point, parent);
-						// point.h = gd(point, target);
+						point.g = parent.g + gd(point, parent);
+						point.h = gd(point, target);
 						// point.f = point.g + point.h;
 						point.parent = parent;
 					}
-					// neighbours.push(point);
 
-					const previous_g = (point.g != null) ? point.g : Number.MAX_VALUE;
-					point.g = Math.min(parent.g + gd(point, parent), previous_g);
-					point.h = gd(point, target);
 					if (point.f == null || (point.f != null && point.f > (point.g + point.h))) {
 						point.f = point.g + point.h;
 						neighbours.push(point);
@@ -180,6 +176,7 @@ function find_best_path_call(grid, start, target, queue = [start], dones = []) {
 }
 
 function find_best_path(grid, start, targets, loop = false) {
+	const start_time = new Date();
 	const base_grid = deep_copy(grid);
 	let path = [];
 	let starting_point = start;
@@ -214,5 +211,7 @@ function find_best_path(grid, start, targets, loop = false) {
 			path.push(r_path);
 		}
 	}
+	const end_time = new Date();
+	console.log("Finished in " + (end_time - start_time));
 	return path;
 }
