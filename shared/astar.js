@@ -79,16 +79,12 @@ function get_neighbours(grid, parent, target = null) {
 				if (point.type == GRID_CASE.OBSTACLE) continue;
 				if (target == null) {
 					neighbours.push(point);
-				} else if (!same(point, parent)) {// && point.type != GRID_CASE.VISITED) {
+				} else if (!same(point, parent) && point.type != GRID_CASE.VISITED) {
 					if (point.g == null || point.g > (parent.g + gd(point, parent))) {
 						point.g = parent.g + gd(point, parent);
 						point.h = gd(point, target);
-						// point.f = point.g + point.h;
-						point.parent = parent;
-					}
-
-					if (point.f == null || (point.f != null && point.f > (point.g + point.h))) {
 						point.f = point.g + point.h;
+						point.parent = parent;
 						neighbours.push(point);
 					}
 				}
@@ -107,28 +103,6 @@ function retrieve_path(current_node, path = []) {
 	path.push(current_node);
 	if (current_node.parent == null) return path;
 	return retrieve_path(current_node.parent, path);
-
-	let current = path[0];
-	if (same(current, start)) {
-		path.unshift(current);
-		return path;
-	}
-
-	let neighbours = get_neighbours(grid, current);
-	let min_f, min_neighbour;
-	// console.info("new neighbours");
-	for (const neighbour of neighbours) {
-		if (arr_index_of_p(path, neighbour) < 0 && (neighbour.f != null && (min_f == null || neighbour.f < min_f))) {
-			// if (min_f == null || neighbour.f < min_f) console.log(neighbour.f);
-			min_f = neighbour.f;
-			min_neighbour = neighbour;
-		}
-	}
-	if (min_f == null || min_neighbour == null) return [];
-	// console.log(min_neighbour);
-
-	path.unshift(min_neighbour);
-	return retrieve_path(grid, start, path);
 }
 
 let call_stack = 0;
