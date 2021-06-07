@@ -80,6 +80,14 @@ function get_neighbours(grid, parent, target = null) {
 				if (target == null) {
 					neighbours.push(point);
 				} else if (!same(point, parent)) {
+					if (point.g == null || point.g > (parent.g + gd(point, parent))) {
+						// point.g = parent.g + gd(point, parent);
+						// point.h = gd(point, target);
+						// point.f = point.g + point.h;
+						point.parent = parent;
+					}
+					// neighbours.push(point);
+
 					const previous_g = (point.g != null) ? point.g : Number.MAX_VALUE;
 					point.g = Math.min(parent.g + gd(point, parent), previous_g);
 					point.h = gd(point, target);
@@ -98,8 +106,11 @@ function same(pos1, pos2) {
 	return (pos1.x == pos2.x && pos1.y == pos2.y);
 }
 
-function retrieve_path(grid, start, path) {
-	if (path.length < 1) return [];
+function retrieve_path(current_node, path = []) {
+	if (current_node == null) return null;
+	path.push(current_node);
+	if (current_node.parent == null) return path;
+	return retrieve_path(current_node.parent, path);
 
 	let current = path[0];
 	if (same(current, start)) {
@@ -109,14 +120,16 @@ function retrieve_path(grid, start, path) {
 
 	let neighbours = get_neighbours(grid, current);
 	let min_f, min_neighbour;
+	// console.info("new neighbours");
 	for (const neighbour of neighbours) {
 		if (arr_index_of_p(path, neighbour) < 0 && (neighbour.f != null && (min_f == null || neighbour.f < min_f))) {
-			if (neighbour.f < min_f) console.log(neighbour.f);
+			// if (min_f == null || neighbour.f < min_f) console.log(neighbour.f);
 			min_f = neighbour.f;
 			min_neighbour = neighbour;
 		}
 	}
 	if (min_f == null || min_neighbour == null) return [];
+	// console.log(min_neighbour);
 
 	path.unshift(min_neighbour);
 	return retrieve_path(grid, start, path);
@@ -139,20 +152,24 @@ function find_best_path_call(grid, start, target, queue = [start], dones = []) {
 
 	let current = queue.pop();
 	dones.push(current);
+	if (same(current, target)) {
+		// console.info("retrieving path");
+		return retrieve_path(target);
+	}
 	if (!same(current, start) && !same(current, target)) {
 		current.type = GRID_CASE.VISITED;
 	}
-	if (same(current, target)) {
-		return retrieve_path(grid, start, [target]);
-	}
 	const neighbours = get_neighbours(grid, current, target);
 	for (const neighbour of neighbours) {
-		if (arr_index_of_p(queue, neighbour) < 0) {
+		const n_i = arr_index_of_p(queue, neighbour);
+		if (n_i < 0) {
 			queue.push(neighbour);
+		} else {
+			queue[n_i] = neighbour;
 		}
 	}
 	queue.sort((a, b) => {
-		if (a.f < b.f) {
+		if (a.f < b.f || (a.f == b.f && a.h < b.h)) {
 			return 1;
 		} else if (a.f > b.f) {
 			return -1;

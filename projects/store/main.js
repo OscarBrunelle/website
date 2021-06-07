@@ -131,8 +131,8 @@ const path_rects = svgg(map, "path_rects");
 function show_store_best_path(path) {
 	path_rects.innerHTML = "";
 	if (path.length <= 0) return;
-	let prev = path[0][0];
 	for (const path_part of path) {
+		let prev = path_part[0];
 		for (const point of path_part) {
 			svgline(path_rects, prev.x + 0.5, prev.y + 0.5, point.x + 0.5, point.y + 0.5, "path");
 			prev = deep_copy(point);
