@@ -57,8 +57,6 @@ function addItem(addedItem = bestSuggestion) {
 		document.getElementById("search-input").value = "";
 		let suggestionsContainer = document.getElementById("search_suggestions");
 		suggestionsContainer.innerHTML = "";
-
-		find_and_show_best_path();
 	}
 }
 
@@ -136,7 +134,7 @@ function show_store_best_path(path) {
 	let prev = path[0][0];
 	for (const path_part of path) {
 		for (const point of path_part) {
-			svgline(path_rects, prev.x, prev.y, point.x, point.y, "path");
+			svgline(path_rects, prev.x + 0.5, prev.y + 0.5, point.x + 0.5, point.y + 0.5, "path");
 			prev = deep_copy(point);
 		}
 		svgrect(path_rects, prev.x, prev.y, 1, 1, "target");

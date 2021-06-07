@@ -62,7 +62,7 @@ function create_grid(w, h, start, targets, obstacles) {
 }
 
 function gd(point1, point2) {
-	return round_to_nearest(get_distance(point1, point2), 0.1);
+	return parseInt(get_distance(point1, point2) * 10);
 }
 
 function get_neighbours(grid, parent, target = null) {
