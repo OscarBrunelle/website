@@ -34,8 +34,7 @@ function create_grid(w, h, start, targets, obstacles) {
 	grid[start.x][start.y] = {
 		type: GRID_CASE.START,
 		x: start.x,
-		y: start.y,
-		g: 0
+		y: start.y
 	};
 
 	for (const c of targets) {
@@ -112,6 +111,7 @@ function retrieve_path(grid, start, path) {
 	let min_f, min_neighbour;
 	for (const neighbour of neighbours) {
 		if (arr_index_of_p(path, neighbour) < 0 && (neighbour.f != null && (min_f == null || neighbour.f < min_f))) {
+			if (neighbour.f < min_f) console.log(neighbour.f);
 			min_f = neighbour.f;
 			min_neighbour = neighbour;
 		}
@@ -127,11 +127,10 @@ let call_stack = 0;
 function find_best_path_call(grid, start, target, queue = [start], dones = []) {
 	if (queue.length < 1) {
 		return null;
-	} else if (queue.length == 1 && queue[0] == start) {
+	} else if (dones.length == 0) {
 		call_stack = 0;
 		path_rects.innerHTML = "";
-		svgrect(path_rects, start.x, start.y, 1, 1, "target");
-		svgrect(path_rects, target.x, target.y, 1, 1, "target");
+		grid[start.x][start.y].g = 0;
 	}
 	if (call_stack++ > grid.length * grid[0].length) {
 		console.error("Error: Call stack exceeded");
