@@ -86,9 +86,21 @@ svg text {
 }
 
 .target {
-	fill: red;
+	fill: orange;
 	stroke: black;
 	stroke-width: 0.1;
+}
+
+.target-start {
+	fill: blue;
+}
+
+.target-path {
+	fill: orange;
+}
+
+.target-end {
+	fill: green;
 }
 
 .path {

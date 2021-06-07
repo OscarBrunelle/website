@@ -17,7 +17,7 @@ function arr_index_of_p(arr, p) {
 	return -1;
 }
 
-function create_grid(w, h, start, targets, obstacles) {
+function create_grid(w, h, start, targets, obstacles, end_point = null) {
 	let grid = [];
 	for (let x = 0; x < w; x++) {
 		let arr = [];
@@ -47,6 +47,9 @@ function create_grid(w, h, start, targets, obstacles) {
 		y: start.y
 	};
 
+	if (end_point != null) {
+		targets.push(end_point);
+	}
 	for (const c of targets) {
 		if (cons(c.x, 0, w - 1) && cons(c.y, 0, h - 1)) {
 			grid[c.x][c.y] = {
@@ -169,7 +172,7 @@ function find_best_path_loop(grid, start, target) {
 	return params.result;
 }
 
-function find_best_path(grid, start, targets, loop = false) {
+function find_best_path(grid, start, targets, end_point = null) {
 	const start_time = new Date();
 	let path = [];
 	let starting_point = start;
@@ -196,8 +199,8 @@ function find_best_path(grid, start, targets, loop = false) {
 		starting_point = targets[min_path.i];
 		targets.splice(min_path.i, 1);
 	}
-	if (loop) {
-		const r_path = find_best_path_loop(grid, starting_point, start);
+	if (end_point != null) {
+		const r_path = find_best_path_loop(grid, starting_point, end_point);
 		if (r_path != null) {
 			path.push(r_path);
 		}

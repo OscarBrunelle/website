@@ -93,6 +93,7 @@ function find_store_best_path() {
 	const store = STORES["CARREFOUR"];
 
 	const start = rect_center(store.in, true);
+	const end = rect_center(store.out, true);
 
 	let targets = [];
 	let obstacles = [];
@@ -131,7 +132,7 @@ function find_store_best_path() {
 
 	const grid = create_grid(store.dimensions.w, store.dimensions.h, start, targets, obstacles);
 
-	return find_best_path(grid, start, targets, true);
+	return find_best_path(grid, start, targets, end);
 }
 
 const path_rects = svgg(map, "path_rects");
@@ -145,8 +146,14 @@ function show_store_best_path(path) {
 			svgline(path_rects, prev.x + 0.5, prev.y + 0.5, point.x + 0.5, point.y + 0.5, "path");
 			prev = deep_copy(point);
 		}
-		svgrect(path_rects, prev.x, prev.y, 1, 1, "target");
+		svgrect(path_rects, prev.x, prev.y, 1, 1, "target target-path");
 	}
+
+	const store = STORES["CARREFOUR"];
+	const start = rect_center(store.in, true);
+	const end = rect_center(store.out, true);
+	svgrect(path_rects, start.x, start.y, 1, 1, "target target-start");
+	svgrect(path_rects, end.x, end.y, 1, 1, "target target-end");
 }
 
 function find_and_show_best_path() {
