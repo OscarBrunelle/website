@@ -61,8 +61,13 @@ function create_grid(w, h, start, targets, obstacles) {
 	return grid;
 }
 
-function gd(point1, point2) {
-	return parseInt(get_distance(point1, point2) * 10);
+function gd(p1, p2) {
+	let d = 0;
+	const m = Math.min(Math.abs(p1.x - p2.x), Math.abs(p1.y - p2.y));
+	d += m * 1.4;
+	d += (Math.abs(p1.x - p2.x) - m);
+	d += (Math.abs(p1.y - p2.y) - m);
+	return Math.round(d * 10);
 }
 
 function get_neighbours(grid, parent, target = null) {
@@ -153,13 +158,14 @@ function find_best_path(grid, start, targets, loop = false) {
 	const start_time = new Date();
 	const base_grid = deep_copy(grid);
 	let path = [];
+	let done_targets = []
 	let starting_point = start;
 	while (targets.length > 0) {
 		const min_path = find_min_in_array(targets, function (target, min_v) {
 			grid = deep_copy(base_grid);
 			const s = grid[starting_point.x][starting_point.y];
 			const t = grid[target.x][target.y];
-			let best_path = find_best_path_call(grid, s, t);
+			let best_path = find_best_path_call(grid, s, t, undefined, undefined, done_targets);
 			if (best_path == null) {
 				return {
 					v: Number.MAX_VALUE,
@@ -176,11 +182,12 @@ function find_best_path(grid, start, targets, loop = false) {
 		path.push(min_path.r.path);
 		starting_point = targets[min_path.i];
 		targets.splice(min_path.i, 1);
+		done_targets.push(starting_point);
 	}
 	if (loop) {
 		grid = deep_copy(base_grid);
 		const s = grid[start.x][start.y];
-		const r_path = find_best_path_call(grid, starting_point, s);
+		const r_path = find_best_path_call(grid, starting_point, s, undefined, undefined, targets);
 		if (r_path != null) {
 			path.push(r_path);
 		}
