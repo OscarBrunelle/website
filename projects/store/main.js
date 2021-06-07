@@ -111,14 +111,14 @@ function find_store_best_path() {
 		if (shelf.r == null && defs.r != null) {
 			shelf.r = defs.r;
 		}
-		// for (let l = shelf.l; l > 0; l--) {
-		// 	for (let h = 0; h < shelf.h; h++) {
-		// 		obstacles.push({
-		// 			x: shelf.x - l,
-		// 			y: shelf.y + h
-		// 		});
-		// 	}
-		// }
+		for (let l = shelf.l; l > 0; l--) {
+			for (let h = 0; h < shelf.h; h++) {
+				obstacles.push({
+					x: shelf.x - l,
+					y: shelf.y + h
+				});
+			}
+		}
 		const target = rect_center(shelf, true);
 		targets.push(target);
 	}

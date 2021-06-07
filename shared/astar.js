@@ -77,9 +77,10 @@ function get_neighbours(grid, parent, target = null) {
 		for (let j = -1; j < 2; j++) {
 			if (cons(x + i, 0, grid.length - 1) && cons(y + j, 0, grid[0].length - 1)) {
 				const point = grid[x + i][y + j];
+				if (point.type == GRID_CASE.OBSTACLE) continue;
 				if (target == null) {
 					neighbours.push(point);
-				} else if (!same(point, parent) && point.type != GRID_CASE.OBSTACLE.type) {
+				} else if (!same(point, parent)) {
 					const previous_g = (point.g != null) ? point.g : Number.MAX_VALUE;
 					point.g = Math.min(parent.g + gd(point, parent), previous_g);
 					point.h = gd(point, target);
@@ -99,25 +100,24 @@ function same(pos1, pos2) {
 }
 
 function retrieve_path(grid, start, path) {
-	if (path.length < 1) {
-		return [];
-	}
+	if (path.length < 1) return [];
+
 	let current = path[0];
+	if (same(current, start)) {
+		path.unshift(current);
+		return path;
+	}
+
 	let neighbours = get_neighbours(grid, current);
 	let min_f, min_neighbour;
 	for (const neighbour of neighbours) {
-		if (same(neighbour, start)) {
-			path.unshift(neighbour);
-			return path;
-		}
-		if (arr_index_of_p(path, neighbour) < 0 && (min_f == null || (neighbour.f != null && neighbour.f < min_f))) {
+		if (arr_index_of_p(path, neighbour) < 0 && (neighbour.f != null && (min_f == null || neighbour.f < min_f))) {
 			min_f = neighbour.f;
 			min_neighbour = neighbour;
 		}
 	}
-	if (min_f == null || min_neighbour == null) {
-		return [];
-	}
+	if (min_f == null || min_neighbour == null) return [];
+
 	path.unshift(min_neighbour);
 	return retrieve_path(grid, start, path);
 }
