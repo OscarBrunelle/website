@@ -228,6 +228,21 @@ const STORES = {
 			"gp": GP.PATES,
 			"x": 24,
 			"y": 70
+		},{
+			"gp": GP.CONSERVES_LEGUMES,
+			"x": 24,
+			"y": 70
+		},{
+			"gp": GP.CEREALES,
+			"x": 24,
+			"y": 70
+		},{
+			"gp": GP.ALCOOL,
+			"x": 24,
+			"y": 30,
+			"w": 2,
+			"l": 1,
+			"r": 1
 		},]
 	},
 };
