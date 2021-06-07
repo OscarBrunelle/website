@@ -117,14 +117,14 @@ function find_store_best_path() {
 				});
 			}
 		}
-		// for (let r = shelf.r; r > 0; r--) {
-		// 	for (let h = 0; h < shelf.h; h++) {
-		// 		obstacles.push({
-		// 			x: shelf.x - r,
-		// 			y: shelf.y + h
-		// 		});
-		// 	}
-		// }
+		for (let r = shelf.r; r > 0; r--) {
+			for (let h = 0; h < shelf.h; h++) {
+				obstacles.push({
+					x: shelf.x + r,
+					y: shelf.y + h
+				});
+			}
+		}
 		const target = rect_center(shelf, true);
 		targets.push(target);
 	}
