@@ -5,6 +5,10 @@ let shoppingList = [];
 
 document.getElementById("search-input").addEventListener("input", searchItem);
 document.getElementById("search-input").addEventListener("focus", searchItem);
+document.getElementById("search-input").addEventListener("focusout", function(e) {
+	let suggestionsContainer = document.getElementById("search_suggestions");
+	suggestionsContainer.style.visibility = "none";
+});
 document.getElementById("search-input").addEventListener("keypress", function (e) {
 	if (e.key == "Enter") {
 		addItem();
@@ -21,13 +25,14 @@ function searchItem(e) {
 	suggestionsContainer.innerHTML = "";
 	bestSuggestion = null;
 
-	for (const item of items) {
-		if (item.name.includes(search) && !shoppingList.includes(item)) {
+	for (const item_key in PRODUCTS) {
+		const item = PRODUCTS[item_key];
+		if (item["name-fr"].includes(search) && !shoppingList.includes(item)) {
 			if (bestSuggestion == null) {
 				bestSuggestion = item;
 			}
 			let suggestion = document.createElement("span");
-			suggestion.innerHTML = item.name;
+			suggestion.innerHTML = item["name-fr"];
 			suggestion.addEventListener("click", function (e) {
 				addItem(item);
 			});
@@ -42,7 +47,7 @@ function addItem(addedItem = bestSuggestion) {
 
 		let shoppingItem = document.createElement("div");
 		let itemName = document.createElement("span");
-		itemName.innerHTML = addedItem.name;
+		itemName.innerHTML = addedItem["name-fr"];
 		shoppingItem.appendChild(itemName);
 		let itemDel = document.createElement("button");
 		itemDel.innerHTML = "del";

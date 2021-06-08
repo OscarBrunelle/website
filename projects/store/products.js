@@ -56,7 +56,13 @@ const PRODUCTS = {
 		"name-fr": "Lardons",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.OTHER,
+		"gp": GP.CHARCUTERIE,
+	},
+	"SAUCISSE": {
+		"name-fr": "Lardons",
+		"unit": "g",
+		"price": 777,
+		"gp": GP.CHARCUTERIE,
 	},
 	"CREME": {
 		"name-fr": "Crème",
