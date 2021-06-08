@@ -1,31 +1,42 @@
 "use strict"
 
 const GP = {
-	"OTHER": "OTHER",
-	"GLACES": "GLACES",
-	"YAHOURTS": "YAHOURTS",
-	"LAITS": "LAITS",
-	"CREME": "CREME",
+	"ALCOOL": "ALCOOL",
 	"BEURRE": "BEURRE",
-	"OEUFS": "OEUFS",
+	"BISCOTTES": "BISCOTTES",
+	"CEREALES": "CEREALES",
+	"CHARCUTERIE": "CHARCUTERIE",
+	"CHIPS": "CHIPS",
+	"CHOCOLAT": "CHOCOLAT",
+	"CHOCOLAT_POUDRE": "CHOCOLAT_POUDRE",
+	"CHOCOLAT_TABLETTE": "CHOCOLAT_TABLETTE",
+	"CONFISERIE": "CONFISERIE",
+	"CONFITURES": "CONFITURES",
+	"CONSERVES_LEGUMES": "CONSERVES_LEGUMES",
+	"CREME": "CREME",
+	"EAU": "EAU",
 	"FARINE": "FARINE",
+	"FROMAGES": "FROMAGES",
+	"FRUITS": "FRUITS",
+	"GATEAUX_SUCRES": "GATEAUX_SUCRES",
+	"GLACES": "GLACES",
+	"HYGIENE": "HYGIENE",
+	"JAMBON": "JAMBON",
+	"LAITS": "LAITS",
+	"LARDONS": "LARDONS",
+	"LEGUMES": "LEGUMES",
+	"OEUFS": "OEUFS",
+	"OTHER": "OTHER",
+	"PAIN_MIE": "PAIN_MIE",
+	"PATES": "PATES",
+	"PATES_TARTES": "PATES_TARTES",
+	"RIZ": "RIZ",
+	"SAUCES": "SAUCES",
+	"SAUCISSONS": "SAUCISSONS",
 	"SUCRE": "SUCRE",
 	"TARTINER": "TARTINER",
-	"CONFITURES": "CONFITURES",
-	"SAUCES": "SAUCES",
-	"PATES": "PATES",
-	"CHIPS": "CHIPS",
-	"HYGIENE": "HYGIENE",
-	"FROMAGES": "FROMAGES",
-	"LEGUMES": "LEGUMES",
-	"FRUITS": "FRUITS",
-	"CONSERVES_LEGUMES": "CONSERVES_LEGUMES",
-	"ALCOOL": "ALCOOL",
-	"EAU": "EAU",
-	"CHOCOLAT": "CHOCOLAT",
-	"JAMBON": "JAMBON",
-	"LARDONS": "LARDONS",
-	"CEREALES": "CEREALES",
+	"VIENNOISERIE": "VIENNOISERIE",
+	"YAOURTS": "YAOURTS",
 };
 
 const PRODUCTS = {
@@ -34,7 +45,7 @@ const PRODUCTS = {
 		"name-fr": "Spaghettis",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.PATES,
+		"gp": GP.PATES_SECHES,
 	},
 	"BOEUF_HACHE": {
 		"name-fr": "Boeuf haché",
@@ -133,43 +144,111 @@ const PRODUCTS = {
 	/* LIQUID END */
 };
 
+const lt = 10;
+const lm = 40;
+const ct = 10;
+const cm = 40;
 const STORES = {
 	"LECLERC": {
 		"defaults": {
-			w: 2,
-			h: 10,
-			l: 1,
-			r: 1
+			w: 1,
+			h: 20,
+			l: 0,
+			r: 0
 		},
 		"dimensions": {
 			w: 100,
 			h: 100
 		},
 		"in": {
-			x: 100,
-			y: 100,
+			x: 95,
+			y: 99,
 			w: 5,
 			h: 1
 		},
 		"out": {
 			x: 0,
-			y: 100,
+			y: 99,
 			w: 90,
 			h: 1
 		},
 		"gps": [{
-			"gp": GP.LAITS,
+			"gp": GP.CHARCUTERIE,
+			"x": 14,
+			"y": lt,
+			"w": 2,
+			"h": 20,
+			"l": 1,
+			"r": 1,
+		}, {
+			"gp": GP.FROMAGES,
 			"x": 20,
-			"y": 70
-		},{
+			"y": lt,
+			"w": 2,
+			"h": 20,
+			"l": 1,
+			"r": 1,
+		}, {
+			"gp": GP.SAUCES,
+			"x": 23,
+			"y": lt,
+			"w": 2,
+			"h": 20,
+			"l": 1,
+			"r": 1,
+		}, {
+			"gp": GP.PATES,
+			"x": 26,
+			"y": lt,
+			"h": 20,
+			"l": 1,
+		}, {
+			"gp": GP.RIZ,
+			"x": 27,
+			"y": lt,
+			"h": 20,
+			"r": 1,
+		}, {
+			"gp": GP.CHIPS,
+			"x": 29,
+			"y": lt,
+			"w": 2,
+			"h": 20,
+			"l": 1,
+			"r": 1,
+		}, /* MID */ {
+			"gp": GP.YAOURTS,
+			"x": 20,
+			"y": lm,
+			"h": 20,
+			"l": 1,
+		}, {
+			"gp": GP.CREME,
+			"x": 21,
+			"y": lm,
+			"h": 5,
+			"r": 1,
+		}, {
+			"gp": GP.BEURRE,
+			"x": 21,
+			"y": lm + 5,
+			"h": 5,
+			"r": 1,
+		}, {
+			"gp": GP.LAITS,
+			"x": 21,
+			"y": lm + 10,
+			"h": 10,
+			"r": 1,
+		}, {
 			"gp": GP.OEUFS,
 			"x": 22,
 			"y": 70
-		},{
-			"gp": GP.PATES,
+		}, {
+			"gp": GP.PATES_SECHES,
 			"x": 24,
 			"y": 50
-		},]
+		}]
 	},
 	"CARREFOUR": {
 		"defaults": {
@@ -200,49 +279,49 @@ const STORES = {
 			"y": 75,
 			"h": 5,
 			"r": 1,
-		},{
+		}, {
 			"gp": GP.LARDONS,
 			"x": 90,
 			"y": 80,
 			"h": 5,
 			"r": 1,
-		},{
+		}, {
 			"gp": GP.CREME,
 			"x": 86,
 			"y": 75,
 			"l": 1,
-		},{
+		}, {
 			"gp": GP.FROMAGES,
 			"x": 87,
 			"y": 75,
 			"r": 1,
-		},{
+		}, {
 			"gp": GP.LAITS,
 			"x": 50,
 			"y": 75
-		},{
+		}, {
 			"gp": GP.OEUFS,
 			"x": 50,
 			"y": 70
-		},{
-			"gp": GP.PATES,
+		}, {
+			"gp": GP.PATES_SECHES,
 			"x": 24,
 			"y": 70
-		},{
+		}, {
 			"gp": GP.CONSERVES_LEGUMES,
 			"x": 24,
 			"y": 70
-		},{
+		}, {
 			"gp": GP.CEREALES,
 			"x": 24,
 			"y": 70
-		},{
+		}, {
 			"gp": GP.ALCOOL,
 			"x": 24,
 			"y": 30,
 			"w": 2,
 			"l": 1,
 			"r": 1
-		},]
+		}]
 	},
 };

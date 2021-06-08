@@ -11,6 +11,8 @@ document.getElementById("search-input").addEventListener("keypress", function (e
 	}
 });
 
+const store_name = "LECLERC";
+
 let bestSuggestion = null;
 
 function searchItem(e) {
@@ -60,7 +62,7 @@ function addItem(addedItem = bestSuggestion) {
 	}
 }
 
-function drawMap(store_key = "CARREFOUR") {
+function drawMap(store_key = store_name) {
 	const store = STORES[store_key];
 
 	const shelfs = svgg(map, "shelfs");
@@ -90,7 +92,7 @@ function drawMap(store_key = "CARREFOUR") {
 }
 
 function find_store_best_path() {
-	const store = STORES["CARREFOUR"];
+	const store = STORES[store_name];
 
 	const start = rect_center(store.in, true);
 	const end = rect_center(store.out, true);
@@ -149,7 +151,7 @@ function show_store_best_path(path) {
 		svgrect(path_rects, prev.x, prev.y, 1, 1, "target target-path");
 	}
 
-	const store = STORES["CARREFOUR"];
+	const store = STORES[store_name];
 	const start = rect_center(store.in, true);
 	const end = rect_center(store.out, true);
 	svgrect(path_rects, start.x, start.y, 1, 1, "target target-start");
@@ -162,7 +164,7 @@ function find_and_show_best_path() {
 }
 
 function findBestPathold() {
-	const store = STORES.CARREFOUR;
+	const store = STORES[store_name];
 	let currentPos = store.in;
 	let exitPos = store.out;
 
@@ -211,7 +213,7 @@ function findBestPathold() {
 }
 
 function load() {
-	const store = STORES["CARREFOUR"];
+	const store = STORES[store_name];
 	map.setAttributeNS(null, "viewBox", `0 0 ${store.dimensions.w} ${store.dimensions.h}`);
 
 	drawMap();
