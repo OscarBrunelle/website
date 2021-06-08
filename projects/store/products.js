@@ -7,7 +7,6 @@ const GP = {
 	"CEREALES": "CEREALES",
 	"CHARCUTERIE": "CHARCUTERIE",
 	"CHIPS": "CHIPS",
-	"CHOCOLAT": "CHOCOLAT",
 	"CHOCOLAT_POUDRE": "CHOCOLAT_POUDRE",
 	"CHOCOLAT_TABLETTE": "CHOCOLAT_TABLETTE",
 	"CONFISERIE": "CONFISERIE",
@@ -117,13 +116,13 @@ const PRODUCTS = {
 		"name-fr": "Chocolat noir",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.CHOCOLAT,
+		"gp": GP.CHOCOLAT_TABLETTE,
 	},
 	"CHOCOLAT_BLANC": {
 		"name-fr": "Chocolat blanc",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.CHOCOLAT,
+		"gp": GP.CHOCOLAT_TABLETTE,
 	},
 	/* SOLID END */
 	/* LIQUID START */
@@ -144,8 +143,13 @@ const PRODUCTS = {
 	/* LIQUID END */
 };
 
+const lw = 50;
+const lh = 70;
 const lt = 10;
 const lm = 40;
+
+const cw = 100;
+const ch = 100;
 const ct = 10;
 const cm = 40;
 const STORES = {
@@ -157,19 +161,19 @@ const STORES = {
 			r: 0
 		},
 		"dimensions": {
-			w: 100,
-			h: 100
+			w: lw,
+			h: lh
 		},
 		"in": {
-			x: 95,
-			y: 99,
+			x: lw - 5,
+			y: lh - 1,
 			w: 5,
 			h: 1
 		},
 		"out": {
 			x: 0,
-			y: 99,
-			w: 90,
+			y: lh - 1,
+			w: lw - 10,
 			h: 1
 		},
 		"gps": [{
@@ -242,12 +246,38 @@ const STORES = {
 			"r": 1,
 		}, {
 			"gp": GP.OEUFS,
-			"x": 22,
-			"y": 70
+			"x": 23,
+			"y": lm,
+			"l": 1,
 		}, {
-			"gp": GP.PATES_SECHES,
+			"gp": GP.SUCRE,
 			"x": 24,
-			"y": 50
+			"y": lm,
+			"h": 10,
+			"r": 1,
+		}, {
+			"gp": GP.FARINE,
+			"x": 24,
+			"y": lm + 10,
+			"h": 10,
+			"r": 1,
+		}, {
+			"gp": GP.CONFISERIE,
+			"x": 26,
+			"y": lm,
+			"l": 1,
+		}, {
+			"gp": GP.CHOCOLAT_TABLETTE,
+			"x": 27,
+			"y": lm,
+			"h": 10,
+			"r": 1,
+		}, {
+			"gp": GP.TARTINER,
+			"x": 27,
+			"y": lm + 10,
+			"h": 10,
+			"r": 1,
 		}]
 	},
 	"CARREFOUR": {
@@ -258,19 +288,19 @@ const STORES = {
 			r: 0
 		},
 		"dimensions": {
-			w: 100,
-			h: 100
+			w: cw,
+			h: ch
 		},
 		"in": {
-			x: 95,
-			y: 99,
+			x: cw - 5,
+			y: ch - 1,
 			w: 5,
 			h: 1
 		},
 		"out": {
 			x: 0,
-			y: 99,
-			w: 90,
+			y: ch - 1,
+			w: cw - 10,
 			h: 1
 		},
 		"gps": [{
