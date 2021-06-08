@@ -100,17 +100,11 @@ function find_store_best_path() {
 	let targets = [];
 	let obstacles = [];
 	for (const shelf of store.gps) {
-		if (shelf.w == null && defs.w != null) {
-			shelf.w = defs.w;
-		}
-		if (shelf.h == null && defs.h != null) {
-			shelf.h = defs.h;
-		}
-		if (shelf.l == null && defs.l != null) {
-			shelf.l = defs.l;
-		}
-		if (shelf.r == null && defs.r != null) {
-			shelf.r = defs.r;
+		const def_letters = ["w", "h", "l", "r", "t", "b"];
+		for (const letter of def_letters) {
+			if (shelf[letter] == null && defs[letter] != null) {
+				shelf[letter] = defs[letter];
+			}
 		}
 		for (let l = shelf.l; l > 0; l--) {
 			for (let h = 0; h < shelf.h; h++) {
