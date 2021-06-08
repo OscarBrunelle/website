@@ -5,7 +5,7 @@ let shoppingList = [];
 
 document.getElementById("search-input").addEventListener("input", searchItem);
 document.getElementById("search-input").addEventListener("focus", searchItem);
-document.getElementById("search-input").addEventListener("focusout", function(e) {
+document.getElementById("search-input").addEventListener("focusout", function (e) {
 	let suggestionsContainer = document.getElementById("search_suggestions");
 	suggestionsContainer.style.visibility = "none";
 });
@@ -96,33 +96,37 @@ function find_store_best_path() {
 	const start = rect_center(store.in, true);
 	const end = rect_center(store.out, true);
 
+	const defs = store.defaults;
 	let targets = [];
 	let obstacles = [];
-	for (const shelf of store.gps) {
-		const def_letters = ["w", "h", "l", "r", "t", "b"];
-		for (const letter of def_letters) {
-			if (shelf[letter] == null && defs[letter] != null) {
-				shelf[letter] = defs[letter];
+	for (const item of shoppingList) {
+		for (const shelf of store.gps) {
+			if (shelf.gp != item.gp) continue;
+			const def_letters = ["w", "h", "l", "r", "t", "b"];
+			for (const letter of def_letters) {
+				if (shelf[letter] == null && defs[letter] != null) {
+					shelf[letter] = defs[letter];
+				}
 			}
-		}
-		for (let l = shelf.l; l > 0; l--) {
-			for (let h = 0; h < shelf.h; h++) {
-				obstacles.push({
-					x: shelf.x - l,
-					y: shelf.y + h
-				});
+			for (let l = shelf.l; l > 0; l--) {
+				for (let h = 0; h < shelf.h; h++) {
+					obstacles.push({
+						x: shelf.x - l,
+						y: shelf.y + h
+					});
+				}
 			}
-		}
-		for (let r = shelf.r; r > 0; r--) {
-			for (let h = 0; h < shelf.h; h++) {
-				obstacles.push({
-					x: shelf.x + r,
-					y: shelf.y + h
-				});
+			for (let r = shelf.r; r > 0; r--) {
+				for (let h = 0; h < shelf.h; h++) {
+					obstacles.push({
+						x: shelf.x + r,
+						y: shelf.y + h
+					});
+				}
 			}
+			const target = rect_center(shelf, true);
+			targets.push(target);
 		}
-		const target = rect_center(shelf, true);
-		targets.push(target);
 	}
 
 	const grid = create_grid(store.dimensions.w, store.dimensions.h, start, targets, obstacles);
