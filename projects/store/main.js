@@ -20,14 +20,14 @@ const store_name = "LECLERC";
 let bestSuggestion = null;
 
 function searchItem(e) {
-	let search = e.target.value;
+	let search = e.target.value.toLowerCase();
 	let suggestionsContainer = document.getElementById("search_suggestions");
 	suggestionsContainer.innerHTML = "";
 	bestSuggestion = null;
 
 	for (const item_key in PRODUCTS) {
 		const item = PRODUCTS[item_key];
-		if (item["name-fr"].includes(search) && !shoppingList.includes(item)) {
+		if (item["name-fr"].toLowerCase().includes(search) && !shoppingList.includes(item)) {
 			if (bestSuggestion == null) {
 				bestSuggestion = item;
 			}
@@ -45,12 +45,8 @@ function addItem(addedItem = bestSuggestion) {
 	if (addedItem != null && !shoppingList.includes(addedItem)) {
 		shoppingList.push(addedItem);
 
-		let shoppingItem = document.createElement("div");
-		let itemName = document.createElement("span");
-		itemName.innerHTML = addedItem["name-fr"];
-		shoppingItem.appendChild(itemName);
-		let itemDel = document.createElement("button");
-		itemDel.innerHTML = "del";
+		let shoppingItem = docli(document.getElementById("shopping_list"), addedItem["name-fr"]);
+		let itemDel = docbutton(shoppingItem, "del");
 		itemDel.addEventListener("click", function () {
 			if (shoppingList.indexOf(addedItem) >= 0) {
 				shoppingList.splice(shoppingList.indexOf(addedItem), 1);
@@ -58,8 +54,6 @@ function addItem(addedItem = bestSuggestion) {
 				find_and_show_best_path();
 			}
 		});
-		shoppingItem.appendChild(itemDel);
-		document.getElementById("shopping_list").appendChild(shoppingItem);
 
 		document.getElementById("search-input").value = "";
 		let suggestionsContainer = document.getElementById("search_suggestions");

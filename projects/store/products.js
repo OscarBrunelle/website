@@ -31,6 +31,7 @@ const GP = {
 	"PATES_TARTES": "PATES_TARTES",
 	"RIZ": "RIZ",
 	"SAUCES": "SAUCES",
+	"SAUCISSE": "SAUCISSE",
 	"SAUCISSONS": "SAUCISSONS",
 	"SUCRE": "SUCRE",
 	"TARTINER": "TARTINER",
@@ -58,11 +59,17 @@ const PRODUCTS = {
 		"price": 777,
 		"gp": GP.CHARCUTERIE,
 	},
-	"SAUCISSE": {
-		"name-fr": "Lardons",
+	"SAUCISSON": {
+		"name-fr": "Saucisson",
 		"unit": "g",
 		"price": 777,
-		"gp": GP.CHARCUTERIE,
+		"gp": GP.SAUCISSONS,
+	},
+	"SAUCISSE": {
+		"name-fr": "Saucisse",
+		"unit": "g",
+		"price": 777,
+		"gp": GP.SAUCISSE,
 	},
 	"CREME": {
 		"name-fr": "Crème",
