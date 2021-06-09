@@ -14,18 +14,23 @@ const DRINKS_TYPES = {
 	"NON_ALCOHOLIC": "Sans alcool",
 };
 
+const MEAL_GROUPS = {
+	"LASAGNES": "Lasagnes",
+	"GRATIN": "Gratin",
+};
+
 const FOODS = {
 	/* MEALS START */
 	"PATES_CARBOS": {
 		"name": "Pâtes carbonara",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.SPAGHETTIS,
+			"ingredient-name": PRODUCTS.SPAGHETTIS,
 			"quantity": 777
 		}, {
-			"ingredient-name": INGREDIENTS.LARDONS,
+			"ingredient-name": PRODUCTS.LARDONS,
 			"quantity": 777
 		}, {
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777,
 			"optional": true
 		}],
@@ -38,7 +43,7 @@ const FOODS = {
 	"OMELETTE_CHAMPIGNONS": {
 		"name": "Omelette aux champignons",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777
 		}],
 		"steps": [],
@@ -48,7 +53,7 @@ const FOODS = {
 	"QUICHE_SAUMON_EPINARD": {
 		"name": "Quiche saumon / épinard",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777
 		}],
 		"steps": [],
@@ -58,7 +63,7 @@ const FOODS = {
 	"NUGGETS_FRITES": {
 		"name": "Nuggets frites",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777
 		}],
 		"steps": [],
@@ -68,7 +73,7 @@ const FOODS = {
 	"RISOTTO_POIREAU": {
 		"name": "Risotto au poireau",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777
 		}],
 		"steps": [],
@@ -78,7 +83,7 @@ const FOODS = {
 	"BRUCHETTAS": {
 		"name": "Bruchettas",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777
 		}],
 		"steps": [],
@@ -88,7 +93,7 @@ const FOODS = {
 	"FAJITAS": {
 		"name": "Fajitas",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777
 		}],
 		"steps": [],
@@ -98,7 +103,7 @@ const FOODS = {
 	"CURRY_CHOU_FLEUR": {
 		"name": "Curry de chou-fleur aux pois-chiches et pommes de terre",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777
 		}],
 		"steps": [],
@@ -108,7 +113,7 @@ const FOODS = {
 	"CREPES_SARASIN": {
 		"name": "Crêpes salées au sarasin",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777
 		}],
 		"steps": [],
@@ -118,28 +123,28 @@ const FOODS = {
 	"COOKIES": {
 		"name": "Cookies",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.SUCRE_CASSONADE,
+			"ingredient-name": PRODUCTS.SUCRE_CASSONADE,
 			"quantity": 60
 		}, {
-			"ingredient-name": INGREDIENTS.SUCRE_SEMOULE,
+			"ingredient-name": PRODUCTS.SUCRE_SEMOULE,
 			"quantity": 60
 		}, {
-			"ingredient-name": INGREDIENTS.FARINE,
+			"ingredient-name": PRODUCTS.FARINE,
 			"quantity": 300
 		}, {
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 1
 		}, {
-			"ingredient-name": INGREDIENTS.BEURRE_DOUX,
+			"ingredient-name": PRODUCTS.BEURRE_DOUX,
 			"quantity": 175
 		}, {
-			"ingredient-name": INGREDIENTS.LEVURE_CHIMIQUE,
+			"ingredient-name": PRODUCTS.LEVURE_CHIMIQUE,
 			"quantity": 0.5
 		}, {
-			"ingredient-name": INGREDIENTS.CHOCOLAT_NOIR,
+			"ingredient-name": PRODUCTS.CHOCOLAT_NOIR,
 			"quantity": 100
 		}, {
-			"ingredient-name": INGREDIENTS.CHOCOLAT_BLANC,
+			"ingredient-name": PRODUCTS.CHOCOLAT_BLANC,
 			"quantity": 100
 		}],
 		"steps": [
@@ -157,7 +162,7 @@ const FOODS = {
 	"POP_CORN": {
 		"name": "Pop-corn",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.OEUF,
+			"ingredient-name": PRODUCTS.OEUF,
 			"quantity": 777
 		}],
 		"steps": [],
@@ -167,22 +172,52 @@ const FOODS = {
 	"CAROTTES_RAPEES": {
 		"name": "Carottes rapées",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.CAROTTE,
+			"ingredient-name": PRODUCTS.CAROTTE,
 			"quantity": 777
 		}],
 		"steps": [],
 		"food_type": FOOD_TYPES.MEAL,
 		"meal_type": MEAL_TYPES.DESSERT
 	},
+	"LASAGNES": {
+		"name": "Lasagnes",
+		"ingredients": [{
+			"ingredient-name": PRODUCTS.BOEUF_HACHE,
+			"quantity": 777
+		}],
+		"steps": [],
+		"food_type": FOOD_TYPES.MEAL,
+		"meal_type": MEAL_TYPES.PLAT
+	},
+	"LASAGNES_VEGE": {
+		"name": "Lasagnes végétariennes",
+		"ingredients": [{
+			"ingredient-name": PRODUCTS.COURGETTE,
+			"quantity": 777
+		}],
+		"steps": [],
+		"food_type": FOOD_TYPES.MEAL,
+		"meal_type": MEAL_TYPES.PLAT
+	},
+	"GRATIN": {
+		"name": "Gratin de pommes de terre",
+		"ingredients": [{
+			"ingredient-name": PRODUCTS.POMME_TERRE,
+			"quantity": 777
+		}],
+		"steps": [],
+		"food_type": FOOD_TYPES.MEAL,
+		"meal_type": MEAL_TYPES.PLAT
+	},
 	/* MEALS END */
 	/* DRINKS START */
 	"PASTIS": {
 		"name": "Pastis",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.PASTIS,
+			"ingredient-name": PRODUCTS.PASTIS,
 			"quantity": 777
 		}, {
-			"ingredient-name": INGREDIENTS.WATER,
+			"ingredient-name": PRODUCTS.WATER,
 			"quantity": 777
 		}],
 		"steps": [
@@ -196,10 +231,10 @@ const FOODS = {
 	"MOJITO": {
 		"name": "Mojito",
 		"ingredients": [{
-			"ingredient-name": INGREDIENTS.PASTIS,
+			"ingredient-name": PRODUCTS.PASTIS,
 			"quantity": 777
 		}, {
-			"ingredient-name": INGREDIENTS.WATER,
+			"ingredient-name": PRODUCTS.WATER,
 			"quantity": 777
 		}],
 		"steps": [

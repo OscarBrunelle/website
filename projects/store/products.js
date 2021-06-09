@@ -137,6 +137,18 @@ const PRODUCTS = {
 		"price": 777,
 		"gp": GP.CHOCOLAT_TABLETTE,
 	},
+	"COURGETTE": {
+		"name-fr": "Courgette",
+		"unit": "g",
+		"price": 777,
+		"gp": GP.LEGUMES,
+	},
+	"POMME_TERRE": {
+		"name-fr": "Pomme de terre",
+		"unit": "g",
+		"price": 777,
+		"gp": GP.LEGUMES,
+	},
 	/* SOLID END */
 	/* LIQUID START */
 	"WATER": {
