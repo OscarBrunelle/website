@@ -661,6 +661,12 @@ function svgline(parent, x1, y1, x2, y2, className = null, prependEl = false) {
 	return addSVGElement(parent, element, className, prependEl);
 }
 
+function svgpath(parent, d, className = null, prependEl = false) {
+	let element = document.createElementNS(xmlns, "path");
+	element.setAttributeNS(null, "d", d);
+	return addSVGElement(parent, element, className, prependEl);
+}
+
 function svgrect(parent, x, y, width, height, className = null, prependEl = false) {
 	let element = document.createElementNS(xmlns, "rect");
 	element.setAttributeNS(null, "x", x);
