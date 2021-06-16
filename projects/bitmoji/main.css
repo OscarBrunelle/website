@@ -1,0 +1,9 @@
+main {
+	padding: 10px;
+	display: grid;
+	justify-items: center;
+}
+
+svg {
+	width: 50%;
+}
