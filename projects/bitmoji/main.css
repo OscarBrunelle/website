@@ -7,3 +7,8 @@ main {
 svg {
 	width: 50%;
 }
+
+svg path {
+	stroke: white;
+	stroke-width: 1;
+}
