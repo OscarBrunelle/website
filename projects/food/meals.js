@@ -245,3 +245,10 @@ const FOODS = {
 	},
 	/* DRINKS END */
 };
+
+/*
+risotto riz / lentilles corail avec courgettes et ratatouille
+chou fleur
+quiche poireaux
+gros poisson en papillotte bbq
+*/
