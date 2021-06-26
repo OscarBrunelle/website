@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="fr">
 
 <head>
 	<link rel="stylesheet" type="text/css" href="shared/shared.css">
 	<link rel="stylesheet" type="text/css" href="shared/template.css">
-	<link rel="stylesheet" type="text/css" href="home.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="icon" type="image/png" href="icons/svgs/solid/tools.svg">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
-	<meta name="description" content="My personal website.">
+	<meta name="description" content="Mon site personnel pour héberger mes projets.">
+	<meta name="keywords" content="Oscar Brunelle">
 	<meta name="author" content="Oscar Brunelle">
 	<title>Oscar Brunelle</title>
 </head>
@@ -17,19 +18,27 @@
 <body>
 	<header>
 		<h1>Oscar Brunelle</h1>
+		<p>Site personnel pour regrouper mes projets.</p>
 		<button id="theme-btn" aria-label="toggle night mode"></button>
 	</header>
 
-	<nav role="navigation" id="top-nav"></nav>
+	<nav role="navigation" id="top-nav">
+		<a href="#"><button class="tab-button home_tab active">Accueil</button></a>
+		<a href="shared/cv_oscar_BRUNELLE_fr.pdf"><button class="tab-button tab-resume">CV</button></a>
+		<a href="en/"><button id="lang-button">EN</button></a>
+	</nav>
 
-	<main id="main" role="main">
-		<div>
-			<div><a href="fr/"><button>Continuer en français</button></a></div>
-			<div><a href="en/"><button>Continue in english</button></a></div>
-		</div>
-	</main>
+	<main id="main" role="main"></main>
+
+	<footer>
+		<a href="#top">Haut de la page</a>
+		<span>Auteur: Oscar Brunelle</span>
+		<a href="en/index.html">Version anglaise</a>
+	</footer>
 
 	<script type="text/javascript" src="shared/shared.js"></script>
+	<script type="text/javascript" src="shared/projects.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>
