@@ -83,6 +83,37 @@ header>p {
 	text-align: center;
 }
 
+header.new_header {
+	padding: 10px;
+}
+
+header.new_header>div {
+	display: grid;
+	grid-template-columns: auto 1fr;
+}
+
+header.new_header h1 {
+	margin: 0;
+	text-align: center;
+	font-size: 40px;
+	font-weight: normal;
+}
+
+header.new_header p {
+	display: block;
+	margin: 0;
+	text-align: left;
+}
+
+header.new_header .header-buttons {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 1fr;
+	justify-items: center;
+	align-items: center;
+	place-items: center;
+}
+
 #theme-btn {
 	position: absolute;
 	top: 0;
