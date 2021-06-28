@@ -89,13 +89,14 @@ header.new_header {
 
 header.new_header>div {
 	display: grid;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: 1fr auto;
+	gap: 10px;
 }
 
 header.new_header h1 {
 	margin: 0;
-	text-align: center;
-	font-size: 40px;
+	text-align: left;
+	font-size: 2em;
 	font-weight: normal;
 }
 
@@ -109,9 +110,34 @@ header.new_header .header-buttons {
 	display: grid;
 	grid-auto-flow: column;
 	grid-auto-columns: 1fr;
+	gap: 10px;
 	justify-items: center;
 	align-items: center;
 	place-items: center;
+}
+
+header.new_header .header-buttons>* {
+	width: 42px;
+	height: 42px;
+	display: grid;
+	place-content: center;
+	border: 1px solid white;
+	border-radius: 50%;
+	font-size: 1.1em;
+	text-decoration: none;
+	background-color: var(--secondary-background-color) !important;
+	color: var(--secondary-text-color);
+
+	position: relative !important;
+}
+
+.theme-dark header.new_header .header-buttons>* {
+	background-color: var(--dark-secondary-background-color) !important;
+	color: var(--dark-secondary-text-color) !important;
+}
+
+header.new_header .header-buttons a#theme-btn {
+	position: relative;
 }
 
 #theme-btn {
