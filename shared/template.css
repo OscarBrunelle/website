@@ -121,6 +121,7 @@ header.new_header .header-buttons>* {
 	height: 42px;
 	display: grid;
 	place-content: center;
+	place-items: center;
 	border: 1px solid white;
 	border-radius: 50%;
 	font-size: 1.1em;
@@ -129,6 +130,10 @@ header.new_header .header-buttons>* {
 	color: var(--secondary-text-color);
 
 	position: relative !important;
+}
+
+header.new_header .header-buttons>* img {
+	width: 28px;
 }
 
 .theme-dark header.new_header .header-buttons>* {
