@@ -72,7 +72,7 @@ function get_cookie(cookie_name) {
 }
 
 function set_cookie(name, value) {
-	document.cookie = name + "=" + value + ";";
+	document.cookie = name + "=" + value + ";path=/;max-age=31536000;samesite=strict;";
 }
 
 /**
