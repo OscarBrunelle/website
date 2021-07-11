@@ -667,7 +667,7 @@ function svgpath(parent, d, className = null, prependEl = false) {
 	return addSVGElement(parent, element, className, prependEl);
 }
 
-function svgrect(parent, x, y, width, height, className = null, prependEl = false) {
+function svgrect(parent, x, y, width = 1, height = 1, className = null, prependEl = false) {
 	let element = document.createElementNS(xmlns, "rect");
 	element.setAttributeNS(null, "x", x);
 	element.setAttributeNS(null, "y", y);
