@@ -5,7 +5,7 @@
 let input_string = "Hello";
 const svg = document.getElementById("svg");
 let structure = svgg(svg, "basic_structure");
-let qr_size = 21;
+let qr_size = 21; // each version increase by 4
 let corner_size = 7;
 let safe_zone = 2;
 
