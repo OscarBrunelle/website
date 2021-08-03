@@ -85,6 +85,7 @@ header>p {
 
 header.new_header {
 	padding: 10px;
+	border-bottom: 1px solid black;
 }
 
 header.new_header>div {
