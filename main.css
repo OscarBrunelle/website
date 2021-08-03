@@ -24,11 +24,6 @@ main>div>div {
 	cursor: pointer;
 }
 
-.projects_list>div a:focus {
-	border-width: 2px;
-	outline: none;
-}
-
 .projects_list>div a>* {
 	transition: 0.25s;
 }
@@ -79,11 +74,16 @@ main>div>div {
 	}
 }
 
-.projects_list>div a:hover>:first-child {
+.projects_list>div a:hover>:first-child, .projects_list>div a:focus>:first-child {
 	transform: scale(1.2);
 }
 
-.projects_list>div a:hover>:last-child {
+.projects_list>div a:hover>:last-child, .projects_list>div a:focus>:last-child {
 	height: 100%;
 	opacity: 0.9;
+}
+
+.projects_list>div a:focus {
+	border-width: 5px;
+	outline: none;
 }

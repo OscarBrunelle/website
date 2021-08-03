@@ -314,11 +314,9 @@ function displayProjects(parent, lang = "en") {
 	}
 
 	const randomLink = document.createElement("a");
+	const project = PROJECTS[random_int(0, PROJECTS.length - 1)];
+	randomLink.href = "../projects/" + project.link + "/index.html";
 	const randTitle = (lang == "en" ? "Random project" : "Projet au hasard")
-	randomLink.addEventListener("click", function (e) {
-		const project = PROJECTS[random_int(0, PROJECTS.length - 1)];
-		randomLink.href = "../projects/" + project.link + "/index.html";
-	});
 	const randomLinkDesc = document.createElement("div");
 	randomLinkDesc.innerHTML = randTitle;
 	randomLink.appendChild(randomLinkDesc);
