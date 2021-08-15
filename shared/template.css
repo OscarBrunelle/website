@@ -221,6 +221,10 @@ footer {
 	border: 1px solid var(--primary-text-color);
 }
 
+footer>a, footer>a:active {
+	color: inherit;
+}
+
 .theme-dark footer {
 	background-color: var(--dark-primary-background-color);
 	color: var(--dark-primary-text-color);
