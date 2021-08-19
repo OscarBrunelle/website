@@ -388,119 +388,119 @@ function addDocElement(parent, element, className = null, prependEl = false) {
 	return element;
 }
 
-function docdiv(parent, className = null) {
+function docdiv(parent = null, className = null) {
 	const element = document.createElement("div");
 	return addDocElement(parent, element, className);
 }
 
-function docsection(parent, className = null) {
+function docsection(parent = null, className = null) {
 	const element = document.createElement("section");
 	return addDocElement(parent, element, className);
 }
 
-function doch1(parent, text = "", className = null) {
+function doch1(parent = null, text = "", className = null) {
 	const element = document.createElement("h1");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function doch2(parent, text = "", className = null) {
+function doch2(parent = null, text = "", className = null) {
 	const element = document.createElement("h2");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function doch3(parent, text = "", className = null) {
+function doch3(parent = null, text = "", className = null) {
 	const element = document.createElement("h3");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function doch4(parent, text = "", className = null) {
+function doch4(parent = null, text = "", className = null) {
 	const element = document.createElement("h4");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function doch5(parent, text = "", className = null) {
+function doch5(parent = null, text = "", className = null) {
 	const element = document.createElement("h5");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function doch6(parent, text = "", className = null) {
+function doch6(parent = null, text = "", className = null) {
 	const element = document.createElement("h6");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function docspan(parent, text = "", className = null) {
+function docspan(parent = null, text = "", className = null) {
 	const element = document.createElement("span");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function docp(parent, text = "", className = null) {
+function docp(parent = null, text = "", className = null) {
 	const element = document.createElement("p");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function docimg(parent, src, className = null) {
+function docimg(parent = null, src = null, className = null) {
 	const element = document.createElement("img");
 	element.setAttribute("src", src);
 	return addDocElement(parent, element, className);
 }
 
-function doca(parent, href, innerHTML = "", className = null) {
+function doca(parent = null, href = null, innerHTML = "", className = null) {
 	const element = document.createElement("a");
 	element.innerHTML = innerHTML;
 	element.setAttribute("href", href);
 	return addDocElement(parent, element, className);
 }
 
-function docbutton(parent, innerHTML = "", className = null) {
+function docbutton(parent = null, innerHTML = "", className = null) {
 	const element = document.createElement("button");
 	element.innerHTML = innerHTML;
 	return addDocElement(parent, element, className);
 }
 
-function docobject(parent, data, className = null) {
+function docobject(parent = null, data = null, className = null) {
 	const element = document.createElement("object");
 	element.setAttribute("data", data);
 	return addDocElement(parent, element, className);
 }
 
-function docsvg(parent, viewBox = "0 0 100 100", className = null) {
+function docsvg(parent = null, viewBox = "0 0 100 100", className = null) {
 	const element = document.createElement("svg");
 	element.setAttribute("viewBox", viewBox);
 	return addDocElement(parent, element, className);
 }
 
-function docol(parent, className = null) {
+function docol(parent = null, className = null) {
 	const element = document.createElement("ol");
 	return addDocElement(parent, element, className);
 }
 
-function docul(parent, className = null) {
+function docul(parent = null, className = null) {
 	const element = document.createElement("ul");
 	return addDocElement(parent, element, className);
 }
 
-function docli(parent, text = "", className = null) {
+function docli(parent = null, text = "", className = null) {
 	const element = document.createElement("li");
 	element.innerHTML = text;
 	return addDocElement(parent, element, className);
 }
 
-function doclabel(parent, text = "", attr_for = null, className = null) {
+function doclabel(parent = null, text = "", attr_for = null, className = null) {
 	const element = document.createElement("label");
 	element.innerHTML = text;
 	element.setAttribute("for", attr_for);
 	return addDocElement(parent, element, className);
 }
 
-function docinput(parent, id = null, name = null, type = "checkbox", default_value = null, checked = false, className = null) {
+function docinput(parent = null, id = null, name = null, type = "checkbox", default_value = null, checked = false, className = null) {
 	const element = document.createElement("input");
 	element.id = id;
 	element.setAttribute("name", name);
@@ -512,7 +512,7 @@ function docinput(parent, id = null, name = null, type = "checkbox", default_val
 
 let inputs_id_index = 0;
 
-function docinputs(parent, options = [], type = "checkbox", className = null) {
+function docinputs(parent = null, options = [], type = "checkbox", className = null) {
 	let elements = [];
 	let i = 0;
 	for (const option of options) {
@@ -526,23 +526,23 @@ function docinputs(parent, options = [], type = "checkbox", className = null) {
 	return elements;
 }
 
-function doctable(parent, className = null) {
+function doctable(parent = null, className = null) {
 	const element = document.createElement("table");
 	return addDocElement(parent, element, className);
 }
 
-function doctr(parent, className = null) {
+function doctr(parent = null, className = null) {
 	const element = document.createElement("tr");
 	return addDocElement(parent, element, className);
 }
 
-function docth(parent, value = "", className = null) {
+function docth(parent = null, value = "", className = null) {
 	const element = document.createElement("th");
 	element.innerHTML = value;
 	return addDocElement(parent, element, className);
 }
 
-function doctd(parent, value = "", className = null) {
+function doctd(parent = null, value = "", className = null) {
 	const element = document.createElement("td");
 	element.innerHTML = value;
 	return addDocElement(parent, element, className);
