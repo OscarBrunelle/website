@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="icon" type="image/png" href="icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="FTL">
+	<meta name="author" content="Oscar Brunelle">
+	<title>FTL</title>
+</head>
+
+<body>
+	<header>
+		<h1>FTL</h1>
+		<button id="theme-btn" aria-label="toggle night mode"></button>
+	</header>
+
+	<nav role="navigation" id="top-nav"></nav>
+
+	<main id="main" role="main">
+		<div class="top">
+			<div class="top_left">
+				<div>
+					<div id="hull_bar" class="hull_bar">
+						<span>Hull: </span><span class="amount"></span>
+						<div class="squares"></div>
+					</div>
+					<div id="scrap">
+						<span>Scraps: </span><span class="amount"></span>
+					</div>
+				</div>
+
+				<div>
+					<div id="shield_bubbles">
+						<span>Shields: </span><span class="amount"></span>
+					</div>
+					<div id="fuel" class="resource">
+						<span>Fuel: </span><span class="amount"></span>
+					</div>
+					<div id="missiles" class="resource">
+						<span>Missiles: </span><span class="amount"></span>
+					</div>
+					<div id="drone_parts" class="resource">
+						<span>Drones: </span><span class="amount"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="menu">
+				<button onclick="toggle()">Jump</button>
+				<button onclick="toggle()">Ship</button>
+				<button onclick="toggle()">Shop</button>
+				<button onclick="toggle()">Options</button>
+			</div>
+		</div>
+
+
+		<div class="left">
+			<div>
+				<div class="stat">
+					<span>Evasion: </span><span class="amount">00%</span>
+				</div>
+				<div class="stat">
+					<span>Oxygen: </span><span class="amount">00%</span>
+				</div>
+			</div>
+
+			<div>
+				<div id="sbires"></div>
+				<button id="positions_save" class="pos_button">Save</button>
+				<button id="positions_return" class="pos_button">Return</button>
+			</div>
+		</div>
+
+		<div class="ship">SHIP</div>
+
+		<div class="bottom">
+			<div class="bottom_left">
+				<div class="energy_capacity"></div>
+				<div class="systems">
+					<div class="shields">S</div>
+					<div class="motor">M</div>
+					<div class="medbay">+</div>
+					<div class="oxygen">O</div>
+					<div class="fedlaser">L</div>
+					<div class="hacking">H</div>
+				</div>
+				<div class="weapons">
+					<div class="weapons_capacity">W</div>
+					<div class="armed_weapons">
+						<div class="weapon-1">weapon 1</div>
+						<div class="weapon-2">weapon 2</div>
+						<div class="weapon-3">weapon 3</div>
+						<div class="weapon-4">weapon 4</div>
+					</div>
+					<div class="autofire">Auto-fire</div>
+				</div>
+			</div>
+			<div class="bottom_right">
+				<div class="sub_systems">
+					<div class="pilot">P</div>
+					<div class="camera">C</div>
+					<div class="doors">D</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<a href="#top">Go to top</a>
+		<span>Author: Oscar Brunelle</span>
+		<a href="../../index.html">Home</a>
+	</footer>
+
+	<!-- <script type="text/javascript" src="../../shared/jquery.js"></script> -->
+	<script type="text/javascript" src="../../shared/shared.js"></script>
+	<script type="text/javascript" src="Resource.js"></script>
+	<script type="text/javascript" src="System.js"></script>
+	<script type="text/javascript" src="Activable.js"></script>
+	<script type="text/javascript" src="Room.js"></script>
+	<script type="text/javascript" src="Sbire.js"></script>
+	<script type="text/javascript" src="Ship.js"></script>
+	<script type="text/javascript" src="Player.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

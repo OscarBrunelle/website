@@ -1,0 +1,92 @@
+.top {
+	width: 100%;
+}
+
+.top>div {
+	display: inline-block;
+}
+
+.top_left {
+	width: 40%;
+}
+
+.top_left>div {
+	width: 100%;
+}
+
+.top_left>div>* {
+	display: inline-block;
+}
+
+.hull_bar {
+	width: 80%;
+	border: 1px solid white;
+}
+
+.square {
+	display: inline-block;
+	width: 3.3%;
+	height: 10px;
+	border: 1px solid white;
+}
+
+.green {
+	background-color: green;
+}
+
+.orange {
+	background-color: orange;
+}
+
+.red {
+	background-color: red;
+}
+
+#scrap {
+	width: 19%;
+	border: 1px solid white;
+}
+
+#shield_bubbles {
+	width: 30%;
+	border: 1px solid white;
+}
+
+.menu>button {
+	border: 1px solid white;
+}
+
+.resource {
+	width: 20%;
+	border: 1px solid white;
+}
+
+.left {
+	width: 7%;
+}
+
+.stat {
+	border: 1px solid white;
+}
+
+.sbire {
+	border: 1px solid white;
+}
+
+.sbire .life_bar_container {
+	width: 100%;
+	height: 10px;
+}
+
+.life_bar_container {
+	border: 1px solid white;
+}
+
+.life_bar_container>div {
+	height: 100%;
+	background-color: green;
+}
+
+.pos_button {
+	width: 40%;
+}
