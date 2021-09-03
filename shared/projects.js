@@ -32,7 +32,6 @@ const PROJECTS = [{
 		"desc_en": "",
 		"desc_fr": "",
 		"tags": ["poc"],
-		"img_path": "bg.png",
 		"top": true
 	},
 	{
@@ -49,8 +48,7 @@ const PROJECTS = [{
 		"title_fr": "Bubble Trouble",
 		"desc_en": "",
 		"desc_fr": "",
-		"tags": ["game"],
-		"img_path": "bg.png"
+		"tags": ["game"]
 	},
 	{
 		"link": "store",
@@ -84,8 +82,7 @@ const PROJECTS = [{
 		"title_fr": "Dames",
 		"desc_en": "",
 		"desc_fr": "",
-		"tags": ["game"],
-		"img_path": "bg.png"
+		"tags": ["game"]
 	},
 	{
 		"link": "chess",
@@ -93,8 +90,7 @@ const PROJECTS = [{
 		"title_fr": "Échecs",
 		"desc_en": "",
 		"desc_fr": "",
-		"tags": ["game"],
-		"img_path": "bg.png"
+		"tags": ["game"]
 	},
 	{
 		"link": "clock",
@@ -103,7 +99,6 @@ const PROJECTS = [{
 		"desc_en": "",
 		"desc_fr": "",
 		"tags": ["useful"],
-		"img_path": "bg.png",
 		"top": true
 	},
 	{
@@ -222,7 +217,6 @@ const PROJECTS = [{
 		"desc_en": "",
 		"desc_fr": "",
 		"tags": ["poc"],
-		"img_path": "bg.png",
 		"top": true
 	},
 	{
@@ -298,7 +292,9 @@ function displayProjects(parent, lang = "en") {
 		} else {
 			const projectImage = document.createElement("img");
 			const imgSrc = "../projects/" + project.link + "/";
-			projectImage.src = imgSrc + (project.img_path != null ? project.img_path : "icon.png");
+			projectImage.width = 320;
+			projectImage.height = 180;
+			projectImage.src = imgSrc + ("preview.webp");
 			projectImage.alt = title + " background image";
 			projectLink.appendChild(projectImage);
 		}
