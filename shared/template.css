@@ -199,13 +199,13 @@ header.new_header .header-buttons a#theme-btn {
 	color: var(--dark-secondary-text-color);
 }
 
-#main {
+main {
 	position: relative;
 	color: var(--secondary-text-color);
 	background-color: var(--secondary-background-color);
 }
 
-.theme-dark #main {
+.theme-dark main {
 	color: var(--dark-secondary-text-color);
 	background-color: var(--dark-secondary-background-color);
 }
