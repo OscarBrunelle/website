@@ -30,6 +30,7 @@ main>div>div {
 
 .projects_list>div a>:first-child {
 	display: flex;
+	width: auto;
 	margin: auto;
 	align-items: center;
 	justify-content: center;
@@ -49,8 +50,8 @@ main>div>div {
 	justify-content: center;
 	flex-direction: column;
 	width: 100%;
-	height: 33%;
-	opacity: 1;
+	height: 25%;
+	opacity: 0.95;
 	color: var(--primary-text-color);
 	background: var(--primary-background-color);
 	text-align: center;
@@ -66,21 +67,12 @@ main>div>div {
 	background: var(--dark-primary-background-color);
 }
 
-@media (hover: none) {
-	.projects_list>div a>:last-child {
-		opacity: 1;
-		height: 33%;
-		background-color: var(--primary-background-color);
-	}
-}
-
 .projects_list>div a:hover>:first-child, .projects_list>div a:focus>:first-child {
 	transform: scale(1.2);
 }
 
 .projects_list>div a:hover>:last-child, .projects_list>div a:focus>:last-child {
 	height: 100%;
-	opacity: 0.9;
 }
 
 .projects_list>div a:focus {
