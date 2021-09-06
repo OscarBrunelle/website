@@ -4,8 +4,14 @@
 }
 
 .title {
-	font-weight: 500;
+	font-size: 18px;
+	font-weight: normal;
 	margin: 0;
+}
+
+.job_title {
+	font-weight: 500;
+	color: rgb(0, 81, 255);
 }
 
 .sub_section>.subtitle {
@@ -15,23 +21,23 @@
 }
 
 .sub_section>.description {
-	margin: 10px 0;
+	padding-left: 10px;
 }
 
 .date-end::before {
-	content: " - "
+	content: " - ";
 }
 
 .job_title::before {
-	content: " : "
+	content: " : ";
 }
 
 .country::before {
-	content: " ("
+	content: " (";
 }
 
 .country::after {
-	content: ")"
+	content: ")";
 }
 
 .multiple {
