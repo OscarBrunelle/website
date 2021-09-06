@@ -31,13 +31,13 @@ const sections = [{
 				date_month: 2,
 				duration: 4,
 				job_title: "Développeur PHP Symfony",
-				description: "TODO"
+				description: "Développement du site 'LesBonsClics' sous <b>Symfony PHP</b>."
 			}, {
 				date_year: 2021,
 				date_month: 5,
 				duration: 4,
 				job_title: "Ingénieur tests autos QA",
-				description: "TODO"
+				description: "Développement et maintenance de tests autos avec <b>RobotFramework</b>."
 			}
 		]
 	}, {
@@ -47,7 +47,9 @@ const sections = [{
 		job_title: "Ingénieur Logiciels",
 		employer: "Schneider Electric",
 		country: "FR",
-		description: "Utiliser Node-RED (bibl. Node.js) pour extraire les valeurs de capteurs. Visualiser des données en réalité virtuelle (Augmented Operator Advisor). Visualiser graphiquement des données sur le web (Aveva Insight)."
+		description: `Écriture et réalisation d'une démo interactive des produits Schneider.
+		<br>Communication tablette/IPC/dashboard et interface graphique avec <b>Node-RED</b>.
+		<br>Visualisation instantanée des données des capteurs avec (Aveva Insight).`
 	}, {
 		date_year: 2020,
 		date_month: 0,
@@ -55,7 +57,9 @@ const sections = [{
 		job_title: "Dév. web (front-end)",
 		employer: "Conseil National de Recherches Canada (CNRC)",
 		country: "CA",
-		description: "Développer des graphiques avec la bibliothèque d3.js. Créer de nouveaux end-points avec Java. Travailler dans une équipe anglophone sur des sujets liés au changement climatique."
+		description: `Dashboards de suivis de consommation pour des clients gouvernementaux.
+		<br>Création de graphiques avec <b>d3.js</b>.
+		<br>Ajout d'end-points pour le back-end avec <b>Java</b>.`
 	}, {
 		date_year: 2019,
 		date_month: 4,
@@ -63,7 +67,9 @@ const sections = [{
 		job_title: "Dév. web (fullstack)",
 		employer: "Datacloud Networks",
 		country: "CA",
-		description: "Développer un site web pour une université. IPTV : recherche de partenaires, installation d’antennes, rapports. Développer une application Android pour obtenir des données GPS."
+		description: `Développement from scratch du site web interne de l'université locale sous <b>PHP</b>.
+		<br>IPTV : recherche de partenaires, installation d’antennes, études de marché.
+		<br>Développement d'une POC d'application <b>Android</b> avec utilisation des données GPS.`
 	}]
 }, {
 	side: "left",
@@ -106,7 +112,7 @@ const cv_data = {
 	first_name: "Oscar",
 	last_name: "Brunelle",
 	position: "Développeur web",
-	description: "Formation d'ingénieur information<br>Expérience professionelle dans le développement web.",
+	description: "Formation d'ingénieur informatique.<br>Expérience professionelle dans le développement web.",
 	phone: "07 49 47 27 20",
 	email: "oscar.brunelle@gmail.com",
 	site: "oscarbrunelle.com",
