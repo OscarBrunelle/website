@@ -24,6 +24,10 @@
 	padding-left: 10px;
 }
 
+#right .sub_section>.description {
+	padding-left: 0;
+}
+
 .date-end::before {
 	content: " - ";
 }
