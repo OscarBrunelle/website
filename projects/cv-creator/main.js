@@ -110,20 +110,18 @@ function renderpdf() {
 function load() {
 	docimg(side_top, "profile_picture.jpg", "profile_picture");
 	doch1(side_top, `${cv_data.first_name} ${cv_data.last_name.toUpperCase()}`, "name");
-	docspan(side_top, cv_data.position, "position");
-	docp(side_top, cv_data.description, "description");
+	docspan(side_top, cv_data.position, "job_searched");
+	docp(side_top, cv_data.description, "about");
 
 	for (const section of sections) {
 		const sect = docsection(side_bottom);
 		doch2(sect, section.title.toUpperCase(), "section-title");
 
-		const ss_titles = docdiv(sect, "ss-titles");
-		const ss_subtitles = docdiv(sect, "ss-subtitles");
-		const ss_descriptions = docdiv(sect, "ss-descriptions");
 		for (const sub_section of section.sub_sections) {
-			doch3(ss_titles, sub_section.title, "title");
-			doch4(ss_subtitles, sub_section.sub_title, "subtitle");
-			docp(ss_descriptions, sub_section.description);
+			const content_container = docdiv(sect, "content_container");
+			doch3(content_container, sub_section.title, "title");
+			doch4(content_container, sub_section.sub_title, "subtitle");
+			docp(content_container, sub_section.description, "description");
 		}
 	}
 }

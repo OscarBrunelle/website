@@ -1,6 +1,6 @@
 #cv {
 	position: relative;
-	aspect-ratio: 592/842;
+	/* aspect-ratio: 592/842; */
 	/* width: 592px;
 	height: 842px; */
 	overflow-y: auto;
@@ -13,6 +13,7 @@
 #top {
 	margin-bottom: 30px;
 	display: grid;
+	position: relative;
 	justify-items: center;
 }
 
@@ -20,17 +21,6 @@ section {
 	border-top: 1px solid black;
 }
 
-section>div {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-}
-
-.ss-title {
-	margin: 10px 0;
-}
-
-.ss-descriptions {
-	margin: 10px 0;
 .profile_picture {
 	height: calc(min(100%, 100px));
 	position: absolute;
@@ -43,11 +33,11 @@ section>div {
 	margin: 0;
 }
 
-.position {
+.job_searched {
 	margin: 0;
 }
 
-.description {
+.about {
 	margin: 0;
 }
 
@@ -67,8 +57,8 @@ section>div {
 	margin: 0;
 }
 
-section:last-child .ss-descriptions {
-	margin-bottom: 0;
+.description {
+	margin: 10px 0;
 }
 
 embed {
