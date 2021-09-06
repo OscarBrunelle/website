@@ -4,7 +4,7 @@
 	/* width: 592px; */
 	/* height: 842px; */
 	overflow-y: auto;
-	margin: 20px;
+	/* margin: 20px; */
 	padding: 40px;
 	background-color: white;
 	color: black;
@@ -22,11 +22,12 @@
 	grid-template-columns: 2fr 1fr;
 }
 
-#left, #right {
-	padding: 10px;
+#left {
+	padding-right: 20px;
 }
 
 #right {
+	padding-left: 20px;
 	border-left: 1px solid black;
 }
 

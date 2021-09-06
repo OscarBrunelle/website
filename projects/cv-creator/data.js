@@ -36,7 +36,7 @@ const sections = [{
 				date_year: 2021,
 				date_month: 5,
 				duration: 4,
-				job_title: "Ingénieur Automatisation QA",
+				job_title: "Ingénieur tests autos QA",
 				description: "TODO"
 			}
 		]
