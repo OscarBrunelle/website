@@ -31,6 +31,12 @@ section>div {
 
 .ss-descriptions {
 	margin: 10px 0;
+.profile_picture {
+	height: calc(min(100%, 100px));
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 25%;
 }
 
 .name {

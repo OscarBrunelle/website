@@ -108,6 +108,7 @@ function renderpdf() {
 }
 
 function load() {
+	docimg(side_top, "profile_picture.jpg", "profile_picture");
 	doch1(side_top, `${cv_data.first_name} ${cv_data.last_name.toUpperCase()}`, "name");
 	docspan(side_top, cv_data.position, "position");
 	docp(side_top, cv_data.description, "description");
