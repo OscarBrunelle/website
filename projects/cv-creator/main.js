@@ -40,13 +40,7 @@ function renderpdf() {
 }
 
 function load() {
-	docimg(side_top, "profile_picture.jpg", "profile_picture");
-	const resume_title = doch1(side_top, null, "name");
-	docspan(resume_title, cv_data.first_name, "first_name");
-	docspan(resume_title, cv_data.last_name, "last_name");
-	docspan(side_top, cv_data.position, "job_searched");
-	docp(side_top, cv_data.description, "about");
-
+	build_top(cv_data);
 	for (const section of sections) {
 		const sect = docsection(section.side == "left" ? side_left : side_right);
 		doch2(sect, section.title, "section-title");

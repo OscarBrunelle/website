@@ -1,12 +1,19 @@
+#top {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	padding-bottom: 20px;
+	border-bottom: 1px solid black;
+}
+
 .profile_picture {
-	height: calc(min(100%, 100px));
-	position: absolute;
-	top: 0;
-	left: 0;
+	height: 100px;
 	border-radius: 25%;
 }
 
 .name {
+	font-size: 36px;
+	font-weight: lighter;
 	margin: 0;
 }
 
@@ -24,4 +31,29 @@
 
 .about {
 	margin: 0;
+}
+
+.top_left {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	gap: 20px;
+}
+
+.infos>* {
+	display: block;
+}
+
+.infos a {
+	font-size: 12px;
+}
+
+.links * {
+	display: inline-block;
+}
+
+.links>*:not(:first-child)::before {
+	content: " / ";
+	white-space: pre;
+	display: inline-block;
 }

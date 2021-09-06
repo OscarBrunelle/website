@@ -10,16 +10,10 @@
 	color: black;
 }
 
-#top {
-	margin-bottom: 30px;
-	display: grid;
-	position: relative;
-	justify-items: center;
-}
-
 #bottom {
 	display: grid;
 	grid-template-columns: 2fr 1fr;
+	padding-top: 20px;
 }
 
 #left {

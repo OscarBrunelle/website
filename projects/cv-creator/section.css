@@ -4,6 +4,7 @@ section {
 }
 
 section:first-child {
+	padding-top: 0;
 	border-top: none;
 }
 
