@@ -4,12 +4,13 @@
 }
 
 .title {
-	font-size: 18px;
+	font-size: inherit;
 	font-weight: normal;
 	margin: 0;
 }
 
 .job_title {
+	font-size: 18px;
 	font-weight: 500;
 	color: rgb(0, 81, 255);
 }
@@ -28,12 +29,12 @@
 	padding-left: 0;
 }
 
-.date-end::before {
-	content: " - ";
+.date-start::before {
+	content: " : ";
 }
 
-.job_title::before {
-	content: " : ";
+.date-end::before {
+	content: " - ";
 }
 
 .country::before {
