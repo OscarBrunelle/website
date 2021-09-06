@@ -446,6 +446,12 @@ function docp(parent = null, text = "", className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function doctime(parent = null, datetime = "", className = null) {
+	const element = document.createElement("time");
+	element.datetime = datetime;
+	return addDocElement(parent, element, className);
+}
+
 function docimg(parent = null, src = null, className = null) {
 	const element = document.createElement("img");
 	element.setAttribute("src", src);
