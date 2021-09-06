@@ -75,14 +75,20 @@ const sections = [{
 	side: "left",
 	title: "Compétences",
 	sub_sections: [{
-		title: "Web",
-		description: ""
+		job_title: "Web",
+		description: `Frameworks / Langages: js, Java, PHP (pure), Symfony
+		<br>Base de données: MySQL, SQLite, Firebase`
 	}, {
-		title: "Software",
-		description: ""
+		job_title: "Software",
+		description: `Programmation: scripting avec Python
+		<br>Gestion de version: Git, Subversion SVN (TortoiseSVN)
+		<br>Intégration continue: Espresso, circleCI
+		<br>Statistiques et traitements audio avec Matlab et R`
 	}, {
-		title: "Hardware",
-		description: ""
+		job_title: "Hardware",
+		description: `Programmation bas-niveau: VHDL / Assembly / C pour cartes Altera
+		<br>Arduino: utilisation basique de la carte Arduino Uno
+		<br>Autres: soudure et impression 3D`
 	}]
 }, {
 	side: "right",
