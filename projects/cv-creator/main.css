@@ -1,8 +1,8 @@
 #cv {
 	position: relative;
-	/* aspect-ratio: 592/842; */
-	/* width: 592px;
-	height: 842px; */
+	aspect-ratio: 592/842;
+	/* width: 592px; */
+	/* height: 842px; */
 	overflow-y: auto;
 	margin: 20px;
 	padding: 40px;
@@ -17,8 +17,29 @@
 	justify-items: center;
 }
 
+#bottom {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+}
+
+#left, #right {
+	padding: 10px;
+}
+
+#right {
+	border-left: 1px solid black;
+}
+
 section {
 	border-top: 1px solid black;
+}
+
+section:first-child {
+	border-top: none;
+}
+
+section:first-child>.section-title {
+	margin-top: 0;
 }
 
 .profile_picture {
@@ -41,23 +62,7 @@ section {
 	margin: 0;
 }
 
-.titles {
-	display: grid;
-	margin-bottom: 25px;
-}
-
-.title {
-	font-weight: bold;
-	margin: 0;
-}
-
-.subtitle {
-	font-style: italic;
-	font-weight: 300;
-	margin: 0;
-}
-
-.description {
+.sub_section {
 	margin: 10px 0;
 }
 
