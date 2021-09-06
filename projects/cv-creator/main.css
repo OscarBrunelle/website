@@ -30,50 +30,6 @@
 	border-left: 1px solid black;
 }
 
-section {
-	border-top: 1px solid black;
-}
-
-section:first-child {
-	border-top: none;
-}
-
-section:first-child>.section-title {
-	margin-top: 0;
-}
-
-.profile_picture {
-	height: calc(min(100%, 100px));
-	position: absolute;
-	top: 0;
-	left: 0;
-	border-radius: 25%;
-}
-
-.name {
-	margin: 0;
-}
-
-.first_name::after {
-	content: " ";
-}
-
-.last_name {
-	text-transform: uppercase;
-}
-
-.job_searched {
-	margin: 0;
-}
-
-.about {
-	margin: 0;
-}
-
-.sub_section {
-	margin: 10px 0;
-}
-
 embed {
 	display: none;
 	width: 100%;
