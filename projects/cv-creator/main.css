@@ -54,6 +54,14 @@ section:first-child>.section-title {
 	margin: 0;
 }
 
+.first_name::after {
+	content: " ";
+}
+
+.last_name {
+	text-transform: uppercase;
+}
+
 .job_searched {
 	margin: 0;
 }
