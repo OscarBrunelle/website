@@ -17,16 +17,20 @@
 
 .sub_section>.subtitle {
 	font-style: italic;
-	font-weight: 300;
+	font-weight: normal;
 	margin: 0;
 }
 
-.sub_section>.description {
+.sub_section .description {
 	padding-left: 10px;
 }
 
 #right .sub_section>.description {
 	padding-left: 0;
+}
+
+.description b {
+	font-weight: 500;
 }
 
 .date-start::before {
