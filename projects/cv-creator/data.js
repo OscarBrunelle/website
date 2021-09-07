@@ -5,12 +5,11 @@ const sections = [{
 		date_year: 2020,
 		job_title: "BAC +4 Génie informatique - Alternance",
 		employer: "Université d'Ottawa",
-		country: "CA"
+		country: "Canada"
 	}, {
 		date_year: 2017,
 		job_title: "BAC S",
-		employer: "Lycée Marguerite de Valois",
-		country: "FR"
+		employer: "Lycée Marguerite de Valois"
 	}, {
 		date_year: 2017,
 		job_title: "Permis B"
@@ -24,7 +23,6 @@ const sections = [{
 		duration: 7,
 		job_title: "Ingénieur Logiciels",
 		employer: "Capgemini",
-		country: "FR",
 		multiple: [
 			{
 				date_year: 2021,
@@ -46,9 +44,8 @@ const sections = [{
 		duration: 4,
 		job_title: "Ingénieur Logiciels",
 		employer: "Schneider Electric",
-		country: "FR",
 		description: `Écriture et réalisation d'une démo interactive des produits Schneider.
-		<br>Communication tablette/IPC/dashboard et interface graphique avec <b>Node-RED</b>.
+		<br>Communication tablette/IPC/dashboard et interface avec <b>Node-RED</b>.
 		<br>Visualisation instantanée des données des capteurs avec (Aveva Insight).`
 	}, {
 		date_year: 2020,
@@ -56,7 +53,7 @@ const sections = [{
 		duration: 4,
 		job_title: "Dév. web (front-end)",
 		employer: "Conseil National de Recherches Canada (CNRC)",
-		country: "CA",
+		country: "Canada",
 		description: `Dashboards de suivis de consommation pour des clients gouvernementaux.
 		<br>Création de graphiques avec <b>d3.js</b>.
 		<br>Ajout d'end-points pour le back-end avec <b>Java</b>.`
@@ -66,10 +63,10 @@ const sections = [{
 		duration: 4,
 		job_title: "Dév. web (fullstack)",
 		employer: "Datacloud Networks",
-		country: "CA",
-		description: `Développement from scratch du site web interne de l'université locale sous <b>PHP</b>.
+		country: "Canada",
+		description: `Développement from scratch du site interne de l'université locale sous <b>PHP</b>.
 		<br>IPTV : recherche de partenaires, installation d’antennes, études de marché.
-		<br>Développement d'une POC d'application <b>Android</b> avec utilisation des données GPS.`
+		<br>Développement d'une POC d'application <b>Android</b> avec utilisation du GPS.`
 	}]
 }, {
 	side: "left",
@@ -96,14 +93,15 @@ const sections = [{
 	sub_sections: [{
 		job_title: "Web et programmation",
 		description: `Site personnel - <a href='https://oscarbrunelle.com'>oscarbrunelle.com</a>
-		<br>Étude et visualisation intéractive d'algorithmes, ex: <a href='https://oscarbrunelle.com/projects/astar'>A*</a> et <a href='https://oscarbrunelle.com/projects/dijkstra'>Dijkstra</a>.
-		<br>Écriture de ce CV en HTML/CSS/js.
-		<br>Apprentissage des formats SVG et GIF, étude des QR codes.`
+		<br><br>Étude et visualisation intéractive d'algorithmes: <a href='https://oscarbrunelle.com/projects/astar'>A*</a> et <a href='https://oscarbrunelle.com/projects/dijkstra'>Dijkstra</a>.
+		<br><br>Écriture de ce CV en HTML/CSS/js.
+		<br><br>Apprentissage des formats SVG et GIF, étude des QR codes.
+		<br><br>Open-source: Première contribution au projet Mozilla!`
 	}, {
 		job_title: "Développement de jeux-vidéos",
-		description: `Petits projets sur Unity et sur le web de jeux basiques.
-		<br>Bases de design sur Blender.
-		<br>Intérêt pour le Game Dev et la 3D via mon entourage.`
+		description: `Petits projets sur Unity et en Javascript de jeux basiques.
+		<br><br>Bases de design sur Blender.
+		<br><br>Intérêt pour le Game Dev et la 3D.`
 	}]
 }, {
 	side: "right",
@@ -112,7 +110,7 @@ const sections = [{
 		job_title: "Langues",
 		description: `Anglais: Courant
 		<br>Espagnol : Niveau scolaire
-		<br>Russe : Bases`
+		<br>Russe : Lecture et écriture`
 	}, {
 		job_title: "Basket",
 		description: `Meneur / Ailier fort (+10 ans)
