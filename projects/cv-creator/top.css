@@ -22,7 +22,7 @@
 }
 
 .last_name {
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 }
 
 .top_left {
@@ -59,6 +59,7 @@
 	justify-self: center;
 	font-size: 40px;
 	font-weight: lighter;
+	color: rgb(0, 81, 255);
 }
 
 .about {
