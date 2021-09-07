@@ -76,12 +76,12 @@ const sections = [{
 	title: "Compétences",
 	sub_sections: [{
 		job_title: "Web",
-		description: `Frameworks / Langages: js, Java, PHP (pure), Symfony
-		<br>Base de données: MySQL, SQLite, Firebase`
+		description: `Frameworks / Langages: <b>js</b>, <b>Java</b>, <b>PHP</b> (pure), <b>Symfony</b>
+		<br>Base de données: <b>MySQL</b>, SQLite, Firebase`
 	}, {
 		job_title: "Software",
-		description: `Programmation: scripting avec Python
-		<br>Gestion de version: Git, Subversion SVN (TortoiseSVN)
+		description: `Programmation: scripting avec <b>Python</b>
+		<br>Gestion de version: <b>Git</b>, Subversion SVN (TortoiseSVN)
 		<br>Intégration continue: Espresso, circleCI
 		<br>Statistiques et traitements audio avec Matlab et R`
 	}, {
