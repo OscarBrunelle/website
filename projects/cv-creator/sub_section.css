@@ -25,10 +25,6 @@
 	padding-left: 10px;
 }
 
-#right .sub_section>.description {
-	padding-left: 0;
-}
-
 .description b {
 	font-weight: 500;
 }

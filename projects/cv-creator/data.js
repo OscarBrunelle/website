@@ -94,24 +94,32 @@ const sections = [{
 	side: "right",
 	title: "Projets",
 	sub_sections: [{
-		title: "Web",
-		description: "Site personnel - oscarbrunelle.com<br>Création d'outils pour les cours et les tâches répétitives."
+		job_title: "Web et programmation",
+		description: `Site personnel - <a href='https://oscarbrunelle.com'>oscarbrunelle.com</a>
+		<br>Étude et visualisation intéractive d'algorithmes, ex: <a href='https://oscarbrunelle.com/projects/astar'>A*</a> et <a href='https://oscarbrunelle.com/projects/dijkstra'>Dijkstra</a>.
+		<br>Écriture de ce CV en HTML/CSS/js.
+		<br>Apprentissage des formats SVG et GIF, étude des QR codes.`
 	}, {
-		title: "Développement de jeux-vidéos",
-		description: "Petits projets sur Unity avec utilisation de Blender.<br>Clones de jeux simples sur le web."
+		job_title: "Développement de jeux-vidéos",
+		description: `Petits projets sur Unity et sur le web de jeux basiques.
+		<br>Bases de design sur Blender.
+		<br>Intérêt pour le Game Dev et la 3D via mon entourage.`
 	}]
 }, {
 	side: "right",
 	title: "Centres d'intérêts",
 	sub_sections: [{
-		title: "Langues",
-		description: "Espagnol : Niveau scolaire<br>Russe : Bases"
+		job_title: "Langues",
+		description: `Anglais: Courant
+		<br>Espagnol : Niveau scolaire
+		<br>Russe : Bases`
 	}, {
-		title: "Basket",
-		description: "Meneur / Ailier fort (+10 ans)<br>Participation à la vie du club"
+		job_title: "Basket",
+		description: `Meneur / Ailier fort (+10 ans)
+		<br>Participation aux événements du club.`
 	}, {
-		title: "Guitare",
-		description: "Bases, solfège"
+		job_title: "Guitare",
+		description: `Bases, solfège`
 	}]
 }];
 const cv_data = {
