@@ -124,7 +124,7 @@ const cv_data = {
 	first_name: "Oscar",
 	last_name: "Brunelle",
 	position: "Développeur web",
-	description: "Formation d'ingénieur informatique.<br>Expérience professionelle dans le développement web.",
+	description: "Formation d'ingénieur informatique.<br>Expérience professionnelle dans le développement web.",
 	phone: "07 49 47 27 20",
 	email: "oscar.brunelle@gmail.com",
 	site: "oscarbrunelle.com",
