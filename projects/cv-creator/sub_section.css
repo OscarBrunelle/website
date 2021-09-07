@@ -22,7 +22,16 @@
 }
 
 .sub_section .description {
+	padding-top: 1px;
 	padding-left: 10px;
+}
+
+#right .sub_section {
+	margin: 10px 0 15px 0;
+}
+
+#right .sub_section .description {
+	padding-top: 3px;
 }
 
 .description b {
