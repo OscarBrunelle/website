@@ -1,0 +1,6 @@
+.audio_container {
+	display: grid;
+	grid-template-columns: 185px auto;
+	align-items: center;
+	margin: 10px;
+}
