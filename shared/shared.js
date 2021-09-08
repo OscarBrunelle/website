@@ -458,6 +458,12 @@ function docimg(parent = null, src = null, className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function docaudio(parent = null, src = null, className = null) {
+	const element = document.createElement("audio");
+	element.setAttribute("src", src);
+	return addDocElement(parent, element, className);
+}
+
 function doca(parent = null, href = null, innerHTML = "", className = null) {
 	const element = document.createElement("a");
 	element.innerHTML = innerHTML;
