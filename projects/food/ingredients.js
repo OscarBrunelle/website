@@ -10,7 +10,7 @@ const REFS = {
 	/* LIQUID END */
 };
 
-const INGREDIENTS = {
+let INGREDIENTS = {
 	/* SOLID START */
 	"SPAGHETTIS": {
 		"name-fr": "Spaghettis",
@@ -91,7 +91,7 @@ const INGREDIENTS = {
 	/* SOLID END */
 	/* LIQUID START */
 	"WATER": {
-		"name-fr": "Chocolat blanc",
+		"name-fr": "Eau",
 		"unit": "cL",
 		"price": 777
 	},

@@ -19,7 +19,7 @@ const MEAL_GROUPS = {
 	"GRATIN": "Gratin",
 };
 
-const FOODS = {
+let FOODS = {
 	/* MEALS START */
 	"PATES_CARBOS": {
 		"name": "Pâtes carbonara",

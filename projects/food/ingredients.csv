@@ -1,0 +1,27 @@
+ref,name-fr,unit,price,type
+spaghettis,Spaghettis,g,,pates
+boeuf_hache,Boeuf haché,g,,viande
+lardons,Lardons,g,,viande
+creme,Crème,cL,,creme
+oeuf,Oeuf,unique,,oeuf
+mais_grains,Maïs en grains,g,,legume
+carotte,Carotte,g,,legume
+sucre_blanc,Sucre blanc,g,,sucre
+sucre_roux,Sucre roux,g,,sucre
+farine,Farine,g,,farine
+beurre_doux,Beurre doux,g,,beurre
+beurre_sale,Beurre salé,g,,beurre
+chocolat_noir,Chocolat noir,g,,chocolat
+chocolat_blanc,Chocolat blanc,g,,chocolat
+eau,Eau,cL,,liquide
+pastis,Pastis,cL,,alcool
+petit_pois,Petits pois,kg,6.99,legume
+raisin_blanc_danlas,Raisin blanc,kg,3.99,fruit
+champignon_brun,Champignon brun,kg,4.75,legume
+courgette,Courgette,kg,1.95,legume
+poivron_rouge,Poivron rouge,kg,2.95,legume
+mozzarela,Mozzarela,kg,6.24,fromage
+,,,,
+,,,,
+,,,,
+,,,,
