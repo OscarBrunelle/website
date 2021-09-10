@@ -1,6 +1,11 @@
-#main {
+main {
 	display: grid;
+	grid-template-rows: auto auto 1fr auto;
 	gap: 5px;
+}
+
+#search-div {
+	justify-self: center;
 }
 
 #meals-div {
