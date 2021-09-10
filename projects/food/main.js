@@ -192,14 +192,6 @@ function random_meal() {
 
 function parse_csv_line(line, columns) {
 	let value = {};
-	line.split(",").forEach(function (v, i) {
-		value[columns[i]] = v.replace("\r", "");
-	});
-	return value;
-}
-
-function alt_parse(line, columns) {
-	let value = {};
 	let i = 0;
 	let prev_ci = 0;
 	let quoting = false;
