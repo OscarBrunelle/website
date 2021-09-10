@@ -1,6 +1,6 @@
 "use strict"
 
-const GP = {
+let GP = {
 	"ALCOOL": "ALCOOL",
 	"BEURRE": "BEURRE",
 	"BISCOTTES": "BISCOTTES",
@@ -39,7 +39,7 @@ const GP = {
 	"YAOURTS": "YAOURTS",
 };
 
-const PRODUCTS = {
+let PRODUCTS = {
 	/* SOLID START */
 	"SPAGHETTIS": {
 		"name-fr": "Spaghettis",
@@ -177,7 +177,7 @@ const cw = 100;
 const ch = 100;
 const ct = 10;
 const cm = 40;
-const STORES = {
+let STORES = {
 	"LECLERC": {
 		"defaults": {
 			w: 1,
