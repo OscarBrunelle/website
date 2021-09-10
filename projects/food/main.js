@@ -254,7 +254,7 @@ function extract_csv(data) {
 	return values;
 }
 
-const get_csv = async (target, callback) => {
+async function get_csv(target, callback) {
 	try {
 		const res = await fetch(target, {
 			method: "get",
