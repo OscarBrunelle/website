@@ -27,16 +27,19 @@ svg .tick {
 }
 
 svg .line_hours {
-	stroke: grey;
+	stroke: wheat;
 	stroke-width: 1;
+	stroke-linecap: round;
 }
 
 svg .line_minutes {
-	stroke: lightgray;
+	stroke: wheat;
 	stroke-width: 1;
+	stroke-linecap: round;
 }
 
 svg .line_seconds {
-	stroke: white;
+	stroke: wheat;
 	stroke-width: 0.3;
+	stroke-linecap: round;
 }
