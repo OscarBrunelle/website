@@ -11,7 +11,7 @@ let line_seconds;
 
 function build_clock() {
 	let center = svg_size / 2;
-	svgcircle(svg, center, center, svg_size/2);
+	svgcircle(svg, center, center, svg_size/2-0.1);
 	for (let i = 0; i < 12; i++) {
 		let x = Math.cos(Math.PI*2*i/12);
 		let y = Math.sin(Math.PI*2*i/12);
