@@ -38,7 +38,6 @@ function update_clock() {
 	let date = new Date();
 
 	let seconds = date.getSeconds() + date.getMilliseconds() / 1000;
-	console.log(seconds);
 	update_line(seconds, 60, line_seconds, line_seconds_length, -Math.PI/2);
 
 	let minutes = date.getMinutes() + seconds / 60;

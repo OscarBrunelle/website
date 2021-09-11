@@ -16,18 +16,27 @@ main {
 	background-color: transparent;
 }
 
+svg circle {
+	stroke: wheat;
+	stroke-width: 0.2;
+}
+
 svg .tick {
 	stroke: wheat;
+	stroke-width: 0.3;
 }
 
 svg .line_hours {
 	stroke: grey;
+	stroke-width: 1;
 }
 
 svg .line_minutes {
 	stroke: lightgray;
+	stroke-width: 1;
 }
 
 svg .line_seconds {
 	stroke: white;
+	stroke-width: 0.3;
 }
