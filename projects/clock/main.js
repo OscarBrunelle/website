@@ -1,79 +1,66 @@
-let p1Time = 600000,
-	p2Time = 600000;
-let p1Turn = true;
-let clockRunning = false;
+"use strict"
 
-document.addEventListener("keypress", function (e) {
-	if (e.code == "Space") {
-		switchPlayer();
-	} else if (e.code = "Enter") {
-		startClock();
+let svg = document.getElementById("svg");
+let svg_size = 100;
+let line_hours_length = svg_size/2.8;
+let line_hours;
+let line_minutes_length = svg_size/2.3;
+let line_minutes;
+let line_seconds_length = svg_size/2.1;
+let line_seconds;
+
+function build_clock() {
+	let center = svg_size / 2;
+	svgcircle(svg, center, center, svg_size/2);
+	for (let i = 0; i < 12; i++) {
+		let x = Math.cos(Math.PI*2*i/12);
+		let y = Math.sin(Math.PI*2*i/12);
+		svgline(svg, center + x*center, center + y*center, center + x*(center-5), center + y*(center-5), "tick");
 	}
-});
-
-function switchPlayer() {
-	p1Turn = !p1Turn;
-}
-
-let frameId;
-let previousUpdateTime;
-function updateTime(timestamp) {
-
-	const currentUpdateTime = new Date();
-	const deltaTime = currentUpdateTime - previousUpdateTime;
-	previousUpdateTime = currentUpdateTime;
-
-	if (p1Turn) {
-		p1Time -= deltaTime;
-		if (p1Time <= 0) {
-			alert("Player 1 lost on time.");
-			startClock();
-		}
-	} else {
-		p2Time -= deltaTime;
-		if (p2Time <= 0) {
-			alert("Player 2 lost on time.");
-			startClock();
-		}
+	for (let i = 0; i < 60; i++) {
+		let x = Math.cos(Math.PI*2*i/60);
+		let y = Math.sin(Math.PI*2*i/60);
+		svgline(svg, center + x*center, center + y*center, center + x*(center-1), center + y*(center-1), "tick");
 	}
-	updateDisplay();
-
-	frameId = requestAnimationFrame(updateTime);
+	line_hours = svgline(svg, center, center, center, center, "line_hours");
+	line_minutes = svgline(svg, center, center, center, center, "line_minutes");
+	line_seconds = svgline(svg, center, center, center, center, "line_seconds");
 }
 
-function startClock() {
-	previousUpdateTime = new Date();
-	if (clockRunning) {
-		cancelAnimationFrame(frameId);
-	} else {
-		frameId = requestAnimationFrame(updateTime);
-	}
-	clockRunning = !clockRunning;
-	updateDisplay();
+let anim;
+let stop_update = false;
+
+function stop_clock() {
+	stop_update = true;
 }
 
-function format(number) {
-	let zeroNumber = "0" + number;
-	return zeroNumber.slice(-2);
+function update_line(value, total, line, line_length, offset) {
+	let x = 50 + line_length * Math.cos(Math.PI*value/total*2 + offset);
+	let y = 50 + line_length * Math.sin(Math.PI*value/total*2 + offset);
+	line.setAttributeNS(null, "x2", x);
+	line.setAttributeNS(null, "y2", y);
 }
 
-function updateDisplay() {
-	let p1Minutes = format(Math.floor(p1Time / 60000));
-	let p1Seconds = format(Math.floor((p1Time % 60000 / 1000) % 60));
-	p1Seconds = p1Seconds.slice(-2);
-	document.getElementById("p1TimeSpan").innerHTML = p1Minutes + ":" + p1Seconds;
+function update_clock() {
+	if (stop_update) return;
+	let date = new Date();
 
-	let p2Minutes = format(Math.floor(p2Time / 60000));
-	let p2Seconds = format(Math.floor((p2Time % 60000 / 1000) % 60));
-	document.getElementById("p2TimeSpan").innerHTML = p2Minutes + ":" + p2Seconds;
+	let seconds = date.getSeconds() + date.getMilliseconds() / 1000;
+	console.log(seconds);
+	update_line(seconds, 60, line_seconds, line_seconds_length, -Math.PI/2);
 
-	if (p1Turn) {
-		document.getElementById("p1TimeSpan").parentElement.className = "active";
-		document.getElementById("p2TimeSpan").parentElement.className = "";
-	} else {
-		document.getElementById("p1TimeSpan").parentElement.className = "";
-		document.getElementById("p2TimeSpan").parentElement.className = "active";
-	}
+	let minutes = date.getMinutes() + seconds / 60;
+	update_line(minutes, 60, line_minutes, line_minutes_length, -Math.PI/2);
+
+	let hours = date.getHours() + minutes / 60;
+	update_line(hours, 24, line_hours, line_hours_length, Math.PI);
+	
+	anim = requestAnimationFrame(update_clock);
 }
 
-document.onload = updateDisplay();
+function load() {
+	build_clock();
+	update_clock();
+}
+
+document.onload = load();
