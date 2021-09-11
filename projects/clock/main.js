@@ -2,7 +2,7 @@
 
 let svg = document.getElementById("svg");
 let svg_size = 100;
-let line_hours_length = svg_size/2.8;
+let line_hours_length = svg_size/4;
 let line_hours;
 let line_minutes_length = svg_size/2.3;
 let line_minutes;
@@ -27,13 +27,6 @@ function build_clock() {
 	line_seconds = svgline(svg, center, center, center, center, "line_seconds");
 }
 
-let anim;
-let stop_update = false;
-
-function stop_clock() {
-	stop_update = true;
-}
-
 function update_line(value, total, line, line_length, offset) {
 	let x = 50 + line_length * Math.cos(Math.PI*value/total*2 + offset);
 	let y = 50 + line_length * Math.sin(Math.PI*value/total*2 + offset);
@@ -42,7 +35,6 @@ function update_line(value, total, line, line_length, offset) {
 }
 
 function update_clock() {
-	if (stop_update) return;
 	let date = new Date();
 
 	let seconds = date.getSeconds() + date.getMilliseconds() / 1000;
@@ -55,7 +47,7 @@ function update_clock() {
 	let hours = date.getHours() + minutes / 60;
 	update_line(hours, 24, line_hours, line_hours_length, Math.PI);
 	
-	anim = requestAnimationFrame(update_clock);
+	requestAnimationFrame(update_clock);
 }
 
 function load() {
