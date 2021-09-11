@@ -597,11 +597,7 @@ function toggle_theme(theme = null) {
 			current_theme = "light";
 		}
 	} else {
-		if (current_theme == "light") {
-			current_theme = "dark";
-		} else {
-			current_theme = "light";
-		}
+		current_theme = (current_theme == "light" ? "dark" : "light");
 	}
 	set_cookie("preferred_theme", current_theme);
 

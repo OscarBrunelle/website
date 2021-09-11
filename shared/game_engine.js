@@ -11,7 +11,7 @@ a* algorithm
 const UNDEFINED_IMAGE = new Image();
 
 class GameCanvas {
-	constructor(parent_selector, _width, _height, id = "game_canvas") {
+	constructor(parent, width, height, canvas = null) {
 		let canvas = document.getElementById(id);
 		if (canvas == null) {
 			canvas = document.createElement("canvas");
@@ -170,8 +170,8 @@ class GameCanvas {
 	fillRect(x, y, width, height, color) {
 		x = x - width / 2;
 		y = y - height / 2;
-		x = (Math.floor(x / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(/*++*/x / 0.5) * 0.5) : (Math.floor((x + 0.5) / 0.5) * 0.5);
-		y = (Math.floor(y / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor(/*++*/y / 0.5) * 0.5) : (Math.floor((y + 0.5) / 0.5) * 0.5);
+		x = (Math.floor(x / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor( /*++*/ x / 0.5) * 0.5) : (Math.floor((x + 0.5) / 0.5) * 0.5);
+		y = (Math.floor(y / 0.5) * 0.5) % 1 === 0.5 ? (Math.floor( /*++*/ y / 0.5) * 0.5) : (Math.floor((y + 0.5) / 0.5) * 0.5);
 		width = Math.floor(width);
 		height = Math.floor(height);
 		this.context.save();
