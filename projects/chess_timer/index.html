@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="../../shared/shared.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/template.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="icon" type="image/png" href="icon.svg">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="description" content="chess timer">
+	<meta name="author" content="Oscar Brunelle">
+	<title>Chess timer</title>
+</head>
+
+<body>
+	<header></header>
+
+	<nav role="navigation" id="top-nav"></nav>
+
+	<main id="main" role="main">
+		<div>
+			<button onclick="startClock();">Start</button>
+			<button onclick="switchPlayer();">Switch</button>
+			<button onclick="resetClock();" disabled>Reset</button>
+		</div>
+		<div>
+			<div><span id="p1TimeSpan">0</span></div>
+			<div><span id="p2TimeSpan">0</span></div>
+		</div>
+	</main>
+
+	<button id="theme-btn" aria-label="toggle night mode"></button>
+
+	<script type="text/javascript" src="../../shared/shared.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

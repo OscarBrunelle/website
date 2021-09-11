@@ -93,9 +93,9 @@ const PROJECTS = [{
 		"tags": ["game"]
 	},
 	{
-		"link": "clock",
-		"title_en": "Clock",
-		"title_fr": "Clock",
+		"link": "chess_timer",
+		"title_en": "Chess timer",
+		"title_fr": "Chrono pour les échecs",
 		"desc_en": "",
 		"desc_fr": "",
 		"tags": ["useful"],

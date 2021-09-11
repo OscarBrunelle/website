@@ -1,0 +1,41 @@
+main {
+	height: 100%;
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+}
+
+main>div {
+	width: 100%;
+	display: grid;
+}
+
+main>div:first-child {
+	grid-template-columns: 1fr 4fr 1fr;
+}
+
+main>div:first-child>button {
+	font-size: 5vw;
+}
+
+main>div:last-child {
+	text-align: center;
+	font-size: 16vw;
+	align-items: center;
+	grid-template-columns: 1fr 1fr;
+}
+
+main>div:last-child>div {
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+main>div:last-child>div.active {
+	background: green;
+	color: white;
+}
+
+main>div:last-child>div>span {
+	width: 100%;
+	text-align: center;
+}
