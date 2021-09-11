@@ -585,9 +585,8 @@ function fill_table(element, columns = [], values = [], empty = true) {
 let current_theme;
 
 function toggle_theme(theme = null) {
-	if (document.getElementById("theme-btn") != null) {
-		document.getElementById("theme-btn").addEventListener("click", toggle_theme);
-	}
+	let button_present = (document.getElementById("theme-btn") != null);
+	if (button_present) document.getElementById("theme-btn").addEventListener("click", toggle_theme);
 
 	if (theme != null && (theme == "light" || theme == "dark")) {
 		current_theme = theme;
@@ -608,12 +607,12 @@ function toggle_theme(theme = null) {
 
 	switch (current_theme) {
 		case "light":
-			document.getElementById("theme-btn").innerHTML = "&#127761;";
+			if (button_present) document.getElementById("theme-btn").innerHTML = "&#127761;";
 			document.body.classList.remove("theme-dark");
 			document.body.classList.add("theme-light");
 			break;
 		case "dark":
-			document.getElementById("theme-btn").innerHTML = "&#9728;&#65039;";
+			if (button_present) document.getElementById("theme-btn").innerHTML = "&#9728;&#65039;";
 			document.body.classList.remove("theme-light");
 			document.body.classList.add("theme-dark");
 			break;
