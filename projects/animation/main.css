@@ -1,3 +1,15 @@
+main {
+	display: grid;
+	grid-template-rows: 1fr auto;
+}
+
 canvas {
+	align-self: center;
+	justify-self: center;
 	background-color: white;
+	border-radius: 10%;
+}
+
+main button {
+	justify-self: center;
 }
