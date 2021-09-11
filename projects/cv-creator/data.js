@@ -26,16 +26,16 @@ const sections = [{
 		multiple: [
 			{
 				date_year: 2021,
-				date_month: 2,
-				duration: 4,
-				job_title: "Développeur PHP Symfony",
-				description: "Développement du site 'LesBonsClics' sous <b>Symfony PHP</b>."
-			}, {
-				date_year: 2021,
 				date_month: 5,
 				duration: 4,
 				job_title: "Ingénieur tests autos QA",
 				description: "Développement et maintenance de tests autos avec <b>RobotFramework</b>."
+			}, {
+				date_year: 2021,
+				date_month: 2,
+				duration: 4,
+				job_title: "Développeur PHP Symfony",
+				description: "Développement du site 'LesBonsClics' sous <b>Symfony PHP</b>."
 			}
 		]
 	}, {
