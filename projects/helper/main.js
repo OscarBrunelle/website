@@ -1,7 +1,7 @@
 function load() {
 	load_conversion();
 }
-
+// <!> use shared functions
 function create_input(label, name, parent, update_function) {
 	const container = document.createElement("div");
 	const field_label = document.createElement("label");
