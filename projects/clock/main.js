@@ -44,7 +44,7 @@ function update_clock() {
 	update_line(minutes, 60, line_minutes, line_minutes_length, -Math.PI/2);
 
 	let hours = date.getHours() + minutes / 60;
-	update_line(hours, 24, line_hours, line_hours_length, Math.PI);
+	update_line(hours, 24, line_hours, line_hours_length, -Math.PI/3);
 	
 	requestAnimationFrame(update_clock);
 }
