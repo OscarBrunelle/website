@@ -157,7 +157,7 @@ function copyToClipboard() {
 	let text = document.getElementById("output-code").innerHTML;
 	navigator.clipboard.writeText(text);
 }
-
+// for performance, save positions then draw in animationFrame <!>
 function load() {
 	document.getElementById("number_colors-select").addEventListener("change", updateColorPickers);
 	updateColorPickers();
