@@ -21,7 +21,7 @@ const sections = [{
 		date_year: 2021,
 		date_month: 2,
 		duration: 7,
-		job_title: "Ingénieur Logiciels",
+		job_title: "Ingénieur logiciels",
 		employer: "Capgemini",
 		multiple: [
 			{
@@ -42,7 +42,7 @@ const sections = [{
 		date_year: 2020,
 		date_month: 8,
 		duration: 4,
-		job_title: "Ingénieur Logiciels",
+		job_title: "Développeur systèmes embarqués temps réel",
 		employer: "Schneider Electric",
 		description: `Écriture et réalisation d'une démo interactive des produits Schneider.
 		<br>Communication tablette/IPC/dashboard et interface avec <b>Node-RED</b>.
@@ -123,8 +123,8 @@ const sections = [{
 const cv_data = {
 	first_name: "Oscar",
 	last_name: "Brunelle",
-	position: "Développeur web",
-	description: "Formation d'ingénieur informatique.<br>Expérience professionnelle dans le développement web.",
+	position: "Ingénieur systèmes embarqués",
+	description: "Formation d'ingénieur informatique.<br>2 ans d'expérience professionnelle dans l'informatique et le développement web.",
 	phone: "07 49 47 27 20",
 	email: "oscar.brunelle@gmail.com",
 	site: "oscarbrunelle.com",
