@@ -1,6 +1,6 @@
 #top {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 2fr 3fr;
 	align-items: center;
 	padding-bottom: 40px;
 	border-bottom: 1px solid black;
@@ -38,6 +38,8 @@
 
 .infos a, .links a {
 	font-size: 0.75rem;
+	color: black;
+	text-decoration: none;
 }
 
 .links * {
