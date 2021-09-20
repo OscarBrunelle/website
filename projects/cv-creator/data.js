@@ -6,10 +6,10 @@ const sections = [{
 		job_title: "BAC +4 Génie informatique - Alternance",
 		employer: "Université d'Ottawa",
 		country: "Canada"
-	}, {
-		date_year: 2017,
-		job_title: "BAC S",
-		employer: "Lycée Marguerite de Valois"
+	// }, {
+	// 	date_year: 2017,
+	// 	job_title: "BAC S",
+	// 	employer: "Lycée Marguerite de Valois"
 	}, {
 		date_year: 2017,
 		job_title: "Permis B"
@@ -124,10 +124,9 @@ const cv_data = {
 	first_name: "Oscar",
 	last_name: "Brunelle",
 	position: "Ingénieur systèmes embarqués",
-	description: "Formation d'ingénieur informatique.<br>2 ans d'expérience professionnelle dans l'informatique et le développement web.",
+	description: "Formation d'ingénieur informatique.<br>2 ans d'expérience dans l'informatique et le développement web.",
 	phone: "07 49 47 27 20",
 	email: "oscar.brunelle@gmail.com",
-	site: "oscarbrunelle.com",
 	links: [
 		{
 			site: "GitHub",
@@ -135,6 +134,9 @@ const cv_data = {
 		}, {
 			site: "LinkedIn",
 			link: "https://www.linkedin.com/in/oscar-brunelle"
+		}, {
+			site: "Site web",
+			link: "https://oscarbrunelle.com"
 		}
 	],
 	sections: sections
