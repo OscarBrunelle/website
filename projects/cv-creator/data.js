@@ -10,9 +10,9 @@ const sections = [{
 	// 	date_year: 2017,
 	// 	job_title: "BAC S",
 	// 	employer: "Lycée Marguerite de Valois"
-	}, {
-		date_year: 2017,
-		job_title: "Permis B"
+	// }, {
+	// 	date_year: 2017,
+	// 	job_title: "Permis B"
 	}]
 }, {
 	side: "left",
@@ -46,7 +46,7 @@ const sections = [{
 		employer: "Schneider Electric",
 		description: `Écriture et réalisation d'une démo interactive des produits Schneider.
 		<br>Communication tablette/IPC/dashboard et interface avec <b>Node-RED</b>.
-		<br>Visualisation instantanée des données des capteurs avec (Aveva Insight).`
+		<br>Visualisation instantanée des données des capteurs avec Aveva Insight.`
 	}, {
 		date_year: 2020,
 		date_month: 0,
@@ -114,7 +114,7 @@ const sections = [{
 	}, {
 		job_title: "Basket",
 		description: `Meneur / Ailier fort (+10 ans)
-		<br>Participation aux événements du club.`
+		<br>Participation à la vie du club.`
 	}, {
 		job_title: "Guitare",
 		description: `Bases, solfège`
