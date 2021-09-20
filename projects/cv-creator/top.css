@@ -12,7 +12,7 @@
 }
 
 .name {
-	font-size: 36px;
+	font-size: 2.3rem;
 	font-weight: lighter;
 	margin: 0;
 }
@@ -37,7 +37,7 @@
 }
 
 .infos a, .links a {
-	font-size: 12px;
+	font-size: 0.75rem;
 }
 
 .links * {
@@ -58,7 +58,7 @@
 	margin-bottom: 20px;
 	justify-self: center;
 	text-align: center;
-	font-size: 40px;
+	font-size: 2.5rem;
 	font-weight: lighter;
 	color: rgb(0, 81, 255);
 }
