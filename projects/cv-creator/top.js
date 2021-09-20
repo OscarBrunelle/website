@@ -8,7 +8,7 @@ function build_top() {
 	doca(top_left_infos, `mailto:${cv_data.email}`, cv_data.email, "email");
 	doca(top_left_infos, `tel:${cv_data.phone}`, cv_data.phone, "phone");
 	doca(top_left_infos, `https://${cv_data.site}`, cv_data.site, "site");
-	const links = docdiv(top_left_infos, "links");
+	const links = docspan(top_left_infos, null, "links");
 	for (const link of cv_data.links) {
 		doca(links, link.link, link.site, link.site);
 	}
