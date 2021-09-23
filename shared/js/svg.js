@@ -2,6 +2,20 @@
 
 const xmlns = "http://www.w3.org/2000/svg";
 
+function addNSElement(parent, element, className = null, prependEl = false) {
+	if (className != null) {
+		element.setAttributeNS(xmlns, "class", className);
+	}
+	if (parent != null) {
+		if (prependEl) {
+			parent.prepend(element);
+		} else {
+			parent.appendChild(element);
+		}
+	}
+	return element;
+}
+
 function docsvg(parent = null, viewBox = "0 0 100 100", className = null) {
 	const element = document.createElementNS(xmlns, "svg");
 	element.setAttributeNS(xmlns, "viewBox", viewBox);
