@@ -8,3 +8,7 @@ svg {
 svg line {
 	stroke: black;
 }
+
+svg .container {
+	overflow: visible;
+}

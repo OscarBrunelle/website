@@ -7,6 +7,10 @@ let template_data = {
 			value: "13",
 			label: "labeltest"
 		}, {
+			date: "2021-09-23T16:29:30",
+			value: "17",
+			label: "labeltest2"
+		}, {
 			date: "2021-09-23T16:30:00",
 			value: "15",
 			label: "labeltest2"

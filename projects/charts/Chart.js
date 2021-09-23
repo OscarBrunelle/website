@@ -43,8 +43,9 @@ function create_graph(data) {
 	for (const d of data) {
 		let x = get_pos(d.date, min_index, max_index);
 		let y = get_pos(d.value, min_value, max_value);
-		console.log(x, y);
-		svgcircle(svg, x, y, 3);
+		const c = svgcontainer(svg, x, y, 4, 4, "container");
+		svgcircle(c, 0, 0, 2);
+		svgtitle(c, d.label);
 		if (prev_pos != null) svgline(svg, prev_pos.x, prev_pos.y, x, y);
 		prev_pos = {
 			x: x,
