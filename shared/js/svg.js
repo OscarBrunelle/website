@@ -2,9 +2,9 @@
 
 const xmlns = "http://www.w3.org/2000/svg";
 
-function addNSElement(parent, element, className = null, prependEl = false) {
+function addSVGElement(parent, element, className = null, prependEl = false) {
 	if (className != null) {
-		element.setAttributeNS(xmlns, "class", className);
+		element.setAttributeNS(null, "class", className);
 	}
 	if (parent != null) {
 		if (prependEl) {
@@ -19,32 +19,16 @@ function addNSElement(parent, element, className = null, prependEl = false) {
 function docsvg(parent = null, viewBox = "0 0 100 100", className = null) {
 	const element = document.createElementNS(xmlns, "svg");
 	element.setAttributeNS(null, "viewBox", viewBox);
-	return addNSElement(parent, element, className);
+	return addSVGElement(parent, element, className);
 }
 
 function svgcontainer(parent, x, y, width, height, className = null) {
 	const element = document.createElementNS(xmlns, "svg");
-	if (className != null) {
-		element.setAttributeNS(null, "class", className);
-	}
 	element.setAttributeNS(null, "x", x);
 	element.setAttributeNS(null, "y", y);
 	element.setAttributeNS(null, "width", width);
 	element.setAttributeNS(null, "height", height);
-	parent.appendChild(element);
-	return element;
-}
-
-function addSVGElement(parent, element, className = null, prependEl = false) {
-	if (className != null) {
-		element.setAttributeNS(null, "class", className);
-	}
-	if (prependEl) {
-		parent.prepend(element);
-	} else {
-		parent.appendChild(element);
-	}
-	return element;
+	return addSVGElement(parent, element, className);
 }
 
 function svgg(parent, className = null, prependEl = false) {
