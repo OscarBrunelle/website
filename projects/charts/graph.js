@@ -47,6 +47,8 @@ function get_pos(value, min_range, max_range, reverse = false) {
 
 function create_graph(parent, data_sets, options = {}) {
 	const svg = docsvg(parent, `0 0 ${size} ${size}`, "graph");
+	docstyle(svg, `.graph{aspect-ratio: 1/1; border: 1px solid black; background-color: white;}
+	.graph line{stroke-linecap: round;}`);
 	let set_index = 0;
 
 	for (const set_name in data_sets) {
@@ -69,8 +71,9 @@ function create_graph(parent, data_sets, options = {}) {
 		let data = data_sets[set_name];
 
 		const gset = svgg(svg, `set ${set_name}`);
-		docstyle(gset, `.set.${set_name} line{stroke: ${colors[set_index]};}
-		.set.${set_name} circle{fill: ${colors[set_index]};}`);
+		docstyle(gset, `g.set.${set_name} line{stroke: ${colors[set_index]};}
+		g.set.${set_name} circle{fill: ${colors[set_index]};}
+		g.set.${set_name} .container {overflow: visible;}`);
 		const glines = svgg(gset, "lines");
 		const gpoints = svgg(gset, "points");
 
@@ -89,4 +92,11 @@ function create_graph(parent, data_sets, options = {}) {
 		}
 		set_index++;
 	}
+
+	const gborders = svgg(svg, "borders");
+	docstyle(gborders, `g.borders line{stroke: black;}`);
+	let ox = (size * padd_perc);
+	let oy = size - (size * padd_perc);
+	svgline(gborders, ox, oy, ox, (size * padd_perc), "border");
+	svgline(gborders, ox, oy, size - (size * padd_perc), oy, "border");
 }

@@ -7,11 +7,4 @@ main {
 svg {
 	max-width: 75vw;
 	max-height: 75vh;
-	aspect-ratio: 1/1;
-	border: 1px solid black;
-	background-color: white;
-}
-
-svg .container {
-	overflow: visible;
 }
