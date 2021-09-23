@@ -10,7 +10,7 @@ function format_data(data) {
 
 function sort_data(data) {
 	return data.sort(function (a, b) {
-		return a - b;
+		return a.date - b.date;
 	});
 }
 
