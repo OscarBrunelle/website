@@ -1,6 +1,7 @@
 const size = 100;
 const padd_perc = 0.1;
 const colors = ["black", "red"];
+const nticks = 5;
 
 function format_data(data) {
 	for (const d of data) {
@@ -45,6 +46,10 @@ function get_pos(value, min_range, max_range, reverse = false) {
 	return pos;
 }
 
+function format_date(date) {
+	return `${to_fixed_length(date.getMonth() + 1, 2)}/${date.getDate()} - ${date.getHours()}:${date.getMinutes()}`;
+}
+
 function create_graph(parent, data_sets, options = {}) {
 	const svg = docsvg(parent, `0 0 ${size} ${size}`, "graph");
 	docstyle(svg, `.graph{aspect-ratio: 1/1; border: 1px solid black; background-color: white;}
@@ -83,7 +88,7 @@ function create_graph(parent, data_sets, options = {}) {
 			let y = get_pos(d.value, min_value, max_value, true);
 			const c = svgcontainer(gpoints, x, y, null, null, "container");
 			svgcircle(c, 0, 0, 2);
-			svgtitle(c, `Value: ${d.value}\nLabel: ${d.label}`);
+			svgtitle(c, `Value: ${d.value}\nDate: ${format_date(d.date)}\nLabel: ${d.label}`);
 			if (prev_pos != null) svgline(glines, prev_pos.x, prev_pos.y, x, y);
 			prev_pos = {
 				x: x,
@@ -99,4 +104,18 @@ function create_graph(parent, data_sets, options = {}) {
 	let oy = size - (size * padd_perc);
 	svgline(gborders, ox, oy, ox, (size * padd_perc), "border");
 	svgline(gborders, ox, oy, size - (size * padd_perc), oy, "border");
+
+	const gticks = svgg(gborders, "ticks");
+	for (let i = 0; i <= nticks; i++) {
+		let x_val = new Date(min_index.getTime() + (max_index.getTime() - min_index.getTime()) * i / nticks);
+		let y_val = min_value + (max_value - min_value) * i / nticks;
+		let x = get_pos(x_val, min_index, max_index);
+		let y = get_pos(y_val, min_value, max_value, true);
+		const gtickx = svgg(gticks);
+		svgline(gtickx, x, oy, x, oy + 3, "tick tickx");
+		svgtitle(gtickx, `${format_date(x_val)}`);
+		const gticky = svgg(gticks);
+		svgline(gticky, ox, y, ox - 3, y, "tick ticky");
+		svgtitle(gticky, `${y_val}`);
+	}
 }
