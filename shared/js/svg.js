@@ -76,6 +76,12 @@ function svgcircle(parent, x, y, radius, className = null, prependEl = false) {
 	return addSVGElement(parent, element, className, prependEl);
 }
 
+function svgtitle(parent, text = "", className = null, prependEl = false) {
+	let element = document.createElementNS(xmlns, "title");
+	element.innerHTML = text;
+	return addSVGElement(parent, element, className, prependEl);
+}
+
 // angles in radians
 function svgarc(parent, x, y, r, startAngle, endAngle, invert = false, className = "", prependEl = false) {
 	if (Math.abs(endAngle - startAngle) == 2 * Math.PI) {
