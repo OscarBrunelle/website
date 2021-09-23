@@ -1,6 +1,12 @@
+main {
+	display: grid;
+	justify-items: center;
+	align-items: center;
+}
+
 svg {
-	width: 300px;
-	height: 300px;
+	width: 30%;
+	aspect-ratio: 1/1;
 	border: 1px solid black;
 	background-color: white;
 }

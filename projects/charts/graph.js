@@ -36,7 +36,7 @@ function get_pos(value, min_range, max_range) {
 	return (value - min_range) / (max_range - min_range) * size * (1 - padd_perc * 2) + (padd_perc * size);
 }
 
-function create_graph(data) {
+function create_graph(parent, data) {
 	// for (const set_name in data) {
 
 	// }
@@ -45,7 +45,7 @@ function create_graph(data) {
 	data = sort_data(data);
 	let [min_index, max_index] = get_index_range(data);
 	let [min_value, max_value] = get_value_range(data);
-	const svg = docsvg(document.getElementById("main"), `0 0 ${size} ${size}`, "graph");
+	const svg = docsvg(parent, `0 0 ${size} ${size}`, "graph");
 
 	let prev_pos;
 	for (const d of data) {
