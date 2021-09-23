@@ -32,10 +32,10 @@ function get_value_range(data) {
 	return [min, max];
 }
 
-function get_pos(value, min_range, max_range) {
-	console.log(min_range, max_range);
-	return (value - min_range) / (max_range - min_range) * 100;
-	return (value - min_range) / (max_range - min_range) * size * (1 - padd_perc * 2) + (padd_perc * size);
+function get_pos(value, min_range, max_range, reverse = false) {
+	let pos = (value - min_range) / (max_range - min_range) * size * (1 - padd_perc * 2) + (padd_perc * size);
+	if (reverse) pos = size - pos;
+	return pos;
 }
 
 function create_graph(parent, data, options = {}) {
@@ -60,7 +60,7 @@ function create_graph(parent, data, options = {}) {
 	let prev_pos;
 	for (const d of data) {
 		let x = get_pos(d.date, min_index, max_index);
-		let y = get_pos(d.value, min_value, max_value);
+		let y = get_pos(d.value, min_value, max_value, true);
 		const c = svgcontainer(gpoints, x, y, null, null, "container");
 		svgcircle(c, 0, 0, 2);
 		svgtitle(c, `Value: ${d.value}\nLabel: ${d.label}`);
