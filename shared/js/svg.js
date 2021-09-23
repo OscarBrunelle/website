@@ -22,12 +22,12 @@ function docsvg(parent = null, viewBox = "0 0 100 100", className = null) {
 	return addSVGElement(parent, element, className);
 }
 
-function svgcontainer(parent, x, y, width, height, className = null) {
+function svgcontainer(parent, x, y, width = null, height = null, className = null) {
 	const element = document.createElementNS(xmlns, "svg");
 	element.setAttributeNS(null, "x", x);
 	element.setAttributeNS(null, "y", y);
-	element.setAttributeNS(null, "width", width);
-	element.setAttributeNS(null, "height", height);
+	if (width != null) element.setAttributeNS(null, "width", width);
+	if (height != null) element.setAttributeNS(null, "height", height);
 	return addSVGElement(parent, element, className);
 }
 
