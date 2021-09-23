@@ -109,12 +109,6 @@ function docobject(parent = null, data = null, className = null) {
 	return addDocElement(parent, element, className);
 }
 
-function docsvg(parent = null, viewBox = "0 0 100 100", className = null) {
-	const element = document.createElement("svg");
-	element.setAttribute("viewBox", viewBox);
-	return addDocElement(parent, element, className);
-}
-
 function docol(parent = null, className = null) {
 	const element = document.createElement("ol");
 	return addDocElement(parent, element, className);
