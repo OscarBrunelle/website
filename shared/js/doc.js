@@ -109,6 +109,12 @@ function docobject(parent = null, data = null, className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function docstyle(parent = null, innerHTML = null) {
+	const element = document.createElement("style");
+	element.innerHTML = innerHTML;
+	return addDocElement(parent, element);
+}
+
 function docol(parent = null, className = null) {
 	const element = document.createElement("ol");
 	return addDocElement(parent, element, className);

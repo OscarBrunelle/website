@@ -11,10 +11,6 @@ svg {
 	background-color: white;
 }
 
-svg line {
-	stroke: black;
-}
-
 svg .container {
 	overflow: visible;
 }

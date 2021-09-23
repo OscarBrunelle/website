@@ -1,5 +1,6 @@
 const size = 100;
 const padd_perc = 0.1;
+const colors = ["black", "red"];
 
 function format_data(data) {
 	for (const d of data) {
@@ -14,20 +15,26 @@ function sort_data(data) {
 	});
 }
 
-function get_index_range(data) {
+function get_index_range(data_sets) {
 	let min, max;
-	for (const d of data) {
-		if (min == null || d.date < min) min = d.date;
-		if (max == null || d.date > max) max = d.date;
+	for (const set_name in data_sets) {
+		const data = data_sets[set_name];
+		for (const d of data) {
+			if (min == null || d.date < min) min = d.date;
+			if (max == null || d.date > max) max = d.date;
+		}
 	}
 	return [min, max];
 }
 
-function get_value_range(data) {
+function get_value_range(data_sets) {
 	let min, max;
-	for (const d of data) {
-		if (min == null || d.value < min) min = d.value;
-		if (max == null || d.value > max) max = d.value;
+	for (const set_name in data_sets) {
+		const data = data_sets[set_name];
+		for (const d of data) {
+			if (min == null || d.value < min) min = d.value;
+			if (max == null || d.value > max) max = d.value;
+		}
 	}
 	return [min, max];
 }
@@ -38,36 +45,48 @@ function get_pos(value, min_range, max_range, reverse = false) {
 	return pos;
 }
 
-function create_graph(parent, data, options = {}) {
-	// for (const set_name in data) {
+function create_graph(parent, data_sets, options = {}) {
+	const svg = docsvg(parent, `0 0 ${size} ${size}`, "graph");
+	let set_index = 0;
 
-	// }
-	data = data["set1"];
-	data = format_data(data);
-	data = sort_data(data);
-	let [min_index, max_index] = get_index_range(data);
+	for (const set_name in data_sets) {
+		let data = data_sets[set_name];
+		data = format_data(data);
+		data = sort_data(data);
+		data_sets[set_name] = data;
+	}
+
+	let [min_index, max_index] = get_index_range(data_sets);
 	let min_value, max_value;
 	if (options.min == null && options.max == null) {
-		[min_value, max_value] = get_value_range(data);
+		[min_value, max_value] = get_value_range(data_sets);
 	} else {
 		min_value = options.min;
 		max_value = options.max;
 	}
-	const svg = docsvg(parent, `0 0 ${size} ${size}`, "graph");
-	const glines = svgg(svg, "lines");
-	const gpoints = svgg(svg, "points");
 
-	let prev_pos;
-	for (const d of data) {
-		let x = get_pos(d.date, min_index, max_index);
-		let y = get_pos(d.value, min_value, max_value, true);
-		const c = svgcontainer(gpoints, x, y, null, null, "container");
-		svgcircle(c, 0, 0, 2);
-		svgtitle(c, `Value: ${d.value}\nLabel: ${d.label}`);
-		if (prev_pos != null) svgline(glines, prev_pos.x, prev_pos.y, x, y);
-		prev_pos = {
-			x: x,
-			y: y
-		};
+	for (const set_name in data_sets) {
+		let data = data_sets[set_name];
+
+		const gset = svgg(svg, `set ${set_name}`);
+		docstyle(gset, `.set.${set_name} line{stroke: ${colors[set_index]};}
+		.set.${set_name} circle{fill: ${colors[set_index]};}`);
+		const glines = svgg(gset, "lines");
+		const gpoints = svgg(gset, "points");
+
+		let prev_pos;
+		for (const d of data) {
+			let x = get_pos(d.date, min_index, max_index);
+			let y = get_pos(d.value, min_value, max_value, true);
+			const c = svgcontainer(gpoints, x, y, null, null, "container");
+			svgcircle(c, 0, 0, 2);
+			svgtitle(c, `Value: ${d.value}\nLabel: ${d.label}`);
+			if (prev_pos != null) svgline(glines, prev_pos.x, prev_pos.y, x, y);
+			prev_pos = {
+				x: x,
+				y: y
+			};
+		}
+		set_index++;
 	}
 }
