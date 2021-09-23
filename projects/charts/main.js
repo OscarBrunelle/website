@@ -45,7 +45,7 @@ let template_data = {
 };
 
 function load() {
-	create_graph(document.getElementById("main"), template_data);
+	create_graph(document.getElementById("main"), template_data, {min: 0, max: 100});
 }
 
 document.onload = load();
