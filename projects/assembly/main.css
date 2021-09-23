@@ -24,7 +24,6 @@ main {
 	position: relative;
 }
 #game > canvas {
-	background-color: white;
 	image-rendering: pixelated;
 }
 

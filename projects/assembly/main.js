@@ -1,6 +1,7 @@
 "use strict"
 
 //if item goes out of canvas, delete
+//add reset progress button
 
 const GRID_FRAMES_X = 16;
 const GRID_FRAMES_Y = 16;
@@ -215,7 +216,7 @@ function update_money() {
 		index++;
 	}
 	const text = "Money: $ " + formatted_money.toFixed(4 - Math.ceil(Math.log10(formatted_money + 1))) + " " + money_rules[index];
-	document.querySelector("#money").innerHTML = text;
+	if (document.querySelector("#money").innerHTML != text)	document.querySelector("#money").innerHTML = text;
 	set_cookie("money", money);
 }
 
