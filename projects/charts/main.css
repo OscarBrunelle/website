@@ -6,5 +6,5 @@ svg {
 }
 
 svg line {
-	fill: black;
+	stroke: black;
 }

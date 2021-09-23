@@ -18,7 +18,7 @@ function addNSElement(parent, element, className = null, prependEl = false) {
 
 function docsvg(parent = null, viewBox = "0 0 100 100", className = null) {
 	const element = document.createElementNS(xmlns, "svg");
-	element.setAttributeNS(xmlns, "viewBox", viewBox);
+	element.setAttributeNS(null, "viewBox", viewBox);
 	return addNSElement(parent, element, className);
 }
 

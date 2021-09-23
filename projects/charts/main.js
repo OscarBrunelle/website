@@ -4,21 +4,21 @@ let template_data = {
 	"set1": [
 		{
 			date: "2021-09-23T16:29:00",
-			value: "test",
+			value: "13",
 			label: "labeltest"
 		}, {
 			date: "2021-09-23T16:30:00",
-			value: "test2",
+			value: "15",
 			label: "labeltest2"
 		}
 	], "set2": [
 		{
 			date: "2021-09-23T16:29:00",
-			value: "2test",
+			value: "13",
 			label: "2labeltest"
 		}, {
 			date: "2021-09-23T17:30:00",
-			value: "2test2",
+			value: "16",
 			label: "2labeltest2"
 		}
 	]
