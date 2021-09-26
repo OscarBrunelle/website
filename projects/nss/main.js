@@ -106,6 +106,15 @@ function update_number() {
 	document.querySelector(".result_value").innerHTML = number;
 }
 
+function copy_to_clipboard(selector) {
+	let text = document.querySelector(selector).innerHTML;
+	navigator.clipboard.writeText(text);
+}
+
+function copy_number() {
+	copy_to_clipboard(".result_value");
+}
+
 function load() {
 	create_inputs();
 	update_number();
