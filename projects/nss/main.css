@@ -1,7 +1,24 @@
 main {
-	padding: 10px;
+	padding: 20px;
 }
 
-.inputs>div {
+.result_container {
+	margin-top: 20px;
+}
+
+.result_title {
+	display: block;
+}
+
+.result_value {
+	font-weight: bold;
+}
+
+.inputs {
+	display: grid;
+	gap: 10px;
+}
+
+.inputs>div>* {
 	display: block;
 }
