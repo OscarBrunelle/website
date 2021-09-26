@@ -138,6 +138,22 @@ function doclabel(parent = null, text = "", attr_for = null, className = null) {
 	return addDocElement(parent, element, className);
 }
 
+function doclabelinput(parent = null, label = "", id = null, name = null, type = "string", placeholder = null, default_value = null, container_div = false) {
+	if (container_div) parent = docdiv(parent);
+	const l = document.createElement("label");
+	l.innerHTML = label;
+	l.setAttribute("for", id);
+	addDocElement(parent, l);
+
+	const input = document.createElement("input");
+	input.id = id;
+	input.setAttribute("name", name);
+	input.setAttribute("type", type);
+	input.setAttribute("value", default_value);
+	input.setAttribute("placeholder", placeholder);
+	return addDocElement(parent, input);
+}
+
 function docinput(parent = null, id = null, name = null, type = "checkbox", default_value = null, checked = false, className = null) {
 	const element = document.createElement("input");
 	element.id = id;
@@ -162,6 +178,27 @@ function docinputs(parent = null, options = [], type = "checkbox", className = n
 	}
 	inputs_id_index++;
 	return elements;
+}
+
+let select_index = 0;
+
+function docselect(parent = null, label = "", options = [], id = `select-${select_index++}`) {
+	const l = document.createElement("label");
+	l.innerHTML = label;
+	l.setAttribute("for", id);
+	addDocElement(parent, l);
+
+	const sel = document.createElement("select");
+	sel.setAttribute("id", id);
+
+	for (const op of options) {
+		const oe = document.createElement("option");
+		oe.setAttribute("value", op.value);
+		oe.innerHTML = op.text;
+		addDocElement(sel, oe);
+	}
+
+	return addDocElement(parent, sel);
 }
 
 function doctable(parent = null, className = null) {
