@@ -3,11 +3,30 @@
 const block_size = 1000;
 const max_loops = 10;
 
+let nodes = [];
+
+function add_data_element(xml_thing, data) {
+	switch (xml_thing) {
+		case "bounds":
+			break;
+		case "node":
+			add_node(data);
+			break;
+		case "tag":
+			break;
+	}
+}
+
+function add_node(data) {
+	console.log(data);
+}
+
 function read_file(e) {
 	const buffer = new Uint8Array(e.target.result);
 	const data_length = e.target.result.byteLength;
 	let byte_index = 0;
 	let while_count = 0;
+
 	while (byte_index < data_length && while_count++ < max_loops) {
 		let snippet = new TextDecoder('utf-8').decode(buffer.slice(byte_index, Math.min(data_length, byte_index + block_size)));
 		let start_symbol_i = snippet.indexOf("<");
@@ -28,8 +47,8 @@ function read_file(e) {
 					end_symbol_i = snippet.indexOf(`</${xml_thing}>`) + `</${xml_thing}>`.length;
 				}
 				let string = snippet.substring(start_symbol_i, end_symbol_i + 1);
-				console.log(string);
 				byte_index += (new TextEncoder().encode(snippet.substring(0, end_symbol_i + 1))).length;
+				add_data_element(xml_thing, string);
 				break;
 			default:
 				console.error(`Error: does not know xml symbol: '${xml_thing}'.`);
