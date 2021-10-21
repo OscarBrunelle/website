@@ -1,3 +1,36 @@
+main {
+	padding: 10px;
+}
+
 canvas {
 	background-color: white;
+}
+
+.progress-bar {
+	position: relative;
+	width: 200px;
+	height: 30px;
+	margin: 10px;
+	border: 1px solid white;
+	background-color: grey;
+}
+
+#progress-perc {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+}
+
+#progress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 100%;
+	background-color: green;
 }

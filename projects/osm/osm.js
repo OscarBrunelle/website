@@ -6,7 +6,7 @@ let number_workers = 8;
 let workers = [];
 
 let chunk_size = 100000;
-const chunks_to_process = 10000;
+const chunks_to_process = 1000;
 
 function read_file(e) {
 	const buffer = new Uint8Array(e.target.result);
@@ -17,7 +17,9 @@ function read_file(e) {
 	let chunk_index = 0;
 	for (const worker of workers) {
 		worker.onmessage = function (e) {
-			document.getElementById("progress").innerText = parseInt(chunk_index * chunk_size / data_length * 100);
+			let perc = parseInt(chunk_index * chunk_size / data_length * 100);
+			document.getElementById("progress-perc").innerText = perc + " %";
+			document.getElementById("progress").style.width = perc + "%";
 			nodes = nodes.concat(e.data);
 			if (chunk_index < data_length / chunk_size && chunk_index < chunks_to_process) {
 				let start_chunk = chunk_size * (chunk_index++);
