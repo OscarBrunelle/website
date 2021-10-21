@@ -1,11 +1,29 @@
 "use strict"
 
 let bounds = {
+	minlat: "41.3",
+	minlon: "8",
+	maxlat: "43.3",
+	maxlon: "10"
+};
+/*
+OSM file bounds:
+bounds = {
 	minlat: "41.31103",
 	minlon: "8.317882",
 	maxlat: "43.16589",
 	maxlon: "9.751243"
 };
+*/
+/*
+Golfe de lava bounds:
+bounds = {
+	minlat: "41.96",
+	minlon: "8.64",
+	maxlat: "42",
+	maxlon: "8.69"
+};
+*/
 let nodes = [];
 let number_workers = 4;
 let workers = [];
