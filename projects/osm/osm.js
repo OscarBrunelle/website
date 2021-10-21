@@ -17,11 +17,61 @@ function add_data_element(xml_thing, data) {
 	}
 }
 
-function add_node(data) {
-	console.log(data);
+function extract_attributes(line) {
+	let attributes = [];
+
+	for (const attribute of line.trim().split(" ").slice(1)) {
+		let n = attribute.split("=")[0];
+		if (n.includes("\"")) n = n.split("\"", 2)[1].split("\"", 1)[0];
+		let v = attribute.split("=")[1];
+		if (v.includes("\"")) v = v.split("\"", 2)[1].split("\"", 1)[0];
+		attributes.push({
+			"name": n,
+			"value": v
+		});
+	}
+
+	return attributes;
+}
+
+function extract_tag(line) {
+	let n = line.split("k=\"", 2)[1].split("\" ")[0].split("\"/>")[0];
+	let v = line.split("v=\"", 2)[1].split("\" ")[0].split("\"/>")[0];
+	return {
+		"name": n,
+		"value": v
+	};
+}
+
+function add_node(data_string) {
+	let data = {};
+	let attributes = ["id", "lat", "lon"];
+	let tags = ["amenity", "name"];
+
+	let lines = data_string.split("\n");
+	for (let line_index in lines) {
+		const line = lines[line_index];
+		if (lines.length > 2 && line_index >= lines.length - 2) {
+			continue;
+		} else if (line_index == 0) {
+			let line_attributes = extract_attributes(line);
+			for (const line_tag of line_attributes) {
+				if (attributes.includes(line_tag.name)) {
+					data[line_tag.name] = line_tag.value;
+				}
+			}
+		} else {
+			let tag = extract_tag(line);
+			if (tags.includes(tag.name)) data[tag.name] = tag.value;
+		}
+	}
+
+	return data;
 }
 
 function read_file(e) {
+	console.info("Processing OSM file...");
+
 	const buffer = new Uint8Array(e.target.result);
 	const data_length = e.target.result.byteLength;
 	let byte_index = 0;
@@ -55,4 +105,6 @@ function read_file(e) {
 				break;
 		}
 	}
+
+	console.info("OSM file processing successfull.");
 }
