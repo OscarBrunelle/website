@@ -18,10 +18,10 @@ bounds = {
 /*
 Golfe de lava bounds:
 bounds = {
-	minlat: "41.96",
-	minlon: "8.64",
+	minlat: "41.95",
+	minlon: "8.65",
 	maxlat: "42",
-	maxlon: "8.69"
+	maxlon: "8.7"
 };
 */
 let nodes = [];
