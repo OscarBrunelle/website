@@ -5,6 +5,8 @@ class Canvas {
 		let canvas = document.getElementById(id);
 		if (canvas == null) {
 			canvas = document.createElement("canvas");
+			canvas.setAttribute("width", _width);
+			canvas.setAttribute("height", _height);
 			document.querySelector(parent_selector).appendChild(canvas);
 		}
 		this.canvas = canvas;
@@ -18,5 +20,9 @@ class Canvas {
 		this.context = this.canvas.getContext("2d");
 		this.context.textAlign = "center";
 		this.context.textBaseline = "middle";
+	}
+
+	rect(x, y, w, h) {
+		this.context.fillRect(x, y, w, h);
 	}
 }

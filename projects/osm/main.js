@@ -8,7 +8,7 @@ input.addEventListener("change", function () {
 		var myFile = this.files[0];
 		var reader = new FileReader();
 
-		reader.addEventListener("loadend", read_file);
+		reader.addEventListener("loadend", load_file);
 
 		reader.readAsArrayBuffer(myFile);
 	}
@@ -38,7 +38,11 @@ function get_current_position() {
 }
 
 function load() {
-	// get_current_position();
+	// var monWorker = new Worker('worker.js');
+	// monWorker.onmessage = function(e) {
+	// 	console.log(e.data);
+	// };
+	// monWorker.postMessage("test")
 }
 
 document.onload = load();
