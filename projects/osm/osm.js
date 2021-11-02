@@ -37,7 +37,11 @@ function end_computing() {
 		worker.terminate();
 	}
 	workers = [];
-	// create_map_visuals();
+	console.info("OSM file processing successfull.");
+
+	console.info("Creating map visuals...");
+	create_map_visuals();
+	console.info("Map visuals successfully created.");
 }
 
 function read_file(e) {
@@ -90,9 +94,4 @@ function load_file(e) {
 	}
 	console.info("Processing OSM file...");
 	read_file(e);
-	console.info("OSM file processing successfull.");
-
-	console.info("Creating map visuals...");
-	create_map_visuals();
-	console.info("Map visuals successfully created.");
 }
