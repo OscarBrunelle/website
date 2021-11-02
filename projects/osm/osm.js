@@ -26,7 +26,7 @@ bounds = {
 */
 let nodes = [];
 let ways = [];
-let number_workers = 8;
+let number_workers = 4;
 let workers = [];
 
 let chunk_size = 10000000;
@@ -79,10 +79,6 @@ function read_file(e) {
 			worker.postMessage([buffer.slice(start_chunk, start_chunk + chunk_size), bounds]);
 		}
 	}
-}
-
-function inter_perc(value, min, max) {
-	return (value - min) / (max - min);
 }
 
 function load_file(e) {
