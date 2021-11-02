@@ -26,10 +26,10 @@ bounds = {
 */
 let nodes = [];
 let ways = [];
-let number_workers = 4;
+let number_workers = 8;
 let workers = [];
 
-let chunk_size = 1000000;
+let chunk_size = 10000000;
 const chunks_to_process = 10000;
 
 function end_computing() {
