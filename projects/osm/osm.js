@@ -56,17 +56,14 @@ function read_file(e) {
 		worker.onmessage = function (e) {
 			workers_active--;
 
-			let data_bounds = e.data[0];
-			let data_nodes = e.data[1];
-			let data_ways = e.data[2];
-			// if (data_bounds != {}) bounds = data.bounds;
-			nodes = nodes.concat(data_nodes);
-			ways = ways.concat(data_ways);
+			nodes = nodes.concat(e.data[0]);
+			ways = ways.concat(e.data[1]);
 
-			// add_data_points(data_nodes); // for real-time drawing
+			// add_data_points(e.data[0]); // for real-time drawing
 			let perc = parseInt(chunk_index * chunk_size / data_length * 100);
 			document.getElementById("progress-perc").innerText = perc + " %";
 			document.getElementById("progress").style.width = perc + "%";
+
 			if (chunk_index < data_length / chunk_size && chunk_index < chunks_to_process) {
 				workers_active++;
 				let start_chunk = chunk_size * (chunk_index++);

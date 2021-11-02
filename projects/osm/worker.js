@@ -20,7 +20,7 @@ addEventListener("message", function (e) {
 	bounds = e.data[1];
 	process_data(e.data[0]);
 
-	this.postMessage([bounds, nodes, ways]);
+	this.postMessage([nodes, ways]);
 }, false);
 
 /**
@@ -46,8 +46,6 @@ function process_data(buffer) {
 		}
 		const xml_tag = line.split(" ", 1)[0].split("<")[1];
 		switch (xml_tag) {
-			case "bounds":
-				break;
 			case "node":
 				node = {
 					"id": get_attr(line, "id"),
