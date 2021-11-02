@@ -29,7 +29,7 @@ let ways = [];
 let number_workers = 4;
 let workers = [];
 
-let chunk_size = 100000;
+let chunk_size = 1000000;
 const chunks_to_process = 10000;
 
 function end_computing() {
@@ -63,7 +63,7 @@ function read_file(e) {
 			nodes = nodes.concat(data_nodes);
 			ways = ways.concat(data_ways);
 
-			add_data_points(data_nodes);
+			// add_data_points(data_nodes); // for real-time drawing
 			let perc = parseInt(chunk_index * chunk_size / data_length * 100);
 			document.getElementById("progress-perc").innerText = perc + " %";
 			document.getElementById("progress").style.width = perc + "%";
