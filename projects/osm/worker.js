@@ -2,10 +2,15 @@
 
 let bounds = {};
 let nodes = [];
+let ways = [];
+
+let attributes = ["id", "lat", "lon"];
+let tags = ["amenity", "name", "building"];
 
 function reset_worker() {
 	bounds = {};
 	nodes = [];
+	ways = [];
 }
 
 function add_data_element(xml_thing, data) {
@@ -18,6 +23,9 @@ function add_data_element(xml_thing, data) {
 			break;
 		case "node":
 			add_node(data);
+			break;
+		case "way":
+			add_way(data);
 			break;
 	}
 }
@@ -48,10 +56,12 @@ function extract_tags(line) {
 	};
 }
 
+function extract_nd(line) {
+	return (line.split("k=\"", 2)[1].split("\" ")[0].split("\"/>")[0]);
+}
+
 function add_node(data_string) {
 	let node = {};
-	let attributes = ["id", "lat", "lon"];
-	let tags = ["amenity", "name"];
 
 	let lines = data_string.trim().split("\n");
 	for (let line_index in lines) {
@@ -65,20 +75,43 @@ function add_node(data_string) {
 					node[line_tag.name] = line_tag.value;
 				}
 			}
-		} else {
+		} else if (line.includes("<tag")) {
 			let tag = extract_tags(line);
 			if (tags.includes(tag.name)) node[tag.name] = tag.value;
 		}
 	}
 
 	nodes.push(node);
-	// workers[worker_index].postMessage({
-	// 	"canvas": canvas.canvas,
-	// 	"node": node,
-	// 	"bounds": bounds
-	// });
-
 	return node;
+}
+
+function add_way(data_string) {
+	let way = {
+		"path": []
+	};
+
+	let lines = data_string.trim().split("\n");
+	for (let line_index in lines) {
+		const line = lines[line_index];
+		if (lines.length > 2 && line_index >= lines.length - 2) {
+			continue;
+		} else if (line_index == 0) {
+			let line_attributes = extract_attributes(line);
+			for (const line_tag of line_attributes) {
+				if (attributes.includes(line_tag.name)) {
+					way[line_tag.name] = line_tag.value;
+				}
+			}
+		} else if (line.includes("<nd")) {
+			way.path.push(extract_nd(line));
+		} else if (line.includes("<tag")) {
+			let tag = extract_tags(line);
+			if (tags.includes(tag.name)) way[tag.name] = tag.value;
+		}
+	}
+
+	ways.push(way);
+	return way;
 }
 
 function inter_perc(value, min, max) {
@@ -88,12 +121,7 @@ function inter_perc(value, min, max) {
 const block_size = 500;
 const max_loops = 1000;
 
-addEventListener("message", function (e) {
-	reset_worker();
-
-	bounds = e.data[1];
-
-	const buffer = e.data[0];
+function process_buffer(buffer) {
 	const data_length = buffer.length;
 
 	let byte_index = 0;
@@ -113,6 +141,7 @@ addEventListener("message", function (e) {
 				break;
 			case "bounds":
 			case "node":
+			case "way":
 				let end_symbol_i = snippet.slice(start_symbol_i).indexOf(">") + snippet.slice(0, start_symbol_i).length;
 				if (end_symbol_i == -1) {
 					// console.error("Could not find closing bracket");
@@ -140,6 +169,15 @@ addEventListener("message", function (e) {
 				break break_flag;
 		}
 	}
+}
 
-	this.postMessage(nodes);
+addEventListener("message", function (e) {
+	reset_worker();
+
+	bounds = e.data[1];
+
+	const buffer = e.data[0];
+	process_buffer(buffer);
+
+	this.postMessage([bounds, nodes, ways]);
 }, false);
