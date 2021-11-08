@@ -71,8 +71,12 @@ function get_cookie(cookie_name) {
 	return null;
 }
 
-function set_cookie(name, value) {
-	document.cookie = name + "=" + value + ";path=/;max-age=31536000;samesite=strict;";
+function set_cookie(name, value, path = "/") {
+	document.cookie = `${name}=${value};path=${path};Max-Age=31536000;samesite=strict`;
+}
+
+function expire_cookie(name, path = "/") {
+	document.cookie = `${name}=;path=${path};expires=0`;
 }
 
 /**
