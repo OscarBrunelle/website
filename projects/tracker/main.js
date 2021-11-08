@@ -3,7 +3,7 @@
 const form = document.querySelector("main form");
 const add_item_input = document.querySelector("input.add_item");
 
-let possible_values = ["test", "valuetest", "valtestlue", "yay", "nope", "tescon"];
+let possible_values = ["test", "valuetest", "valteslue", "yay", "nope", "œuf"];
 
 function send_item(e) {
 	e.preventDefault();
@@ -40,17 +40,23 @@ function select_suggestion(e) {
 	}
 }
 
+function format_search(value) {
+	let search = value.toLowerCase();
+	search = search.replace("œ", "oe");
+	return search;
+}
+
 let suggestions = [];
 let selected_suggestion = 0;
 function update_item_suggestions(e) {
 	if (e.key == "Enter") return send_item();
 	empty_suggestions();
-	let search = e.target.value.toLowerCase();
+	let search = format_search(e.target.value);
 	let suggestionsContainer = document.querySelector(".add_item_suggestions");
-	for (const pv of possible_values) {
-		if (pv.includes(search)) {
-			suggestions.push(pv);
-			docli(suggestionsContainer, pv);
+	for (const possible_value of possible_values) {
+		if (format_search(possible_value).includes(search)) {
+			suggestions.push(possible_value);
+			docli(suggestionsContainer, possible_value);
 		}
 	}
 	if (suggestions.length > 0) {
