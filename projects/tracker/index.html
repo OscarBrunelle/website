@@ -29,8 +29,15 @@
 
 	<main id="main" role="main">
 		<form>
-			<input class="add_item">
-			<ul class="add_item_suggestions"></ul>
+			<div>
+				<label for="bought_item">Item acheté</label>
+				<input id="bought_item" class="add_item" type="text" autocomplete="off">
+				<ul class="add_item_suggestions"></ul>
+			</div>
+			<!-- <div>
+				<label for="consumed_date">Date de consommation</label>
+				<input id="consumed_date" class="consumed_date" type="date" autocomplete="off">
+			</div> -->
 			<button type="submit">Ajouter</button>
 		</form>
 	</main>

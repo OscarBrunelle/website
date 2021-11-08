@@ -10,7 +10,7 @@ function send_item(e) {
 	if (suggestions.length == 0) return;
 	const suggestion = suggestions[selected_suggestion];
 	add_item_input.value = "";
-	empty_suggestions();
+	add_suggestions_for("");
 
 	let current_inventory = get_cookie("inventory");
 	if (current_inventory != null && current_inventory != "") current_inventory = JSON.parse(current_inventory);
@@ -22,7 +22,7 @@ function send_item(e) {
 
 function empty_suggestions() {
 	suggestions = [];
-	select_suggestion = 0;
+	selected_suggestion = 0;
 	document.querySelector(".add_item_suggestions").innerHTML = "";
 }
 
@@ -56,13 +56,11 @@ function format_search(value) {
 let suggestions = [];
 let selected_suggestion = 0;
 
-function update_item_suggestions(e) {
-	if (e.key == "Enter") return send_item();
+function add_suggestions_for(search_term) {
 	empty_suggestions();
-	let search = format_search(e.target.value);
 	let suggestionsContainer = document.querySelector(".add_item_suggestions");
 	for (const possible_value of possible_values) {
-		if (format_search(possible_value).includes(search)) {
+		if (format_search(possible_value).includes(search_term)) {
 			suggestions.push(possible_value);
 			docli(suggestionsContainer, possible_value);
 		}
@@ -72,10 +70,18 @@ function update_item_suggestions(e) {
 	}
 }
 
+function update_item_suggestions(e) {
+	if (e.key == "Enter") return send_item();
+	let search = format_search(e.target.value);
+	add_suggestions_for(search);
+}
+
 function load() {
+	// document.getElementById("consumed_date").valueAsDate = new Date();
 	form.addEventListener("submit", send_item);
 	add_item_input.addEventListener("keydown", select_suggestion);
 	add_item_input.addEventListener("input", update_item_suggestions);
+	add_suggestions_for("");
 }
 
 document.onload = load();
