@@ -11,11 +11,13 @@ function send_item(e) {
 	const suggestion = suggestions[selected_suggestion];
 	add_item_input.value = "";
 	empty_suggestions();
-	let buylist = JSON.parse(get_cookie("buylist"));
-	if (!Array.isArray(buylist)) buylist = [];
-	buylist.push(suggestion);
-	set_cookie("buylist", JSON.stringify(buylist));
-	console.table(buylist);
+
+	let current_inventory = get_cookie("inventory");
+	if (current_inventory != null && current_inventory != "") current_inventory = JSON.parse(current_inventory);
+	if (!Array.isArray(current_inventory)) current_inventory = [];
+	current_inventory.push(suggestion);
+	set_cookie("inventory", JSON.stringify(current_inventory));
+	console.table(current_inventory);
 }
 
 function empty_suggestions() {
@@ -47,12 +49,13 @@ function select_suggestion(e) {
 
 function format_search(value) {
 	let search = value.toLowerCase();
-	search = search.replace("œ", "oe");
+	search = search.replace("œ", "oe").replace("é", "e").replace("-", " ");
 	return search;
 }
 
 let suggestions = [];
 let selected_suggestion = 0;
+
 function update_item_suggestions(e) {
 	if (e.key == "Enter") return send_item();
 	empty_suggestions();
