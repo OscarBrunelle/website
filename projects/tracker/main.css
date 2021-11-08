@@ -16,3 +16,11 @@ nav>a[href=""] {
 	background-color: var(--dark-secondary-background-color);
 	border-bottom: none;
 }
+
+main {
+	padding: 16px;
+}
+
+li.selected {
+	color: red;
+}
