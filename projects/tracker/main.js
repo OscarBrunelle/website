@@ -8,9 +8,14 @@ let possible_values = ["test", "valuetest", "valteslue", "yay", "nope", "œuf"];
 function send_item(e) {
 	e.preventDefault();
 	if (suggestions.length == 0) return;
-	console.log(suggestions[selected_suggestion]);
+	const suggestion = suggestions[selected_suggestion];
 	add_item_input.value = "";
 	empty_suggestions();
+	let buylist = JSON.parse(get_cookie("buylist"));
+	if (!Array.isArray(buylist)) buylist = [];
+	buylist.push(suggestion);
+	set_cookie("buylist", JSON.stringify(buylist));
+	console.table(buylist);
 }
 
 function empty_suggestions() {
