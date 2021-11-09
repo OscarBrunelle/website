@@ -49,7 +49,7 @@ function select_suggestion(e) {
 
 function format_search(value) {
 	let search = value.toLowerCase();
-	search = search.replace("œ", "oe").replace("é", "e").replace("-", " ");
+	search = search.normalize("NFD").replace(/\p{Diacritic}/gu, "").replace("œ", "oe").replace("-", " ");
 	return search;
 }
 
