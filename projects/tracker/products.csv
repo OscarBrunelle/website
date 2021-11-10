@@ -1,0 +1,24 @@
+tag;name;category;peremption_time
+rice;Riz;feculent;-1
+butter_soft;Beurre doux;cremerie;777
+cereals;Céréales;dej;777
+egg;Œuf;cremerie;777
+honey;Miel;dej;777
+spread;Pâte à tartiner;dej;777
+broth;Bouillon;helpers_salty;777
+sugar;Sucre;cooking_sweet;-1
+flour;Farine;cooking_sweet;777
+yogurt;Yahourt;cremerie;777
+vegetarian_drink;Boisson végétale;vegetal;777
+pasta;Pâtes;feculent;-1
+ready;Repas tout fait;ready;777
+canned_fish;Conserve de poisson;canned;-1
+water;Eau en bouteille;drink;-1
+pizza?;Pizzas/Tartes/Quiches;ready;777
+canned_vege;Conserve de légumes;canned;-1
+alcohol;Boisson alcoolisée;drink;777
+vegetables;Légumes;fresh;777
+fruits;Fruits;fresh;777
+soft;Boisson soft;drink;777
+cheese;Fromage;cremerie;777
+asiat;Asiatique;other;777
