@@ -1,44 +1,45 @@
-name;brand;price;quantity;unit;type
-Boisson de soja;;1.08;1;L;vegetarian_drink
-Riz basmati;;2.48;1;kg;rice
-Coquillettes;;1.30;500;g;pasta
-Blé précuit;;2.08;;;
-x2thon nature;;3.85;;;canned_fish
-3x1/10 thon alb prec;;2.50;;;canned_fish
-Rapé pdt lard;;4.15;;;ready
-Vittel x6x1.5L;Vittel;2.44;9;L;water
-Anneaux calamar;;3.00;;;
-x2 feuilleté jambon;;3.10;;;
-Tortilla fraîche;;3.20;;;
-240g flamme biox2;;3.90;240;g;
-pizza raclette bacon;;3.09;;;
-sard msc cble mar;;2.19;;;
-2x coeur coulant;;2.52;;;
-1L pur jus pomme;;2.75;;;
-2x140 sard gene;;2.60;;;
-sardines hle olive;;1.80;;;
-1/5 sard msc cbl;;2.57;;;
-rocher coco;;3.50;400;g;
-bq mais fr;;3.29;400;g;
-carottes bio;;1.39;1;kg;
-riz thai bio;;1.99;500;g;
-1/2 mais extra cro;;0.91;;;
-champignons entier;;1.49;;;canned_vege
-moule sdm;;1.84;250;g;
-cidre brut;;2.80;75;cL;alcohol
-bocal jus pomme;;2.39;1;L;soft
-emmental bloc;;2.18;250;g;cheese
-mais doux;Bonduelle;0.86;;;
-R. monts raclette;;3.85;;;
-1/2 Harciots verts;;1.49;;;
-bq tom cockt;;3.00;500;g;vegetables
-pates spagh;;1.20;1;kg;
-fusilli c/r p;;0.69;500;g;
-pipe rig cuist;;0.85;500;g;
-cappelletti jambon;;3.60;;;
-riz cantonnais;;2.90;300;g;
-nem porc sauce;;4.40;;;asiat
-couscous bio blanc;;1.39;;;
-sauciss courb arde;;5.18;;;
-paprika doux bio;;2.26;;;
-flt 5frt pomelo;;3.95;;;
+name;brand;price;online_price;quantity;unit;type;n;peremption_time
+Boisson soja (nature);Carrefour;1.08;1.07;1;L;vegetarian_drink;;
+Riz basmati (penjab);Carrefour;2.48;2.50;1;kg;rice;;
+Coquillettes;Carrefour;0.65;0.52;500;g;pasta;;
+Blé précuit délicat (fr);Carrefour;2.08;;1;kg;pasta;;
+Thon entier (au naturel);Petit Navire;3.85;;160;g;canned_fish;2;
+Thon entier albacore (au naturel);Carrefour classic';2.50;;80;g;canned_fish;3;
+Filets de cabillaud façon fish&chips;Carrefour le marché;4.00;;220;g;fish_ready;;16
+Rapés de pommes de terre/lardons/oignons;Maison tino;4.15;;440;g;ready;;16
+Vittel x6x1.5L;Vittel;2.44;;9;L;water;6;
+Anneaux de calamars;Cité marine;3.00;;180;g;fish_ready;;20
+Feuilleté jambon/champignons;Randy;3.10;;280;g;ready;;9
+Tortilla fraîche;acheteacarrefour?;3.20;;500;g;ready;;13
+Flammekueche porc/oignons;La recette du traiteur;3.90;;240;g;pizza?;2;3
+Pizza raclette/bacon;Carrefour classic';3.09;;450;g;pizza?;;6
+sard msc cble mar;;2.19;;;;;;
+Coeur coulant au chocolat;Bonne maman;2.52;;160;g;dessert?;;
+1L pur jus pomme;;2.75;;;;;;
+Boîte sardines généreuse (huile ol.);Connétable;2.60;;140;g;canned_fish;2;
+sardines hle olive;;1.80;;;;;;
+1/5 sard msc cbl;;2.57;;;;;;
+Rochers coco;Carrefour;3.50;;400;g;ready;;
+Maïs doux frais;Maistro;3.29;;400;g;vegetables;;
+Carottes bio;Carrefour le marché;1.39;;1;kg;vegetables;;
+Riz Thai bio;Carrefour bio;1.99;;500;g;rice;;
+Conserve maïs doux croquant (ogm, sucres, pesticides, fr);Géant Vert;0.91;;300;g;canned_vege;;
+Conserve champignons entier (sulfite, additif, conservateur, fr);Bonduelle;1.49;;390;g;canned_vege;;
+Beurre demi-sel (cristaux);Grand fermage;1.84;;250;g;butter_salty;;42
+cidre brut;;2.80;;75;cL;alcohol;;
+bocal jus pomme;;2.39;;1;L;soft;;
+Emmental (coeur de meule);Président;2.18;;250;g;cheese;;59
+Conserve maïs doux (ogm, sucres, fr);Bonduelle;0.86;;300;g;canned_vege;;
+Fromage raclette;RichesMonts;3.85;;420;g;cheese;;
+Conserve haricots verts;Bonduelle;1.49;;400;g;canned_vege;;
+Tomates cocktail (pesticides, fr);Solarenn;3.00;;500;g;vegetables;;
+Pâtes spaghetti;Carrefour classic';1.20;0.95;1;kg;pasta;;
+Pâtes fusilli;Carrefour;0.69;0.55;500;g;pasta;;
+Pâtes pipe rigate;Carrefour;0.85;;500;g;pasta;;
+Pâtes cappelletti au jambon cru (ravioli);L'Italie des pâtes;3.60;;250;g;ready;;10
+Riz cantonnais;acheteacarrefour?;2.90;;300;g;asiat;;17
+Nems porc (sauce);acheteacarrefour?;4.40;;280;g;asiat;;19
+Couscous bio (moyen);Carrefour bio;1.39;;500;g;pasta;;
+Saucisse de l'Ardèche;Reflets de France;5.18;;300;g;charcuterie?;;
+Paprika doux bio;Ducros;2.26;;44;g;epices?;;
+Pomelos (sac?);acheteacarrefour?;3.95;;.;.;fruits;5;

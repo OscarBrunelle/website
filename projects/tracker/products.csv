@@ -1,6 +1,7 @@
 tag;name;category;peremption_time
 rice;Riz;feculent;-1
 butter_soft;Beurre doux;cremerie;777
+butter_salty;Beurre demi-sel;cremerie;777
 cereals;Céréales;dej;777
 egg;Œuf;cremerie;777
 honey;Miel;dej;777
@@ -22,3 +23,7 @@ fruits;Fruits;fresh;777
 soft;Boisson soft;drink;777
 cheese;Fromage;cremerie;777
 asiat;Asiatique;other;777
+epices?;Épices;other;-1
+fish_ready;Poisson préparé;other;777
+dessert?;Desserts?;other;777
+charcuterie?;Charcuterie;charcuterie;777
