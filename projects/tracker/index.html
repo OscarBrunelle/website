@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="../../shared/css/shared.css">
 	<link rel="stylesheet" type="text/css" href="../../shared/css/template.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="form.css">
 	<link rel="icon" type="image/png" href="icon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
@@ -29,16 +30,29 @@
 
 	<main id="main" role="main">
 		<form>
-			<div>
-				<label for="bought_item">Item acheté</label>
-				<input id="bought_item" class="add_item" type="text" autocomplete="off">
+			<div class="add_item_container">
+				<label for="bought_item">Item acheté:</label>
+				<input id="bought_item" class="add_item" type="text" autocomplete="off" placeholder="Item acheté">
 				<ul class="add_item_suggestions"></ul>
 			</div>
-			<!-- <div>
-				<label for="consumed_date">Date de consommation</label>
+			<div class="quantity_container">
+				<label for="item_quantity">Nouvelle quantité:</label>
+				<input id="item_quantity" type="number" autocomplete="off" placeholder="0" value="0">
+			</div>
+			<div>
+				<label for="consumed_moment">Moment de la journée:</label>
+				<select name="consumed_moment" id="consumed_moment">
+					<option value="other">Autre / Non précisé</option>
+					<option value="morning">Matin</option>
+					<option value="midday">Midi</option>
+					<option value="evening">Soir</option>
+				</select>
+			</div>
+			<div>
+				<label for="consumed_date">Date de MAJ:</label>
 				<input id="consumed_date" class="consumed_date" type="date" autocomplete="off">
-			</div> -->
-			<button type="submit">Ajouter</button>
+			</div>
+			<button type="submit" onsubmit="send_item">Ajouter</button>
 		</form>
 	</main>
 
@@ -52,6 +66,7 @@
 	<script type="text/javascript" src="../../shared/js/shared.js"></script>
 	<script type="text/javascript" src="../../shared/js/theme.js"></script>
 	<script type="text/javascript" src="../../shared/js/doc.js"></script>
+	<script type="text/javascript" src="../charts/csv.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </body>
 
