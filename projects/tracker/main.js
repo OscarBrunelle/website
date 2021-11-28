@@ -5,6 +5,14 @@ const add_item_input = document.querySelector("input.add_item");
 
 let possible_values = [];
 
+function get_item_quantity(item_name) {
+	let current_inventory = get_cookie("inventory_history");
+	if (current_inventory != null && current_inventory != "") current_inventory = JSON.parse(current_inventory);
+	if (!Array.isArray(current_inventory) || current_inventory[item_name] == null || current_inventory[item_name].length < 1) return 0;
+
+	return current_inventory[item_name][-1]["quantity"];
+}
+
 function send_item(e) {
 	e.preventDefault();
 	if (suggestions.length == 0) return;
@@ -15,7 +23,7 @@ function send_item(e) {
 
 	let current_inventory = get_cookie("inventory_history");
 	if (current_inventory != null && current_inventory != "") current_inventory = JSON.parse(current_inventory);
-	if (!Array.isArray(current_inventory)) current_inventory = [];
+	if (!Array.isArray(current_inventory)) current_inventory = {};
 	if (current_inventory[suggestion_name] == null) current_inventory[suggestion_name] = [];
 	current_inventory[suggestion_name].push({
 		"date": document.getElementById("consumed_date").value,
@@ -51,6 +59,9 @@ function select_suggestion(e = null) {
 		if (suggestion_i == selected_suggestion) {
 			document.querySelectorAll(".add_item_suggestions li")[suggestion_i].classList.add("selected");
 			document.getElementById("item_unit").innerText = suggestions[suggestion_i]["unit"];
+
+			const current_item_q = get_item_quantity(suggestions[suggestion_i]["name"]);
+			document.getElementById("item_quantity_current").innerText = `${current_item_q} ${suggestions[suggestion_i]["unit"]}`;
 		} else {
 			document.querySelectorAll(".add_item_suggestions li")[suggestion_i].classList.remove("selected");
 		}
@@ -76,9 +87,8 @@ function add_suggestions_for(search_term) {
 			let li = docli(suggestionsContainer, possible_value);
 			li.addEventListener("click", function(e) {
 				add_item_input.value = li.innerText;
-				add_suggestions_for(add_item_input.value);
-				selected_suggestion = 0;
-				select_suggestion();
+				const search = format_search(add_item_input.value);
+				add_suggestions_for(search);
 			});
 		}
 	}
