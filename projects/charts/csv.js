@@ -1,3 +1,5 @@
+let split_character = ";";
+
 function parse_csv_line(line, columns) {
 	let value = {};
 	let i = 0;
@@ -7,7 +9,7 @@ function parse_csv_line(line, columns) {
 	let array_i = null;
 	for (let ci = 0; ci < line.length; ci++) {
 		const c = line[ci];
-		if (c == ',' || ci == line.length - 1) {
+		if (c == split_character || ci == line.length - 1) {
 			if (quoting) {
 				if (inner_array != null) {
 					let array_value = line.substring(array_i, ci);
@@ -52,7 +54,7 @@ function extract_csv(data) {
 	let values = [];
 	data.split("\n").forEach(function (line, line_index) {
 		if (line_index == 0) {
-			line.split(",").forEach(function (col) {
+			line.split(split_character).forEach(function (col) {
 				columns.push(col.replace("\r", ""));
 			});
 		} else {
