@@ -8,9 +8,10 @@ let possible_values = [];
 function get_item_quantity(item_name) {
 	let current_inventory = get_cookie("inventory_history");
 	if (current_inventory != null && current_inventory != "") current_inventory = JSON.parse(current_inventory);
-	if (!Array.isArray(current_inventory) || current_inventory[item_name] == null || current_inventory[item_name].length < 1) return 0;
-
-	return current_inventory[item_name][-1]["quantity"];
+	if (current_inventory == null) current_inventory = {};
+	if (current_inventory[item_name] == null || current_inventory[item_name].length < 1) return 0;
+	const l = current_inventory[item_name].length;
+	return current_inventory[item_name][l-1]["quantity"];
 }
 
 function send_item(e) {
@@ -23,7 +24,7 @@ function send_item(e) {
 
 	let current_inventory = get_cookie("inventory_history");
 	if (current_inventory != null && current_inventory != "") current_inventory = JSON.parse(current_inventory);
-	if (!Array.isArray(current_inventory)) current_inventory = {};
+	if (current_inventory == null) current_inventory = {};
 	if (current_inventory[suggestion_name] == null) current_inventory[suggestion_name] = [];
 	current_inventory[suggestion_name].push({
 		"date": document.getElementById("consumed_date").value,
