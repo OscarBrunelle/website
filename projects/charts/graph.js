@@ -2,6 +2,8 @@ const size = 100;
 const padd_perc = 0.1;
 const colors = ["black", "red"];
 const nticks = 5;
+const line_width = 0.5;
+const circle_width = 0.75;
 
 function format_data(data) {
 	for (const d of data) {
@@ -79,7 +81,7 @@ function create_graph(parent, data_sets, options = {}) {
 		let data = data_sets[set_name];
 
 		const gset = svgg(svg, `set ${set_name}`);
-		docstyle(gset, `g.set.${set_name} line{stroke: ${colors[set_index]};}
+		docstyle(gset, `g.set.${set_name} line{stroke: ${colors[set_index]};stroke-width: ${line_width};}
 		g.set.${set_name} circle{fill: ${colors[set_index]};}
 		g.set.${set_name} .container {overflow: visible;}`);
 		const glines = svgg(gset, "lines");
@@ -90,7 +92,7 @@ function create_graph(parent, data_sets, options = {}) {
 			let x = get_pos(d.date, min_index, max_index);
 			let y = get_pos(d.value, min_value, max_value, true);
 			const c = svgcontainer(gpoints, x, y, null, null, "container");
-			svgcircle(c, 0, 0, 2);
+			svgcircle(c, 0, 0, circle_width);
 			svgtitle(c, `Value: ${d.value}\nDate: ${format_date(d.date)}\nLabel: ${d.label}`);
 			if (prev_pos != null) svgline(glines, prev_pos.x, prev_pos.y, x, y);
 			prev_pos = {
@@ -102,7 +104,7 @@ function create_graph(parent, data_sets, options = {}) {
 	}
 
 	const gborders = svgg(svg, "borders");
-	docstyle(gborders, `g.borders line{stroke: black;}`);
+	docstyle(gborders, `g.borders line{stroke: black;stroke-width: ${line_width};}`);
 	let ox = (size * padd_perc);
 	let oy = size - (size * padd_perc);
 	svgline(gborders, ox, oy, ox, (size * padd_perc), "border");
