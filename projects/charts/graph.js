@@ -55,6 +55,7 @@ function create_graph(parent, data_sets, options = {}) {
 	docstyle(svg, `.graph{aspect-ratio: 1/1; border: 1px solid black; background-color: white;}
 	.graph line{stroke-linecap: round;}`);
 	let set_index = 0;
+	if (data_sets == null || data_sets.length < 1) return;
 
 	for (const set_name in data_sets) {
 		let data = data_sets[set_name];
