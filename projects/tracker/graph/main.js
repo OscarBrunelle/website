@@ -1,5 +1,20 @@
 "use strict"
 
+function get_data_hours(moment) {
+	switch (moment) {
+		case "other":
+			return 0;
+		case "morning":
+			return 8;
+		case "midday":
+			return 12;
+		case "evening":
+			return 20;
+		default:
+			return 0;
+	}
+}
+
 function get_data_from_inventory() {
 	let current_date = new Date();
 	let data = [];
@@ -8,12 +23,14 @@ function get_data_from_inventory() {
 		let data_points = [];
 		let last_date, last_value;
 		for (const data_point of inventory[item_key]) {
+			let ddate = new Date(data_point.date);
+			ddate.setHours(get_data_hours(data_point.moment));
 			data_points.push({
-				"date": data_point.date,
+				"date": ddate,
 				"value": data_point.quantity
 			});
-			if (last_date == null || data_point.date > last_date) {
-				last_date = data_point.date;
+			if (last_date == null || ddate > last_date) {
+				last_date = ddate;
 				last_value = data_point.quantity;
 			}
 		}
