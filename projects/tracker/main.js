@@ -11,7 +11,7 @@ function get_item_quantity(item_name) {
 	if (current_inventory == null) current_inventory = {};
 	if (current_inventory[item_name] == null || current_inventory[item_name].length < 1) return 0;
 	const l = current_inventory[item_name].length;
-	return current_inventory[item_name][l-1]["quantity"];
+	return current_inventory[item_name][l - 1]["quantity"];
 }
 
 function send_item(e) {
@@ -23,8 +23,11 @@ function send_item(e) {
 	add_suggestions_for("");
 
 	let current_inventory = get_cookie("inventory_history");
-	if (current_inventory != null && current_inventory != "") current_inventory = JSON.parse(current_inventory);
-	if (current_inventory == null) current_inventory = {};
+	if (current_inventory != null && current_inventory != "") {
+		current_inventory = JSON.parse(current_inventory);
+	} else {
+		current_inventory = {};
+	}
 	if (current_inventory[suggestion_name] == null) current_inventory[suggestion_name] = [];
 	current_inventory[suggestion_name].push({
 		"date": document.getElementById("consumed_date").value,
@@ -86,7 +89,7 @@ function add_suggestions_for(search_term) {
 		if (format_search(possible_value).includes(search_term)) {
 			suggestions.push(possible_value_data);
 			let li = docli(suggestionsContainer, possible_value);
-			li.addEventListener("click", function(e) {
+			li.addEventListener("click", function (e) {
 				add_item_input.value = li.innerText;
 				const search = format_search(add_item_input.value);
 				add_suggestions_for(search);
