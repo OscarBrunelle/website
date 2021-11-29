@@ -2,8 +2,9 @@ const size = 100;
 const padd_perc = 0.1;
 const colors = ["black", "red", "green", "blue", "yellow", "violet", "brown", "orange"];
 const nticks = 5;
-const line_width = 0.5;
-const circle_width = 0.75;
+const tick_width = 3;
+const line_width = 0.25;
+const circle_width = 0.5;
 
 function simplify_string(string) {
 	return string.toLowerCase().replace(/[^a-zA-Z0-9]+/g, "");
@@ -116,7 +117,8 @@ function create_graph(parent, data_sets, options = {}) {
 	}
 
 	const gborders = svgg(svg, "borders");
-	docstyle(gborders, `g.borders line{stroke: black;stroke-width: ${line_width};}`);
+	docstyle(gborders, `g.borders line{stroke: black;stroke-width: ${line_width};}
+	g.ticks text{font-size: 2px}`);
 	let ox = (size * padd_perc);
 	let oy = size - (size * padd_perc);
 	svgline(gborders, ox, oy, ox, (size * padd_perc), "border");
@@ -129,10 +131,12 @@ function create_graph(parent, data_sets, options = {}) {
 		let x = get_pos(x_val, min_index, max_index);
 		let y = get_pos(y_val, min_value, max_value, true);
 		const gtickx = svgg(gticks);
-		svgline(gtickx, x, oy, x, oy + 3, "tick tickx");
+		svgline(gtickx, x, oy, x, oy + tick_width, "tick tickx");
 		svgtitle(gtickx, `${format_date(x_val)}`);
+		svgtext(gtickx, x-2.5, oy + 2*tick_width, `${format_date(x_val).slice(0,5)}`);
 		const gticky = svgg(gticks);
-		svgline(gticky, ox, y, ox - 3, y, "tick ticky");
+		svgline(gticky, ox, y, ox - tick_width, y, "tick ticky");
 		svgtitle(gticky, `${y_val}`);
+		svgtext(gtickx, ox - tick_width - 4, y+0.5, `${y_val}`);
 	}
 }
