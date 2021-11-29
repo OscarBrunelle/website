@@ -57,7 +57,10 @@ function create_graph(parent, data_sets, options = {}) {
 	docstyle(svg, `.graph{aspect-ratio: 1/1; border: 1px solid black; background-color: white;}
 	.graph line{stroke-linecap: round;}`);
 	let set_index = 0;
-	if (data_sets == null || data_sets.length < 1) return;
+	if (data_sets == null || Object.keys(data_sets).length < 1) {
+		console.info("Data set is empty or only contains 1 entry.");
+		return;
+	}
 
 	for (const set_name in data_sets) {
 		let data = data_sets[set_name];
@@ -75,7 +78,10 @@ function create_graph(parent, data_sets, options = {}) {
 		max_value = options.max;
 	}
 
-	if (min_index == max_index || min_value == max_value) return;
+	if (min_index == max_index || min_value == max_value) {
+		console.info("Same min & max values");
+		return;
+	}
 
 	for (const set_name in data_sets) {
 		let data = data_sets[set_name];
