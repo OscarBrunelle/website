@@ -23,6 +23,11 @@ function docsvg(parent = null, viewBox = "0 0 100 100", className = null) {
 }
 
 function svgcontainer(parent, x, y, width = null, height = null, className = null) {
+	if (isNaN(x) || isNaN(y)) {
+		console.info("x or y pos is NaN");
+		return;
+	}
+
 	const element = document.createElementNS(xmlns, "svg");
 	element.setAttributeNS(null, "x", x);
 	element.setAttributeNS(null, "y", y);
@@ -45,6 +50,11 @@ function svgtext(parent, x, y, text, className = null, prependEl = false) {
 }
 
 function svgline(parent, x1, y1, x2, y2, className = null, prependEl = false) {
+	if (isNaN(x1) || isNaN(y1) || isNaN(x2) || isNaN(y2)) {
+		console.info("x or y pos is NaN");
+		return;
+	}
+
 	let element = document.createElementNS(xmlns, "line");
 	element.setAttributeNS(null, "x1", x1);
 	element.setAttributeNS(null, "y1", y1);
