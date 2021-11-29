@@ -5,6 +5,16 @@ const add_item_input = document.querySelector("input.add_item");
 
 let possible_values = [];
 
+function get_inventory() {
+	let data = get_cookie("inventory_history");
+	if (data != null && data != "") {
+		data = JSON.parse(data);
+	} else {
+		data = {};
+	}
+	return data;
+}
+
 function get_item_quantity(item_name) {
 	let current_inventory = get_cookie("inventory_history");
 	if (current_inventory != null && current_inventory != "") current_inventory = JSON.parse(current_inventory);
@@ -22,12 +32,7 @@ function send_item(e) {
 	add_item_input.value = "";
 	add_suggestions_for("");
 
-	let current_inventory = get_cookie("inventory_history");
-	if (current_inventory != null && current_inventory != "") {
-		current_inventory = JSON.parse(current_inventory);
-	} else {
-		current_inventory = {};
-	}
+	let current_inventory = get_inventory();
 	if (current_inventory[suggestion_name] == null) current_inventory[suggestion_name] = [];
 	current_inventory[suggestion_name].push({
 		"date": document.getElementById("consumed_date").value,
@@ -119,12 +124,10 @@ function get_possible_values() {
 	});
 }
 
-function load() {
+function load_tracker() {
 	get_possible_values();
 	document.getElementById("consumed_date").valueAsDate = new Date();
 	form.addEventListener("submit", send_item);
 	add_item_input.addEventListener("keydown", select_suggestion);
 	add_item_input.addEventListener("input", update_item_suggestions);
 }
-
-document.onload = load();

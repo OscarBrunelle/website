@@ -2,8 +2,8 @@
 
 function load_graph() {
 	let data = [];
-	let current_inventory = get_cookie("inventory_history");
-	console.log(current_inventory);
+	const inventory = get_inventory();
+	console.log(inventory);
 	create_graph(document.querySelector("main"), {"months": [{
 		date: "2021-09-23T16:20:00",
 		value: "13",
@@ -14,5 +14,3 @@ function load_graph() {
 		label: "labeltest2"
 	}]});
 }
-
-document.onload = load_graph();
