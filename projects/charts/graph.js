@@ -73,6 +73,8 @@ function create_graph(parent, data_sets, options = {}) {
 		max_value = options.max;
 	}
 
+	if (min_index == max_index || min_value == max_value) return;
+
 	for (const set_name in data_sets) {
 		let data = data_sets[set_name];
 
