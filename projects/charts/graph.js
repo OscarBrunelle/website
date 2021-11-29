@@ -5,6 +5,10 @@ const nticks = 5;
 const line_width = 0.5;
 const circle_width = 0.75;
 
+function simplify_string(string) {
+	return string.toLowerCase().replace(/[^a-zA-Z0-9]+/g, "");
+}
+
 function format_data(data) {
 	for (const d of data) {
 		d.date = new Date(d.date);
@@ -85,11 +89,12 @@ function create_graph(parent, data_sets, options = {}) {
 
 	for (const set_name in data_sets) {
 		let data = data_sets[set_name];
+		const set_class = simplify_string(set_name);
 
-		const gset = svgg(svg, `set ${set_name}`);
-		docstyle(gset, `g.set.${set_name} line{stroke: ${colors[set_index]};stroke-width: ${line_width};}
-		g.set.${set_name} circle{fill: ${colors[set_index]};}
-		g.set.${set_name} .container {overflow: visible;}`);
+		const gset = svgg(svg, `set ${set_class}`);
+		docstyle(gset, `g.set.${set_class} line{stroke: ${colors[set_index]};stroke-width: ${line_width};}
+		g.set.${set_class} circle{fill: ${colors[set_index]};}
+		g.set.${set_class} .container {overflow: visible;}`);
 		const glines = svgg(gset, "lines");
 		const gpoints = svgg(gset, "points");
 
