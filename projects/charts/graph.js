@@ -1,6 +1,6 @@
 const size = 100;
 const padd_perc = 0.1;
-const colors = ["black", "red"];
+const colors = ["black", "red", "green", "blue", "yellow", "violet", "brown", "orange"];
 const nticks = 5;
 const line_width = 0.5;
 const circle_width = 0.75;
@@ -89,11 +89,12 @@ function create_graph(parent, data_sets, options = {}) {
 
 	for (const set_name in data_sets) {
 		let data = data_sets[set_name];
-		const set_class = simplify_string(set_name);
+		const set_class = simplify_string(set_name).slice(0, 15);
+		const color = colors[set_index % colors.length];
 
 		const gset = svgg(svg, `set ${set_class}`);
-		docstyle(gset, `g.set.${set_class} line{stroke: ${colors[set_index]};stroke-width: ${line_width};}
-		g.set.${set_class} circle{fill: ${colors[set_index]};}
+		docstyle(gset, `g.set.${set_class} line{stroke: ${color};stroke-width: ${line_width};}
+		g.set.${set_class} circle{fill: ${color};}
 		g.set.${set_class} .container {overflow: visible;}`);
 		const glines = svgg(gset, "lines");
 		const gpoints = svgg(gset, "points");
