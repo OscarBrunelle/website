@@ -3,7 +3,7 @@
 	grid-template-columns: 2fr 3fr;
 	align-items: center;
 	padding-bottom: 40px;
-	border-bottom: 1px solid black;
+	/* border-bottom: 1px solid black; */
 }
 
 .profile_picture {
