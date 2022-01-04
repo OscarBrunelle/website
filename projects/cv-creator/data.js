@@ -20,16 +20,17 @@ const sections = [{
 	sub_sections: [{
 		date_year: 2021,
 		date_month: 2,
-		duration: 8,
+		duration: 11,
 		job_title: "Ingénieur logiciels",
 		employer: "Capgemini",
 		multiple: [
 			{
 				date_year: 2021,
 				date_month: 5,
-				duration: 5,
+				duration: 8,
 				job_title: "Ingénieur tests autos QA",
-				description: "Développement et maintenance de tests autos avec <b>RobotFramework</b>."
+				description: `Développement et maintenance de tests autos avec <b>RobotFramework</b>.
+				<br>Développement de scripts Python.`
 			}, {
 				date_year: 2021,
 				date_month: 2,
@@ -91,12 +92,16 @@ const sections = [{
 	side: "right",
 	title: "Projets",
 	sub_sections: [{
-		job_title: "Web et programmation",
+		job_title: "Map Open Source",
+		description: `Projet de visualisation de données OpenStreetMap et navigation avec Python.
+		<br>Contributions au projet OSM.`
+	}, {
+		job_title: "Web",
 		description: `Site personnel - <a href='https://oscarbrunelle.com'>oscarbrunelle.com</a>
 		<br><br>Étude et visualisation intéractive d'algorithmes: <a href='https://oscarbrunelle.com/projects/astar'>A*</a> et <a href='https://oscarbrunelle.com/projects/dijkstra'>Dijkstra</a>.
 		<br><br>Écriture de ce CV en HTML/CSS/js.
 		<br><br>Apprentissage des formats SVG et GIF, étude des QR codes.
-		<br><br>Open-source: Première contribution au projet Mozilla!`
+		<br><br>Open-source: Contribution au projet Mozilla!`
 	}, {
 		job_title: "Développement de jeux-vidéos",
 		description: `Petits projets sur Unity et en Javascript de jeux basiques.
