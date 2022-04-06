@@ -1,0 +1,19 @@
+navigation {
+	display: grid;
+}
+
+navigation>ul {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	width: fit-content;
+}
+
+navigation>ul>li {
+	border: 1px solid white;
+	list-style: none;
+	padding: 5px;
+}
+
+navigation>ul>li a {
+	color: white;
+}

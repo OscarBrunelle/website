@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Jobs</title>
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="navigation.css">
+</head>
+
+<body>
+	<navigation>
+		<ul>
+			<li>
+				<a href="">Ajouts</a>
+			</li>
+			<li>
+				<a href="employers">Offres</a>
+			</li>
+			<li>
+				<a href="employers">Contacts</a>
+			</li>
+			<li>
+				<a href="employers">Personnes</a>
+			</li>
+			<li>
+				<a href="employers">Employeurs</a>
+			</li>
+		</ul>
+	</navigation>
+	<main>
+		<div id="forms">
+			<form id="form-offer">
+				<h3>Offre</h3>
+				<div>
+					<label for="employer">Employeur</label>
+					<select name="employer"></select>
+				</div>
+				<div>
+					<label for="client">Client final (si différent)</label>
+					<input name="client">
+				</div>
+				<div>
+					<label for="salary">Salaire</label>
+					<input name="salary">
+				</div>
+				<div>
+					<label for="title">Intitulé</label>
+					<input name="title">
+				</div>
+				<div>
+					<label for="city">Ville</label>
+					<input name="city">
+				</div>
+				<!-- status -->
+				<!-- comment j'ai trouvé l'offre -->
+				<button type="submit">Ajouter</button>
+			</form>
+
+			<form id="form-contact">
+				<h3>Contact</h3>
+				<div>
+					<label for="date">Date</label>
+					<input name="date">
+				</div>
+				<div>
+					<label for="time">Heure</label>
+					<input name="time">
+				</div>
+				<div>
+					<label for="persons">Personnes présentes</label>
+					<select name="persons" multiple></select>
+				</div>
+				<!-- résumé de ce qu'il s'est dit -->
+				<button type="submit">Ajouter</button>
+			</form>
+
+			<form id="form-person">
+				<h3>Personne</h3>
+				<div>
+					<label for="name">Nom</label>
+					<input name="name">
+				</div>
+				<div>
+					<label for="relation">Poste / Relation</label>
+					<input name="relation">
+				</div>
+				<button type="submit">Ajouter</button>
+			</form>
+
+			<form id="form-employer">
+				<h3>Employeur</h3>
+				<div>
+					<label for="name">Nom</label>
+					<input name="name">
+				</div>
+				<div>
+					<label for="group">Groupe</label>
+					<input name="group">
+				</div>
+				<div>
+					<label for="type">Type de structure</label>
+					<input name="type">
+				</div>
+				<button type="submit">Ajouter</button>
+			</form>
+		</div>
+	</main>
+	<script src="shared.js"></script>
+	<script src="main.js"></script>
+</body>
+
+</html>

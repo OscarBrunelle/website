@@ -1,0 +1,24 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: black;
+	color: white;
+}
+
+#forms {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+form {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid white;
+}
+
+form div {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}

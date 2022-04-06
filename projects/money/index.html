@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Money</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+	<main>
+		<div id="forms">
+			<form id="form-recurrent">
+				<h3>Récurrent</h3>
+				<div>
+					<label for="title">Titre</label>
+					<input name="title">
+				</div>
+				<div>
+					<label for="amount">Montant</label>
+					<input name="amount" type="number">
+				</div>
+				<div>
+					<label for="redundancy">Récurrence</label>
+					<select name="redundancy">
+						<option value="day">Jour</option>
+						<option value="week">Semaine</option>
+						<option value="month">Mois</option>
+						<option value="year">Année</option>
+					</select>
+				</div>
+				<div>
+					<label for="redundancy-precision">Jour</label>
+					<select name="redundancy-precision"></select>
+				</div>
+				<div>
+					<label for="from">Du</label>
+					<input name="from" type="date">
+					<label for="to">Au</label>
+					<input name="to" type="date">
+				</div>
+				<div>
+					<label for="category">Catégorie</label>
+					<select name="category"></select>
+				</div>
+				<div>
+					<label for="description">Description</label>
+					<input name="description">
+				</div>
+				<button type="submit">Ajouter</button>
+			</form>
+
+			<form id="form-unique">
+				<h3>Unique</h3>
+				<div>
+					<label for="title">Titre</label>
+					<input name="title">
+				</div>
+				<div>
+					<label for="date">Date</label>
+					<input name="date" type="date">
+				</div>
+				<div>
+					<label for="category">Catégorie</label>
+					<select name="category"></select>
+				</div>
+				<div>
+					<label for="description">Description</label>
+					<input name="description">
+				</div>
+				<button type="submit">Ajouter</button>
+			</form>
+		</div>
+	</main>
+	<script src="../shared.js"></script>
+	<script src="../doc.js"></script>
+	<script src="main.js"></script>
+</body>
+
+</html>
