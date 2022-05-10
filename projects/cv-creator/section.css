@@ -16,5 +16,5 @@ section:first-child>.section-title {
 	margin: 0;
 	font-size: 1.4rem;
 	font-weight: 500;
-	color: rgb(38, 95, 119);
+	/* color: rgb(38, 95, 119); */
 }

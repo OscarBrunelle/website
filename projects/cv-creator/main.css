@@ -5,24 +5,28 @@
 	/* height: 842px; */
 	overflow-y: auto;
 	/* margin: 20px; */
-	padding: 30px;
 	background-color: white;
 	color: black;
 }
 
 #bottom {
 	display: grid;
-	grid-template-columns: 2fr 1fr;
-	padding-top: 15px;
+	grid-template-columns: 20fr 11fr;
+	padding-left: 30px;
 }
 
 #left {
 	padding-right: 15px;
+	padding-bottom: 30px;
+	padding-top: 15px;
 }
 
 #right {
+	padding-top: 15px;
 	padding-left: 15px;
+	padding-right: 30px;
 	border-left: 1px solid black;
+	background-color: #0045ff21;
 }
 
 embed {

@@ -1,33 +1,17 @@
 const sections = [{
 	side: "left",
-	title: "Formation",
-	sub_sections: [{
-		date_year: 2020,
-		job_title: "BAC +4 Génie informatique - Alternance",
-		employer: "Université d'Ottawa",
-		country: "Canada"
-	// }, {
-	// 	date_year: 2017,
-	// 	job_title: "BAC S",
-	// 	employer: "Lycée Marguerite de Valois"
-	// }, {
-	// 	date_year: 2017,
-	// 	job_title: "Permis B"
-	}]
-}, {
-	side: "left",
 	title: "Expériences professionnelles",
 	sub_sections: [{
 		date_year: 2021,
 		date_month: 2,
-		duration: 11,
+		duration: -1,
 		job_title: "Ingénieur logiciels",
 		employer: "Capgemini",
 		multiple: [
 			{
 				date_year: 2021,
 				date_month: 5,
-				duration: 8,
+				duration: -1,
 				job_title: "Ingénieur tests autos QA",
 				description: `Développement et maintenance de tests autos avec <b>RobotFramework</b>.
 				<br>Développement de scripts Python.`
@@ -71,14 +55,27 @@ const sections = [{
 	}]
 }, {
 	side: "left",
+	title: "Formation",
+	sub_sections: [{
+		date_year: 2020,
+		job_title: "BAC +4 Génie informatique - Alternance",
+		employer: "Université d'Ottawa",
+		country: "Canada"
+	// }, {
+	// 	date_year: 2017,
+	// 	job_title: "Permis B"
+	}]
+}, {
+	side: "left",
 	title: "Compétences",
 	sub_sections: [{
 		job_title: "Web",
-		description: `Frameworks / Langages: <b>js</b>, <b>Java</b>, <b>PHP</b> (pure), <b>Symfony</b>
+		description: `Frameworks / Langages: <b>js</b>, <b>Java</b>, <b>PHP</b> (pure), <b>Symfony</b>, Node
 		<br>Base de données: <b>MySQL</b>, SQLite, Firebase`
 	}, {
 		job_title: "Software",
-		description: `Programmation: scripting avec <b>Python</b>
+		description: `Scripting avec <b>Python</b>
+		<br>Développement logiciel cpp avec la librairie <b>Qt (C++)</b>
 		<br>Gestion de version: <b>Git</b>, Subversion SVN (TortoiseSVN)
 		<br>Intégration continue: Espresso, circleCI
 		<br>Statistiques et traitements audio avec Matlab et R`
@@ -113,8 +110,8 @@ const sections = [{
 	title: "Centres d'intérêts",
 	sub_sections: [{
 		job_title: "Langues",
-		description: `Anglais: Courant
-		<br>Espagnol : Niveau scolaire
+		description: `<b>Anglais : C2</b>, travail au Canada
+		<br>Espagnol : B1
 		<br>Russe : Lecture et écriture`
 	}, {
 		job_title: "Basket",
@@ -128,8 +125,8 @@ const sections = [{
 const cv_data = {
 	first_name: "Oscar",
 	last_name: "Brunelle",
-	position: "Ingénieur logiciels",
-	description: "Formation d'ingénieur informatique.<br>2 ans d'expérience dans l'informatique et le développement web.",
+	position: "Développeur C++ / Qt",
+	description: "Ingénieur informatique.<br>3 ans d'expérience dans l'informatique et le développement web.",
 	phone: "07 49 47 27 20",
 	email: "oscar.brunelle@gmail.com",
 	links: [
