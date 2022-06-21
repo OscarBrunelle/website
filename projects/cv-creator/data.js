@@ -12,7 +12,7 @@ const sections = [{
 				date_year: 2021,
 				date_month: 5,
 				duration: -1,
-				job_title: "Ingénieur tests autos QA",
+				job_title: "Ingénieur automatisation QA",
 				description: `Développement et maintenance de tests autos avec <b>RobotFramework</b>.
 				<br>Développement de scripts Python.`
 			}, {
@@ -74,7 +74,7 @@ const sections = [{
 		<br>Base de données: <b>MySQL</b>, SQLite, Firebase`
 	}, {
 		job_title: "Software",
-		description: `Scripting avec <b>Python</b>
+		description: `Scripting avec <b>Python</b>, notions en <b>GoLang</b>
 		<br>Développement logiciel cpp avec la librairie <b>Qt (C++)</b>
 		<br>Gestion de version: <b>Git</b>, Subversion SVN (TortoiseSVN)
 		<br>Intégration continue: Espresso, circleCI
